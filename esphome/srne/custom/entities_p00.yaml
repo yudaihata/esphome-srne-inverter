@@ -1,0 +1,324 @@
+
+sensor:
+  - platform: modbus_controller
+    modbus_controller_id: srne_main
+    register_type: holding
+    skip_updates: ${p00_skip_updates}
+    address: 20
+    force_new_range: true
+    value_type: U_WORD
+    # endianness: register=big, word=little
+    id: sens_p00_20
+    internal: true
+    name: "APP_Version"
+    accuracy_decimals: 0
+    on_value:
+      then:
+        - component.update: txt_p00_ver_20
+  - platform: modbus_controller
+    modbus_controller_id: srne_main
+    register_type: holding
+    skip_updates: ${p00_skip_updates}
+    address: 21
+    value_type: U_WORD
+    # endianness: register=big, word=little
+    id: sens_p00_21
+    internal: true
+    name: "BOOTLOADER_Version"
+    accuracy_decimals: 0
+    on_value:
+      then:
+        - component.update: txt_p00_ver_21
+  - platform: modbus_controller
+    modbus_controller_id: srne_main
+    register_type: holding
+    skip_updates: ${p00_skip_updates}
+    address: 22
+    value_type: U_WORD
+    # endianness: register=big, word=little
+    id: sens_p00_22
+    internal: true
+    name: "Control_Panel_Version"
+    accuracy_decimals: 0
+    on_value:
+      then:
+        - component.update: txt_p00_ver_22
+  - platform: modbus_controller
+    modbus_controller_id: srne_main
+    register_type: holding
+    skip_updates: ${p00_skip_updates}
+    address: 23
+    value_type: U_WORD
+    # endianness: register=big, word=little
+    id: sens_p00_23
+    internal: true
+    name: "Power_Amplifier_Board_Version"
+    accuracy_decimals: 0
+    on_value:
+      then:
+        - component.update: txt_p00_ver_23
+  - platform: modbus_controller
+    modbus_controller_id: srne_main
+    register_type: holding
+    skip_updates: ${p00_skip_updates}
+    address: 26
+    force_new_range: true
+    value_type: U_WORD
+    # endianness: register=big, word=little
+    id: sens_p00_26
+    internal: true
+    name: "Controller_Device_Address"
+    accuracy_decimals: 0
+    entity_category: diagnostic
+    on_value:
+      then:
+        - component.update: txt_p00_raw_26
+  - platform: modbus_controller
+    modbus_controller_id: srne_main
+    register_type: holding
+    skip_updates: ${p00_skip_updates}
+    address: 27
+    value_type: U_WORD
+    # endianness: register=big, word=little
+    id: sens_p00_27
+    internal: true
+    name: "Model_Code"
+    accuracy_decimals: 0
+    entity_category: diagnostic
+    on_value:
+      then:
+        - component.update: txt_p00_raw_27
+  - platform: modbus_controller
+    modbus_controller_id: srne_main
+    register_type: holding
+    skip_updates: ${p00_skip_updates}
+    address: 28
+    value_type: U_WORD
+    # endianness: register=big, word=little
+    id: sens_p00_28
+    internal: true
+    name: "RS485_Protocol_Version"
+    accuracy_decimals: 0
+    on_value:
+      then:
+        - component.update: txt_p00_ver_28
+  - platform: modbus_controller
+    modbus_controller_id: srne_main
+    register_type: holding
+    skip_updates: ${p00_skip_updates}
+    address: 30
+    force_new_range: true
+    value_type: U_WORD
+    # endianness: register=big, word=little
+    id: sens_p00_30
+    internal: true
+    name: "Production_Date_(Year⁄Month)"
+    accuracy_decimals: 0
+    entity_category: diagnostic
+    on_value:
+      then:
+        - component.update: production_date
+  - platform: modbus_controller
+    modbus_controller_id: srne_main
+    register_type: holding
+    skip_updates: ${p00_skip_updates}
+    address: 31
+    value_type: U_WORD
+    # endianness: register=big, word=little
+    id: sens_p00_31
+    internal: true
+    name: "Production_Date_(Day⁄Hour)"
+    accuracy_decimals: 0
+    entity_category: diagnostic
+    on_value:
+      then:
+        - component.update: production_date
+  - platform: modbus_controller
+    modbus_controller_id: srne_main
+    register_type: holding
+    skip_updates: ${p00_skip_updates}
+    address: 33
+    value_type: U_WORD
+    # endianness: register=big, word=little
+    id: sens_p00_33
+    internal: true
+    name: "Software_Build_Time"
+    accuracy_decimals: 0
+    entity_category: diagnostic
+    on_value:
+      then:
+        - component.update: txt_p00_raw_33
+  - platform: modbus_controller
+    modbus_controller_id: srne_main
+    register_type: holding
+    skip_updates: ${p00_skip_updates}
+    address: 53
+    force_new_range: true
+    value_type: U_WORD
+    # endianness: register=big, word=little
+    id: sens_p00_53
+    internal: true
+    name: "Product_Serial_Number"
+    accuracy_decimals: 0
+    entity_category: diagnostic
+
+    on_value:
+      then:
+        - component.update: txt_p00_raw_53
+text_sensor:
+  - platform: template
+    id: production_date
+    name: "Production_Date"
+    entity_category: diagnostic
+    lambda: |-
+      uint16_t ym = (uint16_t) id(sens_p00_30).state;
+      uint16_t dh = (uint16_t) id(sens_p00_31).state;
+      if ((ym == 0xFFFF && dh == 0xFFFF) || (ym == 0 && dh == 0)) { return std::string("Not Set"); }
+      int year = 2000 + ((ym >> 8) & 0xFF);
+      int month = (ym & 0xFF);
+      int day = ((dh >> 8) & 0xFF);
+      int hour = (dh & 0xFF);
+      if (month < 1 || month > 12 || day < 1 || day > 31) { return std::string("Not Set"); }
+      char buf[24];
+      snprintf(buf, sizeof(buf), "%04d-%02d-%02d %02d:00", year, month, day, hour);
+      return std::string(buf);
+  - platform: modbus_controller
+    modbus_controller_id: srne_main
+    register_type: holding
+    skip_updates: ${p00_skip_updates}
+    address: 11
+    # endianness: register=big, word=little
+    name: "Product_Type"
+    lambda: |-
+      int v = 0;
+      if (!x.empty()) v = atoi(x.c_str());
+      switch (v) {
+        case 0: return std::string("Domestic Controller");
+        case 1: return std::string("Controller For Street Light");
+        case 3: return std::string("Grid-Connected Inverter");
+        case 4: return std::string("All-In-One Solar Charger Inverter");
+        case 5: return std::string("Power Frequency Off-Grid");
+        default: return std::string("unknown");
+      }
+  - platform: modbus_controller
+    modbus_controller_id: srne_main
+    register_type: holding
+    skip_updates: ${p00_skip_updates}
+    address: 32
+    # endianness: register=big, word=little
+    name: "Production_Site_Code"
+    lambda: |-
+      int v = 0;
+      if (!x.empty()) v = atoi(x.c_str());
+      switch (v) {
+        case 0: return std::string("Shenzhen");
+        case 1: return std::string("Dongguan");
+        default: return std::string("unknown");
+      }
+    entity_category: diagnostic
+  - platform: template
+    id: txt_p00_ver_20
+    name: "APP_Version"
+    entity_category: diagnostic
+    lambda: |-
+      if (isnan(id(sens_p00_20).state)) return std::string("Unknown");
+      int raw = (int) roundf(id(sens_p00_20).state);
+      if (raw <= 0 || raw > 9999) return std::string("Unknown");
+      int major = raw / 100;
+      int minor = raw % 100;
+      char buf[16];
+      snprintf(buf, sizeof(buf), "V%d.%02d", major, minor);
+      return std::string(buf);
+  - platform: template
+    id: txt_p00_ver_21
+    name: "BOOTLOADER_Version"
+    entity_category: diagnostic
+    lambda: |-
+      if (isnan(id(sens_p00_21).state)) return std::string("Unknown");
+      int raw = (int) roundf(id(sens_p00_21).state);
+      if (raw <= 0 || raw > 9999) return std::string("Unknown");
+      int major = raw / 100;
+      int minor = raw % 100;
+      char buf[16];
+      snprintf(buf, sizeof(buf), "V%d.%02d", major, minor);
+      return std::string(buf);
+  - platform: template
+    id: txt_p00_ver_22
+    name: "Control_Panel_Version"
+    entity_category: diagnostic
+    lambda: |-
+      if (isnan(id(sens_p00_22).state)) return std::string("Unknown");
+      int raw = (int) roundf(id(sens_p00_22).state);
+      if (raw <= 0 || raw > 9999) return std::string("Unknown");
+      int major = raw / 100;
+      int minor = raw % 100;
+      char buf[16];
+      snprintf(buf, sizeof(buf), "V%d.%02d", major, minor);
+      return std::string(buf);
+  - platform: template
+    id: txt_p00_ver_23
+    name: "Power_Amplifier_Board_Version"
+    entity_category: diagnostic
+    lambda: |-
+      if (isnan(id(sens_p00_23).state)) return std::string("Unknown");
+      int raw = (int) roundf(id(sens_p00_23).state);
+      if (raw <= 0 || raw > 9999) return std::string("Unknown");
+      int major = raw / 100;
+      int minor = raw % 100;
+      char buf[16];
+      snprintf(buf, sizeof(buf), "V%d.%02d", major, minor);
+      return std::string(buf);
+  - platform: template
+    id: txt_p00_ver_28
+    name: "RS485_Protocol_Version"
+    entity_category: diagnostic
+    lambda: |-
+      if (isnan(id(sens_p00_28).state)) return std::string("Unknown");
+      int raw = (int) roundf(id(sens_p00_28).state);
+      if (raw <= 0 || raw > 9999) return std::string("Unknown");
+      int major = raw / 100;
+      int minor = raw % 100;
+      char buf[16];
+      snprintf(buf, sizeof(buf), "V%d.%02d", major, minor);
+      return std::string(buf);
+  - platform: template
+    id: txt_p00_raw_26
+    name: "Controller_Device_Address"
+    lambda: |-
+      if (isnan(id(sens_p00_26).state)) return std::string("Unknown");
+      long long raw = llroundf(id(sens_p00_26).state);
+      if (raw > 999999999LL || raw < -999999999LL) return std::string("Unknown");
+      char buf[24];
+      snprintf(buf, sizeof(buf), "%lld", raw);
+      return std::string(buf);
+  - platform: template
+    id: txt_p00_raw_27
+    name: "Model_Code"
+    lambda: |-
+      if (isnan(id(sens_p00_27).state)) return std::string("Unknown");
+      long long raw = llroundf(id(sens_p00_27).state);
+      if (raw > 999999999LL || raw < -999999999LL) return std::string("Unknown");
+      char buf[24];
+      snprintf(buf, sizeof(buf), "%lld", raw);
+      return std::string(buf);
+  - platform: template
+    id: txt_p00_raw_33
+    name: "Software_Build_Time"
+    entity_category: diagnostic
+    lambda: |-
+      if (isnan(id(sens_p00_33).state)) return std::string("Unknown");
+      long long raw = llroundf(id(sens_p00_33).state);
+      if (raw > 999999999LL || raw < -999999999LL) return std::string("Unknown");
+      char buf[24];
+      snprintf(buf, sizeof(buf), "%lld", raw);
+      return std::string(buf);
+  - platform: template
+    id: txt_p00_raw_53
+    name: "Product_Serial_Number"
+    lambda: |-
+      if (isnan(id(sens_p00_53).state)) return std::string("Unknown");
+      long long raw = llroundf(id(sens_p00_53).state);
+      if (raw > 999999999LL || raw < -999999999LL) return std::string("Unknown");
+      char buf[24];
+      snprintf(buf, sizeof(buf), "%lld", raw);
+      return std::string(buf);

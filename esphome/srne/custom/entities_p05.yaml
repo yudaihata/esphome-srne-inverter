@@ -1,0 +1,1676 @@
+
+sensor:
+  - platform: modbus_controller
+    id: sens_p05_57388
+    modbus_controller_id: srne_main
+    register_type: holding
+    skip_updates: ${p05_skip_updates}
+    internal: true
+    force_new_range: true
+    address: 57388
+    value_type: U_WORD
+    on_value:
+      then:
+        - lambda: |-
+            id(p05_write_actions_enabled) = true;
+        - if:
+            condition:
+              lambda: 'return x > 0.5;'
+            then:
+              - switch.template.publish:
+                  id: sw_p05_57388
+                  state: ON
+            else:
+              - switch.template.publish:
+                  id: sw_p05_57388
+                  state: OFF
+  - platform: modbus_controller
+    id: sens_p05_57395
+    modbus_controller_id: srne_main
+    register_type: holding
+    skip_updates: ${p05_skip_updates}
+    internal: true
+    force_new_range: true
+    address: 57395
+    value_type: U_WORD
+    on_value:
+      then:
+        - lambda: |-
+            id(p05_write_actions_enabled) = true;
+        - if:
+            condition:
+              lambda: 'return x > 0.5;'
+            then:
+              - switch.template.publish:
+                  id: sw_p05_57395
+                  state: ON
+            else:
+              - switch.template.publish:
+                  id: sw_p05_57395
+                  state: OFF
+  - platform: modbus_controller
+    id: sens_p05_57400
+    modbus_controller_id: srne_main
+    register_type: holding
+    skip_updates: ${p05_skip_updates}
+    internal: true
+    force_new_range: true
+    address: 57400
+    value_type: U_WORD
+    on_value:
+      then:
+        - lambda: |-
+            id(p05_write_actions_enabled) = true;
+        - if:
+            condition:
+              lambda: 'return x > 0.5;'
+            then:
+              - switch.template.publish:
+                  id: sw_p05_57400
+                  state: ON
+            else:
+              - switch.template.publish:
+                  id: sw_p05_57400
+                  state: OFF
+  - platform: modbus_controller
+    modbus_controller_id: srne_main
+    register_type: holding
+    skip_updates: ${p05_skip_updates}
+    address: 57382
+    value_type: U_WORD
+    id: raw_p05_57382
+    internal: true
+    force_new_range: true
+    on_value:
+      then:
+        - component.update: txt_p05_range_57382_57383
+  - platform: modbus_controller
+    modbus_controller_id: srne_main
+    register_type: holding
+    skip_updates: ${p05_skip_updates}
+    address: 57383
+    value_type: U_WORD
+    id: raw_p05_57383
+    internal: true
+    on_value:
+      then:
+        - component.update: txt_p05_range_57382_57383
+  - platform: modbus_controller
+    modbus_controller_id: srne_main
+    register_type: holding
+    skip_updates: ${p05_skip_updates}
+    address: 57384
+    value_type: U_WORD
+    id: raw_p05_57384
+    internal: true
+    force_new_range: true
+    on_value:
+      then:
+        - component.update: txt_p05_range_57384_57385
+  - platform: modbus_controller
+    modbus_controller_id: srne_main
+    register_type: holding
+    skip_updates: ${p05_skip_updates}
+    address: 57385
+    value_type: U_WORD
+    id: raw_p05_57385
+    internal: true
+    on_value:
+      then:
+        - component.update: txt_p05_range_57384_57385
+  - platform: modbus_controller
+    modbus_controller_id: srne_main
+    register_type: holding
+    skip_updates: ${p05_skip_updates}
+    address: 57386
+    value_type: U_WORD
+    id: raw_p05_57386
+    internal: true
+    force_new_range: true
+    on_value:
+      then:
+        - component.update: txt_p05_range_57386_57387
+  - platform: modbus_controller
+    modbus_controller_id: srne_main
+    register_type: holding
+    skip_updates: ${p05_skip_updates}
+    address: 57387
+    value_type: U_WORD
+    id: raw_p05_57387
+    internal: true
+    on_value:
+      then:
+        - component.update: txt_p05_range_57386_57387
+  - platform: modbus_controller
+    modbus_controller_id: srne_main
+    register_type: holding
+    skip_updates: ${p05_skip_updates}
+    address: 57389
+    value_type: U_WORD
+    id: raw_p05_57389
+    internal: true
+    force_new_range: true
+    on_value:
+      then:
+        - component.update: txt_p05_range_57389_57390
+  - platform: modbus_controller
+    modbus_controller_id: srne_main
+    register_type: holding
+    skip_updates: ${p05_skip_updates}
+    address: 57390
+    value_type: U_WORD
+    id: raw_p05_57390
+    internal: true
+    on_value:
+      then:
+        - component.update: txt_p05_range_57389_57390
+  - platform: modbus_controller
+    modbus_controller_id: srne_main
+    register_type: holding
+    skip_updates: ${p05_skip_updates}
+    address: 57391
+    value_type: U_WORD
+    id: raw_p05_57391
+    internal: true
+    force_new_range: true
+    on_value:
+      then:
+        - component.update: txt_p05_range_57391_57392
+  - platform: modbus_controller
+    modbus_controller_id: srne_main
+    register_type: holding
+    skip_updates: ${p05_skip_updates}
+    address: 57392
+    value_type: U_WORD
+    id: raw_p05_57392
+    internal: true
+    on_value:
+      then:
+        - component.update: txt_p05_range_57391_57392
+  - platform: modbus_controller
+    modbus_controller_id: srne_main
+    register_type: holding
+    skip_updates: ${p05_skip_updates}
+    address: 57393
+    value_type: U_WORD
+    id: raw_p05_57393
+    internal: true
+    force_new_range: true
+    on_value:
+      then:
+        - component.update: txt_p05_range_57393_57394
+  - platform: modbus_controller
+    modbus_controller_id: srne_main
+    register_type: holding
+    skip_updates: ${p05_skip_updates}
+    address: 57394
+    value_type: U_WORD
+    id: raw_p05_57394
+    internal: true
+
+    on_value:
+      then:
+        - component.update: txt_p05_range_57393_57394
+text_sensor:
+  - platform: template
+    id: txt_p05_range_57382_57383
+    name: "Slot 1 Charging Time Range"
+    entity_category: config
+    lambda: |-
+      if (isnan(id(raw_p05_57382).state) || isnan(id(raw_p05_57383).state)) return {};
+      int s = (int) llroundf(id(raw_p05_57382).state);
+      int e = (int) llroundf(id(raw_p05_57383).state);
+      int sh = (s >> 8) & 0xFF; int sm = s & 0xFF;
+      int eh = (e >> 8) & 0xFF; int em = e & 0xFF;
+      if (sh < 0 || sh > 23 || eh < 0 || eh > 23 || sm < 0 || sm > 59 || em < 0 || em > 59) return {};
+      char buf[24];
+      snprintf(buf, sizeof(buf), "%02d:%02d-%02d:%02d", sh, sm, eh, em);
+      return std::string(buf);
+  - platform: template
+    id: txt_p05_range_57384_57385
+    name: "Slot 2 Charging Time Range"
+    entity_category: config
+    lambda: |-
+      if (isnan(id(raw_p05_57384).state) || isnan(id(raw_p05_57385).state)) return {};
+      int s = (int) llroundf(id(raw_p05_57384).state);
+      int e = (int) llroundf(id(raw_p05_57385).state);
+      int sh = (s >> 8) & 0xFF; int sm = s & 0xFF;
+      int eh = (e >> 8) & 0xFF; int em = e & 0xFF;
+      if (sh < 0 || sh > 23 || eh < 0 || eh > 23 || sm < 0 || sm > 59 || em < 0 || em > 59) return {};
+      char buf[24];
+      snprintf(buf, sizeof(buf), "%02d:%02d-%02d:%02d", sh, sm, eh, em);
+      return std::string(buf);
+  - platform: template
+    id: txt_p05_range_57386_57387
+    name: "Slot 3 Charging Time Range"
+    entity_category: config
+    lambda: |-
+      if (isnan(id(raw_p05_57386).state) || isnan(id(raw_p05_57387).state)) return {};
+      int s = (int) llroundf(id(raw_p05_57386).state);
+      int e = (int) llroundf(id(raw_p05_57387).state);
+      int sh = (s >> 8) & 0xFF; int sm = s & 0xFF;
+      int eh = (e >> 8) & 0xFF; int em = e & 0xFF;
+      if (sh < 0 || sh > 23 || eh < 0 || eh > 23 || sm < 0 || sm > 59 || em < 0 || em > 59) return {};
+      char buf[24];
+      snprintf(buf, sizeof(buf), "%02d:%02d-%02d:%02d", sh, sm, eh, em);
+      return std::string(buf);
+  - platform: template
+    id: txt_p05_range_57389_57390
+    name: "Slot 1 Discharge Time Range"
+    entity_category: config
+    lambda: |-
+      if (isnan(id(raw_p05_57389).state) || isnan(id(raw_p05_57390).state)) return {};
+      int s = (int) llroundf(id(raw_p05_57389).state);
+      int e = (int) llroundf(id(raw_p05_57390).state);
+      int sh = (s >> 8) & 0xFF; int sm = s & 0xFF;
+      int eh = (e >> 8) & 0xFF; int em = e & 0xFF;
+      if (sh < 0 || sh > 23 || eh < 0 || eh > 23 || sm < 0 || sm > 59 || em < 0 || em > 59) return {};
+      char buf[24];
+      snprintf(buf, sizeof(buf), "%02d:%02d-%02d:%02d", sh, sm, eh, em);
+      return std::string(buf);
+  - platform: template
+    id: txt_p05_range_57391_57392
+    name: "Slot 2 Discharge Time Range"
+    entity_category: config
+    lambda: |-
+      if (isnan(id(raw_p05_57391).state) || isnan(id(raw_p05_57392).state)) return {};
+      int s = (int) llroundf(id(raw_p05_57391).state);
+      int e = (int) llroundf(id(raw_p05_57392).state);
+      int sh = (s >> 8) & 0xFF; int sm = s & 0xFF;
+      int eh = (e >> 8) & 0xFF; int em = e & 0xFF;
+      if (sh < 0 || sh > 23 || eh < 0 || eh > 23 || sm < 0 || sm > 59 || em < 0 || em > 59) return {};
+      char buf[24];
+      snprintf(buf, sizeof(buf), "%02d:%02d-%02d:%02d", sh, sm, eh, em);
+      return std::string(buf);
+  - platform: template
+    id: txt_p05_range_57393_57394
+    name: "Slot 3 Discharge Time Range"
+    entity_category: config
+    lambda: |-
+      if (isnan(id(raw_p05_57393).state) || isnan(id(raw_p05_57394).state)) return {};
+      int s = (int) llroundf(id(raw_p05_57393).state);
+      int e = (int) llroundf(id(raw_p05_57394).state);
+      int sh = (s >> 8) & 0xFF; int sm = s & 0xFF;
+      int eh = (e >> 8) & 0xFF; int em = e & 0xFF;
+      if (sh < 0 || sh > 23 || eh < 0 || eh > 23 || sm < 0 || sm > 59 || em < 0 || em > 59) return {};
+      char buf[24];
+      snprintf(buf, sizeof(buf), "%02d:%02d-%02d:%02d", sh, sm, eh, em);
+      return std::string(buf);
+
+text:
+  - platform: template
+    id: txtin_p05_57382_57383
+    name: "Slot 1 Charging Time Range Input"
+    entity_category: config
+    optimistic: true
+    mode: text
+    min_length: 11
+    max_length: 11
+    initial_value: "00:00-00:00"
+    set_action:
+      - lambda: |-
+          if (!id(p05_write_actions_enabled)) {
+            ESP_LOGW("p05_range", "Write action blocked during startup guard window");
+            return;
+          }
+          std::string s = x;
+          if (s.size() != 11 || s[2] != ':' || s[5] != '-' || s[8] != ':') {
+            ESP_LOGW("p05_range", "Invalid format, use HH:MM-HH:MM: %s", s.c_str());
+            return;
+          }
+          auto d = [](char c)->bool { return c >= '0' && c <= '9'; };
+          if (!d(s[0]) || !d(s[1]) || !d(s[3]) || !d(s[4]) || !d(s[6]) || !d(s[7]) || !d(s[9]) || !d(s[10])) {
+            ESP_LOGW("p05_range", "Invalid digits: %s", s.c_str());
+            return;
+          }
+          int sh = (s[0]-'0')*10 + (s[1]-'0');
+          int sm = (s[3]-'0')*10 + (s[4]-'0');
+          int eh = (s[6]-'0')*10 + (s[7]-'0');
+          int em = (s[9]-'0')*10 + (s[10]-'0');
+          if (sh < 0 || sh > 23 || eh < 0 || eh > 23 || sm < 0 || sm > 59 || em < 0 || em > 59) {
+            ESP_LOGW("p05_range", "Out of range HH/MM: %s", s.c_str());
+            return;
+          }
+          uint16_t w_start = ((uint16_t)(sh & 0xFF) << 8) | (uint16_t)(sm & 0xFF);
+          uint16_t w_end = ((uint16_t)(eh & 0xFF) << 8) | (uint16_t)(em & 0xFF);
+          std::vector<uint16_t> words; words.reserve(2);
+          words.push_back(w_start);
+          words.push_back(w_end);
+          auto controller = id(srne_main);
+          if (controller == nullptr) return;
+          auto cmd = esphome::modbus_controller::ModbusCommandItem::create_write_multiple_command(controller, 57382, 2, words);
+          controller->queue_command(cmd);
+          id(p05_fast_poll_until_ms) = millis() + 15000U;
+          id(raw_p05_57382).publish_state((float) w_start);
+          id(raw_p05_57383).publish_state((float) w_end);
+          id(txt_p05_range_57382_57383).update();
+  - platform: template
+    id: txtin_p05_57384_57385
+    name: "Slot 2 Charging Time Range Input"
+    entity_category: config
+    optimistic: true
+    mode: text
+    min_length: 11
+    max_length: 11
+    initial_value: "00:00-00:00"
+    set_action:
+      - lambda: |-
+          if (!id(p05_write_actions_enabled)) {
+            ESP_LOGW("p05_range", "Write action blocked during startup guard window");
+            return;
+          }
+          std::string s = x;
+          if (s.size() != 11 || s[2] != ':' || s[5] != '-' || s[8] != ':') {
+            ESP_LOGW("p05_range", "Invalid format, use HH:MM-HH:MM: %s", s.c_str());
+            return;
+          }
+          auto d = [](char c)->bool { return c >= '0' && c <= '9'; };
+          if (!d(s[0]) || !d(s[1]) || !d(s[3]) || !d(s[4]) || !d(s[6]) || !d(s[7]) || !d(s[9]) || !d(s[10])) {
+            ESP_LOGW("p05_range", "Invalid digits: %s", s.c_str());
+            return;
+          }
+          int sh = (s[0]-'0')*10 + (s[1]-'0');
+          int sm = (s[3]-'0')*10 + (s[4]-'0');
+          int eh = (s[6]-'0')*10 + (s[7]-'0');
+          int em = (s[9]-'0')*10 + (s[10]-'0');
+          if (sh < 0 || sh > 23 || eh < 0 || eh > 23 || sm < 0 || sm > 59 || em < 0 || em > 59) {
+            ESP_LOGW("p05_range", "Out of range HH/MM: %s", s.c_str());
+            return;
+          }
+          uint16_t w_start = ((uint16_t)(sh & 0xFF) << 8) | (uint16_t)(sm & 0xFF);
+          uint16_t w_end = ((uint16_t)(eh & 0xFF) << 8) | (uint16_t)(em & 0xFF);
+          std::vector<uint16_t> words; words.reserve(2);
+          words.push_back(w_start);
+          words.push_back(w_end);
+          auto controller = id(srne_main);
+          if (controller == nullptr) return;
+          auto cmd = esphome::modbus_controller::ModbusCommandItem::create_write_multiple_command(controller, 57384, 2, words);
+          controller->queue_command(cmd);
+          id(p05_fast_poll_until_ms) = millis() + 15000U;
+          id(raw_p05_57384).publish_state((float) w_start);
+          id(raw_p05_57385).publish_state((float) w_end);
+          id(txt_p05_range_57384_57385).update();
+  - platform: template
+    id: txtin_p05_57386_57387
+    name: "Slot 3 Charging Time Range Input"
+    entity_category: config
+    optimistic: true
+    mode: text
+    min_length: 11
+    max_length: 11
+    initial_value: "00:00-00:00"
+    set_action:
+      - lambda: |-
+          if (!id(p05_write_actions_enabled)) {
+            ESP_LOGW("p05_range", "Write action blocked during startup guard window");
+            return;
+          }
+          std::string s = x;
+          if (s.size() != 11 || s[2] != ':' || s[5] != '-' || s[8] != ':') {
+            ESP_LOGW("p05_range", "Invalid format, use HH:MM-HH:MM: %s", s.c_str());
+            return;
+          }
+          auto d = [](char c)->bool { return c >= '0' && c <= '9'; };
+          if (!d(s[0]) || !d(s[1]) || !d(s[3]) || !d(s[4]) || !d(s[6]) || !d(s[7]) || !d(s[9]) || !d(s[10])) {
+            ESP_LOGW("p05_range", "Invalid digits: %s", s.c_str());
+            return;
+          }
+          int sh = (s[0]-'0')*10 + (s[1]-'0');
+          int sm = (s[3]-'0')*10 + (s[4]-'0');
+          int eh = (s[6]-'0')*10 + (s[7]-'0');
+          int em = (s[9]-'0')*10 + (s[10]-'0');
+          if (sh < 0 || sh > 23 || eh < 0 || eh > 23 || sm < 0 || sm > 59 || em < 0 || em > 59) {
+            ESP_LOGW("p05_range", "Out of range HH/MM: %s", s.c_str());
+            return;
+          }
+          uint16_t w_start = ((uint16_t)(sh & 0xFF) << 8) | (uint16_t)(sm & 0xFF);
+          uint16_t w_end = ((uint16_t)(eh & 0xFF) << 8) | (uint16_t)(em & 0xFF);
+          std::vector<uint16_t> words; words.reserve(2);
+          words.push_back(w_start);
+          words.push_back(w_end);
+          auto controller = id(srne_main);
+          if (controller == nullptr) return;
+          auto cmd = esphome::modbus_controller::ModbusCommandItem::create_write_multiple_command(controller, 57386, 2, words);
+          controller->queue_command(cmd);
+          id(p05_fast_poll_until_ms) = millis() + 15000U;
+          id(raw_p05_57386).publish_state((float) w_start);
+          id(raw_p05_57387).publish_state((float) w_end);
+          id(txt_p05_range_57386_57387).update();
+  - platform: template
+    id: txtin_p05_57389_57390
+    name: "Slot 1 Discharge Time Range Input"
+    entity_category: config
+    optimistic: true
+    mode: text
+    min_length: 11
+    max_length: 11
+    initial_value: "00:00-00:00"
+    set_action:
+      - lambda: |-
+          if (!id(p05_write_actions_enabled)) {
+            ESP_LOGW("p05_range", "Write action blocked during startup guard window");
+            return;
+          }
+          std::string s = x;
+          if (s.size() != 11 || s[2] != ':' || s[5] != '-' || s[8] != ':') {
+            ESP_LOGW("p05_range", "Invalid format, use HH:MM-HH:MM: %s", s.c_str());
+            return;
+          }
+          auto d = [](char c)->bool { return c >= '0' && c <= '9'; };
+          if (!d(s[0]) || !d(s[1]) || !d(s[3]) || !d(s[4]) || !d(s[6]) || !d(s[7]) || !d(s[9]) || !d(s[10])) {
+            ESP_LOGW("p05_range", "Invalid digits: %s", s.c_str());
+            return;
+          }
+          int sh = (s[0]-'0')*10 + (s[1]-'0');
+          int sm = (s[3]-'0')*10 + (s[4]-'0');
+          int eh = (s[6]-'0')*10 + (s[7]-'0');
+          int em = (s[9]-'0')*10 + (s[10]-'0');
+          if (sh < 0 || sh > 23 || eh < 0 || eh > 23 || sm < 0 || sm > 59 || em < 0 || em > 59) {
+            ESP_LOGW("p05_range", "Out of range HH/MM: %s", s.c_str());
+            return;
+          }
+          uint16_t w_start = ((uint16_t)(sh & 0xFF) << 8) | (uint16_t)(sm & 0xFF);
+          uint16_t w_end = ((uint16_t)(eh & 0xFF) << 8) | (uint16_t)(em & 0xFF);
+          std::vector<uint16_t> words; words.reserve(2);
+          words.push_back(w_start);
+          words.push_back(w_end);
+          auto controller = id(srne_main);
+          if (controller == nullptr) return;
+          auto cmd = esphome::modbus_controller::ModbusCommandItem::create_write_multiple_command(controller, 57389, 2, words);
+          controller->queue_command(cmd);
+          id(p05_fast_poll_until_ms) = millis() + 15000U;
+          id(raw_p05_57389).publish_state((float) w_start);
+          id(raw_p05_57390).publish_state((float) w_end);
+          id(txt_p05_range_57389_57390).update();
+  - platform: template
+    id: txtin_p05_57391_57392
+    name: "Slot 2 Discharge Time Range Input"
+    entity_category: config
+    optimistic: true
+    mode: text
+    min_length: 11
+    max_length: 11
+    initial_value: "00:00-00:00"
+    set_action:
+      - lambda: |-
+          if (!id(p05_write_actions_enabled)) {
+            ESP_LOGW("p05_range", "Write action blocked during startup guard window");
+            return;
+          }
+          std::string s = x;
+          if (s.size() != 11 || s[2] != ':' || s[5] != '-' || s[8] != ':') {
+            ESP_LOGW("p05_range", "Invalid format, use HH:MM-HH:MM: %s", s.c_str());
+            return;
+          }
+          auto d = [](char c)->bool { return c >= '0' && c <= '9'; };
+          if (!d(s[0]) || !d(s[1]) || !d(s[3]) || !d(s[4]) || !d(s[6]) || !d(s[7]) || !d(s[9]) || !d(s[10])) {
+            ESP_LOGW("p05_range", "Invalid digits: %s", s.c_str());
+            return;
+          }
+          int sh = (s[0]-'0')*10 + (s[1]-'0');
+          int sm = (s[3]-'0')*10 + (s[4]-'0');
+          int eh = (s[6]-'0')*10 + (s[7]-'0');
+          int em = (s[9]-'0')*10 + (s[10]-'0');
+          if (sh < 0 || sh > 23 || eh < 0 || eh > 23 || sm < 0 || sm > 59 || em < 0 || em > 59) {
+            ESP_LOGW("p05_range", "Out of range HH/MM: %s", s.c_str());
+            return;
+          }
+          uint16_t w_start = ((uint16_t)(sh & 0xFF) << 8) | (uint16_t)(sm & 0xFF);
+          uint16_t w_end = ((uint16_t)(eh & 0xFF) << 8) | (uint16_t)(em & 0xFF);
+          std::vector<uint16_t> words; words.reserve(2);
+          words.push_back(w_start);
+          words.push_back(w_end);
+          auto controller = id(srne_main);
+          if (controller == nullptr) return;
+          auto cmd = esphome::modbus_controller::ModbusCommandItem::create_write_multiple_command(controller, 57391, 2, words);
+          controller->queue_command(cmd);
+          id(p05_fast_poll_until_ms) = millis() + 15000U;
+          id(raw_p05_57391).publish_state((float) w_start);
+          id(raw_p05_57392).publish_state((float) w_end);
+          id(txt_p05_range_57391_57392).update();
+  - platform: template
+    id: txtin_p05_57393_57394
+    name: "Slot 3 Discharge Time Range Input"
+    entity_category: config
+    optimistic: true
+    mode: text
+    min_length: 11
+    max_length: 11
+    initial_value: "00:00-00:00"
+    set_action:
+      - lambda: |-
+          if (!id(p05_write_actions_enabled)) {
+            ESP_LOGW("p05_range", "Write action blocked during startup guard window");
+            return;
+          }
+          std::string s = x;
+          if (s.size() != 11 || s[2] != ':' || s[5] != '-' || s[8] != ':') {
+            ESP_LOGW("p05_range", "Invalid format, use HH:MM-HH:MM: %s", s.c_str());
+            return;
+          }
+          auto d = [](char c)->bool { return c >= '0' && c <= '9'; };
+          if (!d(s[0]) || !d(s[1]) || !d(s[3]) || !d(s[4]) || !d(s[6]) || !d(s[7]) || !d(s[9]) || !d(s[10])) {
+            ESP_LOGW("p05_range", "Invalid digits: %s", s.c_str());
+            return;
+          }
+          int sh = (s[0]-'0')*10 + (s[1]-'0');
+          int sm = (s[3]-'0')*10 + (s[4]-'0');
+          int eh = (s[6]-'0')*10 + (s[7]-'0');
+          int em = (s[9]-'0')*10 + (s[10]-'0');
+          if (sh < 0 || sh > 23 || eh < 0 || eh > 23 || sm < 0 || sm > 59 || em < 0 || em > 59) {
+            ESP_LOGW("p05_range", "Out of range HH/MM: %s", s.c_str());
+            return;
+          }
+          uint16_t w_start = ((uint16_t)(sh & 0xFF) << 8) | (uint16_t)(sm & 0xFF);
+          uint16_t w_end = ((uint16_t)(eh & 0xFF) << 8) | (uint16_t)(em & 0xFF);
+          std::vector<uint16_t> words; words.reserve(2);
+          words.push_back(w_start);
+          words.push_back(w_end);
+          auto controller = id(srne_main);
+          if (controller == nullptr) return;
+          auto cmd = esphome::modbus_controller::ModbusCommandItem::create_write_multiple_command(controller, 57393, 2, words);
+          controller->queue_command(cmd);
+          id(p05_fast_poll_until_ms) = millis() + 15000U;
+          id(raw_p05_57393).publish_state((float) w_start);
+          id(raw_p05_57394).publish_state((float) w_end);
+          id(txt_p05_range_57393_57394).update();
+
+number:
+  - platform: modbus_controller
+    id: num_p05_57388
+    modbus_controller_id: srne_main
+    register_type: holding
+    skip_updates: ${p05_skip_updates}
+    internal: true
+    address: 57388
+    value_type: U_WORD
+    write_lambda: |-
+      return (int) round(x * 1.0);
+  - platform: modbus_controller
+    id: num_p05_57395
+    modbus_controller_id: srne_main
+    register_type: holding
+    skip_updates: ${p05_skip_updates}
+    internal: true
+    address: 57395
+    value_type: U_WORD
+    write_lambda: |-
+      return (int) round(x * 1.0);
+  - platform: modbus_controller
+    id: num_p05_57400
+    modbus_controller_id: srne_main
+    register_type: holding
+    skip_updates: ${p05_skip_updates}
+    internal: true
+    address: 57400
+    value_type: U_WORD
+    write_lambda: |-
+      return (int) round(x * 1.0);
+  - platform: modbus_controller
+    modbus_controller_id: srne_main
+    register_type: holding
+    skip_updates: ${p05_skip_updates}
+    address: 57345
+    value_type: U_WORD
+    # endianness: register=big, word=little
+    name: "PV_Max_Charge_Current_Setting"
+    unit_of_measurement: "A"
+    entity_category: config
+    min_value: 0
+    max_value: 150
+    step: 0.1
+    lambda: |-
+      return x * 0.1;
+    write_lambda: |-
+      id(p05_fast_poll_until_ms) = millis() + 15000U;
+      return (int) round(x * 10.0);
+  - platform: modbus_controller
+    modbus_controller_id: srne_main
+    register_type: holding
+    skip_updates: ${p05_skip_updates}
+    address: 57346
+    value_type: U_WORD
+    # endianness: register=big, word=little
+    name: "Nominal_Battery_Capacity"
+    unit_of_measurement: "Ah"
+    entity_category: config
+    min_value: 0
+    max_value: 400
+    step: 1
+    write_lambda: |-
+      id(p05_fast_poll_until_ms) = millis() + 15000U;
+      return (int) round(x * 1.0);
+  - platform: modbus_controller
+    modbus_controller_id: srne_main
+    register_type: holding
+    skip_updates: ${p05_skip_updates}
+    address: 57349
+    value_type: U_WORD
+    # endianness: register=big, word=little
+    name: "Overvoltage_Voltage"
+    unit_of_measurement: "V"
+    entity_category: config
+    min_value: 9
+    max_value: 62
+    step: 0.1
+    lambda: |-
+      if (id(sel_p05_57347).state.empty()) return NAN;
+      int rv = atoi(id(sel_p05_57347).state.c_str());
+      if (!(rv == 12 || rv == 24 || rv == 36 || rv == 48)) return NAN;
+      float ratio = ((float) rv) / 12.0f;
+      return x * 0.1 * ratio;
+    write_lambda: |-
+      if (id(sel_p05_57347).state.empty()) {
+        ESP_LOGW("p05_voltage", "Battery_Rated_Voltage unavailable, block write");
+        return {};
+      }
+      int rv = atoi(id(sel_p05_57347).state.c_str());
+      if (!(rv == 12 || rv == 24 || rv == 36 || rv == 48)) {
+        ESP_LOGW("p05_voltage", "Battery_Rated_Voltage invalid (%d), block write", rv);
+        return {};
+      }
+      float ratio = ((float) rv) / 12.0f;
+      float min_v = 9.0 * ratio;
+      float max_v = 15.5 * ratio;
+      if (!isnan(min_v) && x < min_v) {
+        ESP_LOGW("p05_voltage", "Input %.3fV below min %.3fV, block write", x, min_v);
+        return {};
+      }
+      if (!isnan(max_v) && x > max_v) {
+        ESP_LOGW("p05_voltage", "Input %.3fV above max %.3fV, block write", x, max_v);
+        return {};
+      }
+      id(p05_fast_poll_until_ms) = millis() + 15000U;
+      return (int) floorf(x / ratio * 10.0);
+  - platform: modbus_controller
+    modbus_controller_id: srne_main
+    register_type: holding
+    skip_updates: ${p05_skip_updates}
+    address: 57350
+    value_type: U_WORD
+    # endianness: register=big, word=little
+    name: "Charge_Limit_Voltage"
+    unit_of_measurement: "V"
+    entity_category: config
+    min_value: 9
+    max_value: 62
+    step: 0.1
+    lambda: |-
+      if (id(sel_p05_57347).state.empty()) return NAN;
+      int rv = atoi(id(sel_p05_57347).state.c_str());
+      if (!(rv == 12 || rv == 24 || rv == 36 || rv == 48)) return NAN;
+      float ratio = ((float) rv) / 12.0f;
+      return x * 0.1 * ratio;
+    write_lambda: |-
+      if (id(sel_p05_57347).state.empty()) {
+        ESP_LOGW("p05_voltage", "Battery_Rated_Voltage unavailable, block write");
+        return {};
+      }
+      int rv = atoi(id(sel_p05_57347).state.c_str());
+      if (!(rv == 12 || rv == 24 || rv == 36 || rv == 48)) {
+        ESP_LOGW("p05_voltage", "Battery_Rated_Voltage invalid (%d), block write", rv);
+        return {};
+      }
+      float ratio = ((float) rv) / 12.0f;
+      float min_v = 9.0 * ratio;
+      float max_v = 15.5 * ratio;
+      if (!isnan(min_v) && x < min_v) {
+        ESP_LOGW("p05_voltage", "Input %.3fV below min %.3fV, block write", x, min_v);
+        return {};
+      }
+      if (!isnan(max_v) && x > max_v) {
+        ESP_LOGW("p05_voltage", "Input %.3fV above max %.3fV, block write", x, max_v);
+        return {};
+      }
+      id(p05_fast_poll_until_ms) = millis() + 15000U;
+      return (int) floorf(x / ratio * 10.0);
+  - platform: modbus_controller
+    modbus_controller_id: srne_main
+    register_type: holding
+    skip_updates: ${p05_skip_updates}
+    address: 57351
+    value_type: U_WORD
+    # endianness: register=big, word=little
+    name: "Equalization_Charge_Voltage"
+    unit_of_measurement: "V"
+    entity_category: config
+    min_value: 9
+    max_value: 62
+    step: 0.1
+    lambda: |-
+      if (id(sel_p05_57347).state.empty()) return NAN;
+      int rv = atoi(id(sel_p05_57347).state.c_str());
+      if (!(rv == 12 || rv == 24 || rv == 36 || rv == 48)) return NAN;
+      float ratio = ((float) rv) / 12.0f;
+      return x * 0.1 * ratio;
+    write_lambda: |-
+      if (id(sel_p05_57347).state.empty()) {
+        ESP_LOGW("p05_voltage", "Battery_Rated_Voltage unavailable, block write");
+        return {};
+      }
+      int rv = atoi(id(sel_p05_57347).state.c_str());
+      if (!(rv == 12 || rv == 24 || rv == 36 || rv == 48)) {
+        ESP_LOGW("p05_voltage", "Battery_Rated_Voltage invalid (%d), block write", rv);
+        return {};
+      }
+      float ratio = ((float) rv) / 12.0f;
+      float min_v = 9.0 * ratio;
+      float max_v = 15.5 * ratio;
+      if (!isnan(min_v) && x < min_v) {
+        ESP_LOGW("p05_voltage", "Input %.3fV below min %.3fV, block write", x, min_v);
+        return {};
+      }
+      if (!isnan(max_v) && x > max_v) {
+        ESP_LOGW("p05_voltage", "Input %.3fV above max %.3fV, block write", x, max_v);
+        return {};
+      }
+      id(p05_fast_poll_until_ms) = millis() + 15000U;
+      return (int) floorf(x / ratio * 10.0);
+  - platform: modbus_controller
+    modbus_controller_id: srne_main
+    register_type: holding
+    skip_updates: ${p05_skip_updates}
+    address: 57352
+    value_type: U_WORD
+    # endianness: register=big, word=little
+    name: "Boost_Charge_Voltage"
+    unit_of_measurement: "V"
+    entity_category: config
+    min_value: 9
+    max_value: 62
+    step: 0.1
+    lambda: |-
+      if (id(sel_p05_57347).state.empty()) return NAN;
+      int rv = atoi(id(sel_p05_57347).state.c_str());
+      if (!(rv == 12 || rv == 24 || rv == 36 || rv == 48)) return NAN;
+      float ratio = ((float) rv) / 12.0f;
+      return x * 0.1 * ratio;
+    write_lambda: |-
+      if (id(sel_p05_57347).state.empty()) {
+        ESP_LOGW("p05_voltage", "Battery_Rated_Voltage unavailable, block write");
+        return {};
+      }
+      int rv = atoi(id(sel_p05_57347).state.c_str());
+      if (!(rv == 12 || rv == 24 || rv == 36 || rv == 48)) {
+        ESP_LOGW("p05_voltage", "Battery_Rated_Voltage invalid (%d), block write", rv);
+        return {};
+      }
+      float ratio = ((float) rv) / 12.0f;
+      float min_v = 9.0 * ratio;
+      float max_v = 15.5 * ratio;
+      if (!isnan(min_v) && x < min_v) {
+        ESP_LOGW("p05_voltage", "Input %.3fV below min %.3fV, block write", x, min_v);
+        return {};
+      }
+      if (!isnan(max_v) && x > max_v) {
+        ESP_LOGW("p05_voltage", "Input %.3fV above max %.3fV, block write", x, max_v);
+        return {};
+      }
+      id(p05_fast_poll_until_ms) = millis() + 15000U;
+      return (int) floorf(x / ratio * 10.0);
+  - platform: modbus_controller
+    modbus_controller_id: srne_main
+    register_type: holding
+    skip_updates: ${p05_skip_updates}
+    address: 57353
+    value_type: U_WORD
+    # endianness: register=big, word=little
+    name: "Float_Charge_Voltage"
+    unit_of_measurement: "V"
+    entity_category: config
+    min_value: 9
+    max_value: 62
+    step: 0.1
+    lambda: |-
+      if (id(sel_p05_57347).state.empty()) return NAN;
+      int rv = atoi(id(sel_p05_57347).state.c_str());
+      if (!(rv == 12 || rv == 24 || rv == 36 || rv == 48)) return NAN;
+      float ratio = ((float) rv) / 12.0f;
+      return x * 0.1 * ratio;
+    write_lambda: |-
+      if (id(sel_p05_57347).state.empty()) {
+        ESP_LOGW("p05_voltage", "Battery_Rated_Voltage unavailable, block write");
+        return {};
+      }
+      int rv = atoi(id(sel_p05_57347).state.c_str());
+      if (!(rv == 12 || rv == 24 || rv == 36 || rv == 48)) {
+        ESP_LOGW("p05_voltage", "Battery_Rated_Voltage invalid (%d), block write", rv);
+        return {};
+      }
+      float ratio = ((float) rv) / 12.0f;
+      float min_v = 9.0 * ratio;
+      float max_v = 15.5 * ratio;
+      if (!isnan(min_v) && x < min_v) {
+        ESP_LOGW("p05_voltage", "Input %.3fV below min %.3fV, block write", x, min_v);
+        return {};
+      }
+      if (!isnan(max_v) && x > max_v) {
+        ESP_LOGW("p05_voltage", "Input %.3fV above max %.3fV, block write", x, max_v);
+        return {};
+      }
+      id(p05_fast_poll_until_ms) = millis() + 15000U;
+      return (int) floorf(x / ratio * 10.0);
+  - platform: modbus_controller
+    modbus_controller_id: srne_main
+    register_type: holding
+    skip_updates: ${p05_skip_updates}
+    address: 57354
+    value_type: U_WORD
+    # endianness: register=big, word=little
+    name: "Boost_Charge_Recovery_Voltage"
+    unit_of_measurement: "V"
+    entity_category: config
+    min_value: 9
+    max_value: 62
+    step: 0.1
+    lambda: |-
+      if (id(sel_p05_57347).state.empty()) return NAN;
+      int rv = atoi(id(sel_p05_57347).state.c_str());
+      if (!(rv == 12 || rv == 24 || rv == 36 || rv == 48)) return NAN;
+      float ratio = ((float) rv) / 12.0f;
+      return x * 0.1 * ratio;
+    write_lambda: |-
+      if (id(sel_p05_57347).state.empty()) {
+        ESP_LOGW("p05_voltage", "Battery_Rated_Voltage unavailable, block write");
+        return {};
+      }
+      int rv = atoi(id(sel_p05_57347).state.c_str());
+      if (!(rv == 12 || rv == 24 || rv == 36 || rv == 48)) {
+        ESP_LOGW("p05_voltage", "Battery_Rated_Voltage invalid (%d), block write", rv);
+        return {};
+      }
+      float ratio = ((float) rv) / 12.0f;
+      float min_v = 9.0 * ratio;
+      float max_v = 15.5 * ratio;
+      if (!isnan(min_v) && x < min_v) {
+        ESP_LOGW("p05_voltage", "Input %.3fV below min %.3fV, block write", x, min_v);
+        return {};
+      }
+      if (!isnan(max_v) && x > max_v) {
+        ESP_LOGW("p05_voltage", "Input %.3fV above max %.3fV, block write", x, max_v);
+        return {};
+      }
+      id(p05_fast_poll_until_ms) = millis() + 15000U;
+      return (int) floorf(x / ratio * 10.0);
+  - platform: modbus_controller
+    modbus_controller_id: srne_main
+    register_type: holding
+    skip_updates: ${p05_skip_updates}
+    address: 57355
+    value_type: U_WORD
+    # endianness: register=big, word=little
+    name: "Over-discharge_Recovery_Voltage"
+    unit_of_measurement: "V"
+    entity_category: config
+    min_value: 9
+    max_value: 62
+    step: 0.1
+    lambda: |-
+      if (id(sel_p05_57347).state.empty()) return NAN;
+      int rv = atoi(id(sel_p05_57347).state.c_str());
+      if (!(rv == 12 || rv == 24 || rv == 36 || rv == 48)) return NAN;
+      float ratio = ((float) rv) / 12.0f;
+      return x * 0.1 * ratio;
+    write_lambda: |-
+      if (id(sel_p05_57347).state.empty()) {
+        ESP_LOGW("p05_voltage", "Battery_Rated_Voltage unavailable, block write");
+        return {};
+      }
+      int rv = atoi(id(sel_p05_57347).state.c_str());
+      if (!(rv == 12 || rv == 24 || rv == 36 || rv == 48)) {
+        ESP_LOGW("p05_voltage", "Battery_Rated_Voltage invalid (%d), block write", rv);
+        return {};
+      }
+      float ratio = ((float) rv) / 12.0f;
+      float min_v = 9.0 * ratio;
+      float max_v = 15.5 * ratio;
+      if (!isnan(min_v) && x < min_v) {
+        ESP_LOGW("p05_voltage", "Input %.3fV below min %.3fV, block write", x, min_v);
+        return {};
+      }
+      if (!isnan(max_v) && x > max_v) {
+        ESP_LOGW("p05_voltage", "Input %.3fV above max %.3fV, block write", x, max_v);
+        return {};
+      }
+      id(p05_fast_poll_until_ms) = millis() + 15000U;
+      return (int) floorf(x / ratio * 10.0);
+  - platform: modbus_controller
+    modbus_controller_id: srne_main
+    register_type: holding
+    skip_updates: ${p05_skip_updates}
+    address: 57356
+    value_type: U_WORD
+    # endianness: register=big, word=little
+    name: "Under-voltage_Warning_Voltage"
+    unit_of_measurement: "V"
+    entity_category: config
+    min_value: 9
+    max_value: 62
+    step: 0.1
+    lambda: |-
+      if (id(sel_p05_57347).state.empty()) return NAN;
+      int rv = atoi(id(sel_p05_57347).state.c_str());
+      if (!(rv == 12 || rv == 24 || rv == 36 || rv == 48)) return NAN;
+      float ratio = ((float) rv) / 12.0f;
+      return x * 0.1 * ratio;
+    write_lambda: |-
+      if (id(sel_p05_57347).state.empty()) {
+        ESP_LOGW("p05_voltage", "Battery_Rated_Voltage unavailable, block write");
+        return {};
+      }
+      int rv = atoi(id(sel_p05_57347).state.c_str());
+      if (!(rv == 12 || rv == 24 || rv == 36 || rv == 48)) {
+        ESP_LOGW("p05_voltage", "Battery_Rated_Voltage invalid (%d), block write", rv);
+        return {};
+      }
+      float ratio = ((float) rv) / 12.0f;
+      float min_v = 9.0 * ratio;
+      float max_v = 15.5 * ratio;
+      if (!isnan(min_v) && x < min_v) {
+        ESP_LOGW("p05_voltage", "Input %.3fV below min %.3fV, block write", x, min_v);
+        return {};
+      }
+      if (!isnan(max_v) && x > max_v) {
+        ESP_LOGW("p05_voltage", "Input %.3fV above max %.3fV, block write", x, max_v);
+        return {};
+      }
+      id(p05_fast_poll_until_ms) = millis() + 15000U;
+      return (int) floorf(x / ratio * 10.0);
+  - platform: modbus_controller
+    modbus_controller_id: srne_main
+    register_type: holding
+    skip_updates: ${p05_skip_updates}
+    address: 57357
+    value_type: U_WORD
+    # endianness: register=big, word=little
+    name: "Over-discharge_Voltage"
+    unit_of_measurement: "V"
+    entity_category: config
+    min_value: 9
+    max_value: 62
+    step: 0.1
+    lambda: |-
+      if (id(sel_p05_57347).state.empty()) return NAN;
+      int rv = atoi(id(sel_p05_57347).state.c_str());
+      if (!(rv == 12 || rv == 24 || rv == 36 || rv == 48)) return NAN;
+      float ratio = ((float) rv) / 12.0f;
+      return x * 0.1 * ratio;
+    write_lambda: |-
+      if (id(sel_p05_57347).state.empty()) {
+        ESP_LOGW("p05_voltage", "Battery_Rated_Voltage unavailable, block write");
+        return {};
+      }
+      int rv = atoi(id(sel_p05_57347).state.c_str());
+      if (!(rv == 12 || rv == 24 || rv == 36 || rv == 48)) {
+        ESP_LOGW("p05_voltage", "Battery_Rated_Voltage invalid (%d), block write", rv);
+        return {};
+      }
+      float ratio = ((float) rv) / 12.0f;
+      float min_v = 9.0 * ratio;
+      float max_v = 15.5 * ratio;
+      if (!isnan(min_v) && x < min_v) {
+        ESP_LOGW("p05_voltage", "Input %.3fV below min %.3fV, block write", x, min_v);
+        return {};
+      }
+      if (!isnan(max_v) && x > max_v) {
+        ESP_LOGW("p05_voltage", "Input %.3fV above max %.3fV, block write", x, max_v);
+        return {};
+      }
+      id(p05_fast_poll_until_ms) = millis() + 15000U;
+      return (int) floorf(x / ratio * 10.0);
+  - platform: modbus_controller
+    modbus_controller_id: srne_main
+    register_type: holding
+    skip_updates: ${p05_skip_updates}
+    address: 57358
+    value_type: U_WORD
+    # endianness: register=big, word=little
+    name: "Discharge_Limit_Voltage"
+    unit_of_measurement: "V"
+    entity_category: config
+    min_value: 9
+    max_value: 62
+    step: 0.1
+    lambda: |-
+      if (id(sel_p05_57347).state.empty()) return NAN;
+      int rv = atoi(id(sel_p05_57347).state.c_str());
+      if (!(rv == 12 || rv == 24 || rv == 36 || rv == 48)) return NAN;
+      float ratio = ((float) rv) / 12.0f;
+      return x * 0.1 * ratio;
+    write_lambda: |-
+      if (id(sel_p05_57347).state.empty()) {
+        ESP_LOGW("p05_voltage", "Battery_Rated_Voltage unavailable, block write");
+        return {};
+      }
+      int rv = atoi(id(sel_p05_57347).state.c_str());
+      if (!(rv == 12 || rv == 24 || rv == 36 || rv == 48)) {
+        ESP_LOGW("p05_voltage", "Battery_Rated_Voltage invalid (%d), block write", rv);
+        return {};
+      }
+      float ratio = ((float) rv) / 12.0f;
+      float min_v = 9.0 * ratio;
+      float max_v = 15.5 * ratio;
+      if (!isnan(min_v) && x < min_v) {
+        ESP_LOGW("p05_voltage", "Input %.3fV below min %.3fV, block write", x, min_v);
+        return {};
+      }
+      if (!isnan(max_v) && x > max_v) {
+        ESP_LOGW("p05_voltage", "Input %.3fV above max %.3fV, block write", x, max_v);
+        return {};
+      }
+      id(p05_fast_poll_until_ms) = millis() + 15000U;
+      return (int) floorf(x / ratio * 10.0);
+  - platform: modbus_controller
+    modbus_controller_id: srne_main
+    register_type: holding
+    skip_updates: ${p05_skip_updates}
+    address: 57359
+    value_type: U_WORD
+    # endianness: register=big, word=little
+    name: "Discharge_Cut-off_SoC"
+    unit_of_measurement: "%"
+    entity_category: config
+    min_value: 0
+    max_value: 100
+    step: 1
+    write_lambda: |-
+      id(p05_fast_poll_until_ms) = millis() + 15000U;
+      return (int) round(x * 1.0);
+  - platform: modbus_controller
+    modbus_controller_id: srne_main
+    register_type: holding
+    skip_updates: ${p05_skip_updates}
+    address: 57360
+    value_type: U_WORD
+    # endianness: register=big, word=little
+    name: "Over_Discharge_Delay_Time"
+    unit_of_measurement: "s"
+    entity_category: config
+    min_value: 0
+    max_value: 120
+    step: 1
+    write_lambda: |-
+      id(p05_fast_poll_until_ms) = millis() + 15000U;
+      return (int) round(x * 1.0);
+  - platform: modbus_controller
+    modbus_controller_id: srne_main
+    register_type: holding
+    skip_updates: ${p05_skip_updates}
+    address: 57361
+    value_type: U_WORD
+    # endianness: register=big, word=little
+    name: "Equalization_Charge_Time"
+    unit_of_measurement: "min"
+    entity_category: config
+    min_value: 0
+    max_value: 900
+    step: 1
+    write_lambda: |-
+      id(p05_fast_poll_until_ms) = millis() + 15000U;
+      return (int) round(x * 1.0);
+  - platform: modbus_controller
+    modbus_controller_id: srne_main
+    register_type: holding
+    skip_updates: ${p05_skip_updates}
+    address: 57362
+    value_type: U_WORD
+    # endianness: register=big, word=little
+    name: "Boost_Charge_Time"
+    unit_of_measurement: "min"
+    entity_category: config
+    min_value: 10
+    max_value: 900
+    step: 1
+    write_lambda: |-
+      id(p05_fast_poll_until_ms) = millis() + 15000U;
+      return (int) round(x * 1.0);
+  - platform: modbus_controller
+    modbus_controller_id: srne_main
+    register_type: holding
+    skip_updates: ${p05_skip_updates}
+    address: 57363
+    value_type: U_WORD
+    # endianness: register=big, word=little
+    name: "Equalization_Charge_Interval"
+    unit_of_measurement: "day"
+    entity_category: config
+    min_value: 0
+    max_value: 255
+    step: 1
+    write_lambda: |-
+      id(p05_fast_poll_until_ms) = millis() + 15000U;
+      return (int) round(x * 1.0);
+  - platform: modbus_controller
+    modbus_controller_id: srne_main
+    register_type: holding
+    skip_updates: ${p05_skip_updates}
+    address: 57364
+    value_type: S_WORD
+    # endianness: register=big, word=little
+    name: "Temperature_Compensation_Coefficient"
+    unit_of_measurement: "mV/°C"
+    entity_category: config
+    min_value: 0
+    max_value: 10
+    step: 1
+    write_lambda: |-
+      id(p05_fast_poll_until_ms) = millis() + 15000U;
+      return (int) round(x * 1.0);
+  - platform: modbus_controller
+    modbus_controller_id: srne_main
+    register_type: holding
+    skip_updates: ${p05_skip_updates}
+    address: 57365
+    value_type: S_WORD
+    # endianness: register=big, word=little
+    name: "Charge_Limit_Max_Temperature"
+    unit_of_measurement: "°C"
+    entity_category: config
+    min_value: -40
+    max_value: 100
+    step: 0.1
+    lambda: |-
+      return x * 0.1;
+    write_lambda: |-
+      id(p05_fast_poll_until_ms) = millis() + 15000U;
+      return (int) round(x * 10.0);
+  - platform: modbus_controller
+    modbus_controller_id: srne_main
+    register_type: holding
+    skip_updates: ${p05_skip_updates}
+    address: 57366
+    value_type: S_WORD
+    # endianness: register=big, word=little
+    name: "Charge_Limit_Min_Temperature"
+    unit_of_measurement: "°C"
+    entity_category: config
+    min_value: -40
+    max_value: 100
+    step: 0.1
+    lambda: |-
+      return x * 0.1;
+    write_lambda: |-
+      id(p05_fast_poll_until_ms) = millis() + 15000U;
+      return (int) round(x * 10.0);
+  - platform: modbus_controller
+    modbus_controller_id: srne_main
+    register_type: holding
+    skip_updates: ${p05_skip_updates}
+    address: 57367
+    value_type: S_WORD
+    # endianness: register=big, word=little
+    name: "Discharge_Limit_Max_Temperature"
+    unit_of_measurement: "°C"
+    entity_category: config
+    min_value: -40
+    max_value: 100
+    step: 0.1
+    lambda: |-
+      return x * 0.1;
+    write_lambda: |-
+      id(p05_fast_poll_until_ms) = millis() + 15000U;
+      return (int) round(x * 10.0);
+  - platform: modbus_controller
+    modbus_controller_id: srne_main
+    register_type: holding
+    skip_updates: ${p05_skip_updates}
+    address: 57368
+    value_type: S_WORD
+    # endianness: register=big, word=little
+    name: "Discharge_Limit_Min_Temperature"
+    unit_of_measurement: "°C"
+    entity_category: config
+    min_value: -40
+    max_value: 100
+    step: 0.1
+    lambda: |-
+      return x * 0.1;
+    write_lambda: |-
+      id(p05_fast_poll_until_ms) = millis() + 15000U;
+      return (int) round(x * 10.0);
+  - platform: modbus_controller
+    modbus_controller_id: srne_main
+    register_type: holding
+    skip_updates: ${p05_skip_updates}
+    address: 57369
+    value_type: S_WORD
+    # endianness: register=big, word=little
+    name: "Heater_Start_Temperature"
+    unit_of_measurement: "°C"
+    entity_category: config
+    min_value: -40
+    max_value: 100
+    step: 0.1
+    lambda: |-
+      return x * 0.1;
+    write_lambda: |-
+      id(p05_fast_poll_until_ms) = millis() + 15000U;
+      return (int) round(x * 10.0);
+  - platform: modbus_controller
+    modbus_controller_id: srne_main
+    register_type: holding
+    skip_updates: ${p05_skip_updates}
+    address: 57370
+    value_type: S_WORD
+    # endianness: register=big, word=little
+    name: "Heater_Stop_Temperature"
+    unit_of_measurement: "°C"
+    entity_category: config
+    min_value: -40
+    max_value: 100
+    step: 0.1
+    lambda: |-
+      return x * 0.1;
+    write_lambda: |-
+      id(p05_fast_poll_until_ms) = millis() + 15000U;
+      return (int) round(x * 10.0);
+  - platform: modbus_controller
+    modbus_controller_id: srne_main
+    register_type: holding
+    skip_updates: ${p05_skip_updates}
+    address: 57371
+    value_type: U_WORD
+    # endianness: register=big, word=little
+    name: "Battery-to-Grid_Switch_Voltage"
+    unit_of_measurement: "V"
+    entity_category: config
+    min_value: 9
+    max_value: 62
+    step: 0.1
+    lambda: |-
+      if (id(sel_p05_57347).state.empty()) return NAN;
+      int rv = atoi(id(sel_p05_57347).state.c_str());
+      if (!(rv == 12 || rv == 24 || rv == 36 || rv == 48)) return NAN;
+      float ratio = ((float) rv) / 12.0f;
+      return x * 0.1 * ratio;
+    write_lambda: |-
+      if (id(sel_p05_57347).state.empty()) {
+        ESP_LOGW("p05_voltage", "Battery_Rated_Voltage unavailable, block write");
+        return {};
+      }
+      int rv = atoi(id(sel_p05_57347).state.c_str());
+      if (!(rv == 12 || rv == 24 || rv == 36 || rv == 48)) {
+        ESP_LOGW("p05_voltage", "Battery_Rated_Voltage invalid (%d), block write", rv);
+        return {};
+      }
+      float ratio = ((float) rv) / 12.0f;
+      float min_v = 9.0 * ratio;
+      float max_v = 15.5 * ratio;
+      if (!isnan(min_v) && x < min_v) {
+        ESP_LOGW("p05_voltage", "Input %.3fV below min %.3fV, block write", x, min_v);
+        return {};
+      }
+      if (!isnan(max_v) && x > max_v) {
+        ESP_LOGW("p05_voltage", "Input %.3fV above max %.3fV, block write", x, max_v);
+        return {};
+      }
+      id(p05_fast_poll_until_ms) = millis() + 15000U;
+      return (int) floorf(x / ratio * 10.0);
+  - platform: modbus_controller
+    modbus_controller_id: srne_main
+    register_type: holding
+    skip_updates: ${p05_skip_updates}
+    address: 57372
+    value_type: U_WORD
+    # endianness: register=big, word=little
+    name: "Charge_Termination_Current"
+    unit_of_measurement: "A"
+    entity_category: config
+    min_value: 0
+    max_value: 10
+    step: 0.1
+    lambda: |-
+      return x * 0.1;
+    write_lambda: |-
+      id(p05_fast_poll_until_ms) = millis() + 15000U;
+      return (int) round(x * 10.0);
+  - platform: modbus_controller
+    modbus_controller_id: srne_main
+    register_type: holding
+    skip_updates: ${p05_skip_updates}
+    address: 57373
+    value_type: U_WORD
+    # endianness: register=big, word=little
+    name: "Charge_Termination_SoC"
+    unit_of_measurement: "%"
+    entity_category: config
+    min_value: 0
+    max_value: 100
+    step: 1
+    write_lambda: |-
+      id(p05_fast_poll_until_ms) = millis() + 15000U;
+      return (int) round(x * 1.0);
+  - platform: modbus_controller
+    modbus_controller_id: srne_main
+    register_type: holding
+    skip_updates: ${p05_skip_updates}
+    address: 57374
+    value_type: U_WORD
+    # endianness: register=big, word=little
+    name: "Low_SoC_Warning"
+    unit_of_measurement: "%"
+    entity_category: config
+    min_value: 0
+    max_value: 100
+    step: 1
+    write_lambda: |-
+      id(p05_fast_poll_until_ms) = millis() + 15000U;
+      return (int) round(x * 1.0);
+  - platform: modbus_controller
+    modbus_controller_id: srne_main
+    register_type: holding
+    skip_updates: ${p05_skip_updates}
+    address: 57375
+    value_type: U_WORD
+    # endianness: register=big, word=little
+    name: "Battery-to-Grid_Switch_SoC"
+    unit_of_measurement: "%"
+    entity_category: config
+    min_value: 0
+    max_value: 100
+    step: 1
+    write_lambda: |-
+      id(p05_fast_poll_until_ms) = millis() + 15000U;
+      return (int) round(x * 1.0);
+  - platform: modbus_controller
+    modbus_controller_id: srne_main
+    register_type: holding
+    skip_updates: ${p05_skip_updates}
+    address: 57376
+    value_type: U_WORD
+    # endianness: register=big, word=little
+    name: "Grid-to-Battery_Switch_SoC"
+    unit_of_measurement: "%"
+    entity_category: config
+    min_value: 1
+    max_value: 100
+    step: 1
+    write_lambda: |-
+      id(p05_fast_poll_until_ms) = millis() + 15000U;
+      return (int) round(x * 1.0);
+  - platform: modbus_controller
+    modbus_controller_id: srne_main
+    register_type: holding
+    skip_updates: ${p05_skip_updates}
+    address: 57378
+    value_type: U_WORD
+    # endianness: register=big, word=little
+    name: "Grid-to-Battery_Switch_Voltage"
+    unit_of_measurement: "V"
+    entity_category: config
+    min_value: 9
+    max_value: 62
+    step: 0.1
+    lambda: |-
+      if (id(sel_p05_57347).state.empty()) return NAN;
+      int rv = atoi(id(sel_p05_57347).state.c_str());
+      if (!(rv == 12 || rv == 24 || rv == 36 || rv == 48)) return NAN;
+      float ratio = ((float) rv) / 12.0f;
+      return x * 0.1 * ratio;
+    write_lambda: |-
+      if (id(sel_p05_57347).state.empty()) {
+        ESP_LOGW("p05_voltage", "Battery_Rated_Voltage unavailable, block write");
+        return {};
+      }
+      int rv = atoi(id(sel_p05_57347).state.c_str());
+      if (!(rv == 12 || rv == 24 || rv == 36 || rv == 48)) {
+        ESP_LOGW("p05_voltage", "Battery_Rated_Voltage invalid (%d), block write", rv);
+        return {};
+      }
+      float ratio = ((float) rv) / 12.0f;
+      float min_v = 9.0 * ratio;
+      float max_v = 15.5 * ratio;
+      if (!isnan(min_v) && x < min_v) {
+        ESP_LOGW("p05_voltage", "Input %.3fV below min %.3fV, block write", x, min_v);
+        return {};
+      }
+      if (!isnan(max_v) && x > max_v) {
+        ESP_LOGW("p05_voltage", "Input %.3fV above max %.3fV, block write", x, max_v);
+        return {};
+      }
+      id(p05_fast_poll_until_ms) = millis() + 15000U;
+      return (int) floorf(x / ratio * 10.0);
+  - platform: modbus_controller
+    modbus_controller_id: srne_main
+    register_type: holding
+    skip_updates: ${p05_skip_updates}
+    address: 57379
+    value_type: U_WORD
+    # endianness: register=big, word=little
+    name: "Equalization_Charge_Timeout"
+    unit_of_measurement: "min"
+    entity_category: config
+    min_value: 5
+    max_value: 900
+    step: 1
+    write_lambda: |-
+      id(p05_fast_poll_until_ms) = millis() + 15000U;
+      return (int) round(x * 1.0);
+  - platform: modbus_controller
+    modbus_controller_id: srne_main
+    register_type: holding
+    skip_updates: ${p05_skip_updates}
+    address: 57380
+    value_type: U_WORD
+    # endianness: register=big, word=little
+    name: "Lithium_Battery_Activation_Current"
+    unit_of_measurement: "A"
+    entity_category: config
+    min_value: 0
+    max_value: 20
+    step: 0.1
+    lambda: |-
+      return x * 0.1;
+    write_lambda: |-
+      id(p05_fast_poll_until_ms) = millis() + 15000U;
+      return (int) round(x * 10.0);
+
+select:
+  - platform: modbus_controller
+    modbus_controller_id: srne_main
+    skip_updates: ${p05_skip_updates}
+    address: 57347
+    # endianness: register=big, word=little
+    id: sel_p05_57347
+    name: "Battery_Rated_Voltage"
+    force_new_range: true
+    entity_category: config
+    optimistic: true
+    on_value:
+      - lambda: |-
+          static std::string prev = "";
+          if (prev == x) return;
+          prev = x;
+          id(p05_fast_poll_until_ms) = millis() + 15000U;
+    optionsmap:
+      "12V": 12
+      "24V": 24
+      "36V": 36
+      "48V": 48
+  - platform: modbus_controller
+    modbus_controller_id: srne_main
+    skip_updates: ${p05_skip_updates}
+    address: 57348
+    # endianness: register=big, word=little
+    id: sel_p05_57348
+    name: "Battery_Type"
+    force_new_range: true
+    entity_category: config
+    optimistic: true
+    on_value:
+      - lambda: |-
+          static std::string prev = "";
+          if (prev == x) return;
+          prev = x;
+          id(p05_fast_poll_until_ms) = millis() + 15000U;
+    optionsmap:
+      "User define": 0
+      "SLD": 1
+      "FLD": 2
+      "GEL": 3
+      "LFP x14": 4
+      "LFP x15": 5
+      "LFP x16": 6
+      "LFP x7": 7
+      "LFP x8": 8
+      "LFP x9": 9
+      "NMC x7": 10
+      "NMC x8": 11
+      "NMC x13": 12
+      "NMC x14": 13
+  - platform: modbus_controller
+    modbus_controller_id: srne_main
+    skip_updates: ${p05_skip_updates}
+    address: 57381
+    # endianness: register=big, word=little
+    id: sel_p05_57381
+    name: "BMS_Charge_Current_Limit_Mode_Setting"
+    force_new_range: true
+    entity_category: config
+    optimistic: true
+    on_value:
+      - lambda: |-
+          static std::string prev = "";
+          if (prev == x) return;
+          prev = x;
+          id(p05_fast_poll_until_ms) = millis() + 15000U;
+    optionsmap:
+      "User-set Charge Current Limit": 0
+      "BMS Charge Current Limit": 1
+      "Inverter Charge Current Limit": 2
+  - platform: modbus_controller
+    modbus_controller_id: srne_main
+    skip_updates: ${p05_skip_updates}
+    address: 57399
+    # endianness: register=big, word=little
+    id: sel_p05_57399
+    name: "Operation_Mode"
+    force_new_range: true
+    entity_category: config
+    optimistic: true
+    on_value:
+      - lambda: |-
+          static std::string prev = "";
+          if (prev == x) return;
+          prev = x;
+          id(p05_fast_poll_until_ms) = millis() + 15000U;
+    optionsmap:
+      "Off-grid mode (banned)": 0
+      "Grid-connected Mode": 1
+      "AC Output Anti-backfeed Mode": 2
+      "AC Input Anti-backfeed Mode": 3
+  - platform: modbus_controller
+    modbus_controller_id: srne_main
+    skip_updates: ${p05_skip_updates}
+    address: 57401
+    # endianness: register=big, word=little
+    id: sel_p05_57401
+    name: "PV_Output_Priority"
+    force_new_range: true
+    entity_category: config
+    optimistic: true
+    on_value:
+      - lambda: |-
+          static std::string prev = "";
+          if (prev == x) return;
+          prev = x;
+          id(p05_fast_poll_until_ms) = millis() + 15000U;
+    optionsmap:
+      "Charging priority": 0
+      "Load priority": 1
+
+switch:
+  - platform: template
+    id: sw_p05_57388
+    name: "Time-slot Charging"
+    optimistic: true
+    restore_mode: DISABLED
+    entity_category: config
+    turn_on_action:
+      - if:
+          condition:
+            lambda: 'return id(p05_write_actions_enabled);'
+          then:
+            - lambda: |-
+                id(p05_fast_poll_until_ms) = millis() + 15000U;
+            - number.set:
+                id: num_p05_57388
+                value: 1
+    turn_off_action:
+      - if:
+          condition:
+            lambda: 'return id(p05_write_actions_enabled);'
+          then:
+            - lambda: |-
+                id(p05_fast_poll_until_ms) = millis() + 15000U;
+            - number.set:
+                id: num_p05_57388
+                value: 0
+  - platform: template
+    id: sw_p05_57395
+    name: "Time-slot Discharge"
+    optimistic: true
+    restore_mode: DISABLED
+    entity_category: config
+    turn_on_action:
+      - if:
+          condition:
+            lambda: 'return id(p05_write_actions_enabled);'
+          then:
+            - lambda: |-
+                id(p05_fast_poll_until_ms) = millis() + 15000U;
+            - number.set:
+                id: num_p05_57395
+                value: 1
+    turn_off_action:
+      - if:
+          condition:
+            lambda: 'return id(p05_write_actions_enabled);'
+          then:
+            - lambda: |-
+                id(p05_fast_poll_until_ms) = millis() + 15000U;
+            - number.set:
+                id: num_p05_57395
+                value: 0
+  - platform: template
+    id: sw_p05_57400
+    name: "Leakage Current Detection"
+    optimistic: true
+    restore_mode: DISABLED
+    entity_category: config
+    turn_on_action:
+      - if:
+          condition:
+            lambda: 'return id(p05_write_actions_enabled);'
+          then:
+            - lambda: |-
+                id(p05_fast_poll_until_ms) = millis() + 15000U;
+            - number.set:
+                id: num_p05_57400
+                value: 1
+    turn_off_action:
+      - if:
+          condition:
+            lambda: 'return id(p05_write_actions_enabled);'
+          then:
+            - lambda: |-
+                id(p05_fast_poll_until_ms) = millis() + 15000U;
+            - number.set:
+                id: num_p05_57400
+                value: 0
+
+globals:
+  - id: p05_fast_poll_until_ms
+    type: uint32_t
+    restore_value: no
+    initial_value: '0'
+  - id: p05_write_actions_enabled
+    type: bool
+    restore_value: no
+    initial_value: 'false'
+
+interval:
+  - interval: 1s
+    then:
+      - lambda: |-
+          if (!id(p05_write_actions_enabled) && millis() > 3000U) id(p05_write_actions_enabled) = true;

@@ -1,0 +1,1041 @@
+
+sensor:
+  - platform: modbus_controller
+    modbus_controller_id: srne_main
+    register_type: holding
+    skip_updates: ${p02_skip_updates}
+    address: 512
+    force_new_range: true
+    value_type: U_WORD
+    # endianness: register=big, word=little
+    id: sens_p02_512
+    name: "Active_Fault_Bits"
+    accuracy_decimals: 0
+  - platform: modbus_controller
+    modbus_controller_id: srne_main
+    register_type: holding
+    skip_updates: ${p02_skip_updates}
+    address: 527
+    value_type: U_WORD
+    # endianness: register=big, word=little
+    id: sens_p02_527
+    name: "Grid_Connection_Countdown"
+    accuracy_decimals: 0
+  - platform: modbus_controller
+    modbus_controller_id: srne_main
+    register_type: holding
+    skip_updates: ${p02_skip_updates}
+    address: 530
+    value_type: U_WORD
+    # endianness: register=big, word=little
+    id: sens_p02_530
+    name: "Bus_Voltage_Total"
+    unit_of_measurement: "V"
+    accuracy_decimals: 1
+    filters:
+      - multiply: 0.1
+    device_class: voltage
+    state_class: measurement
+  - platform: modbus_controller
+    modbus_controller_id: srne_main
+    register_type: holding
+    skip_updates: ${p02_skip_updates}
+    address: 531
+    value_type: U_WORD
+    # endianness: register=big, word=little
+    id: sens_p02_531
+    name: "Grid_L1_Voltage"
+    unit_of_measurement: "V"
+    accuracy_decimals: 1
+    filters:
+      - multiply: 0.1
+    device_class: voltage
+    state_class: measurement
+  - platform: modbus_controller
+    modbus_controller_id: srne_main
+    register_type: holding
+    skip_updates: ${p02_skip_updates}
+    address: 532
+    value_type: U_WORD
+    # endianness: register=big, word=little
+    id: sens_p02_532
+    name: "Grid_L1_Current"
+    unit_of_measurement: "A"
+    accuracy_decimals: 1
+    filters:
+      - multiply: 0.1
+    device_class: current
+    state_class: measurement
+  - platform: modbus_controller
+    modbus_controller_id: srne_main
+    register_type: holding
+    skip_updates: ${p02_skip_updates}
+    address: 533
+    value_type: U_WORD
+    # endianness: register=big, word=little
+    id: sens_p02_533
+    name: "Grid_Frequency"
+    unit_of_measurement: "Hz"
+    accuracy_decimals: 2
+    filters:
+      - multiply: 0.01
+    device_class: frequency
+    state_class: measurement
+  - platform: modbus_controller
+    modbus_controller_id: srne_main
+    register_type: holding
+    skip_updates: ${p02_skip_updates}
+    address: 534
+    value_type: U_WORD
+    # endianness: register=big, word=little
+    id: sens_p02_534
+    name: "Inverter_L1_Voltage"
+    unit_of_measurement: "V"
+    accuracy_decimals: 1
+    filters:
+      - multiply: 0.1
+    device_class: voltage
+    state_class: measurement
+  - platform: modbus_controller
+    modbus_controller_id: srne_main
+    register_type: holding
+    skip_updates: ${p02_skip_updates}
+    address: 535
+    value_type: U_WORD
+    # endianness: register=big, word=little
+    id: sens_p02_535
+    name: "Inverter_L1_Current"
+    unit_of_measurement: "A"
+    accuracy_decimals: 1
+    filters:
+      - multiply: 0.1
+    device_class: current
+    state_class: measurement
+  - platform: modbus_controller
+    modbus_controller_id: srne_main
+    register_type: holding
+    skip_updates: ${p02_skip_updates}
+    address: 536
+    value_type: U_WORD
+    # endianness: register=big, word=little
+    id: sens_p02_536
+    name: "Inverter_Frequency"
+    unit_of_measurement: "Hz"
+    accuracy_decimals: 2
+    filters:
+      - multiply: 0.01
+    device_class: frequency
+    state_class: measurement
+  - platform: modbus_controller
+    modbus_controller_id: srne_main
+    register_type: holding
+    skip_updates: ${p02_skip_updates}
+    address: 537
+    value_type: U_WORD
+    # endianness: register=big, word=little
+    id: sens_p02_537
+    name: "Load_L1_Current"
+    unit_of_measurement: "A"
+    accuracy_decimals: 1
+    filters:
+      - multiply: 0.1
+    device_class: current
+    state_class: measurement
+  - platform: modbus_controller
+    modbus_controller_id: srne_main
+    register_type: holding
+    skip_updates: ${p02_skip_updates}
+    address: 538
+    value_type: S_WORD
+    # endianness: register=big, word=little
+    id: sens_p02_538
+    name: "Load_Power_Factor"
+    filters:
+      - multiply: 0.001
+  - platform: modbus_controller
+    modbus_controller_id: srne_main
+    register_type: holding
+    skip_updates: ${p02_skip_updates}
+    address: 539
+    value_type: U_WORD
+    # endianness: register=big, word=little
+    id: sens_p02_539
+    name: "Load_L1_Active_Power"
+    unit_of_measurement: "W"
+    accuracy_decimals: 0
+    device_class: power
+    state_class: measurement
+  - platform: modbus_controller
+    modbus_controller_id: srne_main
+    register_type: holding
+    skip_updates: ${p02_skip_updates}
+    address: 540
+    value_type: U_WORD
+    # endianness: register=big, word=little
+    id: sens_p02_540
+    name: "Load_L1_Apparent_Power"
+    unit_of_measurement: "VA"
+    accuracy_decimals: 0
+    device_class: apparent_power
+    state_class: measurement
+  - platform: modbus_controller
+    modbus_controller_id: srne_main
+    register_type: holding
+    skip_updates: ${p02_skip_updates}
+    address: 541
+    value_type: S_WORD
+    # endianness: register=big, word=little
+    id: sens_p02_541
+    name: "Inverter_DC_Component"
+    unit_of_measurement: "mV"
+    accuracy_decimals: 0
+  - platform: modbus_controller
+    modbus_controller_id: srne_main
+    register_type: holding
+    skip_updates: ${p02_skip_updates}
+    address: 542
+    value_type: U_WORD
+    # endianness: register=big, word=little
+    id: sens_p02_542
+    name: "Battery_Grid_Charge_Current"
+    unit_of_measurement: "A"
+    accuracy_decimals: 1
+    filters:
+      - multiply: 0.1
+    device_class: current
+    state_class: measurement
+  - platform: modbus_controller
+    modbus_controller_id: srne_main
+    register_type: holding
+    skip_updates: ${p02_skip_updates}
+    address: 543
+    value_type: U_WORD
+    # endianness: register=big, word=little
+    id: sens_p02_543
+    name: "Load_L1_Rate"
+    unit_of_measurement: "%"
+    accuracy_decimals: 0
+  - platform: modbus_controller
+    modbus_controller_id: srne_main
+    register_type: holding
+    skip_updates: ${p02_skip_updates}
+    address: 544
+    value_type: S_WORD
+    # endianness: register=big, word=little
+    id: sens_p02_544
+    name: "Heatsink_Temperature_A"
+    unit_of_measurement: "°C"
+    accuracy_decimals: 1
+    filters:
+      - multiply: 0.1
+    device_class: temperature
+    state_class: measurement
+  - platform: modbus_controller
+    modbus_controller_id: srne_main
+    register_type: holding
+    skip_updates: ${p02_skip_updates}
+    address: 545
+    value_type: S_WORD
+    # endianness: register=big, word=little
+    id: sens_p02_545
+    name: "Heatsink_Temperature_B"
+    unit_of_measurement: "°C"
+    accuracy_decimals: 1
+    filters:
+      - multiply: 0.1
+    device_class: temperature
+    state_class: measurement
+  - platform: modbus_controller
+    modbus_controller_id: srne_main
+    register_type: holding
+    skip_updates: ${p02_skip_updates}
+    address: 546
+    value_type: S_WORD
+    # endianness: register=big, word=little
+    id: sens_p02_546
+    name: "Heatsink_Temperature_C"
+    unit_of_measurement: "°C"
+    accuracy_decimals: 1
+    filters:
+      - multiply: 0.1
+    device_class: temperature
+    state_class: measurement
+  - platform: modbus_controller
+    modbus_controller_id: srne_main
+    register_type: holding
+    skip_updates: ${p02_skip_updates}
+    address: 547
+    value_type: S_WORD
+    # endianness: register=big, word=little
+    id: sens_p02_547
+    name: "Ambient_Temperature"
+    unit_of_measurement: "°C"
+    accuracy_decimals: 1
+    filters:
+      - multiply: 0.1
+    device_class: temperature
+    state_class: measurement
+  - platform: modbus_controller
+    modbus_controller_id: srne_main
+    register_type: holding
+    skip_updates: ${p02_skip_updates}
+    address: 548
+    value_type: U_WORD
+    # endianness: register=big, word=little
+    id: sens_p02_548
+    name: "PV_Charge_Current"
+    unit_of_measurement: "A"
+    accuracy_decimals: 1
+    filters:
+      - multiply: 0.1
+    device_class: current
+    state_class: measurement
+  - platform: modbus_controller
+    modbus_controller_id: srne_main
+    register_type: holding
+    skip_updates: ${p02_skip_updates}
+    address: 549
+    value_type: U_WORD
+    # endianness: register=big, word=little
+    id: sens_p02_549
+    name: "Load_Parallel_Average_Current"
+    unit_of_measurement: "A"
+    accuracy_decimals: 1
+    filters:
+      - multiply: 0.1
+    device_class: current
+    state_class: measurement
+  - platform: modbus_controller
+    modbus_controller_id: srne_main
+    register_type: holding
+    skip_updates: ${p02_skip_updates}
+    address: 550
+    value_type: U_WORD
+    # endianness: register=big, word=little
+    id: sens_p02_550
+    name: "Inverter_Fault_Status"
+    accuracy_decimals: 0
+  - platform: modbus_controller
+    modbus_controller_id: srne_main
+    register_type: holding
+    skip_updates: ${p02_skip_updates}
+    address: 551
+    value_type: U_WORD
+    # endianness: register=big, word=little
+    id: sens_p02_551
+    name: "Battery_Charge_Status_RV"
+    accuracy_decimals: 0
+  - platform: modbus_controller
+    modbus_controller_id: srne_main
+    register_type: holding
+    skip_updates: ${p02_skip_updates}
+    address: 552
+    value_type: U_WORD
+    # endianness: register=big, word=little
+    id: sens_p02_552
+    name: "Bus_Voltage_Positive"
+    unit_of_measurement: "V"
+    accuracy_decimals: 1
+    filters:
+      - multiply: 0.1
+    device_class: voltage
+    state_class: measurement
+  - platform: modbus_controller
+    modbus_controller_id: srne_main
+    register_type: holding
+    skip_updates: ${p02_skip_updates}
+    address: 553
+    value_type: U_WORD
+    # endianness: register=big, word=little
+    id: sens_p02_553
+    name: "Bus_Voltage_Negative"
+    unit_of_measurement: "V"
+    accuracy_decimals: 1
+    filters:
+      - multiply: 0.1
+    device_class: voltage
+    state_class: measurement
+  - platform: modbus_controller
+    modbus_controller_id: srne_main
+    register_type: holding
+    skip_updates: ${p02_skip_updates}
+    address: 554
+    value_type: U_WORD
+    # endianness: register=big, word=little
+    id: sens_p02_554
+    name: "Grid_L2_Voltage"
+    unit_of_measurement: "V"
+    accuracy_decimals: 1
+    filters:
+      - multiply: 0.1
+    device_class: voltage
+    state_class: measurement
+  - platform: modbus_controller
+    modbus_controller_id: srne_main
+    register_type: holding
+    skip_updates: ${p02_skip_updates}
+    address: 555
+    value_type: U_WORD
+    # endianness: register=big, word=little
+    id: sens_p02_555
+    name: "Grid_L3_Voltage"
+    unit_of_measurement: "V"
+    accuracy_decimals: 1
+    filters:
+      - multiply: 0.1
+    device_class: voltage
+    state_class: measurement
+  - platform: modbus_controller
+    modbus_controller_id: srne_main
+    register_type: holding
+    skip_updates: ${p02_skip_updates}
+    address: 556
+    force_new_range: true
+    value_type: U_WORD
+    # endianness: register=big, word=little
+    id: sens_p02_556
+    name: "Inverter_L2_Voltage"
+    unit_of_measurement: "V"
+    accuracy_decimals: 1
+    filters:
+      - multiply: 0.1
+    device_class: voltage
+    state_class: measurement
+  - platform: modbus_controller
+    modbus_controller_id: srne_main
+    register_type: holding
+    skip_updates: ${p02_skip_updates}
+    address: 557
+    value_type: U_WORD
+    # endianness: register=big, word=little
+    id: sens_p02_557
+    name: "Inverter_L3_Voltage"
+    unit_of_measurement: "V"
+    accuracy_decimals: 1
+    filters:
+      - multiply: 0.1
+    device_class: voltage
+    state_class: measurement
+  - platform: modbus_controller
+    modbus_controller_id: srne_main
+    register_type: holding
+    skip_updates: ${p02_skip_updates}
+    address: 558
+    value_type: U_WORD
+    # endianness: register=big, word=little
+    id: sens_p02_558
+    name: "Inverter_L2_Current"
+    unit_of_measurement: "A"
+    accuracy_decimals: 1
+    filters:
+      - multiply: 0.1
+    device_class: current
+    state_class: measurement
+  - platform: modbus_controller
+    modbus_controller_id: srne_main
+    register_type: holding
+    skip_updates: ${p02_skip_updates}
+    address: 559
+    value_type: U_WORD
+    # endianness: register=big, word=little
+    id: sens_p02_559
+    name: "Inverter_L3_Current"
+    unit_of_measurement: "A"
+    accuracy_decimals: 1
+    filters:
+      - multiply: 0.1
+    device_class: current
+    state_class: measurement
+  - platform: modbus_controller
+    modbus_controller_id: srne_main
+    register_type: holding
+    skip_updates: ${p02_skip_updates}
+    address: 560
+    value_type: U_WORD
+    # endianness: register=big, word=little
+    id: sens_p02_560
+    name: "Load_L2_Current"
+    unit_of_measurement: "A"
+    accuracy_decimals: 1
+    filters:
+      - multiply: 0.1
+    device_class: current
+    state_class: measurement
+  - platform: modbus_controller
+    modbus_controller_id: srne_main
+    register_type: holding
+    skip_updates: ${p02_skip_updates}
+    address: 561
+    value_type: U_WORD
+    # endianness: register=big, word=little
+    id: sens_p02_561
+    name: "Load_L3_Current"
+    unit_of_measurement: "A"
+    accuracy_decimals: 1
+    filters:
+      - multiply: 0.1
+    device_class: current
+    state_class: measurement
+  - platform: modbus_controller
+    modbus_controller_id: srne_main
+    register_type: holding
+    skip_updates: ${p02_skip_updates}
+    address: 562
+    value_type: U_WORD
+    # endianness: register=big, word=little
+    id: sens_p02_562
+    name: "Load_L2_Active_Power"
+    unit_of_measurement: "W"
+    accuracy_decimals: 0
+    device_class: power
+    state_class: measurement
+  - platform: modbus_controller
+    modbus_controller_id: srne_main
+    register_type: holding
+    skip_updates: ${p02_skip_updates}
+    address: 563
+    value_type: U_WORD
+    # endianness: register=big, word=little
+    id: sens_p02_563
+    name: "Load_L3_Active_Power"
+    unit_of_measurement: "W"
+    accuracy_decimals: 0
+    device_class: power
+    state_class: measurement
+  - platform: modbus_controller
+    modbus_controller_id: srne_main
+    register_type: holding
+    skip_updates: ${p02_skip_updates}
+    address: 564
+    value_type: U_WORD
+    # endianness: register=big, word=little
+    id: sens_p02_564
+    name: "Load_L2_Apparent_Power"
+    unit_of_measurement: "VA"
+    accuracy_decimals: 0
+    device_class: apparent_power
+    state_class: measurement
+  - platform: modbus_controller
+    modbus_controller_id: srne_main
+    register_type: holding
+    skip_updates: ${p02_skip_updates}
+    address: 565
+    value_type: U_WORD
+    # endianness: register=big, word=little
+    id: sens_p02_565
+    name: "Load_L3_Apparent_Power"
+    unit_of_measurement: "VA"
+    accuracy_decimals: 0
+    device_class: apparent_power
+    state_class: measurement
+  - platform: modbus_controller
+    modbus_controller_id: srne_main
+    register_type: holding
+    skip_updates: ${p02_skip_updates}
+    address: 566
+    value_type: U_WORD
+    # endianness: register=big, word=little
+    id: sens_p02_566
+    name: "Load_L2_Rate"
+    unit_of_measurement: "%"
+    accuracy_decimals: 0
+  - platform: modbus_controller
+    modbus_controller_id: srne_main
+    register_type: holding
+    skip_updates: ${p02_skip_updates}
+    address: 567
+    value_type: U_WORD
+    # endianness: register=big, word=little
+    id: sens_p02_567
+    name: "Load_L3_Rate"
+    unit_of_measurement: "%"
+    accuracy_decimals: 0
+  - platform: modbus_controller
+    modbus_controller_id: srne_main
+    register_type: holding
+    skip_updates: ${p02_skip_updates}
+    address: 568
+    value_type: U_WORD
+    # endianness: register=big, word=little
+    id: sens_p02_568
+    name: "Grid_L2_Current"
+    unit_of_measurement: "A"
+    accuracy_decimals: 1
+    filters:
+      - multiply: 0.1
+    device_class: current
+    state_class: measurement
+  - platform: modbus_controller
+    modbus_controller_id: srne_main
+    register_type: holding
+    skip_updates: ${p02_skip_updates}
+    address: 569
+    value_type: U_WORD
+    # endianness: register=big, word=little
+    id: sens_p02_569
+    name: "Grid_L3_Current"
+    unit_of_measurement: "A"
+    accuracy_decimals: 1
+    filters:
+      - multiply: 0.1
+    device_class: current
+    state_class: measurement
+  - platform: template
+    id: load_total_active_power
+    name: "Load_Total_Active_Power"
+    unit_of_measurement: "W"
+    device_class: power
+    state_class: measurement
+    accuracy_decimals: 0
+    update_interval: 5s
+    lambda: |-
+      float a = id(sens_p02_539).state;
+      float b = id(sens_p02_562).state;
+      float c = id(sens_p02_563).state;
+      if (isnan(a)) a = 0;
+      if (isnan(b)) b = 0;
+      if (isnan(c)) c = 0;
+      return a + b + c;
+  - platform: template
+    id: grid_total_apparent_power_estimated
+    name: "Grid_Total_Apparent_Power_Estimated"
+    unit_of_measurement: "VA"
+    device_class: apparent_power
+    state_class: measurement
+    accuracy_decimals: 0
+    update_interval: 5s
+    lambda: |-
+      float va = id(sens_p02_531).state;
+      float ia = id(sens_p02_532).state;
+      float vb = id(sens_p02_554).state;
+      float ib = id(sens_p02_568).state;
+      float vc = id(sens_p02_555).state;
+      float ic = id(sens_p02_569).state;
+      if (isnan(va)) va = 0;
+      if (isnan(ia)) ia = 0;
+      if (isnan(vb)) vb = 0;
+      if (isnan(ib)) ib = 0;
+      if (isnan(vc)) vc = 0;
+      if (isnan(ic)) ic = 0;
+      return (va * ia) + (vb * ib) + (vc * ic);
+  - platform: modbus_controller
+    id: sens_p02_516
+    modbus_controller_id: srne_main
+    register_type: holding
+    skip_updates: ${p02_skip_updates}
+    internal: true
+    address: 516
+    value_type: U_WORD
+    force_new_range: true
+  - platform: modbus_controller
+    id: sens_p02_517
+    modbus_controller_id: srne_main
+    register_type: holding
+    skip_updates: ${p02_skip_updates}
+    internal: true
+    address: 517
+    value_type: U_WORD
+  - platform: modbus_controller
+    id: sens_p02_518
+    modbus_controller_id: srne_main
+    register_type: holding
+    skip_updates: ${p02_skip_updates}
+    internal: true
+    address: 518
+    value_type: U_WORD
+  - platform: modbus_controller
+    id: sens_p02_519
+    modbus_controller_id: srne_main
+    register_type: holding
+    skip_updates: ${p02_skip_updates}
+    internal: true
+    address: 519
+    value_type: U_WORD
+
+text_sensor:
+  - platform: template
+    id: sys_datetime_text
+    name: "System DateTime"
+    lambda: |-
+      if (isnan(id(sys_datetime_ym).state) || isnan(id(sys_datetime_dh).state) || isnan(id(sys_datetime_ms).state)) {
+        return {};
+      }
+      uint16_t ym = (uint16_t) id(sys_datetime_ym).state;
+      uint16_t dh = (uint16_t) id(sys_datetime_dh).state;
+      uint16_t ms = (uint16_t) id(sys_datetime_ms).state;
+      int year = 2000 + ((ym >> 8) & 0xFF);
+      int month = (ym & 0xFF);
+      int day = ((dh >> 8) & 0xFF);
+      int hour = (dh & 0xFF);
+      int minute = ((ms >> 8) & 0xFF);
+      int second = (ms & 0xFF);
+      char buf[20];
+      snprintf(buf, sizeof(buf), "%04d-%02d-%02d %02d:%02d:%02d", year, month, day, hour, minute, second);
+      return {buf};
+  - platform: template
+    id: txt_p02_516
+    name: "Active Fault Code 0"
+    entity_category: diagnostic
+    lambda: |-
+      uint16_t v = (uint16_t) id(sens_p02_516).state;
+      switch (v) {
+        case 0: return std::string("No Active Fault");
+        case 1: return std::string("Battery Undervoltage Alarm");
+        case 2: return std::string("Battery Discharge Overcurrent Protection (Software)");
+        case 3: return std::string("Battery Disconnection Fault");
+        case 4: return std::string("Battery End of Discharge Protection");
+        case 5: return std::string("Battery Overcurrent Protection (Hardware)");
+        case 6: return std::string("Battery Charge Overvoltage Protection");
+        case 7: return std::string("DC Link Overvoltage Protection (Hardware)");
+        case 8: return std::string("DC Link Overvoltage Protection (Software)");
+        case 9: return std::string("PV Input Overvoltage Protection");
+        case 10: return std::string("PV Boost Stage Overcurrent Protection (Software)");
+        case 11: return std::string("PV Boost Stage Overcurrent Protection (Hardware)");
+        case 12: return std::string("SPI Communication Fault");
+        case 13: return std::string("Bypass Output Overload Protection");
+        case 14: return std::string("Inverter Output Overload Protection");
+        case 15: return std::string("Inverter Output Overcurrent Protection (Hardware)");
+        case 16: return std::string("Slave DSP PWM Shutdown Request Fault");
+        case 17: return std::string("Inverter Output Short Circuit Protection");
+        case 18: return std::string("DC Link Soft Start Failure");
+        case 19: return std::string("MPPT Heatsink Overtemperature Protection");
+        case 20: return std::string("Inverter Heatsink Overtemperature Protection");
+        case 21: return std::string("Cooling Fan Failure Fault");
+        case 22: return std::string("EEPROM Memory Fault");
+        case 23: return std::string("Model Configuration Fault");
+        case 24: return std::string("DC Link Voltage Imbalance Fault");
+        case 25: return std::string("DC Link Short Circuit Protection");
+        case 26: return std::string("AC Output Relay Short Circuit Fault");
+        case 28: return std::string("AC Input Phase Sequence Error");
+        case 29: return std::string("DC Link Undervoltage Protection");
+        case 30: return std::string("Battery Capacity Low Alarm (10%)");
+        case 31: return std::string("Battery Capacity Critical Alarm (5%)");
+        case 32: return std::string("Battery Capacity Shutdown Protection");
+        case 34: return std::string("Parallel System CAN Communication Fault");
+        case 35: return std::string("Parallel System Address Configuration Fault");
+        case 37: return std::string("Parallel System Current Sharing Fault");
+        case 38: return std::string("Parallel System Battery Voltage Mismatch Fault");
+        case 39: return std::string("Parallel System AC Source Inconsistency Fault");
+        case 40: return std::string("Parallel System Hardware Synchronization Fault");
+        case 41: return std::string("Inverter DC Link Voltage Fault");
+        case 42: return std::string("Parallel System Firmware Version Mismatch Fault");
+        case 43: return std::string("Parallel System Connection Fault");
+        case 44: return std::string("Serial Number Configuration Fault");
+        case 45: return std::string("Split Phase Mode Configuration Fault");
+        case 56: return std::string("PV Insulation Resistance Fault");
+        case 57: return std::string("Residual Current Protection Fault");
+        case 58: return std::string("BMS Communication Fault");
+        case 60: return std::string("BMS Undervoltage Temperature Alarm");
+        case 61: return std::string("BMS Overtemperature Alarm");
+        case 62: return std::string("BMS Overcurrent Alarm");
+        case 63: return std::string("BMS Undervoltage Alarm");
+        case 64: return std::string("BMS Overvoltage Alarm");
+        default: {
+          char buf[16]; snprintf(buf, sizeof(buf), "0x%02X", v & 0xFF);
+          return std::string(buf);
+        }
+      }
+  - platform: template
+    id: txt_p02_517
+    name: "Active Fault Code 1"
+    entity_category: diagnostic
+    lambda: |-
+      uint16_t v = (uint16_t) id(sens_p02_517).state;
+      switch (v) {
+        case 0: return std::string("No Active Fault");
+        case 1: return std::string("Battery Undervoltage Alarm");
+        case 2: return std::string("Battery Discharge Overcurrent Protection (Software)");
+        case 3: return std::string("Battery Disconnection Fault");
+        case 4: return std::string("Battery End of Discharge Protection");
+        case 5: return std::string("Battery Overcurrent Protection (Hardware)");
+        case 6: return std::string("Battery Charge Overvoltage Protection");
+        case 7: return std::string("DC Link Overvoltage Protection (Hardware)");
+        case 8: return std::string("DC Link Overvoltage Protection (Software)");
+        case 9: return std::string("PV Input Overvoltage Protection");
+        case 10: return std::string("PV Boost Stage Overcurrent Protection (Software)");
+        case 11: return std::string("PV Boost Stage Overcurrent Protection (Hardware)");
+        case 12: return std::string("SPI Communication Fault");
+        case 13: return std::string("Bypass Output Overload Protection");
+        case 14: return std::string("Inverter Output Overload Protection");
+        case 15: return std::string("Inverter Output Overcurrent Protection (Hardware)");
+        case 16: return std::string("Slave DSP PWM Shutdown Request Fault");
+        case 17: return std::string("Inverter Output Short Circuit Protection");
+        case 18: return std::string("DC Link Soft Start Failure");
+        case 19: return std::string("MPPT Heatsink Overtemperature Protection");
+        case 20: return std::string("Inverter Heatsink Overtemperature Protection");
+        case 21: return std::string("Cooling Fan Failure Fault");
+        case 22: return std::string("EEPROM Memory Fault");
+        case 23: return std::string("Model Configuration Fault");
+        case 24: return std::string("DC Link Voltage Imbalance Fault");
+        case 25: return std::string("DC Link Short Circuit Protection");
+        case 26: return std::string("AC Output Relay Short Circuit Fault");
+        case 28: return std::string("AC Input Phase Sequence Error");
+        case 29: return std::string("DC Link Undervoltage Protection");
+        case 30: return std::string("Battery Capacity Low Alarm (10%)");
+        case 31: return std::string("Battery Capacity Critical Alarm (5%)");
+        case 32: return std::string("Battery Capacity Shutdown Protection");
+        case 34: return std::string("Parallel System CAN Communication Fault");
+        case 35: return std::string("Parallel System Address Configuration Fault");
+        case 37: return std::string("Parallel System Current Sharing Fault");
+        case 38: return std::string("Parallel System Battery Voltage Mismatch Fault");
+        case 39: return std::string("Parallel System AC Source Inconsistency Fault");
+        case 40: return std::string("Parallel System Hardware Synchronization Fault");
+        case 41: return std::string("Inverter DC Link Voltage Fault");
+        case 42: return std::string("Parallel System Firmware Version Mismatch Fault");
+        case 43: return std::string("Parallel System Connection Fault");
+        case 44: return std::string("Serial Number Configuration Fault");
+        case 45: return std::string("Split Phase Mode Configuration Fault");
+        case 56: return std::string("PV Insulation Resistance Fault");
+        case 57: return std::string("Residual Current Protection Fault");
+        case 58: return std::string("BMS Communication Fault");
+        case 60: return std::string("BMS Undervoltage Temperature Alarm");
+        case 61: return std::string("BMS Overtemperature Alarm");
+        case 62: return std::string("BMS Overcurrent Alarm");
+        case 63: return std::string("BMS Undervoltage Alarm");
+        case 64: return std::string("BMS Overvoltage Alarm");
+        default: {
+          char buf[16]; snprintf(buf, sizeof(buf), "0x%02X", v & 0xFF);
+          return std::string(buf);
+        }
+      }
+  - platform: template
+    id: txt_p02_518
+    name: "Active Fault Code 2"
+    entity_category: diagnostic
+    lambda: |-
+      uint16_t v = (uint16_t) id(sens_p02_518).state;
+      switch (v) {
+        case 0: return std::string("No Active Fault");
+        case 1: return std::string("Battery Undervoltage Alarm");
+        case 2: return std::string("Battery Discharge Overcurrent Protection (Software)");
+        case 3: return std::string("Battery Disconnection Fault");
+        case 4: return std::string("Battery End of Discharge Protection");
+        case 5: return std::string("Battery Overcurrent Protection (Hardware)");
+        case 6: return std::string("Battery Charge Overvoltage Protection");
+        case 7: return std::string("DC Link Overvoltage Protection (Hardware)");
+        case 8: return std::string("DC Link Overvoltage Protection (Software)");
+        case 9: return std::string("PV Input Overvoltage Protection");
+        case 10: return std::string("PV Boost Stage Overcurrent Protection (Software)");
+        case 11: return std::string("PV Boost Stage Overcurrent Protection (Hardware)");
+        case 12: return std::string("SPI Communication Fault");
+        case 13: return std::string("Bypass Output Overload Protection");
+        case 14: return std::string("Inverter Output Overload Protection");
+        case 15: return std::string("Inverter Output Overcurrent Protection (Hardware)");
+        case 16: return std::string("Slave DSP PWM Shutdown Request Fault");
+        case 17: return std::string("Inverter Output Short Circuit Protection");
+        case 18: return std::string("DC Link Soft Start Failure");
+        case 19: return std::string("MPPT Heatsink Overtemperature Protection");
+        case 20: return std::string("Inverter Heatsink Overtemperature Protection");
+        case 21: return std::string("Cooling Fan Failure Fault");
+        case 22: return std::string("EEPROM Memory Fault");
+        case 23: return std::string("Model Configuration Fault");
+        case 24: return std::string("DC Link Voltage Imbalance Fault");
+        case 25: return std::string("DC Link Short Circuit Protection");
+        case 26: return std::string("AC Output Relay Short Circuit Fault");
+        case 28: return std::string("AC Input Phase Sequence Error");
+        case 29: return std::string("DC Link Undervoltage Protection");
+        case 30: return std::string("Battery Capacity Low Alarm (10%)");
+        case 31: return std::string("Battery Capacity Critical Alarm (5%)");
+        case 32: return std::string("Battery Capacity Shutdown Protection");
+        case 34: return std::string("Parallel System CAN Communication Fault");
+        case 35: return std::string("Parallel System Address Configuration Fault");
+        case 37: return std::string("Parallel System Current Sharing Fault");
+        case 38: return std::string("Parallel System Battery Voltage Mismatch Fault");
+        case 39: return std::string("Parallel System AC Source Inconsistency Fault");
+        case 40: return std::string("Parallel System Hardware Synchronization Fault");
+        case 41: return std::string("Inverter DC Link Voltage Fault");
+        case 42: return std::string("Parallel System Firmware Version Mismatch Fault");
+        case 43: return std::string("Parallel System Connection Fault");
+        case 44: return std::string("Serial Number Configuration Fault");
+        case 45: return std::string("Split Phase Mode Configuration Fault");
+        case 56: return std::string("PV Insulation Resistance Fault");
+        case 57: return std::string("Residual Current Protection Fault");
+        case 58: return std::string("BMS Communication Fault");
+        case 60: return std::string("BMS Undervoltage Temperature Alarm");
+        case 61: return std::string("BMS Overtemperature Alarm");
+        case 62: return std::string("BMS Overcurrent Alarm");
+        case 63: return std::string("BMS Undervoltage Alarm");
+        case 64: return std::string("BMS Overvoltage Alarm");
+        default: {
+          char buf[16]; snprintf(buf, sizeof(buf), "0x%02X", v & 0xFF);
+          return std::string(buf);
+        }
+      }
+  - platform: template
+    id: txt_p02_519
+    name: "Active Fault Code 3"
+    entity_category: diagnostic
+    lambda: |-
+      uint16_t v = (uint16_t) id(sens_p02_519).state;
+      switch (v) {
+        case 0: return std::string("No Active Fault");
+        case 1: return std::string("Battery Undervoltage Alarm");
+        case 2: return std::string("Battery Discharge Overcurrent Protection (Software)");
+        case 3: return std::string("Battery Disconnection Fault");
+        case 4: return std::string("Battery End of Discharge Protection");
+        case 5: return std::string("Battery Overcurrent Protection (Hardware)");
+        case 6: return std::string("Battery Charge Overvoltage Protection");
+        case 7: return std::string("DC Link Overvoltage Protection (Hardware)");
+        case 8: return std::string("DC Link Overvoltage Protection (Software)");
+        case 9: return std::string("PV Input Overvoltage Protection");
+        case 10: return std::string("PV Boost Stage Overcurrent Protection (Software)");
+        case 11: return std::string("PV Boost Stage Overcurrent Protection (Hardware)");
+        case 12: return std::string("SPI Communication Fault");
+        case 13: return std::string("Bypass Output Overload Protection");
+        case 14: return std::string("Inverter Output Overload Protection");
+        case 15: return std::string("Inverter Output Overcurrent Protection (Hardware)");
+        case 16: return std::string("Slave DSP PWM Shutdown Request Fault");
+        case 17: return std::string("Inverter Output Short Circuit Protection");
+        case 18: return std::string("DC Link Soft Start Failure");
+        case 19: return std::string("MPPT Heatsink Overtemperature Protection");
+        case 20: return std::string("Inverter Heatsink Overtemperature Protection");
+        case 21: return std::string("Cooling Fan Failure Fault");
+        case 22: return std::string("EEPROM Memory Fault");
+        case 23: return std::string("Model Configuration Fault");
+        case 24: return std::string("DC Link Voltage Imbalance Fault");
+        case 25: return std::string("DC Link Short Circuit Protection");
+        case 26: return std::string("AC Output Relay Short Circuit Fault");
+        case 28: return std::string("AC Input Phase Sequence Error");
+        case 29: return std::string("DC Link Undervoltage Protection");
+        case 30: return std::string("Battery Capacity Low Alarm (10%)");
+        case 31: return std::string("Battery Capacity Critical Alarm (5%)");
+        case 32: return std::string("Battery Capacity Shutdown Protection");
+        case 34: return std::string("Parallel System CAN Communication Fault");
+        case 35: return std::string("Parallel System Address Configuration Fault");
+        case 37: return std::string("Parallel System Current Sharing Fault");
+        case 38: return std::string("Parallel System Battery Voltage Mismatch Fault");
+        case 39: return std::string("Parallel System AC Source Inconsistency Fault");
+        case 40: return std::string("Parallel System Hardware Synchronization Fault");
+        case 41: return std::string("Inverter DC Link Voltage Fault");
+        case 42: return std::string("Parallel System Firmware Version Mismatch Fault");
+        case 43: return std::string("Parallel System Connection Fault");
+        case 44: return std::string("Serial Number Configuration Fault");
+        case 45: return std::string("Split Phase Mode Configuration Fault");
+        case 56: return std::string("PV Insulation Resistance Fault");
+        case 57: return std::string("Residual Current Protection Fault");
+        case 58: return std::string("BMS Communication Fault");
+        case 60: return std::string("BMS Undervoltage Temperature Alarm");
+        case 61: return std::string("BMS Overtemperature Alarm");
+        case 62: return std::string("BMS Overcurrent Alarm");
+        case 63: return std::string("BMS Undervoltage Alarm");
+        case 64: return std::string("BMS Overvoltage Alarm");
+        default: {
+          char buf[16]; snprintf(buf, sizeof(buf), "0x%02X", v & 0xFF);
+          return std::string(buf);
+        }
+      }
+  - platform: modbus_controller
+    modbus_controller_id: srne_main
+    register_type: holding
+    skip_updates: ${p02_skip_updates}
+    address: 528
+    # endianness: register=big, word=little
+    name: "Device_State"
+    lambda: |-
+      int v = 0;
+      if (!x.empty()) v = atoi(x.c_str());
+      switch (v) {
+        case 0: return std::string("Initialization");
+        case 1: return std::string("Standby state");
+        case 2: return std::string("AC power operation");
+        case 3: return std::string("Inverter operation");
+        case 4: return std::string("AC power operation");
+        case 5: return std::string("Inverter operation");
+        case 6: return std::string("Inverter to AC power");
+        case 7: return std::string("AC power to inverter");
+        case 8: return std::string("Battery activation");
+        case 9: return std::string("Manual shutdown");
+        case 10: return std::string("Fault");
+        default: return std::string("unknown");
+      }
+  - platform: modbus_controller
+    modbus_controller_id: srne_main
+    register_type: holding
+    skip_updates: ${p02_skip_updates}
+    address: 529
+    # endianness: register=big, word=little
+    name: "Password_Protection_Status"
+    lambda: |-
+      int v = 0;
+      if (!x.empty()) v = atoi(x.c_str());
+      switch (v) {
+        case 0: return std::string("Users have not entered password");
+        case 1: return std::string("The password of users is entered");
+        case 4: return std::string("The password of the manufacturer is entered");
+        default: return std::string("unknown");
+      }
+
+button:
+  - platform: template
+    id: sync_sys_datetime_now
+    name: "Sync System DateTime"
+    icon: mdi:clock-check
+    entity_category: config
+    on_press:
+      then:
+        - lambda: |-
+            auto t = id(ha_time).now();
+            if (!t.is_valid()) t = id(sntp_time).now();
+            if (!t.is_valid()) return;
+            ESP_LOGI("datetime", "Sync now -> %04d-%02d-%02d %02d:%02d:%02d", t.year, t.month, t.day_of_month, t.hour, t.minute, t.second);
+        - lambda: |-
+            auto t2 = id(ha_time).now();
+            if (!t2.is_valid()) t2 = id(sntp_time).now();
+            if (!t2.is_valid()) return;
+            uint16_t ym = ((uint16_t)((t2.year - 2000) & 0xFF) << 8) | (uint16_t)(t2.month & 0xFF);
+            uint16_t dh = ((uint16_t)(t2.day_of_month & 0xFF) << 8) | (uint16_t)(t2.hour & 0xFF);
+            uint16_t ms = ((uint16_t)(t2.minute & 0xFF) << 8) | (uint16_t)(t2.second & 0xFF);
+            std::vector<uint16_t> words; words.reserve(3);
+            words.push_back(ym); words.push_back(dh); words.push_back(ms);
+            auto controller = id(srne_main);
+            if (controller == nullptr) return;
+            esphome::modbus_controller::ModbusCommandItem set_rtc_command =
+                esphome::modbus_controller::ModbusCommandItem::create_write_multiple_command(controller, 0x020C, 3, words);
+            controller->queue_command(set_rtc_command);
+            // Reflect to internal numbers for immediate UI coherence
+            id(sys_datetime_ym).publish_state((float) ym);
+            id(sys_datetime_dh).publish_state((float) dh);
+            id(sys_datetime_ms).publish_state((float) ms);
+        - delay: 400ms
+        - component.update: sys_datetime_text
+
+number:
+  - platform: modbus_controller
+    modbus_controller_id: srne_main
+    register_type: holding
+    skip_updates: ${p02_skip_updates}
+    address: 524
+    value_type: U_WORD
+    id: sys_datetime_ym
+    internal: true
+    name: "System DateTime Year Month"
+    min_value: 0
+    max_value: 65535
+    write_lambda: |-
+      return (int) x;
+  - platform: modbus_controller
+    modbus_controller_id: srne_main
+    register_type: holding
+    skip_updates: ${p02_skip_updates}
+    address: 525
+    value_type: U_WORD
+    id: sys_datetime_dh
+    internal: true
+    name: "System DateTime Day Hour"
+    min_value: 0
+    max_value: 65535
+    write_lambda: |-
+      return (int) x;
+  - platform: modbus_controller
+    modbus_controller_id: srne_main
+    register_type: holding
+    skip_updates: ${p02_skip_updates}
+    address: 526
+    value_type: U_WORD
+    id: sys_datetime_ms
+    internal: true
+    name: "System DateTime Minute Second"
+    min_value: 0
+    max_value: 65535
+    write_lambda: |-
+      return (int) x;

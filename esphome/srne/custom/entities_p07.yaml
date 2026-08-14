@@ -1,0 +1,1068 @@
+
+sensor:
+  - platform: modbus_controller
+    id: sens_p07_57862
+    modbus_controller_id: srne_main
+    register_type: holding
+    skip_updates: ${p07_skip_updates}
+    internal: true
+    force_new_range: true
+    address: 57862
+    value_type: U_WORD
+    on_value:
+      then:
+        - lambda: |-
+            id(p07_write_actions_enabled) = true;
+        - if:
+            condition:
+              lambda: 'return x > 0.5;'
+            then:
+              - switch.template.publish:
+                  id: sw_p07_57862
+                  state: ON
+            else:
+              - switch.template.publish:
+                  id: sw_p07_57862
+                  state: OFF
+  - platform: modbus_controller
+    id: sens_p07_57863
+    modbus_controller_id: srne_main
+    register_type: holding
+    skip_updates: ${p07_skip_updates}
+    internal: true
+    force_new_range: true
+    address: 57863
+    value_type: U_WORD
+    on_value:
+      then:
+        - lambda: |-
+            id(p07_write_actions_enabled) = true;
+        - if:
+            condition:
+              lambda: 'return x > 0.5;'
+            then:
+              - switch.template.publish:
+                  id: sw_p07_57863
+                  state: ON
+            else:
+              - switch.template.publish:
+                  id: sw_p07_57863
+                  state: OFF
+  - platform: modbus_controller
+    id: sens_p07_57868
+    modbus_controller_id: srne_main
+    register_type: holding
+    skip_updates: ${p07_skip_updates}
+    internal: true
+    force_new_range: true
+    address: 57868
+    value_type: U_WORD
+    on_value:
+      then:
+        - lambda: |-
+            id(p07_write_actions_enabled) = true;
+        - if:
+            condition:
+              lambda: 'return x > 0.5;'
+            then:
+              - switch.template.publish:
+                  id: sw_p07_57868
+                  state: ON
+            else:
+              - switch.template.publish:
+                  id: sw_p07_57868
+                  state: OFF
+  - platform: modbus_controller
+    id: sens_p07_57869
+    modbus_controller_id: srne_main
+    register_type: holding
+    skip_updates: ${p07_skip_updates}
+    internal: true
+    force_new_range: true
+    address: 57869
+    value_type: U_WORD
+    on_value:
+      then:
+        - lambda: |-
+            id(p07_write_actions_enabled) = true;
+        - if:
+            condition:
+              lambda: 'return x > 0.5;'
+            then:
+              - switch.template.publish:
+                  id: sw_p07_57869
+                  state: ON
+            else:
+              - switch.template.publish:
+                  id: sw_p07_57869
+                  state: OFF
+  - platform: modbus_controller
+    id: sens_p07_57870
+    modbus_controller_id: srne_main
+    register_type: holding
+    skip_updates: ${p07_skip_updates}
+    internal: true
+    force_new_range: true
+    address: 57870
+    value_type: U_WORD
+    on_value:
+      then:
+        - lambda: |-
+            id(p07_write_actions_enabled) = true;
+        - if:
+            condition:
+              lambda: 'return x > 0.5;'
+            then:
+              - switch.template.publish:
+                  id: sw_p07_57870
+                  state: ON
+            else:
+              - switch.template.publish:
+                  id: sw_p07_57870
+                  state: OFF
+  - platform: modbus_controller
+    id: sens_p07_57872
+    modbus_controller_id: srne_main
+    register_type: holding
+    skip_updates: ${p07_skip_updates}
+    internal: true
+    force_new_range: true
+    address: 57872
+    value_type: U_WORD
+    on_value:
+      then:
+        - lambda: |-
+            id(p07_write_actions_enabled) = true;
+        - if:
+            condition:
+              lambda: 'return x > 0.5;'
+            then:
+              - switch.template.publish:
+                  id: sw_p07_57872
+                  state: ON
+            else:
+              - switch.template.publish:
+                  id: sw_p07_57872
+                  state: OFF
+  - platform: modbus_controller
+    id: sens_p07_57873
+    modbus_controller_id: srne_main
+    register_type: holding
+    skip_updates: ${p07_skip_updates}
+    internal: true
+    force_new_range: true
+    address: 57873
+    value_type: U_WORD
+    on_value:
+      then:
+        - lambda: |-
+            id(p07_write_actions_enabled) = true;
+        - if:
+            condition:
+              lambda: 'return x > 0.5;'
+            then:
+              - switch.template.publish:
+                  id: sw_p07_57873
+                  state: ON
+            else:
+              - switch.template.publish:
+                  id: sw_p07_57873
+                  state: OFF
+  - platform: modbus_controller
+    id: sens_p07_57874
+    modbus_controller_id: srne_main
+    register_type: holding
+    skip_updates: ${p07_skip_updates}
+    internal: true
+    force_new_range: true
+    address: 57874
+    value_type: U_WORD
+    on_value:
+      then:
+        - lambda: |-
+            id(p07_write_actions_enabled) = true;
+        - if:
+            condition:
+              lambda: 'return x > 0.5;'
+            then:
+              - switch.template.publish:
+                  id: sw_p07_57874
+                  state: ON
+            else:
+              - switch.template.publish:
+                  id: sw_p07_57874
+                  state: OFF
+  - platform: modbus_controller
+    id: sens_p07_57875
+    modbus_controller_id: srne_main
+    register_type: holding
+    skip_updates: ${p07_skip_updates}
+    internal: true
+    force_new_range: true
+    address: 57875
+    value_type: U_WORD
+    on_value:
+      then:
+        - lambda: |-
+            id(p07_write_actions_enabled) = true;
+        - if:
+            condition:
+              lambda: 'return x > 0.5;'
+            then:
+              - switch.template.publish:
+                  id: sw_p07_57875
+                  state: ON
+            else:
+              - switch.template.publish:
+                  id: sw_p07_57875
+                  state: OFF
+  - platform: modbus_controller
+    id: sens_p07_57876
+    modbus_controller_id: srne_main
+    register_type: holding
+    skip_updates: ${p07_skip_updates}
+    internal: true
+    force_new_range: true
+    address: 57876
+    value_type: U_WORD
+    on_value:
+      then:
+        - lambda: |-
+            id(p07_write_actions_enabled) = true;
+        - if:
+            condition:
+              lambda: 'return x > 0.5;'
+            then:
+              - switch.template.publish:
+                  id: sw_p07_57876
+                  state: ON
+            else:
+              - switch.template.publish:
+                  id: sw_p07_57876
+                  state: OFF
+  - platform: modbus_controller
+    id: sens_p07_57878
+    modbus_controller_id: srne_main
+    register_type: holding
+    skip_updates: ${p07_skip_updates}
+    internal: true
+    force_new_range: true
+    address: 57878
+    value_type: U_WORD
+    on_value:
+      then:
+        - lambda: |-
+            id(p07_write_actions_enabled) = true;
+        - if:
+            condition:
+              lambda: 'return x > 0.5;'
+            then:
+              - switch.template.publish:
+                  id: sw_p07_57878
+                  state: ON
+            else:
+              - switch.template.publish:
+                  id: sw_p07_57878
+                  state: OFF
+  - platform: modbus_controller
+    id: sens_p07_57887
+    modbus_controller_id: srne_main
+    register_type: holding
+    skip_updates: ${p07_skip_updates}
+    internal: true
+    force_new_range: true
+    address: 57887
+    value_type: U_WORD
+    on_value:
+      then:
+        - lambda: |-
+            id(p07_write_actions_enabled) = true;
+        - if:
+            condition:
+              lambda: 'return x > 0.5;'
+            then:
+              - switch.template.publish:
+                  id: sw_p07_57887
+                  state: ON
+            else:
+              - switch.template.publish:
+                  id: sw_p07_57887
+                  state: OFF
+
+text_sensor:
+  - platform: modbus_controller
+    modbus_controller_id: srne_main
+    register_type: holding
+    skip_updates: ${p07_skip_updates}
+    address: 57882
+    # endianness: register=big, word=little
+    name: "Generator_Charge_Inhibit"
+    lambda: |-
+      int v = 0;
+      if (!x.empty()) v = atoi(x.c_str());
+      switch (v) {
+        case 0: return std::string("Enable");
+        case 1: return std::string("Disable");
+        default: return std::string("unknown");
+      }
+
+number:
+  - platform: modbus_controller
+    id: num_p07_57862
+    modbus_controller_id: srne_main
+    register_type: holding
+    skip_updates: ${p07_skip_updates}
+    internal: true
+    address: 57862
+    value_type: U_WORD
+    write_lambda: |-
+      return (int) round(x * 1.0);
+  - platform: modbus_controller
+    id: num_p07_57863
+    modbus_controller_id: srne_main
+    register_type: holding
+    skip_updates: ${p07_skip_updates}
+    internal: true
+    address: 57863
+    value_type: U_WORD
+    write_lambda: |-
+      return (int) round(x * 1.0);
+  - platform: modbus_controller
+    id: num_p07_57868
+    modbus_controller_id: srne_main
+    register_type: holding
+    skip_updates: ${p07_skip_updates}
+    internal: true
+    address: 57868
+    value_type: U_WORD
+    write_lambda: |-
+      return (int) round(x * 1.0);
+  - platform: modbus_controller
+    id: num_p07_57869
+    modbus_controller_id: srne_main
+    register_type: holding
+    skip_updates: ${p07_skip_updates}
+    internal: true
+    address: 57869
+    value_type: U_WORD
+    write_lambda: |-
+      return (int) round(x * 1.0);
+  - platform: modbus_controller
+    id: num_p07_57870
+    modbus_controller_id: srne_main
+    register_type: holding
+    skip_updates: ${p07_skip_updates}
+    internal: true
+    address: 57870
+    value_type: U_WORD
+    write_lambda: |-
+      return (int) round(x * 1.0);
+  - platform: modbus_controller
+    id: num_p07_57872
+    modbus_controller_id: srne_main
+    register_type: holding
+    skip_updates: ${p07_skip_updates}
+    internal: true
+    address: 57872
+    value_type: U_WORD
+    write_lambda: |-
+      return (int) round(x * 1.0);
+  - platform: modbus_controller
+    id: num_p07_57873
+    modbus_controller_id: srne_main
+    register_type: holding
+    skip_updates: ${p07_skip_updates}
+    internal: true
+    address: 57873
+    value_type: U_WORD
+    write_lambda: |-
+      return (int) round(x * 1.0);
+  - platform: modbus_controller
+    id: num_p07_57874
+    modbus_controller_id: srne_main
+    register_type: holding
+    skip_updates: ${p07_skip_updates}
+    internal: true
+    address: 57874
+    value_type: U_WORD
+    write_lambda: |-
+      return (int) round(x * 1.0);
+  - platform: modbus_controller
+    id: num_p07_57875
+    modbus_controller_id: srne_main
+    register_type: holding
+    skip_updates: ${p07_skip_updates}
+    internal: true
+    address: 57875
+    value_type: U_WORD
+    write_lambda: |-
+      return (int) round(x * 1.0);
+  - platform: modbus_controller
+    id: num_p07_57876
+    modbus_controller_id: srne_main
+    register_type: holding
+    skip_updates: ${p07_skip_updates}
+    internal: true
+    address: 57876
+    value_type: U_WORD
+    write_lambda: |-
+      return (int) round(x * 1.0);
+  - platform: modbus_controller
+    id: num_p07_57878
+    modbus_controller_id: srne_main
+    register_type: holding
+    skip_updates: ${p07_skip_updates}
+    internal: true
+    address: 57878
+    value_type: U_WORD
+    write_lambda: |-
+      return (int) round(x * 1.0);
+  - platform: modbus_controller
+    id: num_p07_57887
+    modbus_controller_id: srne_main
+    register_type: holding
+    skip_updates: ${p07_skip_updates}
+    internal: true
+    address: 57887
+    value_type: U_WORD
+    write_lambda: |-
+      return (int) round(x * 1.0);
+  - platform: modbus_controller
+    modbus_controller_id: srne_main
+    register_type: holding
+    skip_updates: ${p07_skip_updates}
+    address: 57856
+    value_type: U_WORD
+    # endianness: register=big, word=little
+    name: "Inverter_RS485_Address"
+    entity_category: config
+    min_value: 1
+    max_value: 254
+    step: 1
+    write_lambda: |-
+      id(p07_fast_poll_until_ms) = millis() + 15000U;
+      return (int) round(x * 1.0);
+  - platform: modbus_controller
+    modbus_controller_id: srne_main
+    register_type: holding
+    skip_updates: ${p07_skip_updates}
+    address: 57858
+    value_type: U_WORD
+    # endianness: register=big, word=little
+    name: "User_Password"
+    entity_category: config
+    min_value: 0
+    max_value: 65535
+    step: 1
+    write_lambda: |-
+      id(p07_fast_poll_until_ms) = millis() + 15000U;
+      return (int) round(x * 1.0);
+  - platform: modbus_controller
+    modbus_controller_id: srne_main
+    register_type: holding
+    skip_updates: ${p07_skip_updates}
+    address: 57859
+    value_type: U_WORD
+    # endianness: register=big, word=little
+    name: "Password_Input"
+    entity_category: config
+    min_value: 0
+    max_value: 65535
+    step: 1
+    write_lambda: |-
+      id(p07_fast_poll_until_ms) = millis() + 15000U;
+      return (int) round(x * 1.0);
+  - platform: modbus_controller
+    modbus_controller_id: srne_main
+    register_type: holding
+    skip_updates: ${p07_skip_updates}
+    address: 57861
+    value_type: U_WORD
+    # endianness: register=big, word=little
+    name: "Grid_Charge_Current_Limit"
+    unit_of_measurement: "A"
+    entity_category: config
+    min_value: 0
+    max_value: 200
+    step: 0.1
+    lambda: |-
+      return x * 0.1;
+    write_lambda: |-
+      id(p07_fast_poll_until_ms) = millis() + 15000U;
+      return (int) round(x * 10.0);
+  - platform: modbus_controller
+    modbus_controller_id: srne_main
+    register_type: holding
+    skip_updates: ${p07_skip_updates}
+    address: 57864
+    value_type: U_WORD
+    # endianness: register=big, word=little
+    name: "Output_Voltage"
+    unit_of_measurement: "V"
+    entity_category: config
+    min_value: 100
+    max_value: 264
+    step: 0.1
+    lambda: |-
+      return x * 0.1;
+    write_lambda: |-
+      id(p07_fast_poll_until_ms) = millis() + 15000U;
+      return (int) round(x * 10.0);
+  - platform: modbus_controller
+    modbus_controller_id: srne_main
+    register_type: holding
+    skip_updates: ${p07_skip_updates}
+    address: 57865
+    value_type: U_WORD
+    # endianness: register=big, word=little
+    name: "Output_Frequency"
+    unit_of_measurement: "Hz"
+    entity_category: config
+    min_value: 45
+    max_value: 65
+    step: 0.01
+    lambda: |-
+      return x * 0.01;
+    write_lambda: |-
+      id(p07_fast_poll_until_ms) = millis() + 15000U;
+      return (int) round(x * 100.0);
+  - platform: modbus_controller
+    modbus_controller_id: srne_main
+    register_type: holding
+    skip_updates: ${p07_skip_updates}
+    address: 57866
+    value_type: U_WORD
+    # endianness: register=big, word=little
+    name: "Max_Charge_Current"
+    unit_of_measurement: "A"
+    entity_category: config
+    min_value: 0
+    max_value: 200
+    step: 0.1
+    lambda: |-
+      return x * 0.1;
+    write_lambda: |-
+      id(p07_fast_poll_until_ms) = millis() + 15000U;
+      return (int) round(x * 10.0);
+  - platform: modbus_controller
+    modbus_controller_id: srne_main
+    register_type: holding
+    skip_updates: ${p07_skip_updates}
+    address: 57880
+    value_type: U_WORD
+    # endianness: register=big, word=little
+    name: "Derating_Power"
+    unit_of_measurement: "W"
+    entity_category: config
+    min_value: 1000
+    max_value: 15000
+    step: 1
+    write_lambda: |-
+      id(p07_fast_poll_until_ms) = millis() + 15000U;
+      return (int) round(x * 1.0);
+  - platform: modbus_controller
+    modbus_controller_id: srne_main
+    register_type: holding
+    skip_updates: ${p07_skip_updates}
+    address: 57883
+    value_type: U_WORD
+    # endianness: register=big, word=little
+    name: "BMS_Protocol"
+    entity_category: config
+    min_value: 0
+    max_value: 30
+    step: 1
+    write_lambda: |-
+      id(p07_fast_poll_until_ms) = millis() + 15000U;
+      return (int) round(x * 1.0);
+  - platform: modbus_controller
+    modbus_controller_id: srne_main
+    register_type: holding
+    skip_updates: ${p07_skip_updates}
+    address: 57884
+    value_type: U_WORD
+    # endianness: register=big, word=little
+    name: "Grid_Input_Current_Limit"
+    unit_of_measurement: "A"
+    entity_category: config
+    min_value: 0
+    max_value: 100
+    step: 0.1
+    lambda: |-
+      return x * 0.1;
+    write_lambda: |-
+      id(p07_fast_poll_until_ms) = millis() + 15000U;
+      return (int) round(x * 10.0);
+  - platform: modbus_controller
+    modbus_controller_id: srne_main
+    register_type: holding
+    skip_updates: ${p07_skip_updates}
+    address: 57885
+    value_type: U_WORD
+    # endianness: register=big, word=little
+    name: "Grid_Input_Power_Limit"
+    unit_of_measurement: "W"
+    entity_category: config
+    min_value: 0
+    max_value: 65535
+    step: 1
+    write_lambda: |-
+      id(p07_fast_poll_until_ms) = millis() + 15000U;
+      return (int) round(x * 1.0);
+
+select:
+  - platform: modbus_controller
+    modbus_controller_id: srne_main
+    skip_updates: ${p07_skip_updates}
+    address: 57857
+    # endianness: register=big, word=little
+    id: sel_p07_57857
+    name: "Parallel_Mode"
+    force_new_range: true
+    entity_category: config
+    optimistic: true
+    on_value:
+      - lambda: |-
+          static std::string prev = "";
+          if (prev == x) return;
+          prev = x;
+          id(p07_fast_poll_until_ms) = millis() + 15000U;
+    optionsmap:
+      "Single machine": 0
+      "Single-phase parallel": 1
+      "Two-phase parallel": 2
+      "Two-phase parallel 120": 3
+      "Two-phase parallel 180": 4
+      "Three-phase A": 5
+      "Three-phase B": 6
+      "Three-phase C": 7
+  - platform: modbus_controller
+    modbus_controller_id: srne_main
+    skip_updates: ${p07_skip_updates}
+    address: 57860
+    # endianness: register=big, word=little
+    id: sel_p07_57860
+    name: "Output_Priority"
+    force_new_range: true
+    entity_category: config
+    optimistic: true
+    on_value:
+      - lambda: |-
+          static std::string prev = "";
+          if (prev == x) return;
+          prev = x;
+          id(p07_fast_poll_until_ms) = millis() + 15000U;
+    optionsmap:
+      "SOL (Solar > Grid > Battery)": 0
+      "UTI (Grid > PV > Battery)": 1
+      "SBU (Solar > Battery > Grid)": 2
+  - platform: modbus_controller
+    modbus_controller_id: srne_main
+    skip_updates: ${p07_skip_updates}
+    address: 57867
+    # endianness: register=big, word=little
+    id: sel_p07_57867
+    name: "Grid_Input_Range"
+    force_new_range: true
+    entity_category: config
+    optimistic: true
+    on_value:
+      - lambda: |-
+          static std::string prev = "";
+          if (prev == x) return;
+          prev = x;
+          id(p07_fast_poll_until_ms) = millis() + 15000U;
+    optionsmap:
+      "wide band (APL)": 0
+      "narrow band (UPS)": 1
+  - platform: modbus_controller
+    modbus_controller_id: srne_main
+    skip_updates: ${p07_skip_updates}
+    address: 57871
+    # endianness: register=big, word=little
+    id: sel_p07_57871
+    name: "Charge_Priority"
+    force_new_range: true
+    entity_category: config
+    optimistic: true
+    on_value:
+      - lambda: |-
+          static std::string prev = "";
+          if (prev == x) return;
+          prev = x;
+          id(p07_fast_poll_until_ms) = millis() + 15000U;
+    optionsmap:
+      "PV Priority (CSO)": 0
+      "Grid Priority (CUB)": 1
+      "Hybrid Mode (SNU)": 2
+      "PV Only (OSO)": 3
+  - platform: modbus_controller
+    modbus_controller_id: srne_main
+    skip_updates: ${p07_skip_updates}
+    address: 57877
+    # endianness: register=big, word=little
+    id: sel_p07_57877
+    name: "BMS_Communication"
+    force_new_range: true
+    entity_category: config
+    optimistic: true
+    on_value:
+      - lambda: |-
+          static std::string prev = "";
+          if (prev == x) return;
+          prev = x;
+          id(p07_fast_poll_until_ms) = millis() + 15000U;
+    optionsmap:
+      "Disabled": 0
+      "RS485-BMS": 1
+      "CAN-BMS": 2
+  - platform: modbus_controller
+    modbus_controller_id: srne_main
+    skip_updates: ${p07_skip_updates}
+    address: 57886
+    # endianness: register=big, word=little
+    id: sel_p07_57886
+    name: "AC_Output_Mode"
+    force_new_range: true
+    entity_category: config
+    optimistic: true
+    on_value:
+      - lambda: |-
+          static std::string prev = "";
+          if (prev == x) return;
+          prev = x;
+          id(p07_fast_poll_until_ms) = millis() + 15000U;
+    optionsmap:
+      "Single-phase connection": 0
+      "Three-phase connection": 1
+      "Split-phase connection": 2
+
+switch:
+  - platform: template
+    id: sw_p07_57862
+    name: "Equalization Charge"
+    optimistic: true
+    restore_mode: DISABLED
+    entity_category: config
+    turn_on_action:
+      - if:
+          condition:
+            lambda: 'return id(p07_write_actions_enabled);'
+          then:
+            - lambda: |-
+                id(p07_fast_poll_until_ms) = millis() + 15000U;
+            - number.set:
+                id: num_p07_57862
+                value: 1
+    turn_off_action:
+      - if:
+          condition:
+            lambda: 'return id(p07_write_actions_enabled);'
+          then:
+            - lambda: |-
+                id(p07_fast_poll_until_ms) = millis() + 15000U;
+            - number.set:
+                id: num_p07_57862
+                value: 0
+  - platform: template
+    id: sw_p07_57863
+    name: "N-PE Bonding"
+    optimistic: true
+    restore_mode: DISABLED
+    entity_category: config
+    turn_on_action:
+      - if:
+          condition:
+            lambda: 'return id(p07_write_actions_enabled);'
+          then:
+            - lambda: |-
+                id(p07_fast_poll_until_ms) = millis() + 15000U;
+            - number.set:
+                id: num_p07_57863
+                value: 1
+    turn_off_action:
+      - if:
+          condition:
+            lambda: 'return id(p07_write_actions_enabled);'
+          then:
+            - lambda: |-
+                id(p07_fast_poll_until_ms) = millis() + 15000U;
+            - number.set:
+                id: num_p07_57863
+                value: 0
+  - platform: template
+    id: sw_p07_57868
+    name: "Power Saving Mode"
+    optimistic: true
+    restore_mode: DISABLED
+    entity_category: config
+    turn_on_action:
+      - if:
+          condition:
+            lambda: 'return id(p07_write_actions_enabled);'
+          then:
+            - lambda: |-
+                id(p07_fast_poll_until_ms) = millis() + 15000U;
+            - number.set:
+                id: num_p07_57868
+                value: 1
+    turn_off_action:
+      - if:
+          condition:
+            lambda: 'return id(p07_write_actions_enabled);'
+          then:
+            - lambda: |-
+                id(p07_fast_poll_until_ms) = millis() + 15000U;
+            - number.set:
+                id: num_p07_57868
+                value: 0
+  - platform: template
+    id: sw_p07_57869
+    name: "Overload Auto Restart"
+    optimistic: true
+    restore_mode: DISABLED
+    entity_category: config
+    turn_on_action:
+      - if:
+          condition:
+            lambda: 'return id(p07_write_actions_enabled);'
+          then:
+            - lambda: |-
+                id(p07_fast_poll_until_ms) = millis() + 15000U;
+            - number.set:
+                id: num_p07_57869
+                value: 1
+    turn_off_action:
+      - if:
+          condition:
+            lambda: 'return id(p07_write_actions_enabled);'
+          then:
+            - lambda: |-
+                id(p07_fast_poll_until_ms) = millis() + 15000U;
+            - number.set:
+                id: num_p07_57869
+                value: 0
+  - platform: template
+    id: sw_p07_57870
+    name: "Over-Temp Auto Restart"
+    optimistic: true
+    restore_mode: DISABLED
+    entity_category: config
+    turn_on_action:
+      - if:
+          condition:
+            lambda: 'return id(p07_write_actions_enabled);'
+          then:
+            - lambda: |-
+                id(p07_fast_poll_until_ms) = millis() + 15000U;
+            - number.set:
+                id: num_p07_57870
+                value: 1
+    turn_off_action:
+      - if:
+          condition:
+            lambda: 'return id(p07_write_actions_enabled);'
+          then:
+            - lambda: |-
+                id(p07_fast_poll_until_ms) = millis() + 15000U;
+            - number.set:
+                id: num_p07_57870
+                value: 0
+  - platform: template
+    id: sw_p07_57872
+    name: "Alarm Control"
+    optimistic: true
+    restore_mode: DISABLED
+    entity_category: config
+    turn_on_action:
+      - if:
+          condition:
+            lambda: 'return id(p07_write_actions_enabled);'
+          then:
+            - lambda: |-
+                id(p07_fast_poll_until_ms) = millis() + 15000U;
+            - number.set:
+                id: num_p07_57872
+                value: 1
+    turn_off_action:
+      - if:
+          condition:
+            lambda: 'return id(p07_write_actions_enabled);'
+          then:
+            - lambda: |-
+                id(p07_fast_poll_until_ms) = millis() + 15000U;
+            - number.set:
+                id: num_p07_57872
+                value: 0
+  - platform: template
+    id: sw_p07_57873
+    name: "Source Transfer Alarm"
+    optimistic: true
+    restore_mode: DISABLED
+    entity_category: config
+    turn_on_action:
+      - if:
+          condition:
+            lambda: 'return id(p07_write_actions_enabled);'
+          then:
+            - lambda: |-
+                id(p07_fast_poll_until_ms) = millis() + 15000U;
+            - number.set:
+                id: num_p07_57873
+                value: 1
+    turn_off_action:
+      - if:
+          condition:
+            lambda: 'return id(p07_write_actions_enabled);'
+          then:
+            - lambda: |-
+                id(p07_fast_poll_until_ms) = millis() + 15000U;
+            - number.set:
+                id: num_p07_57873
+                value: 0
+  - platform: template
+    id: sw_p07_57874
+    name: "Overload Bypass"
+    optimistic: true
+    restore_mode: DISABLED
+    entity_category: config
+    turn_on_action:
+      - if:
+          condition:
+            lambda: 'return id(p07_write_actions_enabled);'
+          then:
+            - lambda: |-
+                id(p07_fast_poll_until_ms) = millis() + 15000U;
+            - number.set:
+                id: num_p07_57874
+                value: 1
+    turn_off_action:
+      - if:
+          condition:
+            lambda: 'return id(p07_write_actions_enabled);'
+          then:
+            - lambda: |-
+                id(p07_fast_poll_until_ms) = millis() + 15000U;
+            - number.set:
+                id: num_p07_57874
+                value: 0
+  - platform: template
+    id: sw_p07_57875
+    name: "Record Fault Code"
+    optimistic: true
+    restore_mode: DISABLED
+    entity_category: config
+    turn_on_action:
+      - if:
+          condition:
+            lambda: 'return id(p07_write_actions_enabled);'
+          then:
+            - lambda: |-
+                id(p07_fast_poll_until_ms) = millis() + 15000U;
+            - number.set:
+                id: num_p07_57875
+                value: 1
+    turn_off_action:
+      - if:
+          condition:
+            lambda: 'return id(p07_write_actions_enabled);'
+          then:
+            - lambda: |-
+                id(p07_fast_poll_until_ms) = millis() + 15000U;
+            - number.set:
+                id: num_p07_57875
+                value: 0
+  - platform: template
+    id: sw_p07_57876
+    name: "BMS Fault Shutdown"
+    optimistic: true
+    restore_mode: DISABLED
+    entity_category: config
+    turn_on_action:
+      - if:
+          condition:
+            lambda: 'return id(p07_write_actions_enabled);'
+          then:
+            - lambda: |-
+                id(p07_fast_poll_until_ms) = millis() + 15000U;
+            - number.set:
+                id: num_p07_57876
+                value: 1
+    turn_off_action:
+      - if:
+          condition:
+            lambda: 'return id(p07_write_actions_enabled);'
+          then:
+            - lambda: |-
+                id(p07_fast_poll_until_ms) = millis() + 15000U;
+            - number.set:
+                id: num_p07_57876
+                value: 0
+  - platform: template
+    id: sw_p07_57878
+    name: "DC Load Control"
+    optimistic: true
+    restore_mode: DISABLED
+    entity_category: config
+    turn_on_action:
+      - if:
+          condition:
+            lambda: 'return id(p07_write_actions_enabled);'
+          then:
+            - lambda: |-
+                id(p07_fast_poll_until_ms) = millis() + 15000U;
+            - number.set:
+                id: num_p07_57878
+                value: 1
+    turn_off_action:
+      - if:
+          condition:
+            lambda: 'return id(p07_write_actions_enabled);'
+          then:
+            - lambda: |-
+                id(p07_fast_poll_until_ms) = millis() + 15000U;
+            - number.set:
+                id: num_p07_57878
+                value: 0
+  - platform: template
+    id: sw_p07_57887
+    name: "Generator Mode"
+    optimistic: true
+    restore_mode: DISABLED
+    entity_category: config
+    turn_on_action:
+      - if:
+          condition:
+            lambda: 'return id(p07_write_actions_enabled);'
+          then:
+            - lambda: |-
+                id(p07_fast_poll_until_ms) = millis() + 15000U;
+            - number.set:
+                id: num_p07_57887
+                value: 1
+    turn_off_action:
+      - if:
+          condition:
+            lambda: 'return id(p07_write_actions_enabled);'
+          then:
+            - lambda: |-
+                id(p07_fast_poll_until_ms) = millis() + 15000U;
+            - number.set:
+                id: num_p07_57887
+                value: 0
+
+globals:
+  - id: p07_fast_poll_until_ms
+    type: uint32_t
+    restore_value: no
+    initial_value: '0'
+  - id: p07_write_actions_enabled
+    type: bool
+    restore_value: no
+    initial_value: 'false'
+
+interval:
+  - interval: 1s
+    then:
+      - lambda: |-
+          if (!id(p07_write_actions_enabled) && millis() > 3000U) id(p07_write_actions_enabled) = true;

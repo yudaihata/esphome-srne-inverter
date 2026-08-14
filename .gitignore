@@ -1,0 +1,29 @@
+# macOS and editor metadata
+.DS_Store
+*.swp
+*.swo
+
+# Python
+__pycache__/
+*.py[cod]
+.venv*/
+
+# Local credentials and environment
+.env
+.env.*
+!.env.example
+esphome/secrets.yaml
+
+# ESPHome build/cache output
+esphome/.esphome/
+
+# Device scans, logs, and local wizard state
+tools/build/
+*.log
+log*.txt
+
+# Local archives and scratch files
+backups/
+*.bak
+.letta/
+/名称未設定フォル*/
