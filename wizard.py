@@ -12,11 +12,14 @@
 """
 from __future__ import annotations
 
+import base64
+import getpass
+import secrets
 import sys
-import os
 import json
 from pathlib import Path
 import hashlib
+import re
 from typing import Any, Dict, List, Optional
 
 from tools.common import (
@@ -36,6 +39,67 @@ import tools.yaml_generator as yg
 BUILD_DIR = Path("tools/build")
 ESPHOME_DIR = Path("esphome")
 WIZ_STATE_PATH = BUILD_DIR / "wizard_state.json"
+
+
+def file_sha256(path: Path) -> str:
+    try:
+        return hashlib.sha256(path.read_bytes()).hexdigest()
+    except OSError:
+        return ""
+
+
+def load_wizard_state(path: Path = WIZ_STATE_PATH) -> Dict[str, Any]:
+    try:
+        data = json.loads(path.read_text(encoding="utf-8"))
+        return data if isinstance(data, dict) else {}
+    except (OSError, json.JSONDecodeError):
+        return {}
+
+
+def scan_result_is_reusable(
+    implemented_path: Path,
+    state: Dict[str, Any],
+    catalog_path: Path = JSON_CATALOG_PATH,
+) -> bool:
+    """Only reuse discovery output produced from the current catalog."""
+    if not implemented_path.exists() or not state:
+        return False
+    if state.get("json_catalog_sha256") != file_sha256(catalog_path):
+        return False
+    if not isinstance(state.get("slave_id"), int) or not isinstance(state.get("baudrate"), int):
+        return False
+    try:
+        records = json.loads(implemented_path.read_text(encoding="utf-8"))
+    except (OSError, json.JSONDecodeError):
+        return False
+    return isinstance(records, list) and bool(records)
+
+
+def yaml_string(value: str) -> str:
+    """JSON strings are valid YAML strings and safely escape user input."""
+    return json.dumps(value, ensure_ascii=False)
+
+
+def ensure_management_secrets(path: Path) -> List[str]:
+    """Append missing ESPHome management secrets without replacing Wi-Fi data."""
+    try:
+        content = path.read_text(encoding="utf-8")
+    except OSError:
+        content = ""
+    existing = set(re.findall(r"(?m)^([A-Za-z_][A-Za-z0-9_]*):", content))
+    generated = {
+        "fallback_ap_password": secrets.token_urlsafe(18),
+        "api_encryption_key": base64.b64encode(secrets.token_bytes(32)).decode("ascii"),
+        "ota_password": secrets.token_urlsafe(24),
+    }
+    missing = [key for key in generated if key not in existing]
+    if not missing:
+        return []
+    suffix = "" if not content or content.endswith("\n") else "\n"
+    suffix += "".join(f"{key}: {yaml_string(generated[key])}\n" for key in missing)
+    path.parent.mkdir(parents=True, exist_ok=True)
+    path.write_text(content + suffix, encoding="utf-8")
+    return missing
 
 
 def print_header(title: str) -> None:
@@ -143,21 +207,19 @@ def step_discovery(env: Dict[str, Any]) -> Path:
     print_header("ステップ1: レジスタ探索 (discovery)")
     # 既存スキャン結果があれば、最初に再利用可否を確認して即終了できるようにする
     implemented_default = BUILD_DIR / "implemented_registers.json"
-    if implemented_default.exists():
+    prev = load_wizard_state()
+    if scan_result_is_reusable(implemented_default, prev):
         print(f"既存のスキャン結果が見つかりました: {implemented_default}")
         if yes_no("前回のスキャン結果を利用しますか?", True):
             return implemented_default
+    elif implemented_default.exists():
+        print("既存のスキャン結果は、現在のカタログと一致しないため再利用しません。")
 
     # 以降は新規スキャンのためのポート選択
     # ポート選択（ここで実施）
     # 前回ポートの再利用候補
     prev_port = ""
-    try:
-        if WIZ_STATE_PATH.exists():
-            prev = json.loads(WIZ_STATE_PATH.read_text(encoding="utf-8"))
-            prev_port = str(prev.get("port") or "")
-    except Exception:
-        prev_port = ""
+    prev_port = str(prev.get("port") or "")
 
     port: str = ""
     while True:
@@ -213,35 +275,10 @@ def step_discovery(env: Dict[str, Any]) -> Path:
 
     print(f"使用ポート: {port}")
 
-    # 既存結果の再利用判定（ポート/カタログ一致のチェックは行うが、ここでは再質問しない）
-    def _json_hash(p: Path) -> str:
-        try:
-            data = p.read_bytes()
-            return hashlib.sha256(data).hexdigest()
-        except Exception:
-            return ""
-
-    catalog_hash = _json_hash(JSON_CATALOG_PATH)
-    prev: Dict[str, Any] = {}
-    if WIZ_STATE_PATH.exists():
-        try:
-            prev = json.loads(WIZ_STATE_PATH.read_text(encoding="utf-8"))
-        except Exception:
-            prev = {}
+    catalog_hash = file_sha256(JSON_CATALOG_PATH)
 
     out_path = BUILD_DIR / "implemented_registers.json"
     ensure_dir(BUILD_DIR)
-
-    # 既存スキャンの再利用可否チェック
-    can_reuse = False
-    if out_path.exists() and prev:
-        can_reuse = (
-            prev.get("port") == port
-            and prev.get("json_catalog_sha256") == catalog_hash
-            and isinstance(prev.get("slave_id"), int)
-            and isinstance(prev.get("baudrate"), int)
-        )
-    # 先頭で再利用の確認を済ませているため、ここでは自動では再質問しない
 
     # 標準設定で進めるかを先に確認（既定: はい）
     if yes_no("標準設定で進めますか?", True):
@@ -453,19 +490,26 @@ def step_yaml(implemented_path: Path, ranges_path: Path) -> None:
         reuse = yes_no("既存のWi‑Fi設定を再利用しますか?", True)
         if not reuse:
             ssid = prompt("Wi‑Fi SSID")
-            pw = prompt("Wi‑Fi パスワード")
+            pw = getpass.getpass("Wi‑Fi パスワード: ")
             secrets_path.parent.mkdir(parents=True, exist_ok=True)
-            secrets_content = f"wifi_ssid: \"{ssid}\"\nwifi_password: \"{pw}\"\n"
+            secrets_content = f"wifi_ssid: {yaml_string(ssid)}\nwifi_password: {yaml_string(pw)}\n"
             secrets_path.write_text(secrets_content, encoding="utf-8")
             print(f"Wi‑Fi設定を更新しました: {secrets_path}")
     else:
         if yes_no("Wi‑Fi設定（SSID/パスワード）を登録しますか?", True):
             ssid = prompt("Wi‑Fi SSID")
-            pw = prompt("Wi‑Fi パスワード")
+            pw = getpass.getpass("Wi‑Fi パスワード: ")
             secrets_path.parent.mkdir(parents=True, exist_ok=True)
-            secrets_content = f"wifi_ssid: \"{ssid}\"\nwifi_password: \"{pw}\"\n"
+            secrets_content = f"wifi_ssid: {yaml_string(ssid)}\nwifi_password: {yaml_string(pw)}\n"
             secrets_path.write_text(secrets_content, encoding="utf-8")
             print(f"Wi‑Fi設定を書き込みました: {secrets_path}")
+        else:
+            print("Wi‑Fi設定がないためYAMLを生成できません。")
+            sys.exit(1)
+
+    added_secrets = ensure_management_secrets(secrets_path)
+    if added_secrets:
+        print("API暗号化・OTA・フォールバックAP用の認証情報を生成しました。")
 
     # 単一controller構成（全グループ共通）
     controllers: List[Dict[str, Any]] = [{
@@ -562,6 +606,8 @@ def step_yaml(implemented_path: Path, ranges_path: Path) -> None:
     for g in all_groups:
         gup = yg.normalize_group(g)
         user_lines.append(f"{g.lower()}_skip_updates: '{int(skip_defaults.get(gup, 119))}'")
+        if gup == "P02":
+            user_lines.append("p02_slow_skip_updates: '11'")
 
     (srne_dir / "intervals.yaml").write_text("\n".join(user_lines) + "\n", encoding="utf-8")
     lines = [

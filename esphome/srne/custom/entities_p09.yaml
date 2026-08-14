@@ -1114,7 +1114,7 @@ sensor:
       float ah = id(sens_p09_61492).state;
       if (isnan(ah)) return {};
       float std_v = NAN;
-      std::string bt = id(sel_p05_57348).state;
+      std::string bt = id(sel_p05_57348).current_option();
       if (bt == "User define") return {};
       if (!bt.empty()) {
         if (bt == "LFP x14") std_v = 44.8f;
@@ -1129,7 +1129,7 @@ sensor:
         else if (bt == "NMC x14") std_v = 51.8f;
       }
       if (isnan(std_v)) {
-        std::string rv_s = id(sel_p05_57347).state;
+        std::string rv_s = id(sel_p05_57347).current_option();
         if (!rv_s.empty()) {
           int rv = atoi(rv_s.c_str());
           if (rv == 12 || rv == 24 || rv == 36 || rv == 48) std_v = (float) rv;
@@ -1149,7 +1149,7 @@ sensor:
       float ah = id(sens_p09_61494).state;
       if (isnan(ah)) return {};
       float std_v = NAN;
-      std::string bt = id(sel_p05_57348).state;
+      std::string bt = id(sel_p05_57348).current_option();
       if (bt == "User define") return {};
       if (!bt.empty()) {
         if (bt == "LFP x14") std_v = 44.8f;
@@ -1164,7 +1164,7 @@ sensor:
         else if (bt == "NMC x14") std_v = 51.8f;
       }
       if (isnan(std_v)) {
-        std::string rv_s = id(sel_p05_57347).state;
+        std::string rv_s = id(sel_p05_57347).current_option();
         if (!rv_s.empty()) {
           int rv = atoi(rv_s.c_str());
           if (rv == 12 || rv == 24 || rv == 36 || rv == 48) std_v = (float) rv;

@@ -1,0 +1,10 @@
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["."]
+
+[tool.ruff]
+target-version = "py311"
+exclude = ["tools/_unused"]
+
+[tool.ruff.lint]
+select = ["E9", "F63", "F7", "F82"]

@@ -50,7 +50,7 @@ def build_ranges(records: List[Dict[str, Any]], max_chunk: int = 32) -> Dict[str
         # Exclude 32-bit registers whose pair (N+1) could not be confirmed
         try:
             regcnt = register_count_for_type(rec.get("data_type"))
-            if regcnt == 2 and not bool(rec.get("pair_exists")):
+            if regcnt == 2 and rec.get("pair_exists") is False:
                 continue
         except Exception:
             pass

@@ -38,11 +38,13 @@ def discover(
     delay_ms: int,
     regs: List[RegisterDef],
     dry_run: bool = False,
-    validate_32bit: bool = False,
+    validate_32bit: bool = True,
     signed_check: bool = False,
 ) -> List[Dict[str, Any]]:
     out: List[Dict[str, Any]] = []
     mm = try_import_minimalmodbus()
+    if not dry_run and mm is None:
+        raise RuntimeError("minimalmodbus is required for a hardware discovery scan")
 
     instrument = None
     if not dry_run and mm is not None:
@@ -149,7 +151,12 @@ def main() -> None:
     p.add_argument("--catalog", type=Path, default=JSON_CATALOG_PATH, help="Path to JSON catalog")
     p.add_argument("--output", type=Path, default=Path("tools/build/implemented_registers.json"))
     p.add_argument("--dry-run", action="store_true", help="Do not access serial; just emit template JSON")
-    p.add_argument("--validate-32bit", action="store_true", help="For 32-bit types, verify both words can be read (pair_exists)")
+    p.add_argument(
+        "--validate-32bit",
+        action=argparse.BooleanOptionalAction,
+        default=True,
+        help="For 32-bit types, verify both words can be read (default: enabled)",
+    )
     p.add_argument("--signed-check", action="store_true", help="For int types, also read with signed and record diagnostic values")
     args = p.parse_args()
 

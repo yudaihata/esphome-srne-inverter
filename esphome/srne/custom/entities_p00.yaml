@@ -9,12 +9,11 @@ sensor:
     value_type: U_WORD
     # endianness: register=big, word=little
     id: sens_p00_20
-    internal: true
     name: "APP_Version"
-    accuracy_decimals: 0
-    on_value:
-      then:
-        - component.update: txt_p00_ver_20
+    accuracy_decimals: 2
+    filters:
+      - multiply: 0.01
+      - round: 2
   - platform: modbus_controller
     modbus_controller_id: srne_main
     register_type: holding
@@ -23,12 +22,11 @@ sensor:
     value_type: U_WORD
     # endianness: register=big, word=little
     id: sens_p00_21
-    internal: true
     name: "BOOTLOADER_Version"
-    accuracy_decimals: 0
-    on_value:
-      then:
-        - component.update: txt_p00_ver_21
+    accuracy_decimals: 2
+    filters:
+      - multiply: 0.01
+      - round: 2
   - platform: modbus_controller
     modbus_controller_id: srne_main
     register_type: holding
@@ -37,12 +35,11 @@ sensor:
     value_type: U_WORD
     # endianness: register=big, word=little
     id: sens_p00_22
-    internal: true
     name: "Control_Panel_Version"
-    accuracy_decimals: 0
-    on_value:
-      then:
-        - component.update: txt_p00_ver_22
+    accuracy_decimals: 2
+    filters:
+      - multiply: 0.01
+      - round: 2
   - platform: modbus_controller
     modbus_controller_id: srne_main
     register_type: holding
@@ -51,12 +48,11 @@ sensor:
     value_type: U_WORD
     # endianness: register=big, word=little
     id: sens_p00_23
-    internal: true
     name: "Power_Amplifier_Board_Version"
-    accuracy_decimals: 0
-    on_value:
-      then:
-        - component.update: txt_p00_ver_23
+    accuracy_decimals: 2
+    filters:
+      - multiply: 0.01
+      - round: 2
   - platform: modbus_controller
     modbus_controller_id: srne_main
     register_type: holding
@@ -96,12 +92,11 @@ sensor:
     value_type: U_WORD
     # endianness: register=big, word=little
     id: sens_p00_28
-    internal: true
     name: "RS485_Protocol_Version"
-    accuracy_decimals: 0
-    on_value:
-      then:
-        - component.update: txt_p00_ver_28
+    accuracy_decimals: 2
+    filters:
+      - multiply: 0.01
+      - round: 2
   - platform: modbus_controller
     modbus_controller_id: srne_main
     register_type: holding
@@ -216,71 +211,6 @@ text_sensor:
         default: return std::string("unknown");
       }
     entity_category: diagnostic
-  - platform: template
-    id: txt_p00_ver_20
-    name: "APP_Version"
-    entity_category: diagnostic
-    lambda: |-
-      if (isnan(id(sens_p00_20).state)) return std::string("Unknown");
-      int raw = (int) roundf(id(sens_p00_20).state);
-      if (raw <= 0 || raw > 9999) return std::string("Unknown");
-      int major = raw / 100;
-      int minor = raw % 100;
-      char buf[16];
-      snprintf(buf, sizeof(buf), "V%d.%02d", major, minor);
-      return std::string(buf);
-  - platform: template
-    id: txt_p00_ver_21
-    name: "BOOTLOADER_Version"
-    entity_category: diagnostic
-    lambda: |-
-      if (isnan(id(sens_p00_21).state)) return std::string("Unknown");
-      int raw = (int) roundf(id(sens_p00_21).state);
-      if (raw <= 0 || raw > 9999) return std::string("Unknown");
-      int major = raw / 100;
-      int minor = raw % 100;
-      char buf[16];
-      snprintf(buf, sizeof(buf), "V%d.%02d", major, minor);
-      return std::string(buf);
-  - platform: template
-    id: txt_p00_ver_22
-    name: "Control_Panel_Version"
-    entity_category: diagnostic
-    lambda: |-
-      if (isnan(id(sens_p00_22).state)) return std::string("Unknown");
-      int raw = (int) roundf(id(sens_p00_22).state);
-      if (raw <= 0 || raw > 9999) return std::string("Unknown");
-      int major = raw / 100;
-      int minor = raw % 100;
-      char buf[16];
-      snprintf(buf, sizeof(buf), "V%d.%02d", major, minor);
-      return std::string(buf);
-  - platform: template
-    id: txt_p00_ver_23
-    name: "Power_Amplifier_Board_Version"
-    entity_category: diagnostic
-    lambda: |-
-      if (isnan(id(sens_p00_23).state)) return std::string("Unknown");
-      int raw = (int) roundf(id(sens_p00_23).state);
-      if (raw <= 0 || raw > 9999) return std::string("Unknown");
-      int major = raw / 100;
-      int minor = raw % 100;
-      char buf[16];
-      snprintf(buf, sizeof(buf), "V%d.%02d", major, minor);
-      return std::string(buf);
-  - platform: template
-    id: txt_p00_ver_28
-    name: "RS485_Protocol_Version"
-    entity_category: diagnostic
-    lambda: |-
-      if (isnan(id(sens_p00_28).state)) return std::string("Unknown");
-      int raw = (int) roundf(id(sens_p00_28).state);
-      if (raw <= 0 || raw > 9999) return std::string("Unknown");
-      int major = raw / 100;
-      int minor = raw % 100;
-      char buf[16];
-      snprintf(buf, sizeof(buf), "V%d.%02d", major, minor);
-      return std::string(buf);
   - platform: template
     id: txt_p00_raw_26
     name: "Controller_Device_Address"

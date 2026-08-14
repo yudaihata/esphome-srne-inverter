@@ -654,17 +654,17 @@ number:
     max_value: 62
     step: 0.1
     lambda: |-
-      if (id(sel_p05_57347).state.empty()) return NAN;
-      int rv = atoi(id(sel_p05_57347).state.c_str());
+      if (id(sel_p05_57347).current_option().empty()) return NAN;
+      int rv = atoi(id(sel_p05_57347).current_option().c_str());
       if (!(rv == 12 || rv == 24 || rv == 36 || rv == 48)) return NAN;
       float ratio = ((float) rv) / 12.0f;
       return x * 0.1 * ratio;
     write_lambda: |-
-      if (id(sel_p05_57347).state.empty()) {
+      if (id(sel_p05_57347).current_option().empty()) {
         ESP_LOGW("p05_voltage", "Battery_Rated_Voltage unavailable, block write");
         return {};
       }
-      int rv = atoi(id(sel_p05_57347).state.c_str());
+      int rv = atoi(id(sel_p05_57347).current_option().c_str());
       if (!(rv == 12 || rv == 24 || rv == 36 || rv == 48)) {
         ESP_LOGW("p05_voltage", "Battery_Rated_Voltage invalid (%d), block write", rv);
         return {};
@@ -696,17 +696,17 @@ number:
     max_value: 62
     step: 0.1
     lambda: |-
-      if (id(sel_p05_57347).state.empty()) return NAN;
-      int rv = atoi(id(sel_p05_57347).state.c_str());
+      if (id(sel_p05_57347).current_option().empty()) return NAN;
+      int rv = atoi(id(sel_p05_57347).current_option().c_str());
       if (!(rv == 12 || rv == 24 || rv == 36 || rv == 48)) return NAN;
       float ratio = ((float) rv) / 12.0f;
       return x * 0.1 * ratio;
     write_lambda: |-
-      if (id(sel_p05_57347).state.empty()) {
+      if (id(sel_p05_57347).current_option().empty()) {
         ESP_LOGW("p05_voltage", "Battery_Rated_Voltage unavailable, block write");
         return {};
       }
-      int rv = atoi(id(sel_p05_57347).state.c_str());
+      int rv = atoi(id(sel_p05_57347).current_option().c_str());
       if (!(rv == 12 || rv == 24 || rv == 36 || rv == 48)) {
         ESP_LOGW("p05_voltage", "Battery_Rated_Voltage invalid (%d), block write", rv);
         return {};
@@ -738,17 +738,17 @@ number:
     max_value: 62
     step: 0.1
     lambda: |-
-      if (id(sel_p05_57347).state.empty()) return NAN;
-      int rv = atoi(id(sel_p05_57347).state.c_str());
+      if (id(sel_p05_57347).current_option().empty()) return NAN;
+      int rv = atoi(id(sel_p05_57347).current_option().c_str());
       if (!(rv == 12 || rv == 24 || rv == 36 || rv == 48)) return NAN;
       float ratio = ((float) rv) / 12.0f;
       return x * 0.1 * ratio;
     write_lambda: |-
-      if (id(sel_p05_57347).state.empty()) {
+      if (id(sel_p05_57347).current_option().empty()) {
         ESP_LOGW("p05_voltage", "Battery_Rated_Voltage unavailable, block write");
         return {};
       }
-      int rv = atoi(id(sel_p05_57347).state.c_str());
+      int rv = atoi(id(sel_p05_57347).current_option().c_str());
       if (!(rv == 12 || rv == 24 || rv == 36 || rv == 48)) {
         ESP_LOGW("p05_voltage", "Battery_Rated_Voltage invalid (%d), block write", rv);
         return {};
@@ -780,17 +780,17 @@ number:
     max_value: 62
     step: 0.1
     lambda: |-
-      if (id(sel_p05_57347).state.empty()) return NAN;
-      int rv = atoi(id(sel_p05_57347).state.c_str());
+      if (id(sel_p05_57347).current_option().empty()) return NAN;
+      int rv = atoi(id(sel_p05_57347).current_option().c_str());
       if (!(rv == 12 || rv == 24 || rv == 36 || rv == 48)) return NAN;
       float ratio = ((float) rv) / 12.0f;
       return x * 0.1 * ratio;
     write_lambda: |-
-      if (id(sel_p05_57347).state.empty()) {
+      if (id(sel_p05_57347).current_option().empty()) {
         ESP_LOGW("p05_voltage", "Battery_Rated_Voltage unavailable, block write");
         return {};
       }
-      int rv = atoi(id(sel_p05_57347).state.c_str());
+      int rv = atoi(id(sel_p05_57347).current_option().c_str());
       if (!(rv == 12 || rv == 24 || rv == 36 || rv == 48)) {
         ESP_LOGW("p05_voltage", "Battery_Rated_Voltage invalid (%d), block write", rv);
         return {};
@@ -822,17 +822,17 @@ number:
     max_value: 62
     step: 0.1
     lambda: |-
-      if (id(sel_p05_57347).state.empty()) return NAN;
-      int rv = atoi(id(sel_p05_57347).state.c_str());
+      if (id(sel_p05_57347).current_option().empty()) return NAN;
+      int rv = atoi(id(sel_p05_57347).current_option().c_str());
       if (!(rv == 12 || rv == 24 || rv == 36 || rv == 48)) return NAN;
       float ratio = ((float) rv) / 12.0f;
       return x * 0.1 * ratio;
     write_lambda: |-
-      if (id(sel_p05_57347).state.empty()) {
+      if (id(sel_p05_57347).current_option().empty()) {
         ESP_LOGW("p05_voltage", "Battery_Rated_Voltage unavailable, block write");
         return {};
       }
-      int rv = atoi(id(sel_p05_57347).state.c_str());
+      int rv = atoi(id(sel_p05_57347).current_option().c_str());
       if (!(rv == 12 || rv == 24 || rv == 36 || rv == 48)) {
         ESP_LOGW("p05_voltage", "Battery_Rated_Voltage invalid (%d), block write", rv);
         return {};
@@ -864,17 +864,17 @@ number:
     max_value: 62
     step: 0.1
     lambda: |-
-      if (id(sel_p05_57347).state.empty()) return NAN;
-      int rv = atoi(id(sel_p05_57347).state.c_str());
+      if (id(sel_p05_57347).current_option().empty()) return NAN;
+      int rv = atoi(id(sel_p05_57347).current_option().c_str());
       if (!(rv == 12 || rv == 24 || rv == 36 || rv == 48)) return NAN;
       float ratio = ((float) rv) / 12.0f;
       return x * 0.1 * ratio;
     write_lambda: |-
-      if (id(sel_p05_57347).state.empty()) {
+      if (id(sel_p05_57347).current_option().empty()) {
         ESP_LOGW("p05_voltage", "Battery_Rated_Voltage unavailable, block write");
         return {};
       }
-      int rv = atoi(id(sel_p05_57347).state.c_str());
+      int rv = atoi(id(sel_p05_57347).current_option().c_str());
       if (!(rv == 12 || rv == 24 || rv == 36 || rv == 48)) {
         ESP_LOGW("p05_voltage", "Battery_Rated_Voltage invalid (%d), block write", rv);
         return {};
@@ -906,17 +906,17 @@ number:
     max_value: 62
     step: 0.1
     lambda: |-
-      if (id(sel_p05_57347).state.empty()) return NAN;
-      int rv = atoi(id(sel_p05_57347).state.c_str());
+      if (id(sel_p05_57347).current_option().empty()) return NAN;
+      int rv = atoi(id(sel_p05_57347).current_option().c_str());
       if (!(rv == 12 || rv == 24 || rv == 36 || rv == 48)) return NAN;
       float ratio = ((float) rv) / 12.0f;
       return x * 0.1 * ratio;
     write_lambda: |-
-      if (id(sel_p05_57347).state.empty()) {
+      if (id(sel_p05_57347).current_option().empty()) {
         ESP_LOGW("p05_voltage", "Battery_Rated_Voltage unavailable, block write");
         return {};
       }
-      int rv = atoi(id(sel_p05_57347).state.c_str());
+      int rv = atoi(id(sel_p05_57347).current_option().c_str());
       if (!(rv == 12 || rv == 24 || rv == 36 || rv == 48)) {
         ESP_LOGW("p05_voltage", "Battery_Rated_Voltage invalid (%d), block write", rv);
         return {};
@@ -948,17 +948,17 @@ number:
     max_value: 62
     step: 0.1
     lambda: |-
-      if (id(sel_p05_57347).state.empty()) return NAN;
-      int rv = atoi(id(sel_p05_57347).state.c_str());
+      if (id(sel_p05_57347).current_option().empty()) return NAN;
+      int rv = atoi(id(sel_p05_57347).current_option().c_str());
       if (!(rv == 12 || rv == 24 || rv == 36 || rv == 48)) return NAN;
       float ratio = ((float) rv) / 12.0f;
       return x * 0.1 * ratio;
     write_lambda: |-
-      if (id(sel_p05_57347).state.empty()) {
+      if (id(sel_p05_57347).current_option().empty()) {
         ESP_LOGW("p05_voltage", "Battery_Rated_Voltage unavailable, block write");
         return {};
       }
-      int rv = atoi(id(sel_p05_57347).state.c_str());
+      int rv = atoi(id(sel_p05_57347).current_option().c_str());
       if (!(rv == 12 || rv == 24 || rv == 36 || rv == 48)) {
         ESP_LOGW("p05_voltage", "Battery_Rated_Voltage invalid (%d), block write", rv);
         return {};
@@ -990,17 +990,17 @@ number:
     max_value: 62
     step: 0.1
     lambda: |-
-      if (id(sel_p05_57347).state.empty()) return NAN;
-      int rv = atoi(id(sel_p05_57347).state.c_str());
+      if (id(sel_p05_57347).current_option().empty()) return NAN;
+      int rv = atoi(id(sel_p05_57347).current_option().c_str());
       if (!(rv == 12 || rv == 24 || rv == 36 || rv == 48)) return NAN;
       float ratio = ((float) rv) / 12.0f;
       return x * 0.1 * ratio;
     write_lambda: |-
-      if (id(sel_p05_57347).state.empty()) {
+      if (id(sel_p05_57347).current_option().empty()) {
         ESP_LOGW("p05_voltage", "Battery_Rated_Voltage unavailable, block write");
         return {};
       }
-      int rv = atoi(id(sel_p05_57347).state.c_str());
+      int rv = atoi(id(sel_p05_57347).current_option().c_str());
       if (!(rv == 12 || rv == 24 || rv == 36 || rv == 48)) {
         ESP_LOGW("p05_voltage", "Battery_Rated_Voltage invalid (%d), block write", rv);
         return {};
@@ -1032,17 +1032,17 @@ number:
     max_value: 62
     step: 0.1
     lambda: |-
-      if (id(sel_p05_57347).state.empty()) return NAN;
-      int rv = atoi(id(sel_p05_57347).state.c_str());
+      if (id(sel_p05_57347).current_option().empty()) return NAN;
+      int rv = atoi(id(sel_p05_57347).current_option().c_str());
       if (!(rv == 12 || rv == 24 || rv == 36 || rv == 48)) return NAN;
       float ratio = ((float) rv) / 12.0f;
       return x * 0.1 * ratio;
     write_lambda: |-
-      if (id(sel_p05_57347).state.empty()) {
+      if (id(sel_p05_57347).current_option().empty()) {
         ESP_LOGW("p05_voltage", "Battery_Rated_Voltage unavailable, block write");
         return {};
       }
-      int rv = atoi(id(sel_p05_57347).state.c_str());
+      int rv = atoi(id(sel_p05_57347).current_option().c_str());
       if (!(rv == 12 || rv == 24 || rv == 36 || rv == 48)) {
         ESP_LOGW("p05_voltage", "Battery_Rated_Voltage invalid (%d), block write", rv);
         return {};
@@ -1278,17 +1278,17 @@ number:
     max_value: 62
     step: 0.1
     lambda: |-
-      if (id(sel_p05_57347).state.empty()) return NAN;
-      int rv = atoi(id(sel_p05_57347).state.c_str());
+      if (id(sel_p05_57347).current_option().empty()) return NAN;
+      int rv = atoi(id(sel_p05_57347).current_option().c_str());
       if (!(rv == 12 || rv == 24 || rv == 36 || rv == 48)) return NAN;
       float ratio = ((float) rv) / 12.0f;
       return x * 0.1 * ratio;
     write_lambda: |-
-      if (id(sel_p05_57347).state.empty()) {
+      if (id(sel_p05_57347).current_option().empty()) {
         ESP_LOGW("p05_voltage", "Battery_Rated_Voltage unavailable, block write");
         return {};
       }
-      int rv = atoi(id(sel_p05_57347).state.c_str());
+      int rv = atoi(id(sel_p05_57347).current_option().c_str());
       if (!(rv == 12 || rv == 24 || rv == 36 || rv == 48)) {
         ESP_LOGW("p05_voltage", "Battery_Rated_Voltage invalid (%d), block write", rv);
         return {};
@@ -1402,17 +1402,17 @@ number:
     max_value: 62
     step: 0.1
     lambda: |-
-      if (id(sel_p05_57347).state.empty()) return NAN;
-      int rv = atoi(id(sel_p05_57347).state.c_str());
+      if (id(sel_p05_57347).current_option().empty()) return NAN;
+      int rv = atoi(id(sel_p05_57347).current_option().c_str());
       if (!(rv == 12 || rv == 24 || rv == 36 || rv == 48)) return NAN;
       float ratio = ((float) rv) / 12.0f;
       return x * 0.1 * ratio;
     write_lambda: |-
-      if (id(sel_p05_57347).state.empty()) {
+      if (id(sel_p05_57347).current_option().empty()) {
         ESP_LOGW("p05_voltage", "Battery_Rated_Voltage unavailable, block write");
         return {};
       }
-      int rv = atoi(id(sel_p05_57347).state.c_str());
+      int rv = atoi(id(sel_p05_57347).current_option().c_str());
       if (!(rv == 12 || rv == 24 || rv == 36 || rv == 48)) {
         ESP_LOGW("p05_voltage", "Battery_Rated_Voltage invalid (%d), block write", rv);
         return {};

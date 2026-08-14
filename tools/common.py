@@ -242,8 +242,11 @@ def load_register_defs(path: Path = JSON_CATALOG_PATH) -> List[RegisterDef]:
             }
             try:
                 regs.append(RegisterDef.from_json(flat))
-            except Exception:
-                continue
+            except (TypeError, ValueError) as exc:
+                raise ValueError(
+                    f"Invalid register definition in group {group_code or g.id!r} "
+                    f"at address {it.address_dec!r}: {exc}"
+                ) from exc
     return regs
 
 

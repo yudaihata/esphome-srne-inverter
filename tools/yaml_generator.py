@@ -44,9 +44,28 @@ from .common import (
 )
 DERIVED_RECIPES_PATH = Path("docs/derived_recipes.json")
 SINGLE_CONTROLLER_ID = "srne_main"
+P00_VERSION_ADDRS = {20, 21, 22, 23, 28}
+P02_SLOW_ADDRS = {524, 525, 526}
 
 _DERIVED_RECIPES_CACHE: Optional[Dict[str, Any]] = None
 _GENERATION_HINTS_CACHE: Optional[Dict[str, Any]] = None
+
+
+def infer_accuracy_decimals(unit_val: str, value_type_val: str, mult_val: float) -> Optional[int]:
+    u = (unit_val or "").strip()
+    if u == "Hz":
+        return 2
+    if u in ("V", "A", "°C", "°F"):
+        return 1
+    if u in ("W", "kW", "VA", "%", "Wh", "kWh"):
+        return 0
+    if abs(mult_val - 0.01) < 1e-12:
+        return 2
+    if abs(mult_val - 0.1) < 1e-12:
+        return 1
+    if value_type_val in ("U_WORD", "S_WORD", "U_DWORD", "S_DWORD") and abs(mult_val - 1.0) < 1e-12:
+        return 0
+    return None
 
 def load_derived_recipes() -> Dict[str, Any]:
     global _DERIVED_RECIPES_CACHE
@@ -274,12 +293,17 @@ def generate_core_yaml(
             "  password: !secret wifi_password",
             "  ap:",
             "    ssid: 'srne-inverter-setup'",
-            "    password: 'setup-pass'",
+            "    password: !secret fallback_ap_password",
+            "",
+            "captive_portal:",
             "",
             "api:",
+            "  encryption:",
+            "    key: !secret api_encryption_key",
             "",
             "ota:",
-            "  platform: esphome",
+            "  - platform: esphome",
+            "    password: !secret ota_password",
             "",
             "# 時刻同期（HA優先 / SNTPフォールバック）: DateTime 同期ボタン用",
             "time:",
@@ -613,11 +637,10 @@ def suggest_group_skip_defaults(
     return out
 
 def apply_group_skip_updates(yaml_text: str, group: str) -> str:
-    """Inject group-level skip_updates into modbus_controller blocks if not explicitly set."""
+    """Apply the appropriate update cadence to every Modbus entity block."""
     gnorm = normalize_group(group)
     if not gnorm:
         return yaml_text
-    skip_var = f"${{{skip_updates_var_name(gnorm)}}}"
     lines = yaml_text.splitlines()
     out: List[str] = []
     i = 0
@@ -634,8 +657,20 @@ def apply_group_skip_updates(yaml_text: str, group: str) -> str:
                     break
                 i += 1
             block = lines[start:i]
-            has_skip = any(b.strip().startswith("skip_updates:") for b in block)
-            if not has_skip:
+            address = None
+            for b in block:
+                match = re.match(r"\s*address:\s*(\d+)\s*$", b)
+                if match:
+                    address = int(match.group(1))
+                    break
+            var_name = skip_updates_var_name(gnorm)
+            if gnorm == "P02" and address in P02_SLOW_ADDRS:
+                var_name = "p02_slow_skip_updates"
+            skip_line = f"    skip_updates: ${{{var_name}}}"
+            skip_indexes = [bi for bi, b in enumerate(block) if b.strip().startswith("skip_updates:")]
+            if skip_indexes:
+                block[skip_indexes[0]] = skip_line
+            else:
                 insert_at = 1
                 for bi, b in enumerate(block):
                     if b.strip().startswith("register_type:"):
@@ -646,12 +681,42 @@ def apply_group_skip_updates(yaml_text: str, group: str) -> str:
                         if b.strip().startswith("modbus_controller_id:"):
                             insert_at = bi + 1
                             break
-                block.insert(insert_at, f"    skip_updates: {skip_var}")
+                block.insert(insert_at, skip_line)
+            if gnorm == "P02" and address in {524, 527}:
+                if not any(b.strip().startswith("force_new_range:") for b in block):
+                    block.append("    force_new_range: true")
             out.extend(block)
             continue
         out.append(line)
         i += 1
     return ("\n".join(out) + "\n") if yaml_text.endswith("\n") else "\n".join(out)
+
+
+def split_ranges_at_boundaries(
+    ranges: List[Dict[str, Any]], boundaries: set[int]
+) -> List[Dict[str, Any]]:
+    """Split packed ranges where different polling cadences must not be merged."""
+    result: List[Dict[str, Any]] = []
+    for source in ranges:
+        start = int(source["start"])
+        end = int(source["end"])
+        cuts = sorted(boundary for boundary in boundaries if start < boundary <= end)
+        segment_starts = [start, *cuts]
+        segment_ends = [cut - 1 for cut in cuts] + [end]
+        addresses = [int(address) for address in source.get("addresses", [])]
+        for segment_start, segment_end in zip(segment_starts, segment_ends):
+            segment_addresses = [
+                address for address in addresses if segment_start <= address <= segment_end
+            ]
+            if not segment_addresses:
+                continue
+            result.append({
+                "start": segment_start,
+                "end": segment_end,
+                "size": segment_end - segment_start + 1,
+                "addresses": segment_addresses,
+            })
+    return result
 
 
 def apply_event_driven_templates(yaml_text: str, group: str) -> str:
@@ -785,23 +850,6 @@ def gen_sensor_entry(
     def c_escape(s: str) -> str:
         return s.replace('\\', r'\\').replace('"', r'\"')
 
-    def infer_accuracy_decimals(unit_val: str, value_type_val: str, mult_val: float) -> Optional[int]:
-        u = (unit_val or "").strip()
-        # Unit-first policy for HA readability
-        if u == "Hz":
-            return 2
-        if u in ("V", "A", "°C", "°F"):
-            return 1
-        if u in ("W", "kW", "VA", "%", "Wh", "kWh"):
-            return 0
-        # Fallback by multiplier / integer value type
-        if abs(mult_val - 0.01) < 1e-12:
-            return 2
-        if abs(mult_val - 0.1) < 1e-12:
-            return 1
-        if value_type_val in ("U_WORD", "S_WORD", "U_DWORD", "S_DWORD") and abs(mult_val - 1.0) < 1e-12:
-            return 0
-        return None
     rw = (reg.get("rw") or "R").upper()
     enums = reg.get("enums")
     component = "sensor"
@@ -858,6 +906,9 @@ def gen_sensor_entry(
         addr_ver = int(reg.get("address"))
     except Exception:
         addr_ver = None
+    g_norm = normalize_group(reg.get("group", ""))
+    if g_norm == "P00" and addr_ver in P00_VERSION_ADDRS:
+        multiplier = 0.01
     total_counter_guard_addrs = {61482, 61490, 61492, 61494, 61496, 61498, 61510, 61512}
     apply_total_counter_guard = (
         normalize_group(reg.get("group", "")) == "P09"
@@ -865,7 +916,7 @@ def gen_sensor_entry(
     )
     cat = entity_info_category(reg.get("group", ""), rw)
     # P00のVersion系は通常センサーとして扱う（diagnosticから外す）
-    if normalize_group(reg.get("group", "")) == "P00" and addr_ver in (20, 21, 22, 23, 28, 29):
+    if g_norm == "P00" and addr_ver in P00_VERSION_ADDRS:
         cat = None
     # P00 の text_sensor で常用表示にしたい項目はカテゴリなし
     if normalize_group(reg.get("group", "")) == "P00" and addr_ver in (11,):
@@ -873,7 +924,6 @@ def gen_sensor_entry(
 
     lines: List[str] = []
     lines.append(f"  - platform: modbus_controller")
-    g_norm = normalize_group(reg.get("group", ""))
     # strictモードではアドレスに割り当てられたコントローラIDを優先
     try:
         addr_int = int(reg["address"])
@@ -943,7 +993,7 @@ def gen_sensor_entry(
             except Exception:
                 disp_name = sanitize_display_name(name)
             fin.append(f"    name: \"{yaml_escape(disp_name)}\"")
-            if g_norm == "P00":
+            if g_norm == "P00" and addr_i not in P00_VERSION_ADDRS:
                 fin.append("    internal: true")
             if unit:
                 fin.append(f"    unit_of_measurement: \"{yaml_escape(unit)}\"")
@@ -1054,7 +1104,7 @@ def gen_sensor_entry(
         if addr_i is not None:
             lines.append(f"    id: sens_{g_norm.lower()}_{addr_i}")
             # P00の生値センサーは表示用text_sensorへ渡すためHAには公開しない
-            if g_norm == "P00":
+            if g_norm == "P00" and addr_i not in P00_VERSION_ADDRS:
                 lines.append("    internal: true")
         lines.append(f"    name: \"{yaml_escape(eff_name)}\"")
         if unit:
@@ -1066,6 +1116,8 @@ def gen_sensor_entry(
         if multiplier != 1.0:
             lines.append("    filters:")
             lines.append(f"      - multiply: {multiplier}")
+            if g_norm == "P00" and addr_i in P00_VERSION_ADDRS:
+                lines.append("      - round: 2")
         # フィルタ（外れ値/median）はユーザー要望により現時点では適用しない
         # Runtime/SOC系のスムージング・レート制限は適用しない
         # 外れ値・スパイク対策は適用しない（ユーザー要望により削除）
@@ -1189,17 +1241,17 @@ def gen_sensor_entry(
             except Exception:
                 max_expr = "NAN"
             lines.append("    lambda: |-")
-            lines.append("      if (id(sel_p05_57347).state.empty()) return NAN;")
-            lines.append("      int rv = atoi(id(sel_p05_57347).state.c_str());")
+            lines.append("      if (id(sel_p05_57347).current_option().empty()) return NAN;")
+            lines.append("      int rv = atoi(id(sel_p05_57347).current_option().c_str());")
             lines.append("      if (!(rv == 12 || rv == 24 || rv == 36 || rv == 48)) return NAN;")
             lines.append("      float ratio = ((float) rv) / 12.0f;")
             lines.append(f"      return x * {multiplier} * ratio;")
             lines.append("    write_lambda: |-")
-            lines.append("      if (id(sel_p05_57347).state.empty()) {")
+            lines.append("      if (id(sel_p05_57347).current_option().empty()) {")
             lines.append("        ESP_LOGW(\"p05_voltage\", \"Battery_Rated_Voltage unavailable, block write\");")
             lines.append("        return {};")
             lines.append("      }")
-            lines.append("      int rv = atoi(id(sel_p05_57347).state.c_str());")
+            lines.append("      int rv = atoi(id(sel_p05_57347).current_option().c_str());")
             lines.append("      if (!(rv == 12 || rv == 24 || rv == 36 || rv == 48)) {")
             lines.append("        ESP_LOGW(\"p05_voltage\", \"Battery_Rated_Voltage invalid (%d), block write\", rv);")
             lines.append("        return {};")
@@ -1388,10 +1440,11 @@ def generate_anchors_group_yaml(group: str, ranges: List[Dict[str, Any]], strict
                 except Exception:
                     mult = 1.0
                 idx = aa - start
+                byte_idx = idx * 2
                 enums = rec.get("enums") or None
                 if enums:
-                    lines.append(f"      if ((size_t){idx} < x.size()) {{")
-                    lines.append(f"        uint16_t v = x[{idx}] & 0xFFFF;")
+                    lines.append(f"      if ((size_t){byte_idx + 1} < data.size()) {{")
+                    lines.append(f"        uint16_t v = ((uint16_t)data[{byte_idx}] << 8) | data[{byte_idx + 1}];")
                     lines.append("        switch (v) {")
                     for k, lbl in (enums or {}).items():
                         try:
@@ -1408,24 +1461,24 @@ def generate_anchors_group_yaml(group: str, ranges: List[Dict[str, Any]], strict
                     continue
                 # 数値センサー
                 if vt in ("U_WORD", "S_WORD"):
-                    lines.append(f"      if ((size_t){idx} < x.size()) {{")
+                    lines.append(f"      if ((size_t){byte_idx + 1} < data.size()) {{")
                     if vt == "S_WORD":
-                        lines.append(f"        int16_t raw = (int16_t)(x[{idx}] & 0xFFFF);")
+                        lines.append(f"        int16_t raw = (int16_t)(((uint16_t)data[{byte_idx}] << 8) | data[{byte_idx + 1}]);")
                         if abs(mult - 1.0) < 1e-12:
                             lines.append(f"        id(sens_{gnorm.lower()}_{aa}).publish_state((float) raw);")
                         else:
                             lines.append(f"        id(sens_{gnorm.lower()}_{aa}).publish_state((float) raw * {mult});")
                     else:
-                        lines.append(f"        uint16_t raw = x[{idx}] & 0xFFFF;")
+                        lines.append(f"        uint16_t raw = ((uint16_t)data[{byte_idx}] << 8) | data[{byte_idx + 1}];")
                         if abs(mult - 1.0) < 1e-12:
                             lines.append(f"        id(sens_{gnorm.lower()}_{aa}).publish_state((float) raw);")
                         else:
                             lines.append(f"        id(sens_{gnorm.lower()}_{aa}).publish_state((float) raw * {mult});")
                     lines.append("      }")
                 elif vt in ("U_DWORD", "S_DWORD", "FP32"):
-                    lines.append(f"      if ((size_t)({idx}+1) < x.size()) {{")
-                    lines.append(f"        uint32_t lo = (uint32_t)(x[{idx}] & 0xFFFF);")
-                    lines.append(f"        uint32_t hi = (uint32_t)(x[{idx}+1] & 0xFFFF);")
+                    lines.append(f"      if ((size_t){byte_idx + 3} < data.size()) {{")
+                    lines.append(f"        uint32_t lo = ((uint32_t)data[{byte_idx}] << 8) | data[{byte_idx + 1}];")
+                    lines.append(f"        uint32_t hi = ((uint32_t)data[{byte_idx + 2}] << 8) | data[{byte_idx + 3}];")
                     lines.append(f"        uint32_t u32 = (hi << 16) | lo;")
                     if vt == "FP32":
                         lines.append("        float fval = 0.0f;")
@@ -2433,38 +2486,6 @@ def generate_entities_group_yaml(
                 text_entries.append(gen_sensor_entry(r, interval_var, name_registry, controller_for_addr))
         # do not emit here; appended once at the end
 
-    # P00 version sensors: keep raw sensors internal and expose display text sensors with the original entity names.
-    try:
-        if normalize_group(group) == "P00":
-            ver_defs = [
-                (20, "APP_Version"),
-                (21, "BOOTLOADER_Version"),
-                (22, "Control_Panel_Version"),
-                (23, "Power_Amplifier_Board_Version"),
-                (28, "RS485_Protocol_Version"),
-            ]
-            for addr, disp_name in ver_defs:
-                if addr not in regs_map or addr not in polled_addrs:
-                    continue
-                text_entries += [
-                    "  - platform: template",
-                    f"    id: txt_p00_ver_{addr}",
-                    f"    name: \"{sanitize_display_name(disp_name)}\"",
-                    "    entity_category: diagnostic",
-                    f"    update_interval: ${{{interval_var}}}",
-                    "    lambda: |-",
-                    f"      if (isnan(id(sens_p00_{addr}).state)) return std::string(\"Unknown\");",
-                    f"      int raw = (int) roundf(id(sens_p00_{addr}).state);",
-                    "      if (raw <= 0 || raw > 9999) return std::string(\"Unknown\");",
-                    "      int major = raw / 100;",
-                    "      int minor = raw % 100;",
-                    "      char buf[16];",
-                    "      snprintf(buf, sizeof(buf), \"V%d.%02d\", major, minor);",
-                    "      return std::string(buf);",
-                ]
-    except Exception:
-        pass
-
     # P00 remaining raw numeric sensors: expose integer text sensors with the original entity names.
     try:
         if normalize_group(group) == "P00":
@@ -2886,6 +2907,7 @@ def main() -> None:
     ap.add_argument("--custom-overwrite", action="store_true", help="Overwrite custom entities files if they already exist")
     ap.add_argument("--split-mode", choices=["group", "strict"], default="group", help="Group-level single controller or per-block strict controllers")
     ap.add_argument("--strict-groups", type=str, default="", help="Comma-separated list of groups (e.g., P02,P09,P10) to apply strict split; effective only in strict mode")
+    ap.add_argument("--packed-groups", type=str, default="", help="Comma-separated groups to read through packed range anchors (advanced)")
     args = ap.parse_args()
 
     impl = load_json(args.implemented)
@@ -2947,21 +2969,54 @@ def main() -> None:
     files = {}
     all_groups = sorted(ranges_by_group.keys())
 
-    strict_mode = False
-    strict_set = set()
-    packed_groups = set()
+    strict_mode = args.split_mode == "strict"
+    requested_strict = {
+        normalize_group(group)
+        for group in args.strict_groups.split(",")
+        if group.strip()
+    }
+    strict_set = requested_strict or {normalize_group(group) for group in all_groups}
+    packed_groups = {
+        normalize_group(group)
+        for group in args.packed_groups.split(",")
+        if group.strip()
+    }
+    if "P02" in packed_groups:
+        for group in list(ranges_by_group):
+            if normalize_group(group) == "P02":
+                ranges_by_group[group] = split_ranges_at_boundaries(
+                    ranges_by_group[group], {527}
+                )
 
-    # Build controllers list (single-controller mode)
-    controllers: List[dict] = [{
-        "id": SINGLE_CONTROLLER_ID,
-        "update_interval": f"${{{interval_var_name_main()}}}000ms",
-    }]
+    # Strict groups get one controller per generated range. Other groups share one controller.
+    controllers: List[dict] = []
     controller_for_addr_by_group: Dict[str, Dict[int, str]] = {}
+    has_shared_controller = any(
+        not (
+            (strict_mode and normalize_group(group) in strict_set)
+            or normalize_group(group) in packed_groups
+        )
+        for group in all_groups
+    )
+    if has_shared_controller:
+        controllers.append({
+            "id": SINGLE_CONTROLLER_ID,
+            "update_interval": f"${{{interval_var_name_main()}}}000ms",
+        })
     for g in all_groups:
-        gnorm = g.upper()
+        gnorm = normalize_group(g)
         for rng in ranges_by_group.get(g, []):
+            controller_id = SINGLE_CONTROLLER_ID
+            if (strict_mode and gnorm in strict_set) or gnorm in packed_groups:
+                start = int(rng["start"])
+                end = int(rng["end"])
+                controller_id = f"srne_{gnorm.lower()}_r{start}_{end}"
+                controllers.append({
+                    "id": controller_id,
+                    "update_interval": f"${{{interval_var_name_main()}}}000ms",
+                })
             for addr in rng.get("addresses", []):
-                controller_for_addr_by_group.setdefault(gnorm, {})[int(addr)] = SINGLE_CONTROLLER_ID
+                controller_for_addr_by_group.setdefault(gnorm, {})[int(addr)] = controller_id
 
     # 既定のシンプル設定で core.yaml を生成
     core_yaml = generate_core_yaml(
@@ -2975,7 +3030,7 @@ def main() -> None:
         g_up = g.upper()
         is_packed = g_up in packed_groups
         is_strict = (strict_mode and g_up in strict_set) or is_packed
-        # 既定はアンカー無効。packed対象のみ有効化してブロック配布を使う
+        # Non-packed entities are read by their assigned controller; adding anchors would double-read.
         anchors_content = generate_anchors_group_yaml(
             g,
             ranges_by_group.get(g, []),
@@ -2985,6 +3040,7 @@ def main() -> None:
             disable=(not is_packed),
         )
         # 無効時はファイルを生成しない
+        a_fname = None
         if anchors_content and not anchors_content.strip().startswith("# Anchors disabled"):
             if not anchors_written:
                 anchors_dir.mkdir(parents=True, exist_ok=True)
@@ -3004,18 +3060,9 @@ def main() -> None:
             pass
         else:
             e_fname.write_text(entities_content, encoding="utf-8")
-        # anchors を生成しないため、ファイル一覧からは entities のみ登録
-        files[g] = (None, e_fname)
+        files[g] = (a_fname, e_fname)
 
     # Build intervals_user/system files for substitutions
-    def _ms(v: str) -> int:
-        s = v.strip().lower()
-        if s.endswith("ms"):
-            return int(s[:-2])
-        if s.endswith("s"):
-            return int(float(s[:-1]) * 1000)
-        return int(s)
-
     user_lines = [
         "# User-editable intervals (seconds only)",
         "# ここだけ編集してください。main更新秒と各グループのskip_updatesを指定します。",
@@ -3042,6 +3089,8 @@ def main() -> None:
         gnorm = normalize_group(g)
         default_skip = int(skip_defaults.get(gnorm, 119))
         user_lines.append(f"{skip_updates_var_name(g)}: '{default_skip}'")
+        if gnorm == "P02":
+            user_lines.append("p02_slow_skip_updates: '11'")
     (srne_dir / "intervals.yaml").write_text("\n".join(user_lines) + "\n", encoding="utf-8")
 
     # Build root YAML: substitutions merge includes + packages
@@ -3055,6 +3104,9 @@ def main() -> None:
         "  core: !include srne/core.yaml",
     ]
     for g in all_groups:
+        anchor_path, _ = files[g]
+        if anchor_path is not None:
+            lines.append(f"  {g.lower()}_anchors: !include srne/anchors/{g.lower()}_anchors.yaml")
         lines.append(f"  {g.lower()}_entities: !include srne/custom/entities_{g.lower()}.yaml")
     lines.append("")
     root_yaml = "\n".join(lines)
@@ -3064,7 +3116,8 @@ def main() -> None:
     print(f"  - {out_root / 'srne_inverter.yaml'}")
     for g, pair in files.items():
         a, e = pair
-        print(f"  - {a}")
+        if a is not None:
+            print(f"  - {a}")
         print(f"  - {e}")
 
 

@@ -21,6 +21,7 @@ sensor:
     id: sens_p02_527
     name: "Grid_Connection_Countdown"
     accuracy_decimals: 0
+    force_new_range: true
   - platform: modbus_controller
     modbus_controller_id: srne_main
     register_type: holding
@@ -1003,7 +1004,7 @@ number:
   - platform: modbus_controller
     modbus_controller_id: srne_main
     register_type: holding
-    skip_updates: ${p02_skip_updates}
+    skip_updates: ${p02_slow_skip_updates}
     address: 524
     value_type: U_WORD
     id: sys_datetime_ym
@@ -1013,10 +1014,11 @@ number:
     max_value: 65535
     write_lambda: |-
       return (int) x;
+    force_new_range: true
   - platform: modbus_controller
     modbus_controller_id: srne_main
     register_type: holding
-    skip_updates: ${p02_skip_updates}
+    skip_updates: ${p02_slow_skip_updates}
     address: 525
     value_type: U_WORD
     id: sys_datetime_dh
@@ -1029,7 +1031,7 @@ number:
   - platform: modbus_controller
     modbus_controller_id: srne_main
     register_type: holding
-    skip_updates: ${p02_skip_updates}
+    skip_updates: ${p02_slow_skip_updates}
     address: 526
     value_type: U_WORD
     id: sys_datetime_ms
