@@ -1,4 +1,4 @@
-# SRNE Hybrid Inverter ESPHome Generator
+# ESPHome SRNE Inverter
 
 This tool scans the Modbus registers exposed by an SRNE inverter and generates an ESPHome YAML configuration for the detected device.
 

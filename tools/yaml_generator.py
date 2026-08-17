@@ -278,7 +278,7 @@ def generate_core_yaml(
             "esphome:",
             "  name: srne-inverter",
             "  friendly_name: SRNE-Inverter",
-            "  comment: 'SRNE Hybrid Inverter – auto-generated'",
+            "  comment: 'ESPHome SRNE Inverter - auto-generated'",
             "",
             "# プラットフォーム/ボード設定（必要に応じて変更してください）",
             "esp32:",

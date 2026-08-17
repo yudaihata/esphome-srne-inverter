@@ -142,7 +142,7 @@ def discover(
 
 
 def main() -> None:
-    p = argparse.ArgumentParser(description="SRNE Hybrid Inverter register discovery")
+    p = argparse.ArgumentParser(description="SRNE inverter register discovery")
     p.add_argument("--port", help="Serial port (e.g. /dev/ttyUSB0 or COM3)")
     p.add_argument("--slave", type=int, default=1, help="Modbus slave id")
     p.add_argument("--baud", type=int, default=9600, help="Baudrate")
