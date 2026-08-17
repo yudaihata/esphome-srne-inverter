@@ -1,0 +1,7 @@
+[extend]
+useDefault = true
+
+[[allowlists]]
+description = "Protocol catalog source-key identifiers"
+paths = ['''docs/srne_hybrid_modbus_v1\.96\.json''']
+regexes = ['''^(PVEnergy|BatDisChgEnergy)[2-7]DaysAgo$''']
