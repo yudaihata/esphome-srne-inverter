@@ -1,5 +1,7 @@
 # ESPHome SRNE Inverter
 
+English | [日本語](README.ja.md)
+
 This tool scans the Modbus registers exposed by an SRNE inverter and generates an ESPHome YAML configuration for the detected device.
 
 ## Compatibility
@@ -107,14 +109,3 @@ Generated entities are stored in `esphome/srne/custom/entities_<group>.yaml`. Th
 - Model compatibility and validation: `docs/COMPATIBILITY.md`
 - Protocol notes: `docs/SRNE_Inverter_Modbus_Protocol_V1.96_Notes.md`
 - Register catalog, advisory with device behavior taking precedence: `docs/srne_hybrid_modbus_v1.96.json`
-
-## 日本語概要
-
-このツールは、SRNEインバーターのModbusレジスタを実機スキャンし、応答した項目からESPHome YAMLを生成します。
-
-- 実機確認済み機種はASF48100U200-Hです。
-- 他機種では、リポジトリ内の生成済みYAMLをそのまま使わず、`python3 wizard.py`で再スキャンしてください。
-- Wi-FiやAPIキーなどの秘密情報と、`tools/build/`以下の実機固有スキャン結果はGit管理外です。
-- 更新周期は`esphome/srne/intervals.yaml`で調整し、変更後に再ビルドします。
-- 手動で生成済みYAMLを変更すると次回生成時に消えるため、永続的な変更はカタログ、レシピ、または生成ロジックへ入れてください。
-- 詳細な対応状況と他機種の検証手順は`docs/COMPATIBILITY.md`を参照してください。
