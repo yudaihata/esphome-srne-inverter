@@ -523,6 +523,29 @@ def step_yaml(implemented_path: Path, ranges_path: Path) -> None:
             for addr in (rng.get("addresses") or []):
                 controller_for_addr_by_group.setdefault(gup, {})[int(addr)] = yg.SINGLE_CONTROLLER_ID
 
+    packed_groups = {
+        yg.normalize_group(group)
+        for group in all_groups
+        if yg.normalize_group(group) in yg.STANDARD_PACKED_GROUPS
+    }
+    anchor_ranges_by_group: Dict[str, List[Dict[str, Any]]] = {}
+    for group in all_groups:
+        gnorm = yg.normalize_group(group)
+        if gnorm not in packed_groups:
+            continue
+        group_ranges = ranges_by_group.get(group, [])
+        if gnorm == "P02":
+            group_ranges = yg.split_ranges_at_boundaries(group_ranges, {527})
+        if gnorm == "P10":
+            anchor_ranges_by_group[group] = yg.build_p10_packed_read_ranges(
+                regs_by_group_addr.get(group, {}),
+            )
+        else:
+            anchor_ranges_by_group[group] = yg.build_packed_read_ranges(
+                group_ranges,
+                regs_by_group_addr.get(group, {}),
+            )
+
     # core.yaml（UART/MODBUS/Wi‑Fi/API/OTA/Logger）を書き出し（上記の設定で生成）
     core_text = yg.generate_core_yaml(
         uart_tx=uart_tx,
@@ -536,16 +559,16 @@ def step_yaml(implemented_path: Path, ranges_path: Path) -> None:
         log_level="INFO",
         # 速度重視設定
         send_wait_time_ms=100,
-        command_throttle_ms=150,
-        max_command_retries=8,
+        command_throttle_ms=100,
+        max_command_retries=3,
+        offline_skip_updates=10,
         flow_control_pin=(flow_control_pin or None),
     )
     (srne_dir / "core.yaml").write_text(core_text, encoding="utf-8")
 
-    # 既存カスタムも常に上書き
-    overwrite = True
-
     files = {}
+    anchor_files: Dict[str, Path] = {}
+    anchors_dir = srne_dir / "anchors"
     for g in all_groups:
         # YAMLに制御文字が混入しないようにヌル文字を除去/エスケープ
         def _sanitize_yaml(s: str) -> str:
@@ -554,14 +577,28 @@ def step_yaml(implemented_path: Path, ranges_path: Path) -> None:
             except Exception:
                 return s
 
-        # Entities (非破壊: 既存があれば上書きしない、ユーザーが上書き選択時のみ再生成)
+        is_packed = yg.normalize_group(g) in packed_groups
+        if is_packed:
+            anchors_dir.mkdir(parents=True, exist_ok=True)
+            anchor_content = yg.generate_anchors_group_yaml(
+                g,
+                anchor_ranges_by_group.get(g, []),
+                strict=False,
+                regs_map=regs_by_group_addr.get(g, {}),
+                packed=True,
+            )
+            anchor_path = anchors_dir / f"{g.lower()}_anchors.yaml"
+            anchor_path.write_text(_sanitize_yaml(anchor_content), encoding="utf-8")
+            anchor_files[g] = anchor_path
+
+        # Entities (生成物なので、ウィザード実行時は常に再生成)
         e_fname = custom_dir / f"entities_{g.lower()}.yaml"
         entities_content = yg.generate_entities_group_yaml(
             g,
             ranges_by_group.get(g, []),
             regs_by_group_addr.get(g, {}),
             controller_for_addr=controller_for_addr_by_group.get(g.upper()),
-            packed=False,
+            packed=is_packed,
         )
         e_fname.write_text(_sanitize_yaml(entities_content), encoding="utf-8")
         files[g] = e_fname
@@ -618,8 +655,9 @@ def step_yaml(implemented_path: Path, ranges_path: Path) -> None:
         "packages:",
         f"  core: !include srne/core.yaml",
     ]
-    # anchors は現在使用しないためパッケージ参照しない
     for g in all_groups:
+        if g in anchor_files:
+            lines.append(f"  {g.lower()}_anchors: !include srne/anchors/{g.lower()}_anchors.yaml")
         lines.append(f"  {g.lower()}_entities: !include srne/custom/entities_{g.lower()}.yaml")
     lines.append("")
     root_yaml = "\n".join(lines)
@@ -628,6 +666,8 @@ def step_yaml(implemented_path: Path, ranges_path: Path) -> None:
     print("生成完了。以下のファイルをESPHomeで利用できます:")
     print(f"- {ESPHOME_DIR / 'srne_inverter.yaml'}")
     print(f"- {srne_dir / 'core.yaml'}")
+    for a in anchor_files.values():
+        print(f"- {a}")
     for g, e in files.items():
         print(f"- {e}")
 

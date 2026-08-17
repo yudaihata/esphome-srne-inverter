@@ -1,0 +1,4 @@
+esphome/srne/anchors/*.yaml linguist-generated=true
+esphome/srne/custom/entities_*.yaml linguist-generated=true
+esphome/srne/core.yaml linguist-generated=true
+esphome/srne_inverter.yaml linguist-generated=true

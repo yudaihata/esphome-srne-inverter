@@ -23,6 +23,66 @@
   },
   "recipes": [
     {
+      "id": "p00_app_version_text",
+      "group": "P00",
+      "requires": [20],
+      "template_sensor": {
+        "id": "app_version",
+        "name": "APP_Version",
+        "entity_category": "diagnostic",
+        "update_interval": "${p00_update_interval}",
+        "lambda": "float value = id(sens_p00_20).state;\nif (isnan(value)) { return {}; }\nif (value <= 0.0f || value >= 655.35f) { return std::string(\"Not Set\"); }\nchar buf[16];\nsnprintf(buf, sizeof(buf), \"%.2f\", value);\nreturn std::string(buf);"
+      }
+    },
+    {
+      "id": "p00_bootloader_version_text",
+      "group": "P00",
+      "requires": [21],
+      "template_sensor": {
+        "id": "bootloader_version",
+        "name": "BOOTLOADER_Version",
+        "entity_category": "diagnostic",
+        "update_interval": "${p00_update_interval}",
+        "lambda": "float value = id(sens_p00_21).state;\nif (isnan(value)) { return {}; }\nif (value <= 0.0f || value >= 655.35f) { return std::string(\"Not Set\"); }\nchar buf[16];\nsnprintf(buf, sizeof(buf), \"%.2f\", value);\nreturn std::string(buf);"
+      }
+    },
+    {
+      "id": "p00_control_panel_version_text",
+      "group": "P00",
+      "requires": [22],
+      "template_sensor": {
+        "id": "control_panel_version",
+        "name": "Control_Panel_Version",
+        "entity_category": "diagnostic",
+        "update_interval": "${p00_update_interval}",
+        "lambda": "float value = id(sens_p00_22).state;\nif (isnan(value)) { return {}; }\nif (value <= 0.0f || value >= 655.35f) { return std::string(\"Not Set\"); }\nchar buf[16];\nsnprintf(buf, sizeof(buf), \"%.2f\", value);\nreturn std::string(buf);"
+      }
+    },
+    {
+      "id": "p00_power_amplifier_board_version_text",
+      "group": "P00",
+      "requires": [23],
+      "template_sensor": {
+        "id": "power_amplifier_board_version",
+        "name": "Power_Amplifier_Board_Version",
+        "entity_category": "diagnostic",
+        "update_interval": "${p00_update_interval}",
+        "lambda": "float value = id(sens_p00_23).state;\nif (isnan(value)) { return {}; }\nif (value <= 0.0f || value >= 655.35f) { return std::string(\"Not Set\"); }\nchar buf[16];\nsnprintf(buf, sizeof(buf), \"%.2f\", value);\nreturn std::string(buf);"
+      }
+    },
+    {
+      "id": "p00_rs485_protocol_version_text",
+      "group": "P00",
+      "requires": [28],
+      "template_sensor": {
+        "id": "rs485_protocol_version",
+        "name": "RS485_Protocol_Version",
+        "entity_category": "diagnostic",
+        "update_interval": "${p00_update_interval}",
+        "lambda": "float value = id(sens_p00_28).state;\nif (isnan(value)) { return {}; }\nif (value <= 0.0f || value >= 655.35f) { return std::string(\"Not Set\"); }\nchar buf[16];\nsnprintf(buf, sizeof(buf), \"%.2f\", value);\nreturn std::string(buf);"
+      }
+    },
+    {
       "id": "p00_production_date_text",
       "group": "P00",
       "requires": [
