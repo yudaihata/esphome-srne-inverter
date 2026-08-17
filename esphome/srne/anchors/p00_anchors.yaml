@@ -1,0 +1,129 @@
+sensor:
+  # Anchor for P00 range 1 (0x000B-0x000B, size=1)
+  - platform: modbus_controller
+    modbus_controller_id: srne_main
+    name: "P00 Anchor 1"
+    internal: true
+    register_type: holding
+    skip_updates: ${p00_skip_updates}
+    force_new_range: true
+    address: 11
+    register_count: 1
+    lambda: |-
+      // Distribute 16-bit words to per-register template sensors
+      if ((size_t)1 < data.size()) {
+        uint16_t v = ((uint16_t)data[0] << 8) | data[1];
+        switch (v) {
+          case 0: id(txt_p00_11).publish_state("Domestic Controller"); break;
+          case 1: id(txt_p00_11).publish_state("Controller For Street Light"); break;
+          case 3: id(txt_p00_11).publish_state("Grid-Connected Inverter"); break;
+          case 4: id(txt_p00_11).publish_state("All-In-One Solar Charger Inverter"); break;
+          case 5: id(txt_p00_11).publish_state("Power Frequency Off-Grid"); break;
+          default: id(txt_p00_11).publish_state("unknown"); break;
+        }
+      }
+      return 0;
+  # Anchor for P00 range 2 (0x0014-0x0017, size=4)
+  - platform: modbus_controller
+    modbus_controller_id: srne_main
+    name: "P00 Anchor 2"
+    internal: true
+    register_type: holding
+    skip_updates: ${p00_skip_updates}
+    force_new_range: true
+    address: 20
+    register_count: 4
+    lambda: |-
+      // Distribute 16-bit words to per-register template sensors
+      if ((size_t)1 < data.size()) {
+        uint16_t raw = ((uint16_t)data[0] << 8) | data[1];
+        id(sens_p00_20).publish_state((float) raw * 0.01);
+      }
+      if ((size_t)3 < data.size()) {
+        uint16_t raw = ((uint16_t)data[2] << 8) | data[3];
+        id(sens_p00_21).publish_state((float) raw * 0.01);
+      }
+      if ((size_t)5 < data.size()) {
+        uint16_t raw = ((uint16_t)data[4] << 8) | data[5];
+        id(sens_p00_22).publish_state((float) raw * 0.01);
+      }
+      if ((size_t)7 < data.size()) {
+        uint16_t raw = ((uint16_t)data[6] << 8) | data[7];
+        id(sens_p00_23).publish_state((float) raw * 0.01);
+      }
+      return 0;
+  # Anchor for P00 range 3 (0x001A-0x001C, size=3)
+  - platform: modbus_controller
+    modbus_controller_id: srne_main
+    name: "P00 Anchor 3"
+    internal: true
+    register_type: holding
+    skip_updates: ${p00_skip_updates}
+    force_new_range: true
+    address: 26
+    register_count: 3
+    lambda: |-
+      // Distribute 16-bit words to per-register template sensors
+      if ((size_t)1 < data.size()) {
+        uint16_t raw = ((uint16_t)data[0] << 8) | data[1];
+        id(sens_p00_26).publish_state((float) raw);
+      }
+      if ((size_t)3 < data.size()) {
+        uint16_t raw = ((uint16_t)data[2] << 8) | data[3];
+        id(sens_p00_27).publish_state((float) raw);
+      }
+      if ((size_t)5 < data.size()) {
+        uint16_t raw = ((uint16_t)data[4] << 8) | data[5];
+        id(sens_p00_28).publish_state((float) raw * 0.01);
+      }
+      return 0;
+  # Anchor for P00 range 4 (0x001E-0x0021, size=4)
+  - platform: modbus_controller
+    modbus_controller_id: srne_main
+    name: "P00 Anchor 4"
+    internal: true
+    register_type: holding
+    skip_updates: ${p00_skip_updates}
+    force_new_range: true
+    address: 30
+    register_count: 4
+    lambda: |-
+      // Distribute 16-bit words to per-register template sensors
+      if ((size_t)1 < data.size()) {
+        uint16_t raw = ((uint16_t)data[0] << 8) | data[1];
+        id(sens_p00_30).publish_state((float) raw);
+      }
+      if ((size_t)3 < data.size()) {
+        uint16_t raw = ((uint16_t)data[2] << 8) | data[3];
+        id(sens_p00_31).publish_state((float) raw);
+      }
+      if ((size_t)5 < data.size()) {
+        uint16_t v = ((uint16_t)data[4] << 8) | data[5];
+        switch (v) {
+          case 0: id(txt_p00_32).publish_state("Shenzhen"); break;
+          case 1: id(txt_p00_32).publish_state("Dongguan"); break;
+          default: id(txt_p00_32).publish_state("unknown"); break;
+        }
+      }
+      if ((size_t)7 < data.size()) {
+        uint16_t raw = ((uint16_t)data[6] << 8) | data[7];
+        id(sens_p00_33).publish_state((float) raw);
+      }
+      return 0;
+  # Anchor for P00 range 5 (0x0035-0x0035, size=1)
+  - platform: modbus_controller
+    modbus_controller_id: srne_main
+    name: "P00 Anchor 5"
+    internal: true
+    register_type: holding
+    skip_updates: ${p00_skip_updates}
+    force_new_range: true
+    address: 53
+    register_count: 1
+    lambda: |-
+      // Distribute 16-bit words to per-register template sensors
+      if ((size_t)1 < data.size()) {
+        uint16_t raw = ((uint16_t)data[0] << 8) | data[1];
+        id(sens_p00_53).publish_state((float) raw);
+      }
+      return 0;

@@ -1,0 +1,2257 @@
+sensor:
+  # Anchor for P10 range 1 (0xF800-0xF81F, size=32)
+  - platform: modbus_controller
+    modbus_controller_id: srne_main
+    name: "P10 Anchor 1"
+    internal: true
+    register_type: holding
+    skip_updates: ${p10_skip_updates}
+    force_new_range: true
+    address: 63488
+    register_count: 32
+    lambda: |-
+      // Distribute 16-bit words to per-register template sensors
+      if ((size_t)1 < data.size()) {
+        uint16_t raw = ((uint16_t)data[0] << 8) | data[1];
+        id(fr0_off00).publish_state((float) raw);
+      }
+      if ((size_t)3 < data.size()) {
+        uint16_t raw = ((uint16_t)data[2] << 8) | data[3];
+        id(fr0_off01).publish_state((float) raw);
+      }
+      if ((size_t)5 < data.size()) {
+        uint16_t raw = ((uint16_t)data[4] << 8) | data[5];
+        id(fr0_off02).publish_state((float) raw);
+      }
+      if ((size_t)7 < data.size()) {
+        uint16_t raw = ((uint16_t)data[6] << 8) | data[7];
+        id(fr0_off03).publish_state((float) raw);
+      }
+      if ((size_t)9 < data.size()) {
+        uint16_t raw = ((uint16_t)data[8] << 8) | data[9];
+        id(fr0_off04).publish_state((float) raw);
+      }
+      if ((size_t)11 < data.size()) {
+        uint16_t raw = ((uint16_t)data[10] << 8) | data[11];
+        id(fr0_off05).publish_state((float) raw);
+      }
+      if ((size_t)13 < data.size()) {
+        uint16_t raw = ((uint16_t)data[12] << 8) | data[13];
+        id(fr0_off06).publish_state((float) raw);
+      }
+      if ((size_t)15 < data.size()) {
+        uint16_t raw = ((uint16_t)data[14] << 8) | data[15];
+        id(fr0_off07).publish_state((float) raw);
+      }
+      if ((size_t)17 < data.size()) {
+        uint16_t raw = ((uint16_t)data[16] << 8) | data[17];
+        id(fr0_off08).publish_state((float) raw);
+      }
+      if ((size_t)19 < data.size()) {
+        uint16_t raw = ((uint16_t)data[18] << 8) | data[19];
+        id(fr0_off09).publish_state((float) raw);
+      }
+      if ((size_t)21 < data.size()) {
+        uint16_t raw = ((uint16_t)data[20] << 8) | data[21];
+        id(fr0_off0A).publish_state((float) raw);
+      }
+      if ((size_t)23 < data.size()) {
+        uint16_t raw = ((uint16_t)data[22] << 8) | data[23];
+        id(fr0_off0B).publish_state((float) raw);
+      }
+      if ((size_t)25 < data.size()) {
+        uint16_t raw = ((uint16_t)data[24] << 8) | data[25];
+        id(fr0_off0C).publish_state((float) raw);
+      }
+      if ((size_t)27 < data.size()) {
+        uint16_t raw = ((uint16_t)data[26] << 8) | data[27];
+        id(fr0_off0D).publish_state((float) raw);
+      }
+      if ((size_t)29 < data.size()) {
+        uint16_t raw = ((uint16_t)data[28] << 8) | data[29];
+        id(fr0_off0E).publish_state((float) raw);
+      }
+      if ((size_t)31 < data.size()) {
+        uint16_t raw = ((uint16_t)data[30] << 8) | data[31];
+        id(fr0_off0F).publish_state((float) raw);
+      }
+      if ((size_t)33 < data.size()) {
+        uint16_t raw = ((uint16_t)data[32] << 8) | data[33];
+        id(fr1_off00).publish_state((float) raw);
+      }
+      if ((size_t)35 < data.size()) {
+        uint16_t raw = ((uint16_t)data[34] << 8) | data[35];
+        id(fr1_off01).publish_state((float) raw);
+      }
+      if ((size_t)37 < data.size()) {
+        uint16_t raw = ((uint16_t)data[36] << 8) | data[37];
+        id(fr1_off02).publish_state((float) raw);
+      }
+      if ((size_t)39 < data.size()) {
+        uint16_t raw = ((uint16_t)data[38] << 8) | data[39];
+        id(fr1_off03).publish_state((float) raw);
+      }
+      if ((size_t)41 < data.size()) {
+        uint16_t raw = ((uint16_t)data[40] << 8) | data[41];
+        id(fr1_off04).publish_state((float) raw);
+      }
+      if ((size_t)43 < data.size()) {
+        uint16_t raw = ((uint16_t)data[42] << 8) | data[43];
+        id(fr1_off05).publish_state((float) raw);
+      }
+      if ((size_t)45 < data.size()) {
+        uint16_t raw = ((uint16_t)data[44] << 8) | data[45];
+        id(fr1_off06).publish_state((float) raw);
+      }
+      if ((size_t)47 < data.size()) {
+        uint16_t raw = ((uint16_t)data[46] << 8) | data[47];
+        id(fr1_off07).publish_state((float) raw);
+      }
+      if ((size_t)49 < data.size()) {
+        uint16_t raw = ((uint16_t)data[48] << 8) | data[49];
+        id(fr1_off08).publish_state((float) raw);
+      }
+      if ((size_t)51 < data.size()) {
+        uint16_t raw = ((uint16_t)data[50] << 8) | data[51];
+        id(fr1_off09).publish_state((float) raw);
+      }
+      if ((size_t)53 < data.size()) {
+        uint16_t raw = ((uint16_t)data[52] << 8) | data[53];
+        id(fr1_off0A).publish_state((float) raw);
+      }
+      if ((size_t)55 < data.size()) {
+        uint16_t raw = ((uint16_t)data[54] << 8) | data[55];
+        id(fr1_off0B).publish_state((float) raw);
+      }
+      if ((size_t)57 < data.size()) {
+        uint16_t raw = ((uint16_t)data[56] << 8) | data[57];
+        id(fr1_off0C).publish_state((float) raw);
+      }
+      if ((size_t)59 < data.size()) {
+        uint16_t raw = ((uint16_t)data[58] << 8) | data[59];
+        id(fr1_off0D).publish_state((float) raw);
+      }
+      if ((size_t)61 < data.size()) {
+        uint16_t raw = ((uint16_t)data[60] << 8) | data[61];
+        id(fr1_off0E).publish_state((float) raw);
+      }
+      if ((size_t)63 < data.size()) {
+        uint16_t raw = ((uint16_t)data[62] << 8) | data[63];
+        id(fr1_off0F).publish_state((float) raw);
+      }
+      return 0;
+  # Anchor for P10 range 2 (0xF820-0xF83F, size=32)
+  - platform: modbus_controller
+    modbus_controller_id: srne_main
+    name: "P10 Anchor 2"
+    internal: true
+    register_type: holding
+    skip_updates: ${p10_skip_updates}
+    force_new_range: true
+    address: 63520
+    register_count: 32
+    lambda: |-
+      // Distribute 16-bit words to per-register template sensors
+      if ((size_t)1 < data.size()) {
+        uint16_t raw = ((uint16_t)data[0] << 8) | data[1];
+        id(fr2_off00).publish_state((float) raw);
+      }
+      if ((size_t)3 < data.size()) {
+        uint16_t raw = ((uint16_t)data[2] << 8) | data[3];
+        id(fr2_off01).publish_state((float) raw);
+      }
+      if ((size_t)5 < data.size()) {
+        uint16_t raw = ((uint16_t)data[4] << 8) | data[5];
+        id(fr2_off02).publish_state((float) raw);
+      }
+      if ((size_t)7 < data.size()) {
+        uint16_t raw = ((uint16_t)data[6] << 8) | data[7];
+        id(fr2_off03).publish_state((float) raw);
+      }
+      if ((size_t)9 < data.size()) {
+        uint16_t raw = ((uint16_t)data[8] << 8) | data[9];
+        id(fr2_off04).publish_state((float) raw);
+      }
+      if ((size_t)11 < data.size()) {
+        uint16_t raw = ((uint16_t)data[10] << 8) | data[11];
+        id(fr2_off05).publish_state((float) raw);
+      }
+      if ((size_t)13 < data.size()) {
+        uint16_t raw = ((uint16_t)data[12] << 8) | data[13];
+        id(fr2_off06).publish_state((float) raw);
+      }
+      if ((size_t)15 < data.size()) {
+        uint16_t raw = ((uint16_t)data[14] << 8) | data[15];
+        id(fr2_off07).publish_state((float) raw);
+      }
+      if ((size_t)17 < data.size()) {
+        uint16_t raw = ((uint16_t)data[16] << 8) | data[17];
+        id(fr2_off08).publish_state((float) raw);
+      }
+      if ((size_t)19 < data.size()) {
+        uint16_t raw = ((uint16_t)data[18] << 8) | data[19];
+        id(fr2_off09).publish_state((float) raw);
+      }
+      if ((size_t)21 < data.size()) {
+        uint16_t raw = ((uint16_t)data[20] << 8) | data[21];
+        id(fr2_off0A).publish_state((float) raw);
+      }
+      if ((size_t)23 < data.size()) {
+        uint16_t raw = ((uint16_t)data[22] << 8) | data[23];
+        id(fr2_off0B).publish_state((float) raw);
+      }
+      if ((size_t)25 < data.size()) {
+        uint16_t raw = ((uint16_t)data[24] << 8) | data[25];
+        id(fr2_off0C).publish_state((float) raw);
+      }
+      if ((size_t)27 < data.size()) {
+        uint16_t raw = ((uint16_t)data[26] << 8) | data[27];
+        id(fr2_off0D).publish_state((float) raw);
+      }
+      if ((size_t)29 < data.size()) {
+        uint16_t raw = ((uint16_t)data[28] << 8) | data[29];
+        id(fr2_off0E).publish_state((float) raw);
+      }
+      if ((size_t)31 < data.size()) {
+        uint16_t raw = ((uint16_t)data[30] << 8) | data[31];
+        id(fr2_off0F).publish_state((float) raw);
+      }
+      if ((size_t)33 < data.size()) {
+        uint16_t raw = ((uint16_t)data[32] << 8) | data[33];
+        id(fr3_off00).publish_state((float) raw);
+      }
+      if ((size_t)35 < data.size()) {
+        uint16_t raw = ((uint16_t)data[34] << 8) | data[35];
+        id(fr3_off01).publish_state((float) raw);
+      }
+      if ((size_t)37 < data.size()) {
+        uint16_t raw = ((uint16_t)data[36] << 8) | data[37];
+        id(fr3_off02).publish_state((float) raw);
+      }
+      if ((size_t)39 < data.size()) {
+        uint16_t raw = ((uint16_t)data[38] << 8) | data[39];
+        id(fr3_off03).publish_state((float) raw);
+      }
+      if ((size_t)41 < data.size()) {
+        uint16_t raw = ((uint16_t)data[40] << 8) | data[41];
+        id(fr3_off04).publish_state((float) raw);
+      }
+      if ((size_t)43 < data.size()) {
+        uint16_t raw = ((uint16_t)data[42] << 8) | data[43];
+        id(fr3_off05).publish_state((float) raw);
+      }
+      if ((size_t)45 < data.size()) {
+        uint16_t raw = ((uint16_t)data[44] << 8) | data[45];
+        id(fr3_off06).publish_state((float) raw);
+      }
+      if ((size_t)47 < data.size()) {
+        uint16_t raw = ((uint16_t)data[46] << 8) | data[47];
+        id(fr3_off07).publish_state((float) raw);
+      }
+      if ((size_t)49 < data.size()) {
+        uint16_t raw = ((uint16_t)data[48] << 8) | data[49];
+        id(fr3_off08).publish_state((float) raw);
+      }
+      if ((size_t)51 < data.size()) {
+        uint16_t raw = ((uint16_t)data[50] << 8) | data[51];
+        id(fr3_off09).publish_state((float) raw);
+      }
+      if ((size_t)53 < data.size()) {
+        uint16_t raw = ((uint16_t)data[52] << 8) | data[53];
+        id(fr3_off0A).publish_state((float) raw);
+      }
+      if ((size_t)55 < data.size()) {
+        uint16_t raw = ((uint16_t)data[54] << 8) | data[55];
+        id(fr3_off0B).publish_state((float) raw);
+      }
+      if ((size_t)57 < data.size()) {
+        uint16_t raw = ((uint16_t)data[56] << 8) | data[57];
+        id(fr3_off0C).publish_state((float) raw);
+      }
+      if ((size_t)59 < data.size()) {
+        uint16_t raw = ((uint16_t)data[58] << 8) | data[59];
+        id(fr3_off0D).publish_state((float) raw);
+      }
+      if ((size_t)61 < data.size()) {
+        uint16_t raw = ((uint16_t)data[60] << 8) | data[61];
+        id(fr3_off0E).publish_state((float) raw);
+      }
+      if ((size_t)63 < data.size()) {
+        uint16_t raw = ((uint16_t)data[62] << 8) | data[63];
+        id(fr3_off0F).publish_state((float) raw);
+      }
+      return 0;
+  # Anchor for P10 range 3 (0xF840-0xF85F, size=32)
+  - platform: modbus_controller
+    modbus_controller_id: srne_main
+    name: "P10 Anchor 3"
+    internal: true
+    register_type: holding
+    skip_updates: ${p10_skip_updates}
+    force_new_range: true
+    address: 63552
+    register_count: 32
+    lambda: |-
+      // Distribute 16-bit words to per-register template sensors
+      if ((size_t)1 < data.size()) {
+        uint16_t raw = ((uint16_t)data[0] << 8) | data[1];
+        id(fr4_off00).publish_state((float) raw);
+      }
+      if ((size_t)3 < data.size()) {
+        uint16_t raw = ((uint16_t)data[2] << 8) | data[3];
+        id(fr4_off01).publish_state((float) raw);
+      }
+      if ((size_t)5 < data.size()) {
+        uint16_t raw = ((uint16_t)data[4] << 8) | data[5];
+        id(fr4_off02).publish_state((float) raw);
+      }
+      if ((size_t)7 < data.size()) {
+        uint16_t raw = ((uint16_t)data[6] << 8) | data[7];
+        id(fr4_off03).publish_state((float) raw);
+      }
+      if ((size_t)9 < data.size()) {
+        uint16_t raw = ((uint16_t)data[8] << 8) | data[9];
+        id(fr4_off04).publish_state((float) raw);
+      }
+      if ((size_t)11 < data.size()) {
+        uint16_t raw = ((uint16_t)data[10] << 8) | data[11];
+        id(fr4_off05).publish_state((float) raw);
+      }
+      if ((size_t)13 < data.size()) {
+        uint16_t raw = ((uint16_t)data[12] << 8) | data[13];
+        id(fr4_off06).publish_state((float) raw);
+      }
+      if ((size_t)15 < data.size()) {
+        uint16_t raw = ((uint16_t)data[14] << 8) | data[15];
+        id(fr4_off07).publish_state((float) raw);
+      }
+      if ((size_t)17 < data.size()) {
+        uint16_t raw = ((uint16_t)data[16] << 8) | data[17];
+        id(fr4_off08).publish_state((float) raw);
+      }
+      if ((size_t)19 < data.size()) {
+        uint16_t raw = ((uint16_t)data[18] << 8) | data[19];
+        id(fr4_off09).publish_state((float) raw);
+      }
+      if ((size_t)21 < data.size()) {
+        uint16_t raw = ((uint16_t)data[20] << 8) | data[21];
+        id(fr4_off0A).publish_state((float) raw);
+      }
+      if ((size_t)23 < data.size()) {
+        uint16_t raw = ((uint16_t)data[22] << 8) | data[23];
+        id(fr4_off0B).publish_state((float) raw);
+      }
+      if ((size_t)25 < data.size()) {
+        uint16_t raw = ((uint16_t)data[24] << 8) | data[25];
+        id(fr4_off0C).publish_state((float) raw);
+      }
+      if ((size_t)27 < data.size()) {
+        uint16_t raw = ((uint16_t)data[26] << 8) | data[27];
+        id(fr4_off0D).publish_state((float) raw);
+      }
+      if ((size_t)29 < data.size()) {
+        uint16_t raw = ((uint16_t)data[28] << 8) | data[29];
+        id(fr4_off0E).publish_state((float) raw);
+      }
+      if ((size_t)31 < data.size()) {
+        uint16_t raw = ((uint16_t)data[30] << 8) | data[31];
+        id(fr4_off0F).publish_state((float) raw);
+      }
+      if ((size_t)33 < data.size()) {
+        uint16_t raw = ((uint16_t)data[32] << 8) | data[33];
+        id(fr5_off00).publish_state((float) raw);
+      }
+      if ((size_t)35 < data.size()) {
+        uint16_t raw = ((uint16_t)data[34] << 8) | data[35];
+        id(fr5_off01).publish_state((float) raw);
+      }
+      if ((size_t)37 < data.size()) {
+        uint16_t raw = ((uint16_t)data[36] << 8) | data[37];
+        id(fr5_off02).publish_state((float) raw);
+      }
+      if ((size_t)39 < data.size()) {
+        uint16_t raw = ((uint16_t)data[38] << 8) | data[39];
+        id(fr5_off03).publish_state((float) raw);
+      }
+      if ((size_t)41 < data.size()) {
+        uint16_t raw = ((uint16_t)data[40] << 8) | data[41];
+        id(fr5_off04).publish_state((float) raw);
+      }
+      if ((size_t)43 < data.size()) {
+        uint16_t raw = ((uint16_t)data[42] << 8) | data[43];
+        id(fr5_off05).publish_state((float) raw);
+      }
+      if ((size_t)45 < data.size()) {
+        uint16_t raw = ((uint16_t)data[44] << 8) | data[45];
+        id(fr5_off06).publish_state((float) raw);
+      }
+      if ((size_t)47 < data.size()) {
+        uint16_t raw = ((uint16_t)data[46] << 8) | data[47];
+        id(fr5_off07).publish_state((float) raw);
+      }
+      if ((size_t)49 < data.size()) {
+        uint16_t raw = ((uint16_t)data[48] << 8) | data[49];
+        id(fr5_off08).publish_state((float) raw);
+      }
+      if ((size_t)51 < data.size()) {
+        uint16_t raw = ((uint16_t)data[50] << 8) | data[51];
+        id(fr5_off09).publish_state((float) raw);
+      }
+      if ((size_t)53 < data.size()) {
+        uint16_t raw = ((uint16_t)data[52] << 8) | data[53];
+        id(fr5_off0A).publish_state((float) raw);
+      }
+      if ((size_t)55 < data.size()) {
+        uint16_t raw = ((uint16_t)data[54] << 8) | data[55];
+        id(fr5_off0B).publish_state((float) raw);
+      }
+      if ((size_t)57 < data.size()) {
+        uint16_t raw = ((uint16_t)data[56] << 8) | data[57];
+        id(fr5_off0C).publish_state((float) raw);
+      }
+      if ((size_t)59 < data.size()) {
+        uint16_t raw = ((uint16_t)data[58] << 8) | data[59];
+        id(fr5_off0D).publish_state((float) raw);
+      }
+      if ((size_t)61 < data.size()) {
+        uint16_t raw = ((uint16_t)data[60] << 8) | data[61];
+        id(fr5_off0E).publish_state((float) raw);
+      }
+      if ((size_t)63 < data.size()) {
+        uint16_t raw = ((uint16_t)data[62] << 8) | data[63];
+        id(fr5_off0F).publish_state((float) raw);
+      }
+      return 0;
+  # Anchor for P10 range 4 (0xF860-0xF87F, size=32)
+  - platform: modbus_controller
+    modbus_controller_id: srne_main
+    name: "P10 Anchor 4"
+    internal: true
+    register_type: holding
+    skip_updates: ${p10_skip_updates}
+    force_new_range: true
+    address: 63584
+    register_count: 32
+    lambda: |-
+      // Distribute 16-bit words to per-register template sensors
+      if ((size_t)1 < data.size()) {
+        uint16_t raw = ((uint16_t)data[0] << 8) | data[1];
+        id(fr6_off00).publish_state((float) raw);
+      }
+      if ((size_t)3 < data.size()) {
+        uint16_t raw = ((uint16_t)data[2] << 8) | data[3];
+        id(fr6_off01).publish_state((float) raw);
+      }
+      if ((size_t)5 < data.size()) {
+        uint16_t raw = ((uint16_t)data[4] << 8) | data[5];
+        id(fr6_off02).publish_state((float) raw);
+      }
+      if ((size_t)7 < data.size()) {
+        uint16_t raw = ((uint16_t)data[6] << 8) | data[7];
+        id(fr6_off03).publish_state((float) raw);
+      }
+      if ((size_t)9 < data.size()) {
+        uint16_t raw = ((uint16_t)data[8] << 8) | data[9];
+        id(fr6_off04).publish_state((float) raw);
+      }
+      if ((size_t)11 < data.size()) {
+        uint16_t raw = ((uint16_t)data[10] << 8) | data[11];
+        id(fr6_off05).publish_state((float) raw);
+      }
+      if ((size_t)13 < data.size()) {
+        uint16_t raw = ((uint16_t)data[12] << 8) | data[13];
+        id(fr6_off06).publish_state((float) raw);
+      }
+      if ((size_t)15 < data.size()) {
+        uint16_t raw = ((uint16_t)data[14] << 8) | data[15];
+        id(fr6_off07).publish_state((float) raw);
+      }
+      if ((size_t)17 < data.size()) {
+        uint16_t raw = ((uint16_t)data[16] << 8) | data[17];
+        id(fr6_off08).publish_state((float) raw);
+      }
+      if ((size_t)19 < data.size()) {
+        uint16_t raw = ((uint16_t)data[18] << 8) | data[19];
+        id(fr6_off09).publish_state((float) raw);
+      }
+      if ((size_t)21 < data.size()) {
+        uint16_t raw = ((uint16_t)data[20] << 8) | data[21];
+        id(fr6_off0A).publish_state((float) raw);
+      }
+      if ((size_t)23 < data.size()) {
+        uint16_t raw = ((uint16_t)data[22] << 8) | data[23];
+        id(fr6_off0B).publish_state((float) raw);
+      }
+      if ((size_t)25 < data.size()) {
+        uint16_t raw = ((uint16_t)data[24] << 8) | data[25];
+        id(fr6_off0C).publish_state((float) raw);
+      }
+      if ((size_t)27 < data.size()) {
+        uint16_t raw = ((uint16_t)data[26] << 8) | data[27];
+        id(fr6_off0D).publish_state((float) raw);
+      }
+      if ((size_t)29 < data.size()) {
+        uint16_t raw = ((uint16_t)data[28] << 8) | data[29];
+        id(fr6_off0E).publish_state((float) raw);
+      }
+      if ((size_t)31 < data.size()) {
+        uint16_t raw = ((uint16_t)data[30] << 8) | data[31];
+        id(fr6_off0F).publish_state((float) raw);
+      }
+      if ((size_t)33 < data.size()) {
+        uint16_t raw = ((uint16_t)data[32] << 8) | data[33];
+        id(fr7_off00).publish_state((float) raw);
+      }
+      if ((size_t)35 < data.size()) {
+        uint16_t raw = ((uint16_t)data[34] << 8) | data[35];
+        id(fr7_off01).publish_state((float) raw);
+      }
+      if ((size_t)37 < data.size()) {
+        uint16_t raw = ((uint16_t)data[36] << 8) | data[37];
+        id(fr7_off02).publish_state((float) raw);
+      }
+      if ((size_t)39 < data.size()) {
+        uint16_t raw = ((uint16_t)data[38] << 8) | data[39];
+        id(fr7_off03).publish_state((float) raw);
+      }
+      if ((size_t)41 < data.size()) {
+        uint16_t raw = ((uint16_t)data[40] << 8) | data[41];
+        id(fr7_off04).publish_state((float) raw);
+      }
+      if ((size_t)43 < data.size()) {
+        uint16_t raw = ((uint16_t)data[42] << 8) | data[43];
+        id(fr7_off05).publish_state((float) raw);
+      }
+      if ((size_t)45 < data.size()) {
+        uint16_t raw = ((uint16_t)data[44] << 8) | data[45];
+        id(fr7_off06).publish_state((float) raw);
+      }
+      if ((size_t)47 < data.size()) {
+        uint16_t raw = ((uint16_t)data[46] << 8) | data[47];
+        id(fr7_off07).publish_state((float) raw);
+      }
+      if ((size_t)49 < data.size()) {
+        uint16_t raw = ((uint16_t)data[48] << 8) | data[49];
+        id(fr7_off08).publish_state((float) raw);
+      }
+      if ((size_t)51 < data.size()) {
+        uint16_t raw = ((uint16_t)data[50] << 8) | data[51];
+        id(fr7_off09).publish_state((float) raw);
+      }
+      if ((size_t)53 < data.size()) {
+        uint16_t raw = ((uint16_t)data[52] << 8) | data[53];
+        id(fr7_off0A).publish_state((float) raw);
+      }
+      if ((size_t)55 < data.size()) {
+        uint16_t raw = ((uint16_t)data[54] << 8) | data[55];
+        id(fr7_off0B).publish_state((float) raw);
+      }
+      if ((size_t)57 < data.size()) {
+        uint16_t raw = ((uint16_t)data[56] << 8) | data[57];
+        id(fr7_off0C).publish_state((float) raw);
+      }
+      if ((size_t)59 < data.size()) {
+        uint16_t raw = ((uint16_t)data[58] << 8) | data[59];
+        id(fr7_off0D).publish_state((float) raw);
+      }
+      if ((size_t)61 < data.size()) {
+        uint16_t raw = ((uint16_t)data[60] << 8) | data[61];
+        id(fr7_off0E).publish_state((float) raw);
+      }
+      if ((size_t)63 < data.size()) {
+        uint16_t raw = ((uint16_t)data[62] << 8) | data[63];
+        id(fr7_off0F).publish_state((float) raw);
+      }
+      return 0;
+  # Anchor for P10 range 5 (0xF880-0xF89F, size=32)
+  - platform: modbus_controller
+    modbus_controller_id: srne_main
+    name: "P10 Anchor 5"
+    internal: true
+    register_type: holding
+    skip_updates: ${p10_skip_updates}
+    force_new_range: true
+    address: 63616
+    register_count: 32
+    lambda: |-
+      // Distribute 16-bit words to per-register template sensors
+      if ((size_t)1 < data.size()) {
+        uint16_t raw = ((uint16_t)data[0] << 8) | data[1];
+        id(fr8_off00).publish_state((float) raw);
+      }
+      if ((size_t)3 < data.size()) {
+        uint16_t raw = ((uint16_t)data[2] << 8) | data[3];
+        id(fr8_off01).publish_state((float) raw);
+      }
+      if ((size_t)5 < data.size()) {
+        uint16_t raw = ((uint16_t)data[4] << 8) | data[5];
+        id(fr8_off02).publish_state((float) raw);
+      }
+      if ((size_t)7 < data.size()) {
+        uint16_t raw = ((uint16_t)data[6] << 8) | data[7];
+        id(fr8_off03).publish_state((float) raw);
+      }
+      if ((size_t)9 < data.size()) {
+        uint16_t raw = ((uint16_t)data[8] << 8) | data[9];
+        id(fr8_off04).publish_state((float) raw);
+      }
+      if ((size_t)11 < data.size()) {
+        uint16_t raw = ((uint16_t)data[10] << 8) | data[11];
+        id(fr8_off05).publish_state((float) raw);
+      }
+      if ((size_t)13 < data.size()) {
+        uint16_t raw = ((uint16_t)data[12] << 8) | data[13];
+        id(fr8_off06).publish_state((float) raw);
+      }
+      if ((size_t)15 < data.size()) {
+        uint16_t raw = ((uint16_t)data[14] << 8) | data[15];
+        id(fr8_off07).publish_state((float) raw);
+      }
+      if ((size_t)17 < data.size()) {
+        uint16_t raw = ((uint16_t)data[16] << 8) | data[17];
+        id(fr8_off08).publish_state((float) raw);
+      }
+      if ((size_t)19 < data.size()) {
+        uint16_t raw = ((uint16_t)data[18] << 8) | data[19];
+        id(fr8_off09).publish_state((float) raw);
+      }
+      if ((size_t)21 < data.size()) {
+        uint16_t raw = ((uint16_t)data[20] << 8) | data[21];
+        id(fr8_off0A).publish_state((float) raw);
+      }
+      if ((size_t)23 < data.size()) {
+        uint16_t raw = ((uint16_t)data[22] << 8) | data[23];
+        id(fr8_off0B).publish_state((float) raw);
+      }
+      if ((size_t)25 < data.size()) {
+        uint16_t raw = ((uint16_t)data[24] << 8) | data[25];
+        id(fr8_off0C).publish_state((float) raw);
+      }
+      if ((size_t)27 < data.size()) {
+        uint16_t raw = ((uint16_t)data[26] << 8) | data[27];
+        id(fr8_off0D).publish_state((float) raw);
+      }
+      if ((size_t)29 < data.size()) {
+        uint16_t raw = ((uint16_t)data[28] << 8) | data[29];
+        id(fr8_off0E).publish_state((float) raw);
+      }
+      if ((size_t)31 < data.size()) {
+        uint16_t raw = ((uint16_t)data[30] << 8) | data[31];
+        id(fr8_off0F).publish_state((float) raw);
+      }
+      if ((size_t)33 < data.size()) {
+        uint16_t raw = ((uint16_t)data[32] << 8) | data[33];
+        id(fr9_off00).publish_state((float) raw);
+      }
+      if ((size_t)35 < data.size()) {
+        uint16_t raw = ((uint16_t)data[34] << 8) | data[35];
+        id(fr9_off01).publish_state((float) raw);
+      }
+      if ((size_t)37 < data.size()) {
+        uint16_t raw = ((uint16_t)data[36] << 8) | data[37];
+        id(fr9_off02).publish_state((float) raw);
+      }
+      if ((size_t)39 < data.size()) {
+        uint16_t raw = ((uint16_t)data[38] << 8) | data[39];
+        id(fr9_off03).publish_state((float) raw);
+      }
+      if ((size_t)41 < data.size()) {
+        uint16_t raw = ((uint16_t)data[40] << 8) | data[41];
+        id(fr9_off04).publish_state((float) raw);
+      }
+      if ((size_t)43 < data.size()) {
+        uint16_t raw = ((uint16_t)data[42] << 8) | data[43];
+        id(fr9_off05).publish_state((float) raw);
+      }
+      if ((size_t)45 < data.size()) {
+        uint16_t raw = ((uint16_t)data[44] << 8) | data[45];
+        id(fr9_off06).publish_state((float) raw);
+      }
+      if ((size_t)47 < data.size()) {
+        uint16_t raw = ((uint16_t)data[46] << 8) | data[47];
+        id(fr9_off07).publish_state((float) raw);
+      }
+      if ((size_t)49 < data.size()) {
+        uint16_t raw = ((uint16_t)data[48] << 8) | data[49];
+        id(fr9_off08).publish_state((float) raw);
+      }
+      if ((size_t)51 < data.size()) {
+        uint16_t raw = ((uint16_t)data[50] << 8) | data[51];
+        id(fr9_off09).publish_state((float) raw);
+      }
+      if ((size_t)53 < data.size()) {
+        uint16_t raw = ((uint16_t)data[52] << 8) | data[53];
+        id(fr9_off0A).publish_state((float) raw);
+      }
+      if ((size_t)55 < data.size()) {
+        uint16_t raw = ((uint16_t)data[54] << 8) | data[55];
+        id(fr9_off0B).publish_state((float) raw);
+      }
+      if ((size_t)57 < data.size()) {
+        uint16_t raw = ((uint16_t)data[56] << 8) | data[57];
+        id(fr9_off0C).publish_state((float) raw);
+      }
+      if ((size_t)59 < data.size()) {
+        uint16_t raw = ((uint16_t)data[58] << 8) | data[59];
+        id(fr9_off0D).publish_state((float) raw);
+      }
+      if ((size_t)61 < data.size()) {
+        uint16_t raw = ((uint16_t)data[60] << 8) | data[61];
+        id(fr9_off0E).publish_state((float) raw);
+      }
+      if ((size_t)63 < data.size()) {
+        uint16_t raw = ((uint16_t)data[62] << 8) | data[63];
+        id(fr9_off0F).publish_state((float) raw);
+      }
+      return 0;
+  # Anchor for P10 range 6 (0xF8A0-0xF8BF, size=32)
+  - platform: modbus_controller
+    modbus_controller_id: srne_main
+    name: "P10 Anchor 6"
+    internal: true
+    register_type: holding
+    skip_updates: ${p10_skip_updates}
+    force_new_range: true
+    address: 63648
+    register_count: 32
+    lambda: |-
+      // Distribute 16-bit words to per-register template sensors
+      if ((size_t)1 < data.size()) {
+        uint16_t raw = ((uint16_t)data[0] << 8) | data[1];
+        id(fr10_off00).publish_state((float) raw);
+      }
+      if ((size_t)3 < data.size()) {
+        uint16_t raw = ((uint16_t)data[2] << 8) | data[3];
+        id(fr10_off01).publish_state((float) raw);
+      }
+      if ((size_t)5 < data.size()) {
+        uint16_t raw = ((uint16_t)data[4] << 8) | data[5];
+        id(fr10_off02).publish_state((float) raw);
+      }
+      if ((size_t)7 < data.size()) {
+        uint16_t raw = ((uint16_t)data[6] << 8) | data[7];
+        id(fr10_off03).publish_state((float) raw);
+      }
+      if ((size_t)9 < data.size()) {
+        uint16_t raw = ((uint16_t)data[8] << 8) | data[9];
+        id(fr10_off04).publish_state((float) raw);
+      }
+      if ((size_t)11 < data.size()) {
+        uint16_t raw = ((uint16_t)data[10] << 8) | data[11];
+        id(fr10_off05).publish_state((float) raw);
+      }
+      if ((size_t)13 < data.size()) {
+        uint16_t raw = ((uint16_t)data[12] << 8) | data[13];
+        id(fr10_off06).publish_state((float) raw);
+      }
+      if ((size_t)15 < data.size()) {
+        uint16_t raw = ((uint16_t)data[14] << 8) | data[15];
+        id(fr10_off07).publish_state((float) raw);
+      }
+      if ((size_t)17 < data.size()) {
+        uint16_t raw = ((uint16_t)data[16] << 8) | data[17];
+        id(fr10_off08).publish_state((float) raw);
+      }
+      if ((size_t)19 < data.size()) {
+        uint16_t raw = ((uint16_t)data[18] << 8) | data[19];
+        id(fr10_off09).publish_state((float) raw);
+      }
+      if ((size_t)21 < data.size()) {
+        uint16_t raw = ((uint16_t)data[20] << 8) | data[21];
+        id(fr10_off0A).publish_state((float) raw);
+      }
+      if ((size_t)23 < data.size()) {
+        uint16_t raw = ((uint16_t)data[22] << 8) | data[23];
+        id(fr10_off0B).publish_state((float) raw);
+      }
+      if ((size_t)25 < data.size()) {
+        uint16_t raw = ((uint16_t)data[24] << 8) | data[25];
+        id(fr10_off0C).publish_state((float) raw);
+      }
+      if ((size_t)27 < data.size()) {
+        uint16_t raw = ((uint16_t)data[26] << 8) | data[27];
+        id(fr10_off0D).publish_state((float) raw);
+      }
+      if ((size_t)29 < data.size()) {
+        uint16_t raw = ((uint16_t)data[28] << 8) | data[29];
+        id(fr10_off0E).publish_state((float) raw);
+      }
+      if ((size_t)31 < data.size()) {
+        uint16_t raw = ((uint16_t)data[30] << 8) | data[31];
+        id(fr10_off0F).publish_state((float) raw);
+      }
+      if ((size_t)33 < data.size()) {
+        uint16_t raw = ((uint16_t)data[32] << 8) | data[33];
+        id(fr11_off00).publish_state((float) raw);
+      }
+      if ((size_t)35 < data.size()) {
+        uint16_t raw = ((uint16_t)data[34] << 8) | data[35];
+        id(fr11_off01).publish_state((float) raw);
+      }
+      if ((size_t)37 < data.size()) {
+        uint16_t raw = ((uint16_t)data[36] << 8) | data[37];
+        id(fr11_off02).publish_state((float) raw);
+      }
+      if ((size_t)39 < data.size()) {
+        uint16_t raw = ((uint16_t)data[38] << 8) | data[39];
+        id(fr11_off03).publish_state((float) raw);
+      }
+      if ((size_t)41 < data.size()) {
+        uint16_t raw = ((uint16_t)data[40] << 8) | data[41];
+        id(fr11_off04).publish_state((float) raw);
+      }
+      if ((size_t)43 < data.size()) {
+        uint16_t raw = ((uint16_t)data[42] << 8) | data[43];
+        id(fr11_off05).publish_state((float) raw);
+      }
+      if ((size_t)45 < data.size()) {
+        uint16_t raw = ((uint16_t)data[44] << 8) | data[45];
+        id(fr11_off06).publish_state((float) raw);
+      }
+      if ((size_t)47 < data.size()) {
+        uint16_t raw = ((uint16_t)data[46] << 8) | data[47];
+        id(fr11_off07).publish_state((float) raw);
+      }
+      if ((size_t)49 < data.size()) {
+        uint16_t raw = ((uint16_t)data[48] << 8) | data[49];
+        id(fr11_off08).publish_state((float) raw);
+      }
+      if ((size_t)51 < data.size()) {
+        uint16_t raw = ((uint16_t)data[50] << 8) | data[51];
+        id(fr11_off09).publish_state((float) raw);
+      }
+      if ((size_t)53 < data.size()) {
+        uint16_t raw = ((uint16_t)data[52] << 8) | data[53];
+        id(fr11_off0A).publish_state((float) raw);
+      }
+      if ((size_t)55 < data.size()) {
+        uint16_t raw = ((uint16_t)data[54] << 8) | data[55];
+        id(fr11_off0B).publish_state((float) raw);
+      }
+      if ((size_t)57 < data.size()) {
+        uint16_t raw = ((uint16_t)data[56] << 8) | data[57];
+        id(fr11_off0C).publish_state((float) raw);
+      }
+      if ((size_t)59 < data.size()) {
+        uint16_t raw = ((uint16_t)data[58] << 8) | data[59];
+        id(fr11_off0D).publish_state((float) raw);
+      }
+      if ((size_t)61 < data.size()) {
+        uint16_t raw = ((uint16_t)data[60] << 8) | data[61];
+        id(fr11_off0E).publish_state((float) raw);
+      }
+      if ((size_t)63 < data.size()) {
+        uint16_t raw = ((uint16_t)data[62] << 8) | data[63];
+        id(fr11_off0F).publish_state((float) raw);
+      }
+      return 0;
+  # Anchor for P10 range 7 (0xF8C0-0xF8DF, size=32)
+  - platform: modbus_controller
+    modbus_controller_id: srne_main
+    name: "P10 Anchor 7"
+    internal: true
+    register_type: holding
+    skip_updates: ${p10_skip_updates}
+    force_new_range: true
+    address: 63680
+    register_count: 32
+    lambda: |-
+      // Distribute 16-bit words to per-register template sensors
+      if ((size_t)1 < data.size()) {
+        uint16_t raw = ((uint16_t)data[0] << 8) | data[1];
+        id(fr12_off00).publish_state((float) raw);
+      }
+      if ((size_t)3 < data.size()) {
+        uint16_t raw = ((uint16_t)data[2] << 8) | data[3];
+        id(fr12_off01).publish_state((float) raw);
+      }
+      if ((size_t)5 < data.size()) {
+        uint16_t raw = ((uint16_t)data[4] << 8) | data[5];
+        id(fr12_off02).publish_state((float) raw);
+      }
+      if ((size_t)7 < data.size()) {
+        uint16_t raw = ((uint16_t)data[6] << 8) | data[7];
+        id(fr12_off03).publish_state((float) raw);
+      }
+      if ((size_t)9 < data.size()) {
+        uint16_t raw = ((uint16_t)data[8] << 8) | data[9];
+        id(fr12_off04).publish_state((float) raw);
+      }
+      if ((size_t)11 < data.size()) {
+        uint16_t raw = ((uint16_t)data[10] << 8) | data[11];
+        id(fr12_off05).publish_state((float) raw);
+      }
+      if ((size_t)13 < data.size()) {
+        uint16_t raw = ((uint16_t)data[12] << 8) | data[13];
+        id(fr12_off06).publish_state((float) raw);
+      }
+      if ((size_t)15 < data.size()) {
+        uint16_t raw = ((uint16_t)data[14] << 8) | data[15];
+        id(fr12_off07).publish_state((float) raw);
+      }
+      if ((size_t)17 < data.size()) {
+        uint16_t raw = ((uint16_t)data[16] << 8) | data[17];
+        id(fr12_off08).publish_state((float) raw);
+      }
+      if ((size_t)19 < data.size()) {
+        uint16_t raw = ((uint16_t)data[18] << 8) | data[19];
+        id(fr12_off09).publish_state((float) raw);
+      }
+      if ((size_t)21 < data.size()) {
+        uint16_t raw = ((uint16_t)data[20] << 8) | data[21];
+        id(fr12_off0A).publish_state((float) raw);
+      }
+      if ((size_t)23 < data.size()) {
+        uint16_t raw = ((uint16_t)data[22] << 8) | data[23];
+        id(fr12_off0B).publish_state((float) raw);
+      }
+      if ((size_t)25 < data.size()) {
+        uint16_t raw = ((uint16_t)data[24] << 8) | data[25];
+        id(fr12_off0C).publish_state((float) raw);
+      }
+      if ((size_t)27 < data.size()) {
+        uint16_t raw = ((uint16_t)data[26] << 8) | data[27];
+        id(fr12_off0D).publish_state((float) raw);
+      }
+      if ((size_t)29 < data.size()) {
+        uint16_t raw = ((uint16_t)data[28] << 8) | data[29];
+        id(fr12_off0E).publish_state((float) raw);
+      }
+      if ((size_t)31 < data.size()) {
+        uint16_t raw = ((uint16_t)data[30] << 8) | data[31];
+        id(fr12_off0F).publish_state((float) raw);
+      }
+      if ((size_t)33 < data.size()) {
+        uint16_t raw = ((uint16_t)data[32] << 8) | data[33];
+        id(fr13_off00).publish_state((float) raw);
+      }
+      if ((size_t)35 < data.size()) {
+        uint16_t raw = ((uint16_t)data[34] << 8) | data[35];
+        id(fr13_off01).publish_state((float) raw);
+      }
+      if ((size_t)37 < data.size()) {
+        uint16_t raw = ((uint16_t)data[36] << 8) | data[37];
+        id(fr13_off02).publish_state((float) raw);
+      }
+      if ((size_t)39 < data.size()) {
+        uint16_t raw = ((uint16_t)data[38] << 8) | data[39];
+        id(fr13_off03).publish_state((float) raw);
+      }
+      if ((size_t)41 < data.size()) {
+        uint16_t raw = ((uint16_t)data[40] << 8) | data[41];
+        id(fr13_off04).publish_state((float) raw);
+      }
+      if ((size_t)43 < data.size()) {
+        uint16_t raw = ((uint16_t)data[42] << 8) | data[43];
+        id(fr13_off05).publish_state((float) raw);
+      }
+      if ((size_t)45 < data.size()) {
+        uint16_t raw = ((uint16_t)data[44] << 8) | data[45];
+        id(fr13_off06).publish_state((float) raw);
+      }
+      if ((size_t)47 < data.size()) {
+        uint16_t raw = ((uint16_t)data[46] << 8) | data[47];
+        id(fr13_off07).publish_state((float) raw);
+      }
+      if ((size_t)49 < data.size()) {
+        uint16_t raw = ((uint16_t)data[48] << 8) | data[49];
+        id(fr13_off08).publish_state((float) raw);
+      }
+      if ((size_t)51 < data.size()) {
+        uint16_t raw = ((uint16_t)data[50] << 8) | data[51];
+        id(fr13_off09).publish_state((float) raw);
+      }
+      if ((size_t)53 < data.size()) {
+        uint16_t raw = ((uint16_t)data[52] << 8) | data[53];
+        id(fr13_off0A).publish_state((float) raw);
+      }
+      if ((size_t)55 < data.size()) {
+        uint16_t raw = ((uint16_t)data[54] << 8) | data[55];
+        id(fr13_off0B).publish_state((float) raw);
+      }
+      if ((size_t)57 < data.size()) {
+        uint16_t raw = ((uint16_t)data[56] << 8) | data[57];
+        id(fr13_off0C).publish_state((float) raw);
+      }
+      if ((size_t)59 < data.size()) {
+        uint16_t raw = ((uint16_t)data[58] << 8) | data[59];
+        id(fr13_off0D).publish_state((float) raw);
+      }
+      if ((size_t)61 < data.size()) {
+        uint16_t raw = ((uint16_t)data[60] << 8) | data[61];
+        id(fr13_off0E).publish_state((float) raw);
+      }
+      if ((size_t)63 < data.size()) {
+        uint16_t raw = ((uint16_t)data[62] << 8) | data[63];
+        id(fr13_off0F).publish_state((float) raw);
+      }
+      return 0;
+  # Anchor for P10 range 8 (0xF8E0-0xF8FF, size=32)
+  - platform: modbus_controller
+    modbus_controller_id: srne_main
+    name: "P10 Anchor 8"
+    internal: true
+    register_type: holding
+    skip_updates: ${p10_skip_updates}
+    force_new_range: true
+    address: 63712
+    register_count: 32
+    lambda: |-
+      // Distribute 16-bit words to per-register template sensors
+      if ((size_t)1 < data.size()) {
+        uint16_t raw = ((uint16_t)data[0] << 8) | data[1];
+        id(fr14_off00).publish_state((float) raw);
+      }
+      if ((size_t)3 < data.size()) {
+        uint16_t raw = ((uint16_t)data[2] << 8) | data[3];
+        id(fr14_off01).publish_state((float) raw);
+      }
+      if ((size_t)5 < data.size()) {
+        uint16_t raw = ((uint16_t)data[4] << 8) | data[5];
+        id(fr14_off02).publish_state((float) raw);
+      }
+      if ((size_t)7 < data.size()) {
+        uint16_t raw = ((uint16_t)data[6] << 8) | data[7];
+        id(fr14_off03).publish_state((float) raw);
+      }
+      if ((size_t)9 < data.size()) {
+        uint16_t raw = ((uint16_t)data[8] << 8) | data[9];
+        id(fr14_off04).publish_state((float) raw);
+      }
+      if ((size_t)11 < data.size()) {
+        uint16_t raw = ((uint16_t)data[10] << 8) | data[11];
+        id(fr14_off05).publish_state((float) raw);
+      }
+      if ((size_t)13 < data.size()) {
+        uint16_t raw = ((uint16_t)data[12] << 8) | data[13];
+        id(fr14_off06).publish_state((float) raw);
+      }
+      if ((size_t)15 < data.size()) {
+        uint16_t raw = ((uint16_t)data[14] << 8) | data[15];
+        id(fr14_off07).publish_state((float) raw);
+      }
+      if ((size_t)17 < data.size()) {
+        uint16_t raw = ((uint16_t)data[16] << 8) | data[17];
+        id(fr14_off08).publish_state((float) raw);
+      }
+      if ((size_t)19 < data.size()) {
+        uint16_t raw = ((uint16_t)data[18] << 8) | data[19];
+        id(fr14_off09).publish_state((float) raw);
+      }
+      if ((size_t)21 < data.size()) {
+        uint16_t raw = ((uint16_t)data[20] << 8) | data[21];
+        id(fr14_off0A).publish_state((float) raw);
+      }
+      if ((size_t)23 < data.size()) {
+        uint16_t raw = ((uint16_t)data[22] << 8) | data[23];
+        id(fr14_off0B).publish_state((float) raw);
+      }
+      if ((size_t)25 < data.size()) {
+        uint16_t raw = ((uint16_t)data[24] << 8) | data[25];
+        id(fr14_off0C).publish_state((float) raw);
+      }
+      if ((size_t)27 < data.size()) {
+        uint16_t raw = ((uint16_t)data[26] << 8) | data[27];
+        id(fr14_off0D).publish_state((float) raw);
+      }
+      if ((size_t)29 < data.size()) {
+        uint16_t raw = ((uint16_t)data[28] << 8) | data[29];
+        id(fr14_off0E).publish_state((float) raw);
+      }
+      if ((size_t)31 < data.size()) {
+        uint16_t raw = ((uint16_t)data[30] << 8) | data[31];
+        id(fr14_off0F).publish_state((float) raw);
+      }
+      if ((size_t)33 < data.size()) {
+        uint16_t raw = ((uint16_t)data[32] << 8) | data[33];
+        id(fr15_off00).publish_state((float) raw);
+      }
+      if ((size_t)35 < data.size()) {
+        uint16_t raw = ((uint16_t)data[34] << 8) | data[35];
+        id(fr15_off01).publish_state((float) raw);
+      }
+      if ((size_t)37 < data.size()) {
+        uint16_t raw = ((uint16_t)data[36] << 8) | data[37];
+        id(fr15_off02).publish_state((float) raw);
+      }
+      if ((size_t)39 < data.size()) {
+        uint16_t raw = ((uint16_t)data[38] << 8) | data[39];
+        id(fr15_off03).publish_state((float) raw);
+      }
+      if ((size_t)41 < data.size()) {
+        uint16_t raw = ((uint16_t)data[40] << 8) | data[41];
+        id(fr15_off04).publish_state((float) raw);
+      }
+      if ((size_t)43 < data.size()) {
+        uint16_t raw = ((uint16_t)data[42] << 8) | data[43];
+        id(fr15_off05).publish_state((float) raw);
+      }
+      if ((size_t)45 < data.size()) {
+        uint16_t raw = ((uint16_t)data[44] << 8) | data[45];
+        id(fr15_off06).publish_state((float) raw);
+      }
+      if ((size_t)47 < data.size()) {
+        uint16_t raw = ((uint16_t)data[46] << 8) | data[47];
+        id(fr15_off07).publish_state((float) raw);
+      }
+      if ((size_t)49 < data.size()) {
+        uint16_t raw = ((uint16_t)data[48] << 8) | data[49];
+        id(fr15_off08).publish_state((float) raw);
+      }
+      if ((size_t)51 < data.size()) {
+        uint16_t raw = ((uint16_t)data[50] << 8) | data[51];
+        id(fr15_off09).publish_state((float) raw);
+      }
+      if ((size_t)53 < data.size()) {
+        uint16_t raw = ((uint16_t)data[52] << 8) | data[53];
+        id(fr15_off0A).publish_state((float) raw);
+      }
+      if ((size_t)55 < data.size()) {
+        uint16_t raw = ((uint16_t)data[54] << 8) | data[55];
+        id(fr15_off0B).publish_state((float) raw);
+      }
+      if ((size_t)57 < data.size()) {
+        uint16_t raw = ((uint16_t)data[56] << 8) | data[57];
+        id(fr15_off0C).publish_state((float) raw);
+      }
+      if ((size_t)59 < data.size()) {
+        uint16_t raw = ((uint16_t)data[58] << 8) | data[59];
+        id(fr15_off0D).publish_state((float) raw);
+      }
+      if ((size_t)61 < data.size()) {
+        uint16_t raw = ((uint16_t)data[60] << 8) | data[61];
+        id(fr15_off0E).publish_state((float) raw);
+      }
+      if ((size_t)63 < data.size()) {
+        uint16_t raw = ((uint16_t)data[62] << 8) | data[63];
+        id(fr15_off0F).publish_state((float) raw);
+      }
+      return 0;
+  # Anchor for P10 range 9 (0xF900-0xF91F, size=32)
+  - platform: modbus_controller
+    modbus_controller_id: srne_main
+    name: "P10 Anchor 9"
+    internal: true
+    register_type: holding
+    skip_updates: ${p10_skip_updates}
+    force_new_range: true
+    address: 63744
+    register_count: 32
+    lambda: |-
+      // Distribute 16-bit words to per-register template sensors
+      if ((size_t)1 < data.size()) {
+        uint16_t raw = ((uint16_t)data[0] << 8) | data[1];
+        id(fr16_off00).publish_state((float) raw);
+      }
+      if ((size_t)3 < data.size()) {
+        uint16_t raw = ((uint16_t)data[2] << 8) | data[3];
+        id(fr16_off01).publish_state((float) raw);
+      }
+      if ((size_t)5 < data.size()) {
+        uint16_t raw = ((uint16_t)data[4] << 8) | data[5];
+        id(fr16_off02).publish_state((float) raw);
+      }
+      if ((size_t)7 < data.size()) {
+        uint16_t raw = ((uint16_t)data[6] << 8) | data[7];
+        id(fr16_off03).publish_state((float) raw);
+      }
+      if ((size_t)9 < data.size()) {
+        uint16_t raw = ((uint16_t)data[8] << 8) | data[9];
+        id(fr16_off04).publish_state((float) raw);
+      }
+      if ((size_t)11 < data.size()) {
+        uint16_t raw = ((uint16_t)data[10] << 8) | data[11];
+        id(fr16_off05).publish_state((float) raw);
+      }
+      if ((size_t)13 < data.size()) {
+        uint16_t raw = ((uint16_t)data[12] << 8) | data[13];
+        id(fr16_off06).publish_state((float) raw);
+      }
+      if ((size_t)15 < data.size()) {
+        uint16_t raw = ((uint16_t)data[14] << 8) | data[15];
+        id(fr16_off07).publish_state((float) raw);
+      }
+      if ((size_t)17 < data.size()) {
+        uint16_t raw = ((uint16_t)data[16] << 8) | data[17];
+        id(fr16_off08).publish_state((float) raw);
+      }
+      if ((size_t)19 < data.size()) {
+        uint16_t raw = ((uint16_t)data[18] << 8) | data[19];
+        id(fr16_off09).publish_state((float) raw);
+      }
+      if ((size_t)21 < data.size()) {
+        uint16_t raw = ((uint16_t)data[20] << 8) | data[21];
+        id(fr16_off0A).publish_state((float) raw);
+      }
+      if ((size_t)23 < data.size()) {
+        uint16_t raw = ((uint16_t)data[22] << 8) | data[23];
+        id(fr16_off0B).publish_state((float) raw);
+      }
+      if ((size_t)25 < data.size()) {
+        uint16_t raw = ((uint16_t)data[24] << 8) | data[25];
+        id(fr16_off0C).publish_state((float) raw);
+      }
+      if ((size_t)27 < data.size()) {
+        uint16_t raw = ((uint16_t)data[26] << 8) | data[27];
+        id(fr16_off0D).publish_state((float) raw);
+      }
+      if ((size_t)29 < data.size()) {
+        uint16_t raw = ((uint16_t)data[28] << 8) | data[29];
+        id(fr16_off0E).publish_state((float) raw);
+      }
+      if ((size_t)31 < data.size()) {
+        uint16_t raw = ((uint16_t)data[30] << 8) | data[31];
+        id(fr16_off0F).publish_state((float) raw);
+      }
+      if ((size_t)33 < data.size()) {
+        uint16_t raw = ((uint16_t)data[32] << 8) | data[33];
+        id(fr17_off00).publish_state((float) raw);
+      }
+      if ((size_t)35 < data.size()) {
+        uint16_t raw = ((uint16_t)data[34] << 8) | data[35];
+        id(fr17_off01).publish_state((float) raw);
+      }
+      if ((size_t)37 < data.size()) {
+        uint16_t raw = ((uint16_t)data[36] << 8) | data[37];
+        id(fr17_off02).publish_state((float) raw);
+      }
+      if ((size_t)39 < data.size()) {
+        uint16_t raw = ((uint16_t)data[38] << 8) | data[39];
+        id(fr17_off03).publish_state((float) raw);
+      }
+      if ((size_t)41 < data.size()) {
+        uint16_t raw = ((uint16_t)data[40] << 8) | data[41];
+        id(fr17_off04).publish_state((float) raw);
+      }
+      if ((size_t)43 < data.size()) {
+        uint16_t raw = ((uint16_t)data[42] << 8) | data[43];
+        id(fr17_off05).publish_state((float) raw);
+      }
+      if ((size_t)45 < data.size()) {
+        uint16_t raw = ((uint16_t)data[44] << 8) | data[45];
+        id(fr17_off06).publish_state((float) raw);
+      }
+      if ((size_t)47 < data.size()) {
+        uint16_t raw = ((uint16_t)data[46] << 8) | data[47];
+        id(fr17_off07).publish_state((float) raw);
+      }
+      if ((size_t)49 < data.size()) {
+        uint16_t raw = ((uint16_t)data[48] << 8) | data[49];
+        id(fr17_off08).publish_state((float) raw);
+      }
+      if ((size_t)51 < data.size()) {
+        uint16_t raw = ((uint16_t)data[50] << 8) | data[51];
+        id(fr17_off09).publish_state((float) raw);
+      }
+      if ((size_t)53 < data.size()) {
+        uint16_t raw = ((uint16_t)data[52] << 8) | data[53];
+        id(fr17_off0A).publish_state((float) raw);
+      }
+      if ((size_t)55 < data.size()) {
+        uint16_t raw = ((uint16_t)data[54] << 8) | data[55];
+        id(fr17_off0B).publish_state((float) raw);
+      }
+      if ((size_t)57 < data.size()) {
+        uint16_t raw = ((uint16_t)data[56] << 8) | data[57];
+        id(fr17_off0C).publish_state((float) raw);
+      }
+      if ((size_t)59 < data.size()) {
+        uint16_t raw = ((uint16_t)data[58] << 8) | data[59];
+        id(fr17_off0D).publish_state((float) raw);
+      }
+      if ((size_t)61 < data.size()) {
+        uint16_t raw = ((uint16_t)data[60] << 8) | data[61];
+        id(fr17_off0E).publish_state((float) raw);
+      }
+      if ((size_t)63 < data.size()) {
+        uint16_t raw = ((uint16_t)data[62] << 8) | data[63];
+        id(fr17_off0F).publish_state((float) raw);
+      }
+      return 0;
+  # Anchor for P10 range 10 (0xF920-0xF93F, size=32)
+  - platform: modbus_controller
+    modbus_controller_id: srne_main
+    name: "P10 Anchor 10"
+    internal: true
+    register_type: holding
+    skip_updates: ${p10_skip_updates}
+    force_new_range: true
+    address: 63776
+    register_count: 32
+    lambda: |-
+      // Distribute 16-bit words to per-register template sensors
+      if ((size_t)1 < data.size()) {
+        uint16_t raw = ((uint16_t)data[0] << 8) | data[1];
+        id(fr18_off00).publish_state((float) raw);
+      }
+      if ((size_t)3 < data.size()) {
+        uint16_t raw = ((uint16_t)data[2] << 8) | data[3];
+        id(fr18_off01).publish_state((float) raw);
+      }
+      if ((size_t)5 < data.size()) {
+        uint16_t raw = ((uint16_t)data[4] << 8) | data[5];
+        id(fr18_off02).publish_state((float) raw);
+      }
+      if ((size_t)7 < data.size()) {
+        uint16_t raw = ((uint16_t)data[6] << 8) | data[7];
+        id(fr18_off03).publish_state((float) raw);
+      }
+      if ((size_t)9 < data.size()) {
+        uint16_t raw = ((uint16_t)data[8] << 8) | data[9];
+        id(fr18_off04).publish_state((float) raw);
+      }
+      if ((size_t)11 < data.size()) {
+        uint16_t raw = ((uint16_t)data[10] << 8) | data[11];
+        id(fr18_off05).publish_state((float) raw);
+      }
+      if ((size_t)13 < data.size()) {
+        uint16_t raw = ((uint16_t)data[12] << 8) | data[13];
+        id(fr18_off06).publish_state((float) raw);
+      }
+      if ((size_t)15 < data.size()) {
+        uint16_t raw = ((uint16_t)data[14] << 8) | data[15];
+        id(fr18_off07).publish_state((float) raw);
+      }
+      if ((size_t)17 < data.size()) {
+        uint16_t raw = ((uint16_t)data[16] << 8) | data[17];
+        id(fr18_off08).publish_state((float) raw);
+      }
+      if ((size_t)19 < data.size()) {
+        uint16_t raw = ((uint16_t)data[18] << 8) | data[19];
+        id(fr18_off09).publish_state((float) raw);
+      }
+      if ((size_t)21 < data.size()) {
+        uint16_t raw = ((uint16_t)data[20] << 8) | data[21];
+        id(fr18_off0A).publish_state((float) raw);
+      }
+      if ((size_t)23 < data.size()) {
+        uint16_t raw = ((uint16_t)data[22] << 8) | data[23];
+        id(fr18_off0B).publish_state((float) raw);
+      }
+      if ((size_t)25 < data.size()) {
+        uint16_t raw = ((uint16_t)data[24] << 8) | data[25];
+        id(fr18_off0C).publish_state((float) raw);
+      }
+      if ((size_t)27 < data.size()) {
+        uint16_t raw = ((uint16_t)data[26] << 8) | data[27];
+        id(fr18_off0D).publish_state((float) raw);
+      }
+      if ((size_t)29 < data.size()) {
+        uint16_t raw = ((uint16_t)data[28] << 8) | data[29];
+        id(fr18_off0E).publish_state((float) raw);
+      }
+      if ((size_t)31 < data.size()) {
+        uint16_t raw = ((uint16_t)data[30] << 8) | data[31];
+        id(fr18_off0F).publish_state((float) raw);
+      }
+      if ((size_t)33 < data.size()) {
+        uint16_t raw = ((uint16_t)data[32] << 8) | data[33];
+        id(fr19_off00).publish_state((float) raw);
+      }
+      if ((size_t)35 < data.size()) {
+        uint16_t raw = ((uint16_t)data[34] << 8) | data[35];
+        id(fr19_off01).publish_state((float) raw);
+      }
+      if ((size_t)37 < data.size()) {
+        uint16_t raw = ((uint16_t)data[36] << 8) | data[37];
+        id(fr19_off02).publish_state((float) raw);
+      }
+      if ((size_t)39 < data.size()) {
+        uint16_t raw = ((uint16_t)data[38] << 8) | data[39];
+        id(fr19_off03).publish_state((float) raw);
+      }
+      if ((size_t)41 < data.size()) {
+        uint16_t raw = ((uint16_t)data[40] << 8) | data[41];
+        id(fr19_off04).publish_state((float) raw);
+      }
+      if ((size_t)43 < data.size()) {
+        uint16_t raw = ((uint16_t)data[42] << 8) | data[43];
+        id(fr19_off05).publish_state((float) raw);
+      }
+      if ((size_t)45 < data.size()) {
+        uint16_t raw = ((uint16_t)data[44] << 8) | data[45];
+        id(fr19_off06).publish_state((float) raw);
+      }
+      if ((size_t)47 < data.size()) {
+        uint16_t raw = ((uint16_t)data[46] << 8) | data[47];
+        id(fr19_off07).publish_state((float) raw);
+      }
+      if ((size_t)49 < data.size()) {
+        uint16_t raw = ((uint16_t)data[48] << 8) | data[49];
+        id(fr19_off08).publish_state((float) raw);
+      }
+      if ((size_t)51 < data.size()) {
+        uint16_t raw = ((uint16_t)data[50] << 8) | data[51];
+        id(fr19_off09).publish_state((float) raw);
+      }
+      if ((size_t)53 < data.size()) {
+        uint16_t raw = ((uint16_t)data[52] << 8) | data[53];
+        id(fr19_off0A).publish_state((float) raw);
+      }
+      if ((size_t)55 < data.size()) {
+        uint16_t raw = ((uint16_t)data[54] << 8) | data[55];
+        id(fr19_off0B).publish_state((float) raw);
+      }
+      if ((size_t)57 < data.size()) {
+        uint16_t raw = ((uint16_t)data[56] << 8) | data[57];
+        id(fr19_off0C).publish_state((float) raw);
+      }
+      if ((size_t)59 < data.size()) {
+        uint16_t raw = ((uint16_t)data[58] << 8) | data[59];
+        id(fr19_off0D).publish_state((float) raw);
+      }
+      if ((size_t)61 < data.size()) {
+        uint16_t raw = ((uint16_t)data[60] << 8) | data[61];
+        id(fr19_off0E).publish_state((float) raw);
+      }
+      if ((size_t)63 < data.size()) {
+        uint16_t raw = ((uint16_t)data[62] << 8) | data[63];
+        id(fr19_off0F).publish_state((float) raw);
+      }
+      return 0;
+  # Anchor for P10 range 11 (0xF940-0xF95F, size=32)
+  - platform: modbus_controller
+    modbus_controller_id: srne_main
+    name: "P10 Anchor 11"
+    internal: true
+    register_type: holding
+    skip_updates: ${p10_skip_updates}
+    force_new_range: true
+    address: 63808
+    register_count: 32
+    lambda: |-
+      // Distribute 16-bit words to per-register template sensors
+      if ((size_t)1 < data.size()) {
+        uint16_t raw = ((uint16_t)data[0] << 8) | data[1];
+        id(fr20_off00).publish_state((float) raw);
+      }
+      if ((size_t)3 < data.size()) {
+        uint16_t raw = ((uint16_t)data[2] << 8) | data[3];
+        id(fr20_off01).publish_state((float) raw);
+      }
+      if ((size_t)5 < data.size()) {
+        uint16_t raw = ((uint16_t)data[4] << 8) | data[5];
+        id(fr20_off02).publish_state((float) raw);
+      }
+      if ((size_t)7 < data.size()) {
+        uint16_t raw = ((uint16_t)data[6] << 8) | data[7];
+        id(fr20_off03).publish_state((float) raw);
+      }
+      if ((size_t)9 < data.size()) {
+        uint16_t raw = ((uint16_t)data[8] << 8) | data[9];
+        id(fr20_off04).publish_state((float) raw);
+      }
+      if ((size_t)11 < data.size()) {
+        uint16_t raw = ((uint16_t)data[10] << 8) | data[11];
+        id(fr20_off05).publish_state((float) raw);
+      }
+      if ((size_t)13 < data.size()) {
+        uint16_t raw = ((uint16_t)data[12] << 8) | data[13];
+        id(fr20_off06).publish_state((float) raw);
+      }
+      if ((size_t)15 < data.size()) {
+        uint16_t raw = ((uint16_t)data[14] << 8) | data[15];
+        id(fr20_off07).publish_state((float) raw);
+      }
+      if ((size_t)17 < data.size()) {
+        uint16_t raw = ((uint16_t)data[16] << 8) | data[17];
+        id(fr20_off08).publish_state((float) raw);
+      }
+      if ((size_t)19 < data.size()) {
+        uint16_t raw = ((uint16_t)data[18] << 8) | data[19];
+        id(fr20_off09).publish_state((float) raw);
+      }
+      if ((size_t)21 < data.size()) {
+        uint16_t raw = ((uint16_t)data[20] << 8) | data[21];
+        id(fr20_off0A).publish_state((float) raw);
+      }
+      if ((size_t)23 < data.size()) {
+        uint16_t raw = ((uint16_t)data[22] << 8) | data[23];
+        id(fr20_off0B).publish_state((float) raw);
+      }
+      if ((size_t)25 < data.size()) {
+        uint16_t raw = ((uint16_t)data[24] << 8) | data[25];
+        id(fr20_off0C).publish_state((float) raw);
+      }
+      if ((size_t)27 < data.size()) {
+        uint16_t raw = ((uint16_t)data[26] << 8) | data[27];
+        id(fr20_off0D).publish_state((float) raw);
+      }
+      if ((size_t)29 < data.size()) {
+        uint16_t raw = ((uint16_t)data[28] << 8) | data[29];
+        id(fr20_off0E).publish_state((float) raw);
+      }
+      if ((size_t)31 < data.size()) {
+        uint16_t raw = ((uint16_t)data[30] << 8) | data[31];
+        id(fr20_off0F).publish_state((float) raw);
+      }
+      if ((size_t)33 < data.size()) {
+        uint16_t raw = ((uint16_t)data[32] << 8) | data[33];
+        id(fr21_off00).publish_state((float) raw);
+      }
+      if ((size_t)35 < data.size()) {
+        uint16_t raw = ((uint16_t)data[34] << 8) | data[35];
+        id(fr21_off01).publish_state((float) raw);
+      }
+      if ((size_t)37 < data.size()) {
+        uint16_t raw = ((uint16_t)data[36] << 8) | data[37];
+        id(fr21_off02).publish_state((float) raw);
+      }
+      if ((size_t)39 < data.size()) {
+        uint16_t raw = ((uint16_t)data[38] << 8) | data[39];
+        id(fr21_off03).publish_state((float) raw);
+      }
+      if ((size_t)41 < data.size()) {
+        uint16_t raw = ((uint16_t)data[40] << 8) | data[41];
+        id(fr21_off04).publish_state((float) raw);
+      }
+      if ((size_t)43 < data.size()) {
+        uint16_t raw = ((uint16_t)data[42] << 8) | data[43];
+        id(fr21_off05).publish_state((float) raw);
+      }
+      if ((size_t)45 < data.size()) {
+        uint16_t raw = ((uint16_t)data[44] << 8) | data[45];
+        id(fr21_off06).publish_state((float) raw);
+      }
+      if ((size_t)47 < data.size()) {
+        uint16_t raw = ((uint16_t)data[46] << 8) | data[47];
+        id(fr21_off07).publish_state((float) raw);
+      }
+      if ((size_t)49 < data.size()) {
+        uint16_t raw = ((uint16_t)data[48] << 8) | data[49];
+        id(fr21_off08).publish_state((float) raw);
+      }
+      if ((size_t)51 < data.size()) {
+        uint16_t raw = ((uint16_t)data[50] << 8) | data[51];
+        id(fr21_off09).publish_state((float) raw);
+      }
+      if ((size_t)53 < data.size()) {
+        uint16_t raw = ((uint16_t)data[52] << 8) | data[53];
+        id(fr21_off0A).publish_state((float) raw);
+      }
+      if ((size_t)55 < data.size()) {
+        uint16_t raw = ((uint16_t)data[54] << 8) | data[55];
+        id(fr21_off0B).publish_state((float) raw);
+      }
+      if ((size_t)57 < data.size()) {
+        uint16_t raw = ((uint16_t)data[56] << 8) | data[57];
+        id(fr21_off0C).publish_state((float) raw);
+      }
+      if ((size_t)59 < data.size()) {
+        uint16_t raw = ((uint16_t)data[58] << 8) | data[59];
+        id(fr21_off0D).publish_state((float) raw);
+      }
+      if ((size_t)61 < data.size()) {
+        uint16_t raw = ((uint16_t)data[60] << 8) | data[61];
+        id(fr21_off0E).publish_state((float) raw);
+      }
+      if ((size_t)63 < data.size()) {
+        uint16_t raw = ((uint16_t)data[62] << 8) | data[63];
+        id(fr21_off0F).publish_state((float) raw);
+      }
+      return 0;
+  # Anchor for P10 range 12 (0xF960-0xF97F, size=32)
+  - platform: modbus_controller
+    modbus_controller_id: srne_main
+    name: "P10 Anchor 12"
+    internal: true
+    register_type: holding
+    skip_updates: ${p10_skip_updates}
+    force_new_range: true
+    address: 63840
+    register_count: 32
+    lambda: |-
+      // Distribute 16-bit words to per-register template sensors
+      if ((size_t)1 < data.size()) {
+        uint16_t raw = ((uint16_t)data[0] << 8) | data[1];
+        id(fr22_off00).publish_state((float) raw);
+      }
+      if ((size_t)3 < data.size()) {
+        uint16_t raw = ((uint16_t)data[2] << 8) | data[3];
+        id(fr22_off01).publish_state((float) raw);
+      }
+      if ((size_t)5 < data.size()) {
+        uint16_t raw = ((uint16_t)data[4] << 8) | data[5];
+        id(fr22_off02).publish_state((float) raw);
+      }
+      if ((size_t)7 < data.size()) {
+        uint16_t raw = ((uint16_t)data[6] << 8) | data[7];
+        id(fr22_off03).publish_state((float) raw);
+      }
+      if ((size_t)9 < data.size()) {
+        uint16_t raw = ((uint16_t)data[8] << 8) | data[9];
+        id(fr22_off04).publish_state((float) raw);
+      }
+      if ((size_t)11 < data.size()) {
+        uint16_t raw = ((uint16_t)data[10] << 8) | data[11];
+        id(fr22_off05).publish_state((float) raw);
+      }
+      if ((size_t)13 < data.size()) {
+        uint16_t raw = ((uint16_t)data[12] << 8) | data[13];
+        id(fr22_off06).publish_state((float) raw);
+      }
+      if ((size_t)15 < data.size()) {
+        uint16_t raw = ((uint16_t)data[14] << 8) | data[15];
+        id(fr22_off07).publish_state((float) raw);
+      }
+      if ((size_t)17 < data.size()) {
+        uint16_t raw = ((uint16_t)data[16] << 8) | data[17];
+        id(fr22_off08).publish_state((float) raw);
+      }
+      if ((size_t)19 < data.size()) {
+        uint16_t raw = ((uint16_t)data[18] << 8) | data[19];
+        id(fr22_off09).publish_state((float) raw);
+      }
+      if ((size_t)21 < data.size()) {
+        uint16_t raw = ((uint16_t)data[20] << 8) | data[21];
+        id(fr22_off0A).publish_state((float) raw);
+      }
+      if ((size_t)23 < data.size()) {
+        uint16_t raw = ((uint16_t)data[22] << 8) | data[23];
+        id(fr22_off0B).publish_state((float) raw);
+      }
+      if ((size_t)25 < data.size()) {
+        uint16_t raw = ((uint16_t)data[24] << 8) | data[25];
+        id(fr22_off0C).publish_state((float) raw);
+      }
+      if ((size_t)27 < data.size()) {
+        uint16_t raw = ((uint16_t)data[26] << 8) | data[27];
+        id(fr22_off0D).publish_state((float) raw);
+      }
+      if ((size_t)29 < data.size()) {
+        uint16_t raw = ((uint16_t)data[28] << 8) | data[29];
+        id(fr22_off0E).publish_state((float) raw);
+      }
+      if ((size_t)31 < data.size()) {
+        uint16_t raw = ((uint16_t)data[30] << 8) | data[31];
+        id(fr22_off0F).publish_state((float) raw);
+      }
+      if ((size_t)33 < data.size()) {
+        uint16_t raw = ((uint16_t)data[32] << 8) | data[33];
+        id(fr23_off00).publish_state((float) raw);
+      }
+      if ((size_t)35 < data.size()) {
+        uint16_t raw = ((uint16_t)data[34] << 8) | data[35];
+        id(fr23_off01).publish_state((float) raw);
+      }
+      if ((size_t)37 < data.size()) {
+        uint16_t raw = ((uint16_t)data[36] << 8) | data[37];
+        id(fr23_off02).publish_state((float) raw);
+      }
+      if ((size_t)39 < data.size()) {
+        uint16_t raw = ((uint16_t)data[38] << 8) | data[39];
+        id(fr23_off03).publish_state((float) raw);
+      }
+      if ((size_t)41 < data.size()) {
+        uint16_t raw = ((uint16_t)data[40] << 8) | data[41];
+        id(fr23_off04).publish_state((float) raw);
+      }
+      if ((size_t)43 < data.size()) {
+        uint16_t raw = ((uint16_t)data[42] << 8) | data[43];
+        id(fr23_off05).publish_state((float) raw);
+      }
+      if ((size_t)45 < data.size()) {
+        uint16_t raw = ((uint16_t)data[44] << 8) | data[45];
+        id(fr23_off06).publish_state((float) raw);
+      }
+      if ((size_t)47 < data.size()) {
+        uint16_t raw = ((uint16_t)data[46] << 8) | data[47];
+        id(fr23_off07).publish_state((float) raw);
+      }
+      if ((size_t)49 < data.size()) {
+        uint16_t raw = ((uint16_t)data[48] << 8) | data[49];
+        id(fr23_off08).publish_state((float) raw);
+      }
+      if ((size_t)51 < data.size()) {
+        uint16_t raw = ((uint16_t)data[50] << 8) | data[51];
+        id(fr23_off09).publish_state((float) raw);
+      }
+      if ((size_t)53 < data.size()) {
+        uint16_t raw = ((uint16_t)data[52] << 8) | data[53];
+        id(fr23_off0A).publish_state((float) raw);
+      }
+      if ((size_t)55 < data.size()) {
+        uint16_t raw = ((uint16_t)data[54] << 8) | data[55];
+        id(fr23_off0B).publish_state((float) raw);
+      }
+      if ((size_t)57 < data.size()) {
+        uint16_t raw = ((uint16_t)data[56] << 8) | data[57];
+        id(fr23_off0C).publish_state((float) raw);
+      }
+      if ((size_t)59 < data.size()) {
+        uint16_t raw = ((uint16_t)data[58] << 8) | data[59];
+        id(fr23_off0D).publish_state((float) raw);
+      }
+      if ((size_t)61 < data.size()) {
+        uint16_t raw = ((uint16_t)data[60] << 8) | data[61];
+        id(fr23_off0E).publish_state((float) raw);
+      }
+      if ((size_t)63 < data.size()) {
+        uint16_t raw = ((uint16_t)data[62] << 8) | data[63];
+        id(fr23_off0F).publish_state((float) raw);
+      }
+      return 0;
+  # Anchor for P10 range 13 (0xF980-0xF99F, size=32)
+  - platform: modbus_controller
+    modbus_controller_id: srne_main
+    name: "P10 Anchor 13"
+    internal: true
+    register_type: holding
+    skip_updates: ${p10_skip_updates}
+    force_new_range: true
+    address: 63872
+    register_count: 32
+    lambda: |-
+      // Distribute 16-bit words to per-register template sensors
+      if ((size_t)1 < data.size()) {
+        uint16_t raw = ((uint16_t)data[0] << 8) | data[1];
+        id(fr24_off00).publish_state((float) raw);
+      }
+      if ((size_t)3 < data.size()) {
+        uint16_t raw = ((uint16_t)data[2] << 8) | data[3];
+        id(fr24_off01).publish_state((float) raw);
+      }
+      if ((size_t)5 < data.size()) {
+        uint16_t raw = ((uint16_t)data[4] << 8) | data[5];
+        id(fr24_off02).publish_state((float) raw);
+      }
+      if ((size_t)7 < data.size()) {
+        uint16_t raw = ((uint16_t)data[6] << 8) | data[7];
+        id(fr24_off03).publish_state((float) raw);
+      }
+      if ((size_t)9 < data.size()) {
+        uint16_t raw = ((uint16_t)data[8] << 8) | data[9];
+        id(fr24_off04).publish_state((float) raw);
+      }
+      if ((size_t)11 < data.size()) {
+        uint16_t raw = ((uint16_t)data[10] << 8) | data[11];
+        id(fr24_off05).publish_state((float) raw);
+      }
+      if ((size_t)13 < data.size()) {
+        uint16_t raw = ((uint16_t)data[12] << 8) | data[13];
+        id(fr24_off06).publish_state((float) raw);
+      }
+      if ((size_t)15 < data.size()) {
+        uint16_t raw = ((uint16_t)data[14] << 8) | data[15];
+        id(fr24_off07).publish_state((float) raw);
+      }
+      if ((size_t)17 < data.size()) {
+        uint16_t raw = ((uint16_t)data[16] << 8) | data[17];
+        id(fr24_off08).publish_state((float) raw);
+      }
+      if ((size_t)19 < data.size()) {
+        uint16_t raw = ((uint16_t)data[18] << 8) | data[19];
+        id(fr24_off09).publish_state((float) raw);
+      }
+      if ((size_t)21 < data.size()) {
+        uint16_t raw = ((uint16_t)data[20] << 8) | data[21];
+        id(fr24_off0A).publish_state((float) raw);
+      }
+      if ((size_t)23 < data.size()) {
+        uint16_t raw = ((uint16_t)data[22] << 8) | data[23];
+        id(fr24_off0B).publish_state((float) raw);
+      }
+      if ((size_t)25 < data.size()) {
+        uint16_t raw = ((uint16_t)data[24] << 8) | data[25];
+        id(fr24_off0C).publish_state((float) raw);
+      }
+      if ((size_t)27 < data.size()) {
+        uint16_t raw = ((uint16_t)data[26] << 8) | data[27];
+        id(fr24_off0D).publish_state((float) raw);
+      }
+      if ((size_t)29 < data.size()) {
+        uint16_t raw = ((uint16_t)data[28] << 8) | data[29];
+        id(fr24_off0E).publish_state((float) raw);
+      }
+      if ((size_t)31 < data.size()) {
+        uint16_t raw = ((uint16_t)data[30] << 8) | data[31];
+        id(fr24_off0F).publish_state((float) raw);
+      }
+      if ((size_t)33 < data.size()) {
+        uint16_t raw = ((uint16_t)data[32] << 8) | data[33];
+        id(fr25_off00).publish_state((float) raw);
+      }
+      if ((size_t)35 < data.size()) {
+        uint16_t raw = ((uint16_t)data[34] << 8) | data[35];
+        id(fr25_off01).publish_state((float) raw);
+      }
+      if ((size_t)37 < data.size()) {
+        uint16_t raw = ((uint16_t)data[36] << 8) | data[37];
+        id(fr25_off02).publish_state((float) raw);
+      }
+      if ((size_t)39 < data.size()) {
+        uint16_t raw = ((uint16_t)data[38] << 8) | data[39];
+        id(fr25_off03).publish_state((float) raw);
+      }
+      if ((size_t)41 < data.size()) {
+        uint16_t raw = ((uint16_t)data[40] << 8) | data[41];
+        id(fr25_off04).publish_state((float) raw);
+      }
+      if ((size_t)43 < data.size()) {
+        uint16_t raw = ((uint16_t)data[42] << 8) | data[43];
+        id(fr25_off05).publish_state((float) raw);
+      }
+      if ((size_t)45 < data.size()) {
+        uint16_t raw = ((uint16_t)data[44] << 8) | data[45];
+        id(fr25_off06).publish_state((float) raw);
+      }
+      if ((size_t)47 < data.size()) {
+        uint16_t raw = ((uint16_t)data[46] << 8) | data[47];
+        id(fr25_off07).publish_state((float) raw);
+      }
+      if ((size_t)49 < data.size()) {
+        uint16_t raw = ((uint16_t)data[48] << 8) | data[49];
+        id(fr25_off08).publish_state((float) raw);
+      }
+      if ((size_t)51 < data.size()) {
+        uint16_t raw = ((uint16_t)data[50] << 8) | data[51];
+        id(fr25_off09).publish_state((float) raw);
+      }
+      if ((size_t)53 < data.size()) {
+        uint16_t raw = ((uint16_t)data[52] << 8) | data[53];
+        id(fr25_off0A).publish_state((float) raw);
+      }
+      if ((size_t)55 < data.size()) {
+        uint16_t raw = ((uint16_t)data[54] << 8) | data[55];
+        id(fr25_off0B).publish_state((float) raw);
+      }
+      if ((size_t)57 < data.size()) {
+        uint16_t raw = ((uint16_t)data[56] << 8) | data[57];
+        id(fr25_off0C).publish_state((float) raw);
+      }
+      if ((size_t)59 < data.size()) {
+        uint16_t raw = ((uint16_t)data[58] << 8) | data[59];
+        id(fr25_off0D).publish_state((float) raw);
+      }
+      if ((size_t)61 < data.size()) {
+        uint16_t raw = ((uint16_t)data[60] << 8) | data[61];
+        id(fr25_off0E).publish_state((float) raw);
+      }
+      if ((size_t)63 < data.size()) {
+        uint16_t raw = ((uint16_t)data[62] << 8) | data[63];
+        id(fr25_off0F).publish_state((float) raw);
+      }
+      return 0;
+  # Anchor for P10 range 14 (0xF9A0-0xF9BF, size=32)
+  - platform: modbus_controller
+    modbus_controller_id: srne_main
+    name: "P10 Anchor 14"
+    internal: true
+    register_type: holding
+    skip_updates: ${p10_skip_updates}
+    force_new_range: true
+    address: 63904
+    register_count: 32
+    lambda: |-
+      // Distribute 16-bit words to per-register template sensors
+      if ((size_t)1 < data.size()) {
+        uint16_t raw = ((uint16_t)data[0] << 8) | data[1];
+        id(fr26_off00).publish_state((float) raw);
+      }
+      if ((size_t)3 < data.size()) {
+        uint16_t raw = ((uint16_t)data[2] << 8) | data[3];
+        id(fr26_off01).publish_state((float) raw);
+      }
+      if ((size_t)5 < data.size()) {
+        uint16_t raw = ((uint16_t)data[4] << 8) | data[5];
+        id(fr26_off02).publish_state((float) raw);
+      }
+      if ((size_t)7 < data.size()) {
+        uint16_t raw = ((uint16_t)data[6] << 8) | data[7];
+        id(fr26_off03).publish_state((float) raw);
+      }
+      if ((size_t)9 < data.size()) {
+        uint16_t raw = ((uint16_t)data[8] << 8) | data[9];
+        id(fr26_off04).publish_state((float) raw);
+      }
+      if ((size_t)11 < data.size()) {
+        uint16_t raw = ((uint16_t)data[10] << 8) | data[11];
+        id(fr26_off05).publish_state((float) raw);
+      }
+      if ((size_t)13 < data.size()) {
+        uint16_t raw = ((uint16_t)data[12] << 8) | data[13];
+        id(fr26_off06).publish_state((float) raw);
+      }
+      if ((size_t)15 < data.size()) {
+        uint16_t raw = ((uint16_t)data[14] << 8) | data[15];
+        id(fr26_off07).publish_state((float) raw);
+      }
+      if ((size_t)17 < data.size()) {
+        uint16_t raw = ((uint16_t)data[16] << 8) | data[17];
+        id(fr26_off08).publish_state((float) raw);
+      }
+      if ((size_t)19 < data.size()) {
+        uint16_t raw = ((uint16_t)data[18] << 8) | data[19];
+        id(fr26_off09).publish_state((float) raw);
+      }
+      if ((size_t)21 < data.size()) {
+        uint16_t raw = ((uint16_t)data[20] << 8) | data[21];
+        id(fr26_off0A).publish_state((float) raw);
+      }
+      if ((size_t)23 < data.size()) {
+        uint16_t raw = ((uint16_t)data[22] << 8) | data[23];
+        id(fr26_off0B).publish_state((float) raw);
+      }
+      if ((size_t)25 < data.size()) {
+        uint16_t raw = ((uint16_t)data[24] << 8) | data[25];
+        id(fr26_off0C).publish_state((float) raw);
+      }
+      if ((size_t)27 < data.size()) {
+        uint16_t raw = ((uint16_t)data[26] << 8) | data[27];
+        id(fr26_off0D).publish_state((float) raw);
+      }
+      if ((size_t)29 < data.size()) {
+        uint16_t raw = ((uint16_t)data[28] << 8) | data[29];
+        id(fr26_off0E).publish_state((float) raw);
+      }
+      if ((size_t)31 < data.size()) {
+        uint16_t raw = ((uint16_t)data[30] << 8) | data[31];
+        id(fr26_off0F).publish_state((float) raw);
+      }
+      if ((size_t)33 < data.size()) {
+        uint16_t raw = ((uint16_t)data[32] << 8) | data[33];
+        id(fr27_off00).publish_state((float) raw);
+      }
+      if ((size_t)35 < data.size()) {
+        uint16_t raw = ((uint16_t)data[34] << 8) | data[35];
+        id(fr27_off01).publish_state((float) raw);
+      }
+      if ((size_t)37 < data.size()) {
+        uint16_t raw = ((uint16_t)data[36] << 8) | data[37];
+        id(fr27_off02).publish_state((float) raw);
+      }
+      if ((size_t)39 < data.size()) {
+        uint16_t raw = ((uint16_t)data[38] << 8) | data[39];
+        id(fr27_off03).publish_state((float) raw);
+      }
+      if ((size_t)41 < data.size()) {
+        uint16_t raw = ((uint16_t)data[40] << 8) | data[41];
+        id(fr27_off04).publish_state((float) raw);
+      }
+      if ((size_t)43 < data.size()) {
+        uint16_t raw = ((uint16_t)data[42] << 8) | data[43];
+        id(fr27_off05).publish_state((float) raw);
+      }
+      if ((size_t)45 < data.size()) {
+        uint16_t raw = ((uint16_t)data[44] << 8) | data[45];
+        id(fr27_off06).publish_state((float) raw);
+      }
+      if ((size_t)47 < data.size()) {
+        uint16_t raw = ((uint16_t)data[46] << 8) | data[47];
+        id(fr27_off07).publish_state((float) raw);
+      }
+      if ((size_t)49 < data.size()) {
+        uint16_t raw = ((uint16_t)data[48] << 8) | data[49];
+        id(fr27_off08).publish_state((float) raw);
+      }
+      if ((size_t)51 < data.size()) {
+        uint16_t raw = ((uint16_t)data[50] << 8) | data[51];
+        id(fr27_off09).publish_state((float) raw);
+      }
+      if ((size_t)53 < data.size()) {
+        uint16_t raw = ((uint16_t)data[52] << 8) | data[53];
+        id(fr27_off0A).publish_state((float) raw);
+      }
+      if ((size_t)55 < data.size()) {
+        uint16_t raw = ((uint16_t)data[54] << 8) | data[55];
+        id(fr27_off0B).publish_state((float) raw);
+      }
+      if ((size_t)57 < data.size()) {
+        uint16_t raw = ((uint16_t)data[56] << 8) | data[57];
+        id(fr27_off0C).publish_state((float) raw);
+      }
+      if ((size_t)59 < data.size()) {
+        uint16_t raw = ((uint16_t)data[58] << 8) | data[59];
+        id(fr27_off0D).publish_state((float) raw);
+      }
+      if ((size_t)61 < data.size()) {
+        uint16_t raw = ((uint16_t)data[60] << 8) | data[61];
+        id(fr27_off0E).publish_state((float) raw);
+      }
+      if ((size_t)63 < data.size()) {
+        uint16_t raw = ((uint16_t)data[62] << 8) | data[63];
+        id(fr27_off0F).publish_state((float) raw);
+      }
+      return 0;
+  # Anchor for P10 range 15 (0xF9C0-0xF9DF, size=32)
+  - platform: modbus_controller
+    modbus_controller_id: srne_main
+    name: "P10 Anchor 15"
+    internal: true
+    register_type: holding
+    skip_updates: ${p10_skip_updates}
+    force_new_range: true
+    address: 63936
+    register_count: 32
+    lambda: |-
+      // Distribute 16-bit words to per-register template sensors
+      if ((size_t)1 < data.size()) {
+        uint16_t raw = ((uint16_t)data[0] << 8) | data[1];
+        id(fr28_off00).publish_state((float) raw);
+      }
+      if ((size_t)3 < data.size()) {
+        uint16_t raw = ((uint16_t)data[2] << 8) | data[3];
+        id(fr28_off01).publish_state((float) raw);
+      }
+      if ((size_t)5 < data.size()) {
+        uint16_t raw = ((uint16_t)data[4] << 8) | data[5];
+        id(fr28_off02).publish_state((float) raw);
+      }
+      if ((size_t)7 < data.size()) {
+        uint16_t raw = ((uint16_t)data[6] << 8) | data[7];
+        id(fr28_off03).publish_state((float) raw);
+      }
+      if ((size_t)9 < data.size()) {
+        uint16_t raw = ((uint16_t)data[8] << 8) | data[9];
+        id(fr28_off04).publish_state((float) raw);
+      }
+      if ((size_t)11 < data.size()) {
+        uint16_t raw = ((uint16_t)data[10] << 8) | data[11];
+        id(fr28_off05).publish_state((float) raw);
+      }
+      if ((size_t)13 < data.size()) {
+        uint16_t raw = ((uint16_t)data[12] << 8) | data[13];
+        id(fr28_off06).publish_state((float) raw);
+      }
+      if ((size_t)15 < data.size()) {
+        uint16_t raw = ((uint16_t)data[14] << 8) | data[15];
+        id(fr28_off07).publish_state((float) raw);
+      }
+      if ((size_t)17 < data.size()) {
+        uint16_t raw = ((uint16_t)data[16] << 8) | data[17];
+        id(fr28_off08).publish_state((float) raw);
+      }
+      if ((size_t)19 < data.size()) {
+        uint16_t raw = ((uint16_t)data[18] << 8) | data[19];
+        id(fr28_off09).publish_state((float) raw);
+      }
+      if ((size_t)21 < data.size()) {
+        uint16_t raw = ((uint16_t)data[20] << 8) | data[21];
+        id(fr28_off0A).publish_state((float) raw);
+      }
+      if ((size_t)23 < data.size()) {
+        uint16_t raw = ((uint16_t)data[22] << 8) | data[23];
+        id(fr28_off0B).publish_state((float) raw);
+      }
+      if ((size_t)25 < data.size()) {
+        uint16_t raw = ((uint16_t)data[24] << 8) | data[25];
+        id(fr28_off0C).publish_state((float) raw);
+      }
+      if ((size_t)27 < data.size()) {
+        uint16_t raw = ((uint16_t)data[26] << 8) | data[27];
+        id(fr28_off0D).publish_state((float) raw);
+      }
+      if ((size_t)29 < data.size()) {
+        uint16_t raw = ((uint16_t)data[28] << 8) | data[29];
+        id(fr28_off0E).publish_state((float) raw);
+      }
+      if ((size_t)31 < data.size()) {
+        uint16_t raw = ((uint16_t)data[30] << 8) | data[31];
+        id(fr28_off0F).publish_state((float) raw);
+      }
+      if ((size_t)33 < data.size()) {
+        uint16_t raw = ((uint16_t)data[32] << 8) | data[33];
+        id(fr29_off00).publish_state((float) raw);
+      }
+      if ((size_t)35 < data.size()) {
+        uint16_t raw = ((uint16_t)data[34] << 8) | data[35];
+        id(fr29_off01).publish_state((float) raw);
+      }
+      if ((size_t)37 < data.size()) {
+        uint16_t raw = ((uint16_t)data[36] << 8) | data[37];
+        id(fr29_off02).publish_state((float) raw);
+      }
+      if ((size_t)39 < data.size()) {
+        uint16_t raw = ((uint16_t)data[38] << 8) | data[39];
+        id(fr29_off03).publish_state((float) raw);
+      }
+      if ((size_t)41 < data.size()) {
+        uint16_t raw = ((uint16_t)data[40] << 8) | data[41];
+        id(fr29_off04).publish_state((float) raw);
+      }
+      if ((size_t)43 < data.size()) {
+        uint16_t raw = ((uint16_t)data[42] << 8) | data[43];
+        id(fr29_off05).publish_state((float) raw);
+      }
+      if ((size_t)45 < data.size()) {
+        uint16_t raw = ((uint16_t)data[44] << 8) | data[45];
+        id(fr29_off06).publish_state((float) raw);
+      }
+      if ((size_t)47 < data.size()) {
+        uint16_t raw = ((uint16_t)data[46] << 8) | data[47];
+        id(fr29_off07).publish_state((float) raw);
+      }
+      if ((size_t)49 < data.size()) {
+        uint16_t raw = ((uint16_t)data[48] << 8) | data[49];
+        id(fr29_off08).publish_state((float) raw);
+      }
+      if ((size_t)51 < data.size()) {
+        uint16_t raw = ((uint16_t)data[50] << 8) | data[51];
+        id(fr29_off09).publish_state((float) raw);
+      }
+      if ((size_t)53 < data.size()) {
+        uint16_t raw = ((uint16_t)data[52] << 8) | data[53];
+        id(fr29_off0A).publish_state((float) raw);
+      }
+      if ((size_t)55 < data.size()) {
+        uint16_t raw = ((uint16_t)data[54] << 8) | data[55];
+        id(fr29_off0B).publish_state((float) raw);
+      }
+      if ((size_t)57 < data.size()) {
+        uint16_t raw = ((uint16_t)data[56] << 8) | data[57];
+        id(fr29_off0C).publish_state((float) raw);
+      }
+      if ((size_t)59 < data.size()) {
+        uint16_t raw = ((uint16_t)data[58] << 8) | data[59];
+        id(fr29_off0D).publish_state((float) raw);
+      }
+      if ((size_t)61 < data.size()) {
+        uint16_t raw = ((uint16_t)data[60] << 8) | data[61];
+        id(fr29_off0E).publish_state((float) raw);
+      }
+      if ((size_t)63 < data.size()) {
+        uint16_t raw = ((uint16_t)data[62] << 8) | data[63];
+        id(fr29_off0F).publish_state((float) raw);
+      }
+      return 0;
+  # Anchor for P10 range 16 (0xF9E0-0xF9FF, size=32)
+  - platform: modbus_controller
+    modbus_controller_id: srne_main
+    name: "P10 Anchor 16"
+    internal: true
+    register_type: holding
+    skip_updates: ${p10_skip_updates}
+    force_new_range: true
+    address: 63968
+    register_count: 32
+    lambda: |-
+      // Distribute 16-bit words to per-register template sensors
+      if ((size_t)1 < data.size()) {
+        uint16_t raw = ((uint16_t)data[0] << 8) | data[1];
+        id(fr30_off00).publish_state((float) raw);
+      }
+      if ((size_t)3 < data.size()) {
+        uint16_t raw = ((uint16_t)data[2] << 8) | data[3];
+        id(fr30_off01).publish_state((float) raw);
+      }
+      if ((size_t)5 < data.size()) {
+        uint16_t raw = ((uint16_t)data[4] << 8) | data[5];
+        id(fr30_off02).publish_state((float) raw);
+      }
+      if ((size_t)7 < data.size()) {
+        uint16_t raw = ((uint16_t)data[6] << 8) | data[7];
+        id(fr30_off03).publish_state((float) raw);
+      }
+      if ((size_t)9 < data.size()) {
+        uint16_t raw = ((uint16_t)data[8] << 8) | data[9];
+        id(fr30_off04).publish_state((float) raw);
+      }
+      if ((size_t)11 < data.size()) {
+        uint16_t raw = ((uint16_t)data[10] << 8) | data[11];
+        id(fr30_off05).publish_state((float) raw);
+      }
+      if ((size_t)13 < data.size()) {
+        uint16_t raw = ((uint16_t)data[12] << 8) | data[13];
+        id(fr30_off06).publish_state((float) raw);
+      }
+      if ((size_t)15 < data.size()) {
+        uint16_t raw = ((uint16_t)data[14] << 8) | data[15];
+        id(fr30_off07).publish_state((float) raw);
+      }
+      if ((size_t)17 < data.size()) {
+        uint16_t raw = ((uint16_t)data[16] << 8) | data[17];
+        id(fr30_off08).publish_state((float) raw);
+      }
+      if ((size_t)19 < data.size()) {
+        uint16_t raw = ((uint16_t)data[18] << 8) | data[19];
+        id(fr30_off09).publish_state((float) raw);
+      }
+      if ((size_t)21 < data.size()) {
+        uint16_t raw = ((uint16_t)data[20] << 8) | data[21];
+        id(fr30_off0A).publish_state((float) raw);
+      }
+      if ((size_t)23 < data.size()) {
+        uint16_t raw = ((uint16_t)data[22] << 8) | data[23];
+        id(fr30_off0B).publish_state((float) raw);
+      }
+      if ((size_t)25 < data.size()) {
+        uint16_t raw = ((uint16_t)data[24] << 8) | data[25];
+        id(fr30_off0C).publish_state((float) raw);
+      }
+      if ((size_t)27 < data.size()) {
+        uint16_t raw = ((uint16_t)data[26] << 8) | data[27];
+        id(fr30_off0D).publish_state((float) raw);
+      }
+      if ((size_t)29 < data.size()) {
+        uint16_t raw = ((uint16_t)data[28] << 8) | data[29];
+        id(fr30_off0E).publish_state((float) raw);
+      }
+      if ((size_t)31 < data.size()) {
+        uint16_t raw = ((uint16_t)data[30] << 8) | data[31];
+        id(fr30_off0F).publish_state((float) raw);
+      }
+      if ((size_t)33 < data.size()) {
+        uint16_t raw = ((uint16_t)data[32] << 8) | data[33];
+        id(fr31_off00).publish_state((float) raw);
+      }
+      if ((size_t)35 < data.size()) {
+        uint16_t raw = ((uint16_t)data[34] << 8) | data[35];
+        id(fr31_off01).publish_state((float) raw);
+      }
+      if ((size_t)37 < data.size()) {
+        uint16_t raw = ((uint16_t)data[36] << 8) | data[37];
+        id(fr31_off02).publish_state((float) raw);
+      }
+      if ((size_t)39 < data.size()) {
+        uint16_t raw = ((uint16_t)data[38] << 8) | data[39];
+        id(fr31_off03).publish_state((float) raw);
+      }
+      if ((size_t)41 < data.size()) {
+        uint16_t raw = ((uint16_t)data[40] << 8) | data[41];
+        id(fr31_off04).publish_state((float) raw);
+      }
+      if ((size_t)43 < data.size()) {
+        uint16_t raw = ((uint16_t)data[42] << 8) | data[43];
+        id(fr31_off05).publish_state((float) raw);
+      }
+      if ((size_t)45 < data.size()) {
+        uint16_t raw = ((uint16_t)data[44] << 8) | data[45];
+        id(fr31_off06).publish_state((float) raw);
+      }
+      if ((size_t)47 < data.size()) {
+        uint16_t raw = ((uint16_t)data[46] << 8) | data[47];
+        id(fr31_off07).publish_state((float) raw);
+      }
+      if ((size_t)49 < data.size()) {
+        uint16_t raw = ((uint16_t)data[48] << 8) | data[49];
+        id(fr31_off08).publish_state((float) raw);
+      }
+      if ((size_t)51 < data.size()) {
+        uint16_t raw = ((uint16_t)data[50] << 8) | data[51];
+        id(fr31_off09).publish_state((float) raw);
+      }
+      if ((size_t)53 < data.size()) {
+        uint16_t raw = ((uint16_t)data[52] << 8) | data[53];
+        id(fr31_off0A).publish_state((float) raw);
+      }
+      if ((size_t)55 < data.size()) {
+        uint16_t raw = ((uint16_t)data[54] << 8) | data[55];
+        id(fr31_off0B).publish_state((float) raw);
+      }
+      if ((size_t)57 < data.size()) {
+        uint16_t raw = ((uint16_t)data[56] << 8) | data[57];
+        id(fr31_off0C).publish_state((float) raw);
+      }
+      if ((size_t)59 < data.size()) {
+        uint16_t raw = ((uint16_t)data[58] << 8) | data[59];
+        id(fr31_off0D).publish_state((float) raw);
+      }
+      if ((size_t)61 < data.size()) {
+        uint16_t raw = ((uint16_t)data[60] << 8) | data[61];
+        id(fr31_off0E).publish_state((float) raw);
+      }
+      if ((size_t)63 < data.size()) {
+        uint16_t raw = ((uint16_t)data[62] << 8) | data[63];
+        id(fr31_off0F).publish_state((float) raw);
+      }
+      return 0;

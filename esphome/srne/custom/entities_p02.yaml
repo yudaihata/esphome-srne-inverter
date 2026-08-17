@@ -1,586 +1,317 @@
 
 sensor:
-  - platform: modbus_controller
-    modbus_controller_id: srne_main
-    register_type: holding
-    skip_updates: ${p02_skip_updates}
-    address: 512
-    force_new_range: true
-    value_type: U_WORD
-    # endianness: register=big, word=little
+  - platform: template
     id: sens_p02_512
     name: "Active_Fault_Bits"
     accuracy_decimals: 0
-  - platform: modbus_controller
-    modbus_controller_id: srne_main
-    register_type: holding
-    skip_updates: ${p02_skip_updates}
-    address: 527
-    value_type: U_WORD
-    # endianness: register=big, word=little
+
+  - platform: template
     id: sens_p02_527
     name: "Grid_Connection_Countdown"
     accuracy_decimals: 0
-    force_new_range: true
-  - platform: modbus_controller
-    modbus_controller_id: srne_main
-    register_type: holding
-    skip_updates: ${p02_skip_updates}
-    address: 530
-    value_type: U_WORD
-    # endianness: register=big, word=little
+
+  - platform: template
     id: sens_p02_530
     name: "Bus_Voltage_Total"
     unit_of_measurement: "V"
     accuracy_decimals: 1
-    filters:
-      - multiply: 0.1
     device_class: voltage
     state_class: measurement
-  - platform: modbus_controller
-    modbus_controller_id: srne_main
-    register_type: holding
-    skip_updates: ${p02_skip_updates}
-    address: 531
-    value_type: U_WORD
-    # endianness: register=big, word=little
+
+  - platform: template
     id: sens_p02_531
     name: "Grid_L1_Voltage"
     unit_of_measurement: "V"
     accuracy_decimals: 1
-    filters:
-      - multiply: 0.1
     device_class: voltage
     state_class: measurement
-  - platform: modbus_controller
-    modbus_controller_id: srne_main
-    register_type: holding
-    skip_updates: ${p02_skip_updates}
-    address: 532
-    value_type: U_WORD
-    # endianness: register=big, word=little
+
+  - platform: template
     id: sens_p02_532
     name: "Grid_L1_Current"
     unit_of_measurement: "A"
     accuracy_decimals: 1
-    filters:
-      - multiply: 0.1
     device_class: current
     state_class: measurement
-  - platform: modbus_controller
-    modbus_controller_id: srne_main
-    register_type: holding
-    skip_updates: ${p02_skip_updates}
-    address: 533
-    value_type: U_WORD
-    # endianness: register=big, word=little
+
+  - platform: template
     id: sens_p02_533
     name: "Grid_Frequency"
     unit_of_measurement: "Hz"
     accuracy_decimals: 2
-    filters:
-      - multiply: 0.01
     device_class: frequency
     state_class: measurement
-  - platform: modbus_controller
-    modbus_controller_id: srne_main
-    register_type: holding
-    skip_updates: ${p02_skip_updates}
-    address: 534
-    value_type: U_WORD
-    # endianness: register=big, word=little
+
+  - platform: template
     id: sens_p02_534
     name: "Inverter_L1_Voltage"
     unit_of_measurement: "V"
     accuracy_decimals: 1
-    filters:
-      - multiply: 0.1
     device_class: voltage
     state_class: measurement
-  - platform: modbus_controller
-    modbus_controller_id: srne_main
-    register_type: holding
-    skip_updates: ${p02_skip_updates}
-    address: 535
-    value_type: U_WORD
-    # endianness: register=big, word=little
+
+  - platform: template
     id: sens_p02_535
     name: "Inverter_L1_Current"
     unit_of_measurement: "A"
     accuracy_decimals: 1
-    filters:
-      - multiply: 0.1
     device_class: current
     state_class: measurement
-  - platform: modbus_controller
-    modbus_controller_id: srne_main
-    register_type: holding
-    skip_updates: ${p02_skip_updates}
-    address: 536
-    value_type: U_WORD
-    # endianness: register=big, word=little
+
+  - platform: template
     id: sens_p02_536
     name: "Inverter_Frequency"
     unit_of_measurement: "Hz"
     accuracy_decimals: 2
-    filters:
-      - multiply: 0.01
     device_class: frequency
     state_class: measurement
-  - platform: modbus_controller
-    modbus_controller_id: srne_main
-    register_type: holding
-    skip_updates: ${p02_skip_updates}
-    address: 537
-    value_type: U_WORD
-    # endianness: register=big, word=little
+
+  - platform: template
     id: sens_p02_537
     name: "Load_L1_Current"
     unit_of_measurement: "A"
     accuracy_decimals: 1
-    filters:
-      - multiply: 0.1
     device_class: current
     state_class: measurement
-  - platform: modbus_controller
-    modbus_controller_id: srne_main
-    register_type: holding
-    skip_updates: ${p02_skip_updates}
-    address: 538
-    value_type: S_WORD
-    # endianness: register=big, word=little
+
+  - platform: template
     id: sens_p02_538
     name: "Load_Power_Factor"
-    filters:
-      - multiply: 0.001
-  - platform: modbus_controller
-    modbus_controller_id: srne_main
-    register_type: holding
-    skip_updates: ${p02_skip_updates}
-    address: 539
-    value_type: U_WORD
-    # endianness: register=big, word=little
+
+  - platform: template
     id: sens_p02_539
     name: "Load_L1_Active_Power"
     unit_of_measurement: "W"
     accuracy_decimals: 0
     device_class: power
     state_class: measurement
-  - platform: modbus_controller
-    modbus_controller_id: srne_main
-    register_type: holding
-    skip_updates: ${p02_skip_updates}
-    address: 540
-    value_type: U_WORD
-    # endianness: register=big, word=little
+
+  - platform: template
     id: sens_p02_540
     name: "Load_L1_Apparent_Power"
     unit_of_measurement: "VA"
     accuracy_decimals: 0
     device_class: apparent_power
     state_class: measurement
-  - platform: modbus_controller
-    modbus_controller_id: srne_main
-    register_type: holding
-    skip_updates: ${p02_skip_updates}
-    address: 541
-    value_type: S_WORD
-    # endianness: register=big, word=little
+
+  - platform: template
     id: sens_p02_541
     name: "Inverter_DC_Component"
     unit_of_measurement: "mV"
     accuracy_decimals: 0
-  - platform: modbus_controller
-    modbus_controller_id: srne_main
-    register_type: holding
-    skip_updates: ${p02_skip_updates}
-    address: 542
-    value_type: U_WORD
-    # endianness: register=big, word=little
+
+  - platform: template
     id: sens_p02_542
     name: "Battery_Grid_Charge_Current"
     unit_of_measurement: "A"
     accuracy_decimals: 1
-    filters:
-      - multiply: 0.1
     device_class: current
     state_class: measurement
-  - platform: modbus_controller
-    modbus_controller_id: srne_main
-    register_type: holding
-    skip_updates: ${p02_skip_updates}
-    address: 543
-    value_type: U_WORD
-    # endianness: register=big, word=little
+
+  - platform: template
     id: sens_p02_543
     name: "Load_L1_Rate"
     unit_of_measurement: "%"
     accuracy_decimals: 0
-  - platform: modbus_controller
-    modbus_controller_id: srne_main
-    register_type: holding
-    skip_updates: ${p02_skip_updates}
-    address: 544
-    value_type: S_WORD
-    # endianness: register=big, word=little
+
+  - platform: template
     id: sens_p02_544
     name: "Heatsink_Temperature_A"
     unit_of_measurement: "°C"
     accuracy_decimals: 1
-    filters:
-      - multiply: 0.1
     device_class: temperature
     state_class: measurement
-  - platform: modbus_controller
-    modbus_controller_id: srne_main
-    register_type: holding
-    skip_updates: ${p02_skip_updates}
-    address: 545
-    value_type: S_WORD
-    # endianness: register=big, word=little
+
+  - platform: template
     id: sens_p02_545
     name: "Heatsink_Temperature_B"
     unit_of_measurement: "°C"
     accuracy_decimals: 1
-    filters:
-      - multiply: 0.1
     device_class: temperature
     state_class: measurement
-  - platform: modbus_controller
-    modbus_controller_id: srne_main
-    register_type: holding
-    skip_updates: ${p02_skip_updates}
-    address: 546
-    value_type: S_WORD
-    # endianness: register=big, word=little
+
+  - platform: template
     id: sens_p02_546
     name: "Heatsink_Temperature_C"
     unit_of_measurement: "°C"
     accuracy_decimals: 1
-    filters:
-      - multiply: 0.1
     device_class: temperature
     state_class: measurement
-  - platform: modbus_controller
-    modbus_controller_id: srne_main
-    register_type: holding
-    skip_updates: ${p02_skip_updates}
-    address: 547
-    value_type: S_WORD
-    # endianness: register=big, word=little
+
+  - platform: template
     id: sens_p02_547
     name: "Ambient_Temperature"
     unit_of_measurement: "°C"
     accuracy_decimals: 1
-    filters:
-      - multiply: 0.1
     device_class: temperature
     state_class: measurement
-  - platform: modbus_controller
-    modbus_controller_id: srne_main
-    register_type: holding
-    skip_updates: ${p02_skip_updates}
-    address: 548
-    value_type: U_WORD
-    # endianness: register=big, word=little
+
+  - platform: template
     id: sens_p02_548
     name: "PV_Charge_Current"
     unit_of_measurement: "A"
     accuracy_decimals: 1
-    filters:
-      - multiply: 0.1
     device_class: current
     state_class: measurement
-  - platform: modbus_controller
-    modbus_controller_id: srne_main
-    register_type: holding
-    skip_updates: ${p02_skip_updates}
-    address: 549
-    value_type: U_WORD
-    # endianness: register=big, word=little
+
+  - platform: template
     id: sens_p02_549
     name: "Load_Parallel_Average_Current"
     unit_of_measurement: "A"
     accuracy_decimals: 1
-    filters:
-      - multiply: 0.1
     device_class: current
     state_class: measurement
-  - platform: modbus_controller
-    modbus_controller_id: srne_main
-    register_type: holding
-    skip_updates: ${p02_skip_updates}
-    address: 550
-    value_type: U_WORD
-    # endianness: register=big, word=little
+
+  - platform: template
     id: sens_p02_550
     name: "Inverter_Fault_Status"
     accuracy_decimals: 0
-  - platform: modbus_controller
-    modbus_controller_id: srne_main
-    register_type: holding
-    skip_updates: ${p02_skip_updates}
-    address: 551
-    value_type: U_WORD
-    # endianness: register=big, word=little
+
+  - platform: template
     id: sens_p02_551
     name: "Battery_Charge_Status_RV"
     accuracy_decimals: 0
-  - platform: modbus_controller
-    modbus_controller_id: srne_main
-    register_type: holding
-    skip_updates: ${p02_skip_updates}
-    address: 552
-    value_type: U_WORD
-    # endianness: register=big, word=little
+
+  - platform: template
     id: sens_p02_552
     name: "Bus_Voltage_Positive"
     unit_of_measurement: "V"
     accuracy_decimals: 1
-    filters:
-      - multiply: 0.1
     device_class: voltage
     state_class: measurement
-  - platform: modbus_controller
-    modbus_controller_id: srne_main
-    register_type: holding
-    skip_updates: ${p02_skip_updates}
-    address: 553
-    value_type: U_WORD
-    # endianness: register=big, word=little
+
+  - platform: template
     id: sens_p02_553
     name: "Bus_Voltage_Negative"
     unit_of_measurement: "V"
     accuracy_decimals: 1
-    filters:
-      - multiply: 0.1
     device_class: voltage
     state_class: measurement
-  - platform: modbus_controller
-    modbus_controller_id: srne_main
-    register_type: holding
-    skip_updates: ${p02_skip_updates}
-    address: 554
-    value_type: U_WORD
-    # endianness: register=big, word=little
+
+  - platform: template
     id: sens_p02_554
     name: "Grid_L2_Voltage"
     unit_of_measurement: "V"
     accuracy_decimals: 1
-    filters:
-      - multiply: 0.1
     device_class: voltage
     state_class: measurement
-  - platform: modbus_controller
-    modbus_controller_id: srne_main
-    register_type: holding
-    skip_updates: ${p02_skip_updates}
-    address: 555
-    value_type: U_WORD
-    # endianness: register=big, word=little
+
+  - platform: template
     id: sens_p02_555
     name: "Grid_L3_Voltage"
     unit_of_measurement: "V"
     accuracy_decimals: 1
-    filters:
-      - multiply: 0.1
     device_class: voltage
     state_class: measurement
-  - platform: modbus_controller
-    modbus_controller_id: srne_main
-    register_type: holding
-    skip_updates: ${p02_skip_updates}
-    address: 556
-    force_new_range: true
-    value_type: U_WORD
-    # endianness: register=big, word=little
+
+  - platform: template
     id: sens_p02_556
     name: "Inverter_L2_Voltage"
     unit_of_measurement: "V"
     accuracy_decimals: 1
-    filters:
-      - multiply: 0.1
     device_class: voltage
     state_class: measurement
-  - platform: modbus_controller
-    modbus_controller_id: srne_main
-    register_type: holding
-    skip_updates: ${p02_skip_updates}
-    address: 557
-    value_type: U_WORD
-    # endianness: register=big, word=little
+
+  - platform: template
     id: sens_p02_557
     name: "Inverter_L3_Voltage"
     unit_of_measurement: "V"
     accuracy_decimals: 1
-    filters:
-      - multiply: 0.1
     device_class: voltage
     state_class: measurement
-  - platform: modbus_controller
-    modbus_controller_id: srne_main
-    register_type: holding
-    skip_updates: ${p02_skip_updates}
-    address: 558
-    value_type: U_WORD
-    # endianness: register=big, word=little
+
+  - platform: template
     id: sens_p02_558
     name: "Inverter_L2_Current"
     unit_of_measurement: "A"
     accuracy_decimals: 1
-    filters:
-      - multiply: 0.1
     device_class: current
     state_class: measurement
-  - platform: modbus_controller
-    modbus_controller_id: srne_main
-    register_type: holding
-    skip_updates: ${p02_skip_updates}
-    address: 559
-    value_type: U_WORD
-    # endianness: register=big, word=little
+
+  - platform: template
     id: sens_p02_559
     name: "Inverter_L3_Current"
     unit_of_measurement: "A"
     accuracy_decimals: 1
-    filters:
-      - multiply: 0.1
     device_class: current
     state_class: measurement
-  - platform: modbus_controller
-    modbus_controller_id: srne_main
-    register_type: holding
-    skip_updates: ${p02_skip_updates}
-    address: 560
-    value_type: U_WORD
-    # endianness: register=big, word=little
+
+  - platform: template
     id: sens_p02_560
     name: "Load_L2_Current"
     unit_of_measurement: "A"
     accuracy_decimals: 1
-    filters:
-      - multiply: 0.1
     device_class: current
     state_class: measurement
-  - platform: modbus_controller
-    modbus_controller_id: srne_main
-    register_type: holding
-    skip_updates: ${p02_skip_updates}
-    address: 561
-    value_type: U_WORD
-    # endianness: register=big, word=little
+
+  - platform: template
     id: sens_p02_561
     name: "Load_L3_Current"
     unit_of_measurement: "A"
     accuracy_decimals: 1
-    filters:
-      - multiply: 0.1
     device_class: current
     state_class: measurement
-  - platform: modbus_controller
-    modbus_controller_id: srne_main
-    register_type: holding
-    skip_updates: ${p02_skip_updates}
-    address: 562
-    value_type: U_WORD
-    # endianness: register=big, word=little
+
+  - platform: template
     id: sens_p02_562
     name: "Load_L2_Active_Power"
     unit_of_measurement: "W"
     accuracy_decimals: 0
     device_class: power
     state_class: measurement
-  - platform: modbus_controller
-    modbus_controller_id: srne_main
-    register_type: holding
-    skip_updates: ${p02_skip_updates}
-    address: 563
-    value_type: U_WORD
-    # endianness: register=big, word=little
+
+  - platform: template
     id: sens_p02_563
     name: "Load_L3_Active_Power"
     unit_of_measurement: "W"
     accuracy_decimals: 0
     device_class: power
     state_class: measurement
-  - platform: modbus_controller
-    modbus_controller_id: srne_main
-    register_type: holding
-    skip_updates: ${p02_skip_updates}
-    address: 564
-    value_type: U_WORD
-    # endianness: register=big, word=little
+
+  - platform: template
     id: sens_p02_564
     name: "Load_L2_Apparent_Power"
     unit_of_measurement: "VA"
     accuracy_decimals: 0
     device_class: apparent_power
     state_class: measurement
-  - platform: modbus_controller
-    modbus_controller_id: srne_main
-    register_type: holding
-    skip_updates: ${p02_skip_updates}
-    address: 565
-    value_type: U_WORD
-    # endianness: register=big, word=little
+
+  - platform: template
     id: sens_p02_565
     name: "Load_L3_Apparent_Power"
     unit_of_measurement: "VA"
     accuracy_decimals: 0
     device_class: apparent_power
     state_class: measurement
-  - platform: modbus_controller
-    modbus_controller_id: srne_main
-    register_type: holding
-    skip_updates: ${p02_skip_updates}
-    address: 566
-    value_type: U_WORD
-    # endianness: register=big, word=little
+
+  - platform: template
     id: sens_p02_566
     name: "Load_L2_Rate"
     unit_of_measurement: "%"
     accuracy_decimals: 0
-  - platform: modbus_controller
-    modbus_controller_id: srne_main
-    register_type: holding
-    skip_updates: ${p02_skip_updates}
-    address: 567
-    value_type: U_WORD
-    # endianness: register=big, word=little
+
+  - platform: template
     id: sens_p02_567
     name: "Load_L3_Rate"
     unit_of_measurement: "%"
     accuracy_decimals: 0
-  - platform: modbus_controller
-    modbus_controller_id: srne_main
-    register_type: holding
-    skip_updates: ${p02_skip_updates}
-    address: 568
-    value_type: U_WORD
-    # endianness: register=big, word=little
+
+  - platform: template
     id: sens_p02_568
     name: "Grid_L2_Current"
     unit_of_measurement: "A"
     accuracy_decimals: 1
-    filters:
-      - multiply: 0.1
     device_class: current
     state_class: measurement
-  - platform: modbus_controller
-    modbus_controller_id: srne_main
-    register_type: holding
-    skip_updates: ${p02_skip_updates}
-    address: 569
-    value_type: U_WORD
-    # endianness: register=big, word=little
+
+  - platform: template
     id: sens_p02_569
     name: "Grid_L3_Current"
     unit_of_measurement: "A"
     accuracy_decimals: 1
-    filters:
-      - multiply: 0.1
     device_class: current
     state_class: measurement
+
   - platform: template
     id: load_total_active_power
     name: "Load_Total_Active_Power"
@@ -619,39 +350,18 @@ sensor:
       if (isnan(vc)) vc = 0;
       if (isnan(ic)) ic = 0;
       return (va * ia) + (vb * ib) + (vc * ic);
-  - platform: modbus_controller
+  - platform: template
     id: sens_p02_516
-    modbus_controller_id: srne_main
-    register_type: holding
-    skip_updates: ${p02_skip_updates}
     internal: true
-    address: 516
-    value_type: U_WORD
-    force_new_range: true
-  - platform: modbus_controller
+  - platform: template
     id: sens_p02_517
-    modbus_controller_id: srne_main
-    register_type: holding
-    skip_updates: ${p02_skip_updates}
     internal: true
-    address: 517
-    value_type: U_WORD
-  - platform: modbus_controller
+  - platform: template
     id: sens_p02_518
-    modbus_controller_id: srne_main
-    register_type: holding
-    skip_updates: ${p02_skip_updates}
     internal: true
-    address: 518
-    value_type: U_WORD
-  - platform: modbus_controller
+  - platform: template
     id: sens_p02_519
-    modbus_controller_id: srne_main
-    register_type: holding
-    skip_updates: ${p02_skip_updates}
     internal: true
-    address: 519
-    value_type: U_WORD
 
 text_sensor:
   - platform: template
@@ -925,46 +635,12 @@ text_sensor:
           return std::string(buf);
         }
       }
-  - platform: modbus_controller
-    modbus_controller_id: srne_main
-    register_type: holding
-    skip_updates: ${p02_skip_updates}
-    address: 528
-    # endianness: register=big, word=little
-    name: "Device_State"
-    lambda: |-
-      int v = 0;
-      if (!x.empty()) v = atoi(x.c_str());
-      switch (v) {
-        case 0: return std::string("Initialization");
-        case 1: return std::string("Standby state");
-        case 2: return std::string("AC power operation");
-        case 3: return std::string("Inverter operation");
-        case 4: return std::string("AC power operation");
-        case 5: return std::string("Inverter operation");
-        case 6: return std::string("Inverter to AC power");
-        case 7: return std::string("AC power to inverter");
-        case 8: return std::string("Battery activation");
-        case 9: return std::string("Manual shutdown");
-        case 10: return std::string("Fault");
-        default: return std::string("unknown");
-      }
-  - platform: modbus_controller
-    modbus_controller_id: srne_main
-    register_type: holding
-    skip_updates: ${p02_skip_updates}
-    address: 529
-    # endianness: register=big, word=little
-    name: "Password_Protection_Status"
-    lambda: |-
-      int v = 0;
-      if (!x.empty()) v = atoi(x.c_str());
-      switch (v) {
-        case 0: return std::string("Users have not entered password");
-        case 1: return std::string("The password of users is entered");
-        case 4: return std::string("The password of the manufacturer is entered");
-        default: return std::string("unknown");
-      }
+  - platform: template
+    id: txt_p02_528
+    name: "Device State"
+  - platform: template
+    id: txt_p02_529
+    name: "Password Protection Status"
 
 button:
   - platform: template
@@ -1014,7 +690,6 @@ number:
     max_value: 65535
     write_lambda: |-
       return (int) x;
-    force_new_range: true
   - platform: modbus_controller
     modbus_controller_id: srne_main
     register_type: holding

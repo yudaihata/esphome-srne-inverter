@@ -6,7 +6,6 @@ sensor:
     register_type: holding
     skip_updates: ${p05_skip_updates}
     internal: true
-    force_new_range: true
     address: 57388
     value_type: U_WORD
     on_value:
@@ -30,7 +29,6 @@ sensor:
     register_type: holding
     skip_updates: ${p05_skip_updates}
     internal: true
-    force_new_range: true
     address: 57395
     value_type: U_WORD
     on_value:
@@ -54,7 +52,6 @@ sensor:
     register_type: holding
     skip_updates: ${p05_skip_updates}
     internal: true
-    force_new_range: true
     address: 57400
     value_type: U_WORD
     on_value:
@@ -80,7 +77,6 @@ sensor:
     value_type: U_WORD
     id: raw_p05_57382
     internal: true
-    force_new_range: true
     on_value:
       then:
         - component.update: txt_p05_range_57382_57383
@@ -103,7 +99,6 @@ sensor:
     value_type: U_WORD
     id: raw_p05_57384
     internal: true
-    force_new_range: true
     on_value:
       then:
         - component.update: txt_p05_range_57384_57385
@@ -126,7 +121,6 @@ sensor:
     value_type: U_WORD
     id: raw_p05_57386
     internal: true
-    force_new_range: true
     on_value:
       then:
         - component.update: txt_p05_range_57386_57387
@@ -149,7 +143,6 @@ sensor:
     value_type: U_WORD
     id: raw_p05_57389
     internal: true
-    force_new_range: true
     on_value:
       then:
         - component.update: txt_p05_range_57389_57390
@@ -172,7 +165,6 @@ sensor:
     value_type: U_WORD
     id: raw_p05_57391
     internal: true
-    force_new_range: true
     on_value:
       then:
         - component.update: txt_p05_range_57391_57392
@@ -195,7 +187,6 @@ sensor:
     value_type: U_WORD
     id: raw_p05_57393
     internal: true
-    force_new_range: true
     on_value:
       then:
         - component.update: txt_p05_range_57393_57394
@@ -340,7 +331,7 @@ text:
           if (controller == nullptr) return;
           auto cmd = esphome::modbus_controller::ModbusCommandItem::create_write_multiple_command(controller, 57382, 2, words);
           controller->queue_command(cmd);
-          id(p05_fast_poll_until_ms) = millis() + 15000U;
+          id(p05_refresh_after_write).execute();
           id(raw_p05_57382).publish_state((float) w_start);
           id(raw_p05_57383).publish_state((float) w_end);
           id(txt_p05_range_57382_57383).update();
@@ -386,7 +377,7 @@ text:
           if (controller == nullptr) return;
           auto cmd = esphome::modbus_controller::ModbusCommandItem::create_write_multiple_command(controller, 57384, 2, words);
           controller->queue_command(cmd);
-          id(p05_fast_poll_until_ms) = millis() + 15000U;
+          id(p05_refresh_after_write).execute();
           id(raw_p05_57384).publish_state((float) w_start);
           id(raw_p05_57385).publish_state((float) w_end);
           id(txt_p05_range_57384_57385).update();
@@ -432,7 +423,7 @@ text:
           if (controller == nullptr) return;
           auto cmd = esphome::modbus_controller::ModbusCommandItem::create_write_multiple_command(controller, 57386, 2, words);
           controller->queue_command(cmd);
-          id(p05_fast_poll_until_ms) = millis() + 15000U;
+          id(p05_refresh_after_write).execute();
           id(raw_p05_57386).publish_state((float) w_start);
           id(raw_p05_57387).publish_state((float) w_end);
           id(txt_p05_range_57386_57387).update();
@@ -478,7 +469,7 @@ text:
           if (controller == nullptr) return;
           auto cmd = esphome::modbus_controller::ModbusCommandItem::create_write_multiple_command(controller, 57389, 2, words);
           controller->queue_command(cmd);
-          id(p05_fast_poll_until_ms) = millis() + 15000U;
+          id(p05_refresh_after_write).execute();
           id(raw_p05_57389).publish_state((float) w_start);
           id(raw_p05_57390).publish_state((float) w_end);
           id(txt_p05_range_57389_57390).update();
@@ -524,7 +515,7 @@ text:
           if (controller == nullptr) return;
           auto cmd = esphome::modbus_controller::ModbusCommandItem::create_write_multiple_command(controller, 57391, 2, words);
           controller->queue_command(cmd);
-          id(p05_fast_poll_until_ms) = millis() + 15000U;
+          id(p05_refresh_after_write).execute();
           id(raw_p05_57391).publish_state((float) w_start);
           id(raw_p05_57392).publish_state((float) w_end);
           id(txt_p05_range_57391_57392).update();
@@ -570,7 +561,7 @@ text:
           if (controller == nullptr) return;
           auto cmd = esphome::modbus_controller::ModbusCommandItem::create_write_multiple_command(controller, 57393, 2, words);
           controller->queue_command(cmd);
-          id(p05_fast_poll_until_ms) = millis() + 15000U;
+          id(p05_refresh_after_write).execute();
           id(raw_p05_57393).publish_state((float) w_start);
           id(raw_p05_57394).publish_state((float) w_end);
           id(txt_p05_range_57393_57394).update();
@@ -622,7 +613,7 @@ number:
     lambda: |-
       return x * 0.1;
     write_lambda: |-
-      id(p05_fast_poll_until_ms) = millis() + 15000U;
+      id(p05_refresh_after_write).execute();
       return (int) round(x * 10.0);
   - platform: modbus_controller
     modbus_controller_id: srne_main
@@ -638,7 +629,7 @@ number:
     max_value: 400
     step: 1
     write_lambda: |-
-      id(p05_fast_poll_until_ms) = millis() + 15000U;
+      id(p05_refresh_after_write).execute();
       return (int) round(x * 1.0);
   - platform: modbus_controller
     modbus_controller_id: srne_main
@@ -680,7 +671,7 @@ number:
         ESP_LOGW("p05_voltage", "Input %.3fV above max %.3fV, block write", x, max_v);
         return {};
       }
-      id(p05_fast_poll_until_ms) = millis() + 15000U;
+      id(p05_refresh_after_write).execute();
       return (int) floorf(x / ratio * 10.0);
   - platform: modbus_controller
     modbus_controller_id: srne_main
@@ -722,7 +713,7 @@ number:
         ESP_LOGW("p05_voltage", "Input %.3fV above max %.3fV, block write", x, max_v);
         return {};
       }
-      id(p05_fast_poll_until_ms) = millis() + 15000U;
+      id(p05_refresh_after_write).execute();
       return (int) floorf(x / ratio * 10.0);
   - platform: modbus_controller
     modbus_controller_id: srne_main
@@ -764,7 +755,7 @@ number:
         ESP_LOGW("p05_voltage", "Input %.3fV above max %.3fV, block write", x, max_v);
         return {};
       }
-      id(p05_fast_poll_until_ms) = millis() + 15000U;
+      id(p05_refresh_after_write).execute();
       return (int) floorf(x / ratio * 10.0);
   - platform: modbus_controller
     modbus_controller_id: srne_main
@@ -806,7 +797,7 @@ number:
         ESP_LOGW("p05_voltage", "Input %.3fV above max %.3fV, block write", x, max_v);
         return {};
       }
-      id(p05_fast_poll_until_ms) = millis() + 15000U;
+      id(p05_refresh_after_write).execute();
       return (int) floorf(x / ratio * 10.0);
   - platform: modbus_controller
     modbus_controller_id: srne_main
@@ -848,7 +839,7 @@ number:
         ESP_LOGW("p05_voltage", "Input %.3fV above max %.3fV, block write", x, max_v);
         return {};
       }
-      id(p05_fast_poll_until_ms) = millis() + 15000U;
+      id(p05_refresh_after_write).execute();
       return (int) floorf(x / ratio * 10.0);
   - platform: modbus_controller
     modbus_controller_id: srne_main
@@ -890,7 +881,7 @@ number:
         ESP_LOGW("p05_voltage", "Input %.3fV above max %.3fV, block write", x, max_v);
         return {};
       }
-      id(p05_fast_poll_until_ms) = millis() + 15000U;
+      id(p05_refresh_after_write).execute();
       return (int) floorf(x / ratio * 10.0);
   - platform: modbus_controller
     modbus_controller_id: srne_main
@@ -932,7 +923,7 @@ number:
         ESP_LOGW("p05_voltage", "Input %.3fV above max %.3fV, block write", x, max_v);
         return {};
       }
-      id(p05_fast_poll_until_ms) = millis() + 15000U;
+      id(p05_refresh_after_write).execute();
       return (int) floorf(x / ratio * 10.0);
   - platform: modbus_controller
     modbus_controller_id: srne_main
@@ -974,7 +965,7 @@ number:
         ESP_LOGW("p05_voltage", "Input %.3fV above max %.3fV, block write", x, max_v);
         return {};
       }
-      id(p05_fast_poll_until_ms) = millis() + 15000U;
+      id(p05_refresh_after_write).execute();
       return (int) floorf(x / ratio * 10.0);
   - platform: modbus_controller
     modbus_controller_id: srne_main
@@ -1016,7 +1007,7 @@ number:
         ESP_LOGW("p05_voltage", "Input %.3fV above max %.3fV, block write", x, max_v);
         return {};
       }
-      id(p05_fast_poll_until_ms) = millis() + 15000U;
+      id(p05_refresh_after_write).execute();
       return (int) floorf(x / ratio * 10.0);
   - platform: modbus_controller
     modbus_controller_id: srne_main
@@ -1058,7 +1049,7 @@ number:
         ESP_LOGW("p05_voltage", "Input %.3fV above max %.3fV, block write", x, max_v);
         return {};
       }
-      id(p05_fast_poll_until_ms) = millis() + 15000U;
+      id(p05_refresh_after_write).execute();
       return (int) floorf(x / ratio * 10.0);
   - platform: modbus_controller
     modbus_controller_id: srne_main
@@ -1074,7 +1065,7 @@ number:
     max_value: 100
     step: 1
     write_lambda: |-
-      id(p05_fast_poll_until_ms) = millis() + 15000U;
+      id(p05_refresh_after_write).execute();
       return (int) round(x * 1.0);
   - platform: modbus_controller
     modbus_controller_id: srne_main
@@ -1090,7 +1081,7 @@ number:
     max_value: 120
     step: 1
     write_lambda: |-
-      id(p05_fast_poll_until_ms) = millis() + 15000U;
+      id(p05_refresh_after_write).execute();
       return (int) round(x * 1.0);
   - platform: modbus_controller
     modbus_controller_id: srne_main
@@ -1106,7 +1097,7 @@ number:
     max_value: 900
     step: 1
     write_lambda: |-
-      id(p05_fast_poll_until_ms) = millis() + 15000U;
+      id(p05_refresh_after_write).execute();
       return (int) round(x * 1.0);
   - platform: modbus_controller
     modbus_controller_id: srne_main
@@ -1122,7 +1113,7 @@ number:
     max_value: 900
     step: 1
     write_lambda: |-
-      id(p05_fast_poll_until_ms) = millis() + 15000U;
+      id(p05_refresh_after_write).execute();
       return (int) round(x * 1.0);
   - platform: modbus_controller
     modbus_controller_id: srne_main
@@ -1138,7 +1129,7 @@ number:
     max_value: 255
     step: 1
     write_lambda: |-
-      id(p05_fast_poll_until_ms) = millis() + 15000U;
+      id(p05_refresh_after_write).execute();
       return (int) round(x * 1.0);
   - platform: modbus_controller
     modbus_controller_id: srne_main
@@ -1154,7 +1145,7 @@ number:
     max_value: 10
     step: 1
     write_lambda: |-
-      id(p05_fast_poll_until_ms) = millis() + 15000U;
+      id(p05_refresh_after_write).execute();
       return (int) round(x * 1.0);
   - platform: modbus_controller
     modbus_controller_id: srne_main
@@ -1172,7 +1163,7 @@ number:
     lambda: |-
       return x * 0.1;
     write_lambda: |-
-      id(p05_fast_poll_until_ms) = millis() + 15000U;
+      id(p05_refresh_after_write).execute();
       return (int) round(x * 10.0);
   - platform: modbus_controller
     modbus_controller_id: srne_main
@@ -1190,7 +1181,7 @@ number:
     lambda: |-
       return x * 0.1;
     write_lambda: |-
-      id(p05_fast_poll_until_ms) = millis() + 15000U;
+      id(p05_refresh_after_write).execute();
       return (int) round(x * 10.0);
   - platform: modbus_controller
     modbus_controller_id: srne_main
@@ -1208,7 +1199,7 @@ number:
     lambda: |-
       return x * 0.1;
     write_lambda: |-
-      id(p05_fast_poll_until_ms) = millis() + 15000U;
+      id(p05_refresh_after_write).execute();
       return (int) round(x * 10.0);
   - platform: modbus_controller
     modbus_controller_id: srne_main
@@ -1226,7 +1217,7 @@ number:
     lambda: |-
       return x * 0.1;
     write_lambda: |-
-      id(p05_fast_poll_until_ms) = millis() + 15000U;
+      id(p05_refresh_after_write).execute();
       return (int) round(x * 10.0);
   - platform: modbus_controller
     modbus_controller_id: srne_main
@@ -1244,7 +1235,7 @@ number:
     lambda: |-
       return x * 0.1;
     write_lambda: |-
-      id(p05_fast_poll_until_ms) = millis() + 15000U;
+      id(p05_refresh_after_write).execute();
       return (int) round(x * 10.0);
   - platform: modbus_controller
     modbus_controller_id: srne_main
@@ -1262,7 +1253,7 @@ number:
     lambda: |-
       return x * 0.1;
     write_lambda: |-
-      id(p05_fast_poll_until_ms) = millis() + 15000U;
+      id(p05_refresh_after_write).execute();
       return (int) round(x * 10.0);
   - platform: modbus_controller
     modbus_controller_id: srne_main
@@ -1304,7 +1295,7 @@ number:
         ESP_LOGW("p05_voltage", "Input %.3fV above max %.3fV, block write", x, max_v);
         return {};
       }
-      id(p05_fast_poll_until_ms) = millis() + 15000U;
+      id(p05_refresh_after_write).execute();
       return (int) floorf(x / ratio * 10.0);
   - platform: modbus_controller
     modbus_controller_id: srne_main
@@ -1322,7 +1313,7 @@ number:
     lambda: |-
       return x * 0.1;
     write_lambda: |-
-      id(p05_fast_poll_until_ms) = millis() + 15000U;
+      id(p05_refresh_after_write).execute();
       return (int) round(x * 10.0);
   - platform: modbus_controller
     modbus_controller_id: srne_main
@@ -1338,7 +1329,7 @@ number:
     max_value: 100
     step: 1
     write_lambda: |-
-      id(p05_fast_poll_until_ms) = millis() + 15000U;
+      id(p05_refresh_after_write).execute();
       return (int) round(x * 1.0);
   - platform: modbus_controller
     modbus_controller_id: srne_main
@@ -1354,7 +1345,7 @@ number:
     max_value: 100
     step: 1
     write_lambda: |-
-      id(p05_fast_poll_until_ms) = millis() + 15000U;
+      id(p05_refresh_after_write).execute();
       return (int) round(x * 1.0);
   - platform: modbus_controller
     modbus_controller_id: srne_main
@@ -1370,7 +1361,7 @@ number:
     max_value: 100
     step: 1
     write_lambda: |-
-      id(p05_fast_poll_until_ms) = millis() + 15000U;
+      id(p05_refresh_after_write).execute();
       return (int) round(x * 1.0);
   - platform: modbus_controller
     modbus_controller_id: srne_main
@@ -1386,7 +1377,7 @@ number:
     max_value: 100
     step: 1
     write_lambda: |-
-      id(p05_fast_poll_until_ms) = millis() + 15000U;
+      id(p05_refresh_after_write).execute();
       return (int) round(x * 1.0);
   - platform: modbus_controller
     modbus_controller_id: srne_main
@@ -1428,7 +1419,7 @@ number:
         ESP_LOGW("p05_voltage", "Input %.3fV above max %.3fV, block write", x, max_v);
         return {};
       }
-      id(p05_fast_poll_until_ms) = millis() + 15000U;
+      id(p05_refresh_after_write).execute();
       return (int) floorf(x / ratio * 10.0);
   - platform: modbus_controller
     modbus_controller_id: srne_main
@@ -1444,7 +1435,7 @@ number:
     max_value: 900
     step: 1
     write_lambda: |-
-      id(p05_fast_poll_until_ms) = millis() + 15000U;
+      id(p05_refresh_after_write).execute();
       return (int) round(x * 1.0);
   - platform: modbus_controller
     modbus_controller_id: srne_main
@@ -1462,7 +1453,7 @@ number:
     lambda: |-
       return x * 0.1;
     write_lambda: |-
-      id(p05_fast_poll_until_ms) = millis() + 15000U;
+      id(p05_refresh_after_write).execute();
       return (int) round(x * 10.0);
 
 select:
@@ -1473,15 +1464,20 @@ select:
     # endianness: register=big, word=little
     id: sel_p05_57347
     name: "Battery_Rated_Voltage"
-    force_new_range: true
     entity_category: config
     optimistic: true
     on_value:
       - lambda: |-
           static std::string prev = "";
+          static bool initialized = false;
+          if (!initialized) {
+            initialized = true;
+            prev = x;
+            return;
+          }
           if (prev == x) return;
           prev = x;
-          id(p05_fast_poll_until_ms) = millis() + 15000U;
+          id(p05_refresh_after_write).execute();
     optionsmap:
       "12V": 12
       "24V": 24
@@ -1494,15 +1490,20 @@ select:
     # endianness: register=big, word=little
     id: sel_p05_57348
     name: "Battery_Type"
-    force_new_range: true
     entity_category: config
     optimistic: true
     on_value:
       - lambda: |-
           static std::string prev = "";
+          static bool initialized = false;
+          if (!initialized) {
+            initialized = true;
+            prev = x;
+            return;
+          }
           if (prev == x) return;
           prev = x;
-          id(p05_fast_poll_until_ms) = millis() + 15000U;
+          id(p05_refresh_after_write).execute();
     optionsmap:
       "User define": 0
       "SLD": 1
@@ -1525,15 +1526,20 @@ select:
     # endianness: register=big, word=little
     id: sel_p05_57381
     name: "BMS_Charge_Current_Limit_Mode_Setting"
-    force_new_range: true
     entity_category: config
     optimistic: true
     on_value:
       - lambda: |-
           static std::string prev = "";
+          static bool initialized = false;
+          if (!initialized) {
+            initialized = true;
+            prev = x;
+            return;
+          }
           if (prev == x) return;
           prev = x;
-          id(p05_fast_poll_until_ms) = millis() + 15000U;
+          id(p05_refresh_after_write).execute();
     optionsmap:
       "User-set Charge Current Limit": 0
       "BMS Charge Current Limit": 1
@@ -1545,15 +1551,20 @@ select:
     # endianness: register=big, word=little
     id: sel_p05_57399
     name: "Operation_Mode"
-    force_new_range: true
     entity_category: config
     optimistic: true
     on_value:
       - lambda: |-
           static std::string prev = "";
+          static bool initialized = false;
+          if (!initialized) {
+            initialized = true;
+            prev = x;
+            return;
+          }
           if (prev == x) return;
           prev = x;
-          id(p05_fast_poll_until_ms) = millis() + 15000U;
+          id(p05_refresh_after_write).execute();
     optionsmap:
       "Off-grid mode (banned)": 0
       "Grid-connected Mode": 1
@@ -1566,15 +1577,20 @@ select:
     # endianness: register=big, word=little
     id: sel_p05_57401
     name: "PV_Output_Priority"
-    force_new_range: true
     entity_category: config
     optimistic: true
     on_value:
       - lambda: |-
           static std::string prev = "";
+          static bool initialized = false;
+          if (!initialized) {
+            initialized = true;
+            prev = x;
+            return;
+          }
           if (prev == x) return;
           prev = x;
-          id(p05_fast_poll_until_ms) = millis() + 15000U;
+          id(p05_refresh_after_write).execute();
     optionsmap:
       "Charging priority": 0
       "Load priority": 1
@@ -1592,7 +1608,7 @@ switch:
             lambda: 'return id(p05_write_actions_enabled);'
           then:
             - lambda: |-
-                id(p05_fast_poll_until_ms) = millis() + 15000U;
+                id(p05_refresh_after_write).execute();
             - number.set:
                 id: num_p05_57388
                 value: 1
@@ -1602,7 +1618,7 @@ switch:
             lambda: 'return id(p05_write_actions_enabled);'
           then:
             - lambda: |-
-                id(p05_fast_poll_until_ms) = millis() + 15000U;
+                id(p05_refresh_after_write).execute();
             - number.set:
                 id: num_p05_57388
                 value: 0
@@ -1618,7 +1634,7 @@ switch:
             lambda: 'return id(p05_write_actions_enabled);'
           then:
             - lambda: |-
-                id(p05_fast_poll_until_ms) = millis() + 15000U;
+                id(p05_refresh_after_write).execute();
             - number.set:
                 id: num_p05_57395
                 value: 1
@@ -1628,7 +1644,7 @@ switch:
             lambda: 'return id(p05_write_actions_enabled);'
           then:
             - lambda: |-
-                id(p05_fast_poll_until_ms) = millis() + 15000U;
+                id(p05_refresh_after_write).execute();
             - number.set:
                 id: num_p05_57395
                 value: 0
@@ -1644,7 +1660,7 @@ switch:
             lambda: 'return id(p05_write_actions_enabled);'
           then:
             - lambda: |-
-                id(p05_fast_poll_until_ms) = millis() + 15000U;
+                id(p05_refresh_after_write).execute();
             - number.set:
                 id: num_p05_57400
                 value: 1
@@ -1654,16 +1670,33 @@ switch:
             lambda: 'return id(p05_write_actions_enabled);'
           then:
             - lambda: |-
-                id(p05_fast_poll_until_ms) = millis() + 15000U;
+                id(p05_refresh_after_write).execute();
             - number.set:
                 id: num_p05_57400
                 value: 0
 
+script:
+  - id: p05_refresh_after_write
+    mode: restart
+    then:
+      - delay: 1s
+      - lambda: |-
+          auto controller = id(srne_main);
+          if (controller == nullptr) return;
+          controller->queue_command(
+              esphome::modbus_controller::ModbusCommandItem::create_read_command(
+                  controller, esphome::modbus_controller::ModbusRegisterType::HOLDING,
+                  57345, 32));
+          controller->queue_command(
+              esphome::modbus_controller::ModbusCommandItem::create_read_command(
+                  controller, esphome::modbus_controller::ModbusRegisterType::HOLDING,
+                  57378, 18));
+          controller->queue_command(
+              esphome::modbus_controller::ModbusCommandItem::create_read_command(
+                  controller, esphome::modbus_controller::ModbusRegisterType::HOLDING,
+                  57399, 3));
+
 globals:
-  - id: p05_fast_poll_until_ms
-    type: uint32_t
-    restore_value: no
-    initial_value: '0'
   - id: p05_write_actions_enabled
     type: bool
     restore_value: no

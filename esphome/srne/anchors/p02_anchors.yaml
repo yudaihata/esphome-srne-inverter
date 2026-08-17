@@ -1,0 +1,263 @@
+sensor:
+  # Anchor for P02 range 1 (0x0200-0x0200, size=1)
+  - platform: modbus_controller
+    modbus_controller_id: srne_main
+    name: "P02 Anchor 1"
+    internal: true
+    register_type: holding
+    skip_updates: ${p02_skip_updates}
+    force_new_range: true
+    address: 512
+    register_count: 1
+    lambda: |-
+      // Distribute 16-bit words to per-register template sensors
+      if ((size_t)1 < data.size()) {
+        uint16_t raw = ((uint16_t)data[0] << 8) | data[1];
+        id(sens_p02_512).publish_state((float) raw);
+      }
+      return 0;
+  # Anchor for P02 range 2 (0x0204-0x0207, size=4)
+  - platform: modbus_controller
+    modbus_controller_id: srne_main
+    name: "P02 Anchor 2"
+    internal: true
+    register_type: holding
+    skip_updates: ${p02_skip_updates}
+    force_new_range: true
+    address: 516
+    register_count: 4
+    lambda: |-
+      // Distribute 16-bit words to per-register template sensors
+      if ((size_t)1 < data.size()) {
+        uint16_t raw = ((uint16_t)data[0] << 8) | data[1];
+        id(sens_p02_516).publish_state((float) raw);
+      }
+      if ((size_t)3 < data.size()) {
+        uint16_t raw = ((uint16_t)data[2] << 8) | data[3];
+        id(sens_p02_517).publish_state((float) raw);
+      }
+      if ((size_t)5 < data.size()) {
+        uint16_t raw = ((uint16_t)data[4] << 8) | data[5];
+        id(sens_p02_518).publish_state((float) raw);
+      }
+      if ((size_t)7 < data.size()) {
+        uint16_t raw = ((uint16_t)data[6] << 8) | data[7];
+        id(sens_p02_519).publish_state((float) raw);
+      }
+      return 0;
+  # Anchor for P02 range 3 (0x020F-0x022B, size=29)
+  - platform: modbus_controller
+    modbus_controller_id: srne_main
+    name: "P02 Anchor 3"
+    internal: true
+    register_type: holding
+    skip_updates: ${p02_skip_updates}
+    force_new_range: true
+    address: 527
+    register_count: 29
+    lambda: |-
+      // Distribute 16-bit words to per-register template sensors
+      if ((size_t)1 < data.size()) {
+        uint16_t raw = ((uint16_t)data[0] << 8) | data[1];
+        id(sens_p02_527).publish_state((float) raw);
+      }
+      if ((size_t)3 < data.size()) {
+        uint16_t v = ((uint16_t)data[2] << 8) | data[3];
+        switch (v) {
+          case 0: id(txt_p02_528).publish_state("Initialization"); break;
+          case 1: id(txt_p02_528).publish_state("Standby state"); break;
+          case 2: id(txt_p02_528).publish_state("AC power operation"); break;
+          case 3: id(txt_p02_528).publish_state("Inverter operation"); break;
+          case 4: id(txt_p02_528).publish_state("AC power operation"); break;
+          case 5: id(txt_p02_528).publish_state("Inverter operation"); break;
+          case 6: id(txt_p02_528).publish_state("Inverter to AC power"); break;
+          case 7: id(txt_p02_528).publish_state("AC power to inverter"); break;
+          case 8: id(txt_p02_528).publish_state("Battery activation"); break;
+          case 9: id(txt_p02_528).publish_state("Manual shutdown"); break;
+          case 10: id(txt_p02_528).publish_state("Fault"); break;
+          default: id(txt_p02_528).publish_state("unknown"); break;
+        }
+      }
+      if ((size_t)5 < data.size()) {
+        uint16_t v = ((uint16_t)data[4] << 8) | data[5];
+        switch (v) {
+          case 0: id(txt_p02_529).publish_state("Users have not entered password"); break;
+          case 1: id(txt_p02_529).publish_state("The password of users is entered"); break;
+          case 4: id(txt_p02_529).publish_state("The password of the manufacturer is entered"); break;
+          default: id(txt_p02_529).publish_state("unknown"); break;
+        }
+      }
+      if ((size_t)7 < data.size()) {
+        uint16_t raw = ((uint16_t)data[6] << 8) | data[7];
+        id(sens_p02_530).publish_state((float) raw * 0.1);
+      }
+      if ((size_t)9 < data.size()) {
+        uint16_t raw = ((uint16_t)data[8] << 8) | data[9];
+        id(sens_p02_531).publish_state((float) raw * 0.1);
+      }
+      if ((size_t)11 < data.size()) {
+        uint16_t raw = ((uint16_t)data[10] << 8) | data[11];
+        id(sens_p02_532).publish_state((float) raw * 0.1);
+      }
+      if ((size_t)13 < data.size()) {
+        uint16_t raw = ((uint16_t)data[12] << 8) | data[13];
+        id(sens_p02_533).publish_state((float) raw * 0.01);
+      }
+      if ((size_t)15 < data.size()) {
+        uint16_t raw = ((uint16_t)data[14] << 8) | data[15];
+        id(sens_p02_534).publish_state((float) raw * 0.1);
+      }
+      if ((size_t)17 < data.size()) {
+        uint16_t raw = ((uint16_t)data[16] << 8) | data[17];
+        id(sens_p02_535).publish_state((float) raw * 0.1);
+      }
+      if ((size_t)19 < data.size()) {
+        uint16_t raw = ((uint16_t)data[18] << 8) | data[19];
+        id(sens_p02_536).publish_state((float) raw * 0.01);
+      }
+      if ((size_t)21 < data.size()) {
+        uint16_t raw = ((uint16_t)data[20] << 8) | data[21];
+        id(sens_p02_537).publish_state((float) raw * 0.1);
+      }
+      if ((size_t)23 < data.size()) {
+        int16_t raw = (int16_t)(((uint16_t)data[22] << 8) | data[23]);
+        id(sens_p02_538).publish_state((float) raw * 0.001);
+      }
+      if ((size_t)25 < data.size()) {
+        uint16_t raw = ((uint16_t)data[24] << 8) | data[25];
+        id(sens_p02_539).publish_state((float) raw);
+      }
+      if ((size_t)27 < data.size()) {
+        uint16_t raw = ((uint16_t)data[26] << 8) | data[27];
+        id(sens_p02_540).publish_state((float) raw);
+      }
+      if ((size_t)29 < data.size()) {
+        int16_t raw = (int16_t)(((uint16_t)data[28] << 8) | data[29]);
+        id(sens_p02_541).publish_state((float) raw);
+      }
+      if ((size_t)31 < data.size()) {
+        uint16_t raw = ((uint16_t)data[30] << 8) | data[31];
+        id(sens_p02_542).publish_state((float) raw * 0.1);
+      }
+      if ((size_t)33 < data.size()) {
+        uint16_t raw = ((uint16_t)data[32] << 8) | data[33];
+        id(sens_p02_543).publish_state((float) raw);
+      }
+      if ((size_t)35 < data.size()) {
+        int16_t raw = (int16_t)(((uint16_t)data[34] << 8) | data[35]);
+        id(sens_p02_544).publish_state((float) raw * 0.1);
+      }
+      if ((size_t)37 < data.size()) {
+        int16_t raw = (int16_t)(((uint16_t)data[36] << 8) | data[37]);
+        id(sens_p02_545).publish_state((float) raw * 0.1);
+      }
+      if ((size_t)39 < data.size()) {
+        int16_t raw = (int16_t)(((uint16_t)data[38] << 8) | data[39]);
+        id(sens_p02_546).publish_state((float) raw * 0.1);
+      }
+      if ((size_t)41 < data.size()) {
+        int16_t raw = (int16_t)(((uint16_t)data[40] << 8) | data[41]);
+        id(sens_p02_547).publish_state((float) raw * 0.1);
+      }
+      if ((size_t)43 < data.size()) {
+        uint16_t raw = ((uint16_t)data[42] << 8) | data[43];
+        id(sens_p02_548).publish_state((float) raw * 0.1);
+      }
+      if ((size_t)45 < data.size()) {
+        uint16_t raw = ((uint16_t)data[44] << 8) | data[45];
+        id(sens_p02_549).publish_state((float) raw * 0.1);
+      }
+      if ((size_t)47 < data.size()) {
+        uint16_t raw = ((uint16_t)data[46] << 8) | data[47];
+        id(sens_p02_550).publish_state((float) raw);
+      }
+      if ((size_t)49 < data.size()) {
+        uint16_t raw = ((uint16_t)data[48] << 8) | data[49];
+        id(sens_p02_551).publish_state((float) raw);
+      }
+      if ((size_t)51 < data.size()) {
+        uint16_t raw = ((uint16_t)data[50] << 8) | data[51];
+        id(sens_p02_552).publish_state((float) raw * 0.1);
+      }
+      if ((size_t)53 < data.size()) {
+        uint16_t raw = ((uint16_t)data[52] << 8) | data[53];
+        id(sens_p02_553).publish_state((float) raw * 0.1);
+      }
+      if ((size_t)55 < data.size()) {
+        uint16_t raw = ((uint16_t)data[54] << 8) | data[55];
+        id(sens_p02_554).publish_state((float) raw * 0.1);
+      }
+      if ((size_t)57 < data.size()) {
+        uint16_t raw = ((uint16_t)data[56] << 8) | data[57];
+        id(sens_p02_555).publish_state((float) raw * 0.1);
+      }
+      return 0;
+  # Anchor for P02 range 4 (0x022C-0x0239, size=14)
+  - platform: modbus_controller
+    modbus_controller_id: srne_main
+    name: "P02 Anchor 4"
+    internal: true
+    register_type: holding
+    skip_updates: ${p02_skip_updates}
+    force_new_range: true
+    address: 556
+    register_count: 14
+    lambda: |-
+      // Distribute 16-bit words to per-register template sensors
+      if ((size_t)1 < data.size()) {
+        uint16_t raw = ((uint16_t)data[0] << 8) | data[1];
+        id(sens_p02_556).publish_state((float) raw * 0.1);
+      }
+      if ((size_t)3 < data.size()) {
+        uint16_t raw = ((uint16_t)data[2] << 8) | data[3];
+        id(sens_p02_557).publish_state((float) raw * 0.1);
+      }
+      if ((size_t)5 < data.size()) {
+        uint16_t raw = ((uint16_t)data[4] << 8) | data[5];
+        id(sens_p02_558).publish_state((float) raw * 0.1);
+      }
+      if ((size_t)7 < data.size()) {
+        uint16_t raw = ((uint16_t)data[6] << 8) | data[7];
+        id(sens_p02_559).publish_state((float) raw * 0.1);
+      }
+      if ((size_t)9 < data.size()) {
+        uint16_t raw = ((uint16_t)data[8] << 8) | data[9];
+        id(sens_p02_560).publish_state((float) raw * 0.1);
+      }
+      if ((size_t)11 < data.size()) {
+        uint16_t raw = ((uint16_t)data[10] << 8) | data[11];
+        id(sens_p02_561).publish_state((float) raw * 0.1);
+      }
+      if ((size_t)13 < data.size()) {
+        uint16_t raw = ((uint16_t)data[12] << 8) | data[13];
+        id(sens_p02_562).publish_state((float) raw);
+      }
+      if ((size_t)15 < data.size()) {
+        uint16_t raw = ((uint16_t)data[14] << 8) | data[15];
+        id(sens_p02_563).publish_state((float) raw);
+      }
+      if ((size_t)17 < data.size()) {
+        uint16_t raw = ((uint16_t)data[16] << 8) | data[17];
+        id(sens_p02_564).publish_state((float) raw);
+      }
+      if ((size_t)19 < data.size()) {
+        uint16_t raw = ((uint16_t)data[18] << 8) | data[19];
+        id(sens_p02_565).publish_state((float) raw);
+      }
+      if ((size_t)21 < data.size()) {
+        uint16_t raw = ((uint16_t)data[20] << 8) | data[21];
+        id(sens_p02_566).publish_state((float) raw);
+      }
+      if ((size_t)23 < data.size()) {
+        uint16_t raw = ((uint16_t)data[22] << 8) | data[23];
+        id(sens_p02_567).publish_state((float) raw);
+      }
+      if ((size_t)25 < data.size()) {
+        uint16_t raw = ((uint16_t)data[24] << 8) | data[25];
+        id(sens_p02_568).publish_state((float) raw * 0.1);
+      }
+      if ((size_t)27 < data.size()) {
+        uint16_t raw = ((uint16_t)data[26] << 8) | data[27];
+        id(sens_p02_569).publish_state((float) raw * 0.1);
+      }
+      return 0;

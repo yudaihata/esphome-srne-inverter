@@ -1,0 +1,92 @@
+sensor:
+  # Anchor for P01 range 1 (0x0100-0x0103, size=4)
+  - platform: modbus_controller
+    modbus_controller_id: srne_main
+    name: "P01 Anchor 1"
+    internal: true
+    register_type: holding
+    skip_updates: ${p01_skip_updates}
+    force_new_range: true
+    address: 256
+    register_count: 4
+    lambda: |-
+      // Distribute 16-bit words to per-register template sensors
+      if ((size_t)1 < data.size()) {
+        uint16_t raw = ((uint16_t)data[0] << 8) | data[1];
+        id(sens_p01_256).publish_state((float) raw);
+      }
+      if ((size_t)3 < data.size()) {
+        uint16_t raw = ((uint16_t)data[2] << 8) | data[3];
+        id(sens_p01_257).publish_state((float) raw * 0.1);
+      }
+      if ((size_t)5 < data.size()) {
+        int16_t raw = (int16_t)(((uint16_t)data[4] << 8) | data[5]);
+        id(sens_p01_258).publish_state((float) raw * -0.1);
+      }
+      if ((size_t)7 < data.size()) {
+        int16_t raw = (int16_t)(((uint16_t)data[6] << 8) | data[7]);
+        id(sens_p01_259).publish_state((float) raw * 0.1);
+      }
+      return 0;
+  # Anchor for P01 range 2 (0x0107-0x010B, size=5)
+  - platform: modbus_controller
+    modbus_controller_id: srne_main
+    name: "P01 Anchor 2"
+    internal: true
+    register_type: holding
+    skip_updates: ${p01_skip_updates}
+    force_new_range: true
+    address: 263
+    register_count: 5
+    lambda: |-
+      // Distribute 16-bit words to per-register template sensors
+      if ((size_t)1 < data.size()) {
+        uint16_t raw = ((uint16_t)data[0] << 8) | data[1];
+        id(sens_p01_263).publish_state((float) raw * 0.1);
+      }
+      if ((size_t)3 < data.size()) {
+        uint16_t raw = ((uint16_t)data[2] << 8) | data[3];
+        id(sens_p01_264).publish_state((float) raw * 0.1);
+      }
+      if ((size_t)5 < data.size()) {
+        uint16_t raw = ((uint16_t)data[4] << 8) | data[5];
+        id(sens_p01_265).publish_state((float) raw);
+      }
+      if ((size_t)7 < data.size()) {
+        uint16_t raw = ((uint16_t)data[6] << 8) | data[7];
+        id(sens_p01_266).publish_state((float) raw);
+      }
+      if ((size_t)9 < data.size()) {
+        uint16_t v = ((uint16_t)data[8] << 8) | data[9];
+        id(sens_p01_267).publish_state((float) v);
+      }
+      return 0;
+  # Anchor for P01 range 3 (0x010E-0x0111, size=4)
+  - platform: modbus_controller
+    modbus_controller_id: srne_main
+    name: "P01 Anchor 3"
+    internal: true
+    register_type: holding
+    skip_updates: ${p01_skip_updates}
+    force_new_range: true
+    address: 270
+    register_count: 4
+    lambda: |-
+      // Distribute 16-bit words to per-register template sensors
+      if ((size_t)1 < data.size()) {
+        uint16_t raw = ((uint16_t)data[0] << 8) | data[1];
+        id(sens_p01_270).publish_state((float) raw);
+      }
+      if ((size_t)3 < data.size()) {
+        uint16_t raw = ((uint16_t)data[2] << 8) | data[3];
+        id(sens_p01_271).publish_state((float) raw * 0.1);
+      }
+      if ((size_t)5 < data.size()) {
+        uint16_t raw = ((uint16_t)data[4] << 8) | data[5];
+        id(sens_p01_272).publish_state((float) raw * 0.1);
+      }
+      if ((size_t)7 < data.size()) {
+        uint16_t raw = ((uint16_t)data[6] << 8) | data[7];
+        id(sens_p01_273).publish_state((float) raw);
+      }
+      return 0;

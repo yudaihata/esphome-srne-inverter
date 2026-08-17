@@ -6,7 +6,6 @@ sensor:
     register_type: holding
     skip_updates: ${p07_skip_updates}
     internal: true
-    force_new_range: true
     address: 57862
     value_type: U_WORD
     on_value:
@@ -30,7 +29,6 @@ sensor:
     register_type: holding
     skip_updates: ${p07_skip_updates}
     internal: true
-    force_new_range: true
     address: 57863
     value_type: U_WORD
     on_value:
@@ -54,7 +52,6 @@ sensor:
     register_type: holding
     skip_updates: ${p07_skip_updates}
     internal: true
-    force_new_range: true
     address: 57868
     value_type: U_WORD
     on_value:
@@ -78,7 +75,6 @@ sensor:
     register_type: holding
     skip_updates: ${p07_skip_updates}
     internal: true
-    force_new_range: true
     address: 57869
     value_type: U_WORD
     on_value:
@@ -102,7 +98,6 @@ sensor:
     register_type: holding
     skip_updates: ${p07_skip_updates}
     internal: true
-    force_new_range: true
     address: 57870
     value_type: U_WORD
     on_value:
@@ -126,7 +121,6 @@ sensor:
     register_type: holding
     skip_updates: ${p07_skip_updates}
     internal: true
-    force_new_range: true
     address: 57872
     value_type: U_WORD
     on_value:
@@ -150,7 +144,6 @@ sensor:
     register_type: holding
     skip_updates: ${p07_skip_updates}
     internal: true
-    force_new_range: true
     address: 57873
     value_type: U_WORD
     on_value:
@@ -174,7 +167,6 @@ sensor:
     register_type: holding
     skip_updates: ${p07_skip_updates}
     internal: true
-    force_new_range: true
     address: 57874
     value_type: U_WORD
     on_value:
@@ -198,7 +190,6 @@ sensor:
     register_type: holding
     skip_updates: ${p07_skip_updates}
     internal: true
-    force_new_range: true
     address: 57875
     value_type: U_WORD
     on_value:
@@ -222,7 +213,6 @@ sensor:
     register_type: holding
     skip_updates: ${p07_skip_updates}
     internal: true
-    force_new_range: true
     address: 57876
     value_type: U_WORD
     on_value:
@@ -246,7 +236,6 @@ sensor:
     register_type: holding
     skip_updates: ${p07_skip_updates}
     internal: true
-    force_new_range: true
     address: 57878
     value_type: U_WORD
     on_value:
@@ -270,7 +259,6 @@ sensor:
     register_type: holding
     skip_updates: ${p07_skip_updates}
     internal: true
-    force_new_range: true
     address: 57887
     value_type: U_WORD
     on_value:
@@ -440,7 +428,7 @@ number:
     max_value: 254
     step: 1
     write_lambda: |-
-      id(p07_fast_poll_until_ms) = millis() + 15000U;
+      id(p07_refresh_after_write).execute();
       return (int) round(x * 1.0);
   - platform: modbus_controller
     modbus_controller_id: srne_main
@@ -455,7 +443,7 @@ number:
     max_value: 65535
     step: 1
     write_lambda: |-
-      id(p07_fast_poll_until_ms) = millis() + 15000U;
+      id(p07_refresh_after_write).execute();
       return (int) round(x * 1.0);
   - platform: modbus_controller
     modbus_controller_id: srne_main
@@ -470,7 +458,7 @@ number:
     max_value: 65535
     step: 1
     write_lambda: |-
-      id(p07_fast_poll_until_ms) = millis() + 15000U;
+      id(p07_refresh_after_write).execute();
       return (int) round(x * 1.0);
   - platform: modbus_controller
     modbus_controller_id: srne_main
@@ -488,7 +476,7 @@ number:
     lambda: |-
       return x * 0.1;
     write_lambda: |-
-      id(p07_fast_poll_until_ms) = millis() + 15000U;
+      id(p07_refresh_after_write).execute();
       return (int) round(x * 10.0);
   - platform: modbus_controller
     modbus_controller_id: srne_main
@@ -506,7 +494,7 @@ number:
     lambda: |-
       return x * 0.1;
     write_lambda: |-
-      id(p07_fast_poll_until_ms) = millis() + 15000U;
+      id(p07_refresh_after_write).execute();
       return (int) round(x * 10.0);
   - platform: modbus_controller
     modbus_controller_id: srne_main
@@ -524,7 +512,7 @@ number:
     lambda: |-
       return x * 0.01;
     write_lambda: |-
-      id(p07_fast_poll_until_ms) = millis() + 15000U;
+      id(p07_refresh_after_write).execute();
       return (int) round(x * 100.0);
   - platform: modbus_controller
     modbus_controller_id: srne_main
@@ -542,7 +530,7 @@ number:
     lambda: |-
       return x * 0.1;
     write_lambda: |-
-      id(p07_fast_poll_until_ms) = millis() + 15000U;
+      id(p07_refresh_after_write).execute();
       return (int) round(x * 10.0);
   - platform: modbus_controller
     modbus_controller_id: srne_main
@@ -558,7 +546,7 @@ number:
     max_value: 15000
     step: 1
     write_lambda: |-
-      id(p07_fast_poll_until_ms) = millis() + 15000U;
+      id(p07_refresh_after_write).execute();
       return (int) round(x * 1.0);
   - platform: modbus_controller
     modbus_controller_id: srne_main
@@ -573,7 +561,7 @@ number:
     max_value: 30
     step: 1
     write_lambda: |-
-      id(p07_fast_poll_until_ms) = millis() + 15000U;
+      id(p07_refresh_after_write).execute();
       return (int) round(x * 1.0);
   - platform: modbus_controller
     modbus_controller_id: srne_main
@@ -591,7 +579,7 @@ number:
     lambda: |-
       return x * 0.1;
     write_lambda: |-
-      id(p07_fast_poll_until_ms) = millis() + 15000U;
+      id(p07_refresh_after_write).execute();
       return (int) round(x * 10.0);
   - platform: modbus_controller
     modbus_controller_id: srne_main
@@ -607,7 +595,7 @@ number:
     max_value: 65535
     step: 1
     write_lambda: |-
-      id(p07_fast_poll_until_ms) = millis() + 15000U;
+      id(p07_refresh_after_write).execute();
       return (int) round(x * 1.0);
 
 select:
@@ -618,15 +606,20 @@ select:
     # endianness: register=big, word=little
     id: sel_p07_57857
     name: "Parallel_Mode"
-    force_new_range: true
     entity_category: config
     optimistic: true
     on_value:
       - lambda: |-
           static std::string prev = "";
+          static bool initialized = false;
+          if (!initialized) {
+            initialized = true;
+            prev = x;
+            return;
+          }
           if (prev == x) return;
           prev = x;
-          id(p07_fast_poll_until_ms) = millis() + 15000U;
+          id(p07_refresh_after_write).execute();
     optionsmap:
       "Single machine": 0
       "Single-phase parallel": 1
@@ -643,15 +636,20 @@ select:
     # endianness: register=big, word=little
     id: sel_p07_57860
     name: "Output_Priority"
-    force_new_range: true
     entity_category: config
     optimistic: true
     on_value:
       - lambda: |-
           static std::string prev = "";
+          static bool initialized = false;
+          if (!initialized) {
+            initialized = true;
+            prev = x;
+            return;
+          }
           if (prev == x) return;
           prev = x;
-          id(p07_fast_poll_until_ms) = millis() + 15000U;
+          id(p07_refresh_after_write).execute();
     optionsmap:
       "SOL (Solar > Grid > Battery)": 0
       "UTI (Grid > PV > Battery)": 1
@@ -663,15 +661,20 @@ select:
     # endianness: register=big, word=little
     id: sel_p07_57867
     name: "Grid_Input_Range"
-    force_new_range: true
     entity_category: config
     optimistic: true
     on_value:
       - lambda: |-
           static std::string prev = "";
+          static bool initialized = false;
+          if (!initialized) {
+            initialized = true;
+            prev = x;
+            return;
+          }
           if (prev == x) return;
           prev = x;
-          id(p07_fast_poll_until_ms) = millis() + 15000U;
+          id(p07_refresh_after_write).execute();
     optionsmap:
       "wide band (APL)": 0
       "narrow band (UPS)": 1
@@ -682,15 +685,20 @@ select:
     # endianness: register=big, word=little
     id: sel_p07_57871
     name: "Charge_Priority"
-    force_new_range: true
     entity_category: config
     optimistic: true
     on_value:
       - lambda: |-
           static std::string prev = "";
+          static bool initialized = false;
+          if (!initialized) {
+            initialized = true;
+            prev = x;
+            return;
+          }
           if (prev == x) return;
           prev = x;
-          id(p07_fast_poll_until_ms) = millis() + 15000U;
+          id(p07_refresh_after_write).execute();
     optionsmap:
       "PV Priority (CSO)": 0
       "Grid Priority (CUB)": 1
@@ -703,15 +711,20 @@ select:
     # endianness: register=big, word=little
     id: sel_p07_57877
     name: "BMS_Communication"
-    force_new_range: true
     entity_category: config
     optimistic: true
     on_value:
       - lambda: |-
           static std::string prev = "";
+          static bool initialized = false;
+          if (!initialized) {
+            initialized = true;
+            prev = x;
+            return;
+          }
           if (prev == x) return;
           prev = x;
-          id(p07_fast_poll_until_ms) = millis() + 15000U;
+          id(p07_refresh_after_write).execute();
     optionsmap:
       "Disabled": 0
       "RS485-BMS": 1
@@ -723,15 +736,20 @@ select:
     # endianness: register=big, word=little
     id: sel_p07_57886
     name: "AC_Output_Mode"
-    force_new_range: true
     entity_category: config
     optimistic: true
     on_value:
       - lambda: |-
           static std::string prev = "";
+          static bool initialized = false;
+          if (!initialized) {
+            initialized = true;
+            prev = x;
+            return;
+          }
           if (prev == x) return;
           prev = x;
-          id(p07_fast_poll_until_ms) = millis() + 15000U;
+          id(p07_refresh_after_write).execute();
     optionsmap:
       "Single-phase connection": 0
       "Three-phase connection": 1
@@ -750,7 +768,7 @@ switch:
             lambda: 'return id(p07_write_actions_enabled);'
           then:
             - lambda: |-
-                id(p07_fast_poll_until_ms) = millis() + 15000U;
+                id(p07_refresh_after_write).execute();
             - number.set:
                 id: num_p07_57862
                 value: 1
@@ -760,7 +778,7 @@ switch:
             lambda: 'return id(p07_write_actions_enabled);'
           then:
             - lambda: |-
-                id(p07_fast_poll_until_ms) = millis() + 15000U;
+                id(p07_refresh_after_write).execute();
             - number.set:
                 id: num_p07_57862
                 value: 0
@@ -776,7 +794,7 @@ switch:
             lambda: 'return id(p07_write_actions_enabled);'
           then:
             - lambda: |-
-                id(p07_fast_poll_until_ms) = millis() + 15000U;
+                id(p07_refresh_after_write).execute();
             - number.set:
                 id: num_p07_57863
                 value: 1
@@ -786,7 +804,7 @@ switch:
             lambda: 'return id(p07_write_actions_enabled);'
           then:
             - lambda: |-
-                id(p07_fast_poll_until_ms) = millis() + 15000U;
+                id(p07_refresh_after_write).execute();
             - number.set:
                 id: num_p07_57863
                 value: 0
@@ -802,7 +820,7 @@ switch:
             lambda: 'return id(p07_write_actions_enabled);'
           then:
             - lambda: |-
-                id(p07_fast_poll_until_ms) = millis() + 15000U;
+                id(p07_refresh_after_write).execute();
             - number.set:
                 id: num_p07_57868
                 value: 1
@@ -812,7 +830,7 @@ switch:
             lambda: 'return id(p07_write_actions_enabled);'
           then:
             - lambda: |-
-                id(p07_fast_poll_until_ms) = millis() + 15000U;
+                id(p07_refresh_after_write).execute();
             - number.set:
                 id: num_p07_57868
                 value: 0
@@ -828,7 +846,7 @@ switch:
             lambda: 'return id(p07_write_actions_enabled);'
           then:
             - lambda: |-
-                id(p07_fast_poll_until_ms) = millis() + 15000U;
+                id(p07_refresh_after_write).execute();
             - number.set:
                 id: num_p07_57869
                 value: 1
@@ -838,7 +856,7 @@ switch:
             lambda: 'return id(p07_write_actions_enabled);'
           then:
             - lambda: |-
-                id(p07_fast_poll_until_ms) = millis() + 15000U;
+                id(p07_refresh_after_write).execute();
             - number.set:
                 id: num_p07_57869
                 value: 0
@@ -854,7 +872,7 @@ switch:
             lambda: 'return id(p07_write_actions_enabled);'
           then:
             - lambda: |-
-                id(p07_fast_poll_until_ms) = millis() + 15000U;
+                id(p07_refresh_after_write).execute();
             - number.set:
                 id: num_p07_57870
                 value: 1
@@ -864,7 +882,7 @@ switch:
             lambda: 'return id(p07_write_actions_enabled);'
           then:
             - lambda: |-
-                id(p07_fast_poll_until_ms) = millis() + 15000U;
+                id(p07_refresh_after_write).execute();
             - number.set:
                 id: num_p07_57870
                 value: 0
@@ -880,7 +898,7 @@ switch:
             lambda: 'return id(p07_write_actions_enabled);'
           then:
             - lambda: |-
-                id(p07_fast_poll_until_ms) = millis() + 15000U;
+                id(p07_refresh_after_write).execute();
             - number.set:
                 id: num_p07_57872
                 value: 1
@@ -890,7 +908,7 @@ switch:
             lambda: 'return id(p07_write_actions_enabled);'
           then:
             - lambda: |-
-                id(p07_fast_poll_until_ms) = millis() + 15000U;
+                id(p07_refresh_after_write).execute();
             - number.set:
                 id: num_p07_57872
                 value: 0
@@ -906,7 +924,7 @@ switch:
             lambda: 'return id(p07_write_actions_enabled);'
           then:
             - lambda: |-
-                id(p07_fast_poll_until_ms) = millis() + 15000U;
+                id(p07_refresh_after_write).execute();
             - number.set:
                 id: num_p07_57873
                 value: 1
@@ -916,7 +934,7 @@ switch:
             lambda: 'return id(p07_write_actions_enabled);'
           then:
             - lambda: |-
-                id(p07_fast_poll_until_ms) = millis() + 15000U;
+                id(p07_refresh_after_write).execute();
             - number.set:
                 id: num_p07_57873
                 value: 0
@@ -932,7 +950,7 @@ switch:
             lambda: 'return id(p07_write_actions_enabled);'
           then:
             - lambda: |-
-                id(p07_fast_poll_until_ms) = millis() + 15000U;
+                id(p07_refresh_after_write).execute();
             - number.set:
                 id: num_p07_57874
                 value: 1
@@ -942,7 +960,7 @@ switch:
             lambda: 'return id(p07_write_actions_enabled);'
           then:
             - lambda: |-
-                id(p07_fast_poll_until_ms) = millis() + 15000U;
+                id(p07_refresh_after_write).execute();
             - number.set:
                 id: num_p07_57874
                 value: 0
@@ -958,7 +976,7 @@ switch:
             lambda: 'return id(p07_write_actions_enabled);'
           then:
             - lambda: |-
-                id(p07_fast_poll_until_ms) = millis() + 15000U;
+                id(p07_refresh_after_write).execute();
             - number.set:
                 id: num_p07_57875
                 value: 1
@@ -968,7 +986,7 @@ switch:
             lambda: 'return id(p07_write_actions_enabled);'
           then:
             - lambda: |-
-                id(p07_fast_poll_until_ms) = millis() + 15000U;
+                id(p07_refresh_after_write).execute();
             - number.set:
                 id: num_p07_57875
                 value: 0
@@ -984,7 +1002,7 @@ switch:
             lambda: 'return id(p07_write_actions_enabled);'
           then:
             - lambda: |-
-                id(p07_fast_poll_until_ms) = millis() + 15000U;
+                id(p07_refresh_after_write).execute();
             - number.set:
                 id: num_p07_57876
                 value: 1
@@ -994,7 +1012,7 @@ switch:
             lambda: 'return id(p07_write_actions_enabled);'
           then:
             - lambda: |-
-                id(p07_fast_poll_until_ms) = millis() + 15000U;
+                id(p07_refresh_after_write).execute();
             - number.set:
                 id: num_p07_57876
                 value: 0
@@ -1010,7 +1028,7 @@ switch:
             lambda: 'return id(p07_write_actions_enabled);'
           then:
             - lambda: |-
-                id(p07_fast_poll_until_ms) = millis() + 15000U;
+                id(p07_refresh_after_write).execute();
             - number.set:
                 id: num_p07_57878
                 value: 1
@@ -1020,7 +1038,7 @@ switch:
             lambda: 'return id(p07_write_actions_enabled);'
           then:
             - lambda: |-
-                id(p07_fast_poll_until_ms) = millis() + 15000U;
+                id(p07_refresh_after_write).execute();
             - number.set:
                 id: num_p07_57878
                 value: 0
@@ -1036,7 +1054,7 @@ switch:
             lambda: 'return id(p07_write_actions_enabled);'
           then:
             - lambda: |-
-                id(p07_fast_poll_until_ms) = millis() + 15000U;
+                id(p07_refresh_after_write).execute();
             - number.set:
                 id: num_p07_57887
                 value: 1
@@ -1046,16 +1064,33 @@ switch:
             lambda: 'return id(p07_write_actions_enabled);'
           then:
             - lambda: |-
-                id(p07_fast_poll_until_ms) = millis() + 15000U;
+                id(p07_refresh_after_write).execute();
             - number.set:
                 id: num_p07_57887
                 value: 0
 
+script:
+  - id: p07_refresh_after_write
+    mode: restart
+    then:
+      - delay: 1s
+      - lambda: |-
+          auto controller = id(srne_main);
+          if (controller == nullptr) return;
+          controller->queue_command(
+              esphome::modbus_controller::ModbusCommandItem::create_read_command(
+                  controller, esphome::modbus_controller::ModbusRegisterType::HOLDING,
+                  57856, 23));
+          controller->queue_command(
+              esphome::modbus_controller::ModbusCommandItem::create_read_command(
+                  controller, esphome::modbus_controller::ModbusRegisterType::HOLDING,
+                  57880, 1));
+          controller->queue_command(
+              esphome::modbus_controller::ModbusCommandItem::create_read_command(
+                  controller, esphome::modbus_controller::ModbusRegisterType::HOLDING,
+                  57882, 6));
+
 globals:
-  - id: p07_fast_poll_until_ms
-    type: uint32_t
-    restore_value: no
-    initial_value: '0'
   - id: p07_write_actions_enabled
     type: bool
     restore_value: no

@@ -1,0 +1,496 @@
+sensor:
+  # Anchor for P09 range 1 (0xF000-0xF01F, size=32)
+  - platform: modbus_controller
+    modbus_controller_id: srne_main
+    name: "P09 Anchor 1"
+    internal: true
+    register_type: holding
+    skip_updates: ${p09_skip_updates}
+    force_new_range: true
+    address: 61440
+    register_count: 32
+    lambda: |-
+      // Distribute 16-bit words to per-register template sensors
+      if ((size_t)1 < data.size()) {
+        uint16_t raw = ((uint16_t)data[0] << 8) | data[1];
+        id(sens_p09_61440).publish_state((float) raw * 0.1);
+      }
+      if ((size_t)3 < data.size()) {
+        uint16_t raw = ((uint16_t)data[2] << 8) | data[3];
+        id(sens_p09_61441).publish_state((float) raw * 0.1);
+      }
+      if ((size_t)5 < data.size()) {
+        uint16_t raw = ((uint16_t)data[4] << 8) | data[5];
+        id(sens_p09_61442).publish_state((float) raw * 0.1);
+      }
+      if ((size_t)7 < data.size()) {
+        uint16_t raw = ((uint16_t)data[6] << 8) | data[7];
+        id(sens_p09_61443).publish_state((float) raw * 0.1);
+      }
+      if ((size_t)9 < data.size()) {
+        uint16_t raw = ((uint16_t)data[8] << 8) | data[9];
+        id(sens_p09_61444).publish_state((float) raw * 0.1);
+      }
+      if ((size_t)11 < data.size()) {
+        uint16_t raw = ((uint16_t)data[10] << 8) | data[11];
+        id(sens_p09_61445).publish_state((float) raw * 0.1);
+      }
+      if ((size_t)13 < data.size()) {
+        uint16_t raw = ((uint16_t)data[12] << 8) | data[13];
+        id(sens_p09_61446).publish_state((float) raw * 0.1);
+      }
+      if ((size_t)15 < data.size()) {
+        uint16_t raw = ((uint16_t)data[14] << 8) | data[15];
+        id(sens_p09_61447).publish_state((float) raw);
+      }
+      if ((size_t)17 < data.size()) {
+        uint16_t raw = ((uint16_t)data[16] << 8) | data[17];
+        id(sens_p09_61448).publish_state((float) raw);
+      }
+      if ((size_t)19 < data.size()) {
+        uint16_t raw = ((uint16_t)data[18] << 8) | data[19];
+        id(sens_p09_61449).publish_state((float) raw);
+      }
+      if ((size_t)21 < data.size()) {
+        uint16_t raw = ((uint16_t)data[20] << 8) | data[21];
+        id(sens_p09_61450).publish_state((float) raw);
+      }
+      if ((size_t)23 < data.size()) {
+        uint16_t raw = ((uint16_t)data[22] << 8) | data[23];
+        id(sens_p09_61451).publish_state((float) raw);
+      }
+      if ((size_t)25 < data.size()) {
+        uint16_t raw = ((uint16_t)data[24] << 8) | data[25];
+        id(sens_p09_61452).publish_state((float) raw);
+      }
+      if ((size_t)27 < data.size()) {
+        uint16_t raw = ((uint16_t)data[26] << 8) | data[27];
+        id(sens_p09_61453).publish_state((float) raw);
+      }
+      if ((size_t)29 < data.size()) {
+        uint16_t raw = ((uint16_t)data[28] << 8) | data[29];
+        id(sens_p09_61454).publish_state((float) raw);
+      }
+      if ((size_t)31 < data.size()) {
+        uint16_t raw = ((uint16_t)data[30] << 8) | data[31];
+        id(sens_p09_61455).publish_state((float) raw);
+      }
+      if ((size_t)33 < data.size()) {
+        uint16_t raw = ((uint16_t)data[32] << 8) | data[33];
+        id(sens_p09_61456).publish_state((float) raw);
+      }
+      if ((size_t)35 < data.size()) {
+        uint16_t raw = ((uint16_t)data[34] << 8) | data[35];
+        id(sens_p09_61457).publish_state((float) raw);
+      }
+      if ((size_t)37 < data.size()) {
+        uint16_t raw = ((uint16_t)data[36] << 8) | data[37];
+        id(sens_p09_61458).publish_state((float) raw);
+      }
+      if ((size_t)39 < data.size()) {
+        uint16_t raw = ((uint16_t)data[38] << 8) | data[39];
+        id(sens_p09_61459).publish_state((float) raw);
+      }
+      if ((size_t)41 < data.size()) {
+        uint16_t raw = ((uint16_t)data[40] << 8) | data[41];
+        id(sens_p09_61460).publish_state((float) raw);
+      }
+      if ((size_t)43 < data.size()) {
+        uint16_t raw = ((uint16_t)data[42] << 8) | data[43];
+        id(sens_p09_61461).publish_state((float) raw);
+      }
+      if ((size_t)45 < data.size()) {
+        uint16_t raw = ((uint16_t)data[44] << 8) | data[45];
+        id(sens_p09_61462).publish_state((float) raw);
+      }
+      if ((size_t)47 < data.size()) {
+        uint16_t raw = ((uint16_t)data[46] << 8) | data[47];
+        id(sens_p09_61463).publish_state((float) raw);
+      }
+      if ((size_t)49 < data.size()) {
+        uint16_t raw = ((uint16_t)data[48] << 8) | data[49];
+        id(sens_p09_61464).publish_state((float) raw);
+      }
+      if ((size_t)51 < data.size()) {
+        uint16_t raw = ((uint16_t)data[50] << 8) | data[51];
+        id(sens_p09_61465).publish_state((float) raw);
+      }
+      if ((size_t)53 < data.size()) {
+        uint16_t raw = ((uint16_t)data[52] << 8) | data[53];
+        id(sens_p09_61466).publish_state((float) raw);
+      }
+      if ((size_t)55 < data.size()) {
+        uint16_t raw = ((uint16_t)data[54] << 8) | data[55];
+        id(sens_p09_61467).publish_state((float) raw);
+      }
+      if ((size_t)57 < data.size()) {
+        uint16_t raw = ((uint16_t)data[56] << 8) | data[57];
+        id(sens_p09_61468).publish_state((float) raw * 0.1);
+      }
+      if ((size_t)59 < data.size()) {
+        uint16_t raw = ((uint16_t)data[58] << 8) | data[59];
+        id(sens_p09_61469).publish_state((float) raw * 0.1);
+      }
+      if ((size_t)61 < data.size()) {
+        uint16_t raw = ((uint16_t)data[60] << 8) | data[61];
+        id(sens_p09_61470).publish_state((float) raw * 0.1);
+      }
+      if ((size_t)63 < data.size()) {
+        uint16_t raw = ((uint16_t)data[62] << 8) | data[63];
+        id(sens_p09_61471).publish_state((float) raw * 0.1);
+      }
+      return 0;
+  # Anchor for P09 range 2 (0xF020-0xF032, size=20)
+  - platform: modbus_controller
+    modbus_controller_id: srne_main
+    name: "P09 Anchor 2"
+    internal: true
+    register_type: holding
+    skip_updates: ${p09_skip_updates}
+    force_new_range: true
+    address: 61472
+    register_count: 20
+    lambda: |-
+      // Distribute 16-bit words to per-register template sensors
+      if ((size_t)1 < data.size()) {
+        uint16_t raw = ((uint16_t)data[0] << 8) | data[1];
+        id(sens_p09_61472).publish_state((float) raw * 0.1);
+      }
+      if ((size_t)3 < data.size()) {
+        uint16_t raw = ((uint16_t)data[2] << 8) | data[3];
+        id(sens_p09_61473).publish_state((float) raw * 0.1);
+      }
+      if ((size_t)5 < data.size()) {
+        uint16_t raw = ((uint16_t)data[4] << 8) | data[5];
+        id(sens_p09_61474).publish_state((float) raw * 0.1);
+      }
+      if ((size_t)7 < data.size()) {
+        uint16_t raw = ((uint16_t)data[6] << 8) | data[7];
+        id(sens_p09_61475).publish_state((float) raw * 0.1);
+      }
+      if ((size_t)9 < data.size()) {
+        uint16_t raw = ((uint16_t)data[8] << 8) | data[9];
+        id(sens_p09_61476).publish_state((float) raw * 0.1);
+      }
+      if ((size_t)11 < data.size()) {
+        uint16_t raw = ((uint16_t)data[10] << 8) | data[11];
+        id(sens_p09_61477).publish_state((float) raw * 0.1);
+      }
+      if ((size_t)13 < data.size()) {
+        uint16_t raw = ((uint16_t)data[12] << 8) | data[13];
+        id(sens_p09_61478).publish_state((float) raw * 0.1);
+      }
+      if ((size_t)15 < data.size()) {
+        uint16_t raw = ((uint16_t)data[14] << 8) | data[15];
+        id(sens_p09_61479).publish_state((float) raw * 0.1);
+      }
+      if ((size_t)17 < data.size()) {
+        uint16_t raw = ((uint16_t)data[16] << 8) | data[17];
+        id(sens_p09_61480).publish_state((float) raw * 0.1);
+      }
+      if ((size_t)19 < data.size()) {
+        uint16_t raw = ((uint16_t)data[18] << 8) | data[19];
+        id(sens_p09_61481).publish_state((float) raw * 0.1);
+      }
+      if ((size_t)21 < data.size()) {
+        uint16_t raw = ((uint16_t)data[20] << 8) | data[21];
+        id(sens_p09_61482).publish_state((float) raw * 0.1);
+      }
+      if ((size_t)23 < data.size()) {
+        uint16_t raw = ((uint16_t)data[22] << 8) | data[23];
+        id(sens_p09_61483).publish_state((float) raw * 0.1);
+      }
+      if ((size_t)25 < data.size()) {
+        uint16_t raw = ((uint16_t)data[24] << 8) | data[25];
+        id(sens_p09_61484).publish_state((float) raw * 0.1);
+      }
+      if ((size_t)27 < data.size()) {
+        uint16_t raw = ((uint16_t)data[26] << 8) | data[27];
+        id(sens_p09_61485).publish_state((float) raw);
+      }
+      if ((size_t)29 < data.size()) {
+        uint16_t raw = ((uint16_t)data[28] << 8) | data[29];
+        id(sens_p09_61486).publish_state((float) raw);
+      }
+      if ((size_t)31 < data.size()) {
+        uint16_t raw = ((uint16_t)data[30] << 8) | data[31];
+        id(sens_p09_61487).publish_state((float) raw * 0.1);
+      }
+      if ((size_t)33 < data.size()) {
+        uint16_t raw = ((uint16_t)data[32] << 8) | data[33];
+        id(sens_p09_61488).publish_state((float) raw * 0.1);
+      }
+      if ((size_t)35 < data.size()) {
+        uint16_t raw = ((uint16_t)data[34] << 8) | data[35];
+        id(sens_p09_61489).publish_state((float) raw);
+      }
+      if ((size_t)39 < data.size()) {
+        uint32_t lo = ((uint32_t)data[36] << 8) | data[37];
+        uint32_t hi = ((uint32_t)data[38] << 8) | data[39];
+        uint32_t u32 = (hi << 16) | lo;
+        // Packed reads are atomic; publish the first complete value, then reject regressions/spikes.
+        static bool init_done = false;
+        static uint32_t last_u32 = 0;
+        bool accept = false;
+        if (!init_done) {
+          init_done = true;
+          last_u32 = u32;
+          accept = true;
+        } else if (u32 >= last_u32 && (u32 - last_u32) <= 50000U) {
+          last_u32 = u32;
+          accept = true;
+        }
+        if (accept) id(sens_p09_61490).publish_state((float) u32 * 0.1);
+      }
+      return 0;
+  # Anchor for P09 range 3 (0xF034-0xF034, size=2)
+  - platform: modbus_controller
+    modbus_controller_id: srne_main
+    name: "P09 Anchor 3"
+    internal: true
+    register_type: holding
+    skip_updates: ${p09_skip_updates}
+    force_new_range: true
+    address: 61492
+    register_count: 2
+    lambda: |-
+      // Distribute 16-bit words to per-register template sensors
+      if ((size_t)3 < data.size()) {
+        uint32_t lo = ((uint32_t)data[0] << 8) | data[1];
+        uint32_t hi = ((uint32_t)data[2] << 8) | data[3];
+        uint32_t u32 = (hi << 16) | lo;
+        // Packed reads are atomic; publish the first complete value, then reject regressions/spikes.
+        static bool init_done = false;
+        static uint32_t last_u32 = 0;
+        bool accept = false;
+        if (!init_done) {
+          init_done = true;
+          last_u32 = u32;
+          accept = true;
+        } else if (u32 >= last_u32 && (u32 - last_u32) <= 50000U) {
+          last_u32 = u32;
+          accept = true;
+        }
+        if (accept) id(sens_p09_61492).publish_state((float) u32);
+      }
+      return 0;
+  # Anchor for P09 range 4 (0xF036-0xF036, size=2)
+  - platform: modbus_controller
+    modbus_controller_id: srne_main
+    name: "P09 Anchor 4"
+    internal: true
+    register_type: holding
+    skip_updates: ${p09_skip_updates}
+    force_new_range: true
+    address: 61494
+    register_count: 2
+    lambda: |-
+      // Distribute 16-bit words to per-register template sensors
+      if ((size_t)3 < data.size()) {
+        uint32_t lo = ((uint32_t)data[0] << 8) | data[1];
+        uint32_t hi = ((uint32_t)data[2] << 8) | data[3];
+        uint32_t u32 = (hi << 16) | lo;
+        // Packed reads are atomic; publish the first complete value, then reject regressions/spikes.
+        static bool init_done = false;
+        static uint32_t last_u32 = 0;
+        bool accept = false;
+        if (!init_done) {
+          init_done = true;
+          last_u32 = u32;
+          accept = true;
+        } else if (u32 >= last_u32 && (u32 - last_u32) <= 50000U) {
+          last_u32 = u32;
+          accept = true;
+        }
+        if (accept) id(sens_p09_61494).publish_state((float) u32);
+      }
+      return 0;
+  # Anchor for P09 range 5 (0xF038-0xF038, size=2)
+  - platform: modbus_controller
+    modbus_controller_id: srne_main
+    name: "P09 Anchor 5"
+    internal: true
+    register_type: holding
+    skip_updates: ${p09_skip_updates}
+    force_new_range: true
+    address: 61496
+    register_count: 2
+    lambda: |-
+      // Distribute 16-bit words to per-register template sensors
+      if ((size_t)3 < data.size()) {
+        uint32_t lo = ((uint32_t)data[0] << 8) | data[1];
+        uint32_t hi = ((uint32_t)data[2] << 8) | data[3];
+        uint32_t u32 = (hi << 16) | lo;
+        // Packed reads are atomic; publish the first complete value, then reject regressions/spikes.
+        static bool init_done = false;
+        static uint32_t last_u32 = 0;
+        bool accept = false;
+        if (!init_done) {
+          init_done = true;
+          last_u32 = u32;
+          accept = true;
+        } else if (u32 >= last_u32 && (u32 - last_u32) <= 50000U) {
+          last_u32 = u32;
+          accept = true;
+        }
+        if (accept) id(sens_p09_61496).publish_state((float) u32 * 0.1);
+      }
+      return 0;
+  # Anchor for P09 range 6 (0xF03A-0xF03A, size=2)
+  - platform: modbus_controller
+    modbus_controller_id: srne_main
+    name: "P09 Anchor 6"
+    internal: true
+    register_type: holding
+    skip_updates: ${p09_skip_updates}
+    force_new_range: true
+    address: 61498
+    register_count: 2
+    lambda: |-
+      // Distribute 16-bit words to per-register template sensors
+      if ((size_t)3 < data.size()) {
+        uint32_t lo = ((uint32_t)data[0] << 8) | data[1];
+        uint32_t hi = ((uint32_t)data[2] << 8) | data[3];
+        uint32_t u32 = (hi << 16) | lo;
+        // Packed reads are atomic; publish the first complete value, then reject regressions/spikes.
+        static bool init_done = false;
+        static uint32_t last_u32 = 0;
+        bool accept = false;
+        if (!init_done) {
+          init_done = true;
+          last_u32 = u32;
+          accept = true;
+        } else if (u32 >= last_u32 && (u32 - last_u32) <= 50000U) {
+          last_u32 = u32;
+          accept = true;
+        }
+        if (accept) id(sens_p09_61498).publish_state((float) u32 * 0.1);
+      }
+      return 0;
+  # Anchor for P09 range 7 (0xF03C-0xF046, size=12)
+  - platform: modbus_controller
+    modbus_controller_id: srne_main
+    name: "P09 Anchor 7"
+    internal: true
+    register_type: holding
+    skip_updates: ${p09_skip_updates}
+    force_new_range: true
+    address: 61500
+    register_count: 12
+    lambda: |-
+      // Distribute 16-bit words to per-register template sensors
+      if ((size_t)1 < data.size()) {
+        uint16_t raw = ((uint16_t)data[0] << 8) | data[1];
+        id(sens_p09_61500).publish_state((float) raw);
+      }
+      if ((size_t)3 < data.size()) {
+        uint16_t raw = ((uint16_t)data[2] << 8) | data[3];
+        id(sens_p09_61501).publish_state((float) raw * 0.1);
+      }
+      if ((size_t)5 < data.size()) {
+        uint16_t raw = ((uint16_t)data[4] << 8) | data[5];
+        id(sens_p09_61502).publish_state((float) raw);
+      }
+      if ((size_t)7 < data.size()) {
+        uint16_t raw = ((uint16_t)data[6] << 8) | data[7];
+        id(sens_p09_61503).publish_state((float) raw);
+      }
+      if ((size_t)9 < data.size()) {
+        uint16_t raw = ((uint16_t)data[8] << 8) | data[9];
+        id(p09_uptime_ym).publish_state((float) raw);
+      }
+      if ((size_t)11 < data.size()) {
+        uint16_t raw = ((uint16_t)data[10] << 8) | data[11];
+        id(p09_uptime_dh).publish_state((float) raw);
+      }
+      if ((size_t)13 < data.size()) {
+        uint16_t raw = ((uint16_t)data[12] << 8) | data[13];
+        id(p09_uptime_ms).publish_state((float) raw);
+      }
+      if ((size_t)15 < data.size()) {
+        uint16_t raw = ((uint16_t)data[14] << 8) | data[15];
+        id(p09_eq_time_ym).publish_state((float) raw);
+      }
+      if ((size_t)17 < data.size()) {
+        uint16_t raw = ((uint16_t)data[16] << 8) | data[17];
+        id(p09_eq_time_dh).publish_state((float) raw);
+      }
+      if ((size_t)19 < data.size()) {
+        uint16_t raw = ((uint16_t)data[18] << 8) | data[19];
+        id(p09_eq_time_ms).publish_state((float) raw);
+      }
+      if ((size_t)23 < data.size()) {
+        uint32_t lo = ((uint32_t)data[20] << 8) | data[21];
+        uint32_t hi = ((uint32_t)data[22] << 8) | data[23];
+        uint32_t u32 = (hi << 16) | lo;
+        // Packed reads are atomic; publish the first complete value, then reject regressions/spikes.
+        static bool init_done = false;
+        static uint32_t last_u32 = 0;
+        bool accept = false;
+        if (!init_done) {
+          init_done = true;
+          last_u32 = u32;
+          accept = true;
+        } else if (u32 >= last_u32 && (u32 - last_u32) <= 50000U) {
+          last_u32 = u32;
+          accept = true;
+        }
+        if (accept) id(sens_p09_61510).publish_state((float) u32);
+      }
+      return 0;
+  # Anchor for P09 range 8 (0xF048-0xF048, size=2)
+  - platform: modbus_controller
+    modbus_controller_id: srne_main
+    name: "P09 Anchor 8"
+    internal: true
+    register_type: holding
+    skip_updates: ${p09_skip_updates}
+    force_new_range: true
+    address: 61512
+    register_count: 2
+    lambda: |-
+      // Distribute 16-bit words to per-register template sensors
+      if ((size_t)3 < data.size()) {
+        uint32_t lo = ((uint32_t)data[0] << 8) | data[1];
+        uint32_t hi = ((uint32_t)data[2] << 8) | data[3];
+        uint32_t u32 = (hi << 16) | lo;
+        // Packed reads are atomic; publish the first complete value, then reject regressions/spikes.
+        static bool init_done = false;
+        static uint32_t last_u32 = 0;
+        bool accept = false;
+        if (!init_done) {
+          init_done = true;
+          last_u32 = u32;
+          accept = true;
+        } else if (u32 >= last_u32 && (u32 - last_u32) <= 50000U) {
+          last_u32 = u32;
+          accept = true;
+        }
+        if (accept) id(sens_p09_61512).publish_state((float) u32 * 0.1);
+      }
+      return 0;
+  # Anchor for P09 range 9 (0xF04A-0xF04C, size=3)
+  - platform: modbus_controller
+    modbus_controller_id: srne_main
+    name: "P09 Anchor 9"
+    internal: true
+    register_type: holding
+    skip_updates: ${p09_skip_updates}
+    force_new_range: true
+    address: 61514
+    register_count: 3
+    lambda: |-
+      // Distribute 16-bit words to per-register template sensors
+      if ((size_t)1 < data.size()) {
+        uint16_t raw = ((uint16_t)data[0] << 8) | data[1];
+        id(sens_p09_61514).publish_state((float) raw);
+      }
+      if ((size_t)3 < data.size()) {
+        uint16_t raw = ((uint16_t)data[2] << 8) | data[3];
+        id(sens_p09_61515).publish_state((float) raw);
+      }
+      if ((size_t)5 < data.size()) {
+        uint16_t raw = ((uint16_t)data[4] << 8) | data[5];
+        id(sens_p09_61516).publish_state((float) raw);
+      }
+      return 0;

@@ -1,184 +1,102 @@
 
 sensor:
-  - platform: modbus_controller
-    modbus_controller_id: srne_main
-    register_type: holding
-    skip_updates: ${p01_skip_updates}
-    address: 256
-    force_new_range: true
-    value_type: U_WORD
-    # endianness: register=big, word=little
+  - platform: template
     id: sens_p01_256
     name: "Battery_SoC"
     unit_of_measurement: "%"
     accuracy_decimals: 0
-  - platform: modbus_controller
-    modbus_controller_id: srne_main
-    register_type: holding
-    skip_updates: ${p01_skip_updates}
-    address: 257
-    value_type: U_WORD
-    # endianness: register=big, word=little
+
+  - platform: template
     id: sens_p01_257
     name: "Battery_Voltage"
     unit_of_measurement: "V"
     accuracy_decimals: 1
-    filters:
-      - multiply: 0.1
     device_class: voltage
     state_class: measurement
-  - platform: modbus_controller
-    modbus_controller_id: srne_main
-    register_type: holding
-    skip_updates: ${p01_skip_updates}
-    address: 258
-    value_type: S_WORD
-    # endianness: register=big, word=little
+
+  - platform: template
     id: sens_p01_258
     name: "Battery_Current"
     unit_of_measurement: "A"
     accuracy_decimals: 1
-    filters:
-      - multiply: -0.1
     device_class: current
     state_class: measurement
-  - platform: modbus_controller
-    modbus_controller_id: srne_main
-    register_type: holding
-    skip_updates: ${p01_skip_updates}
-    address: 259
-    value_type: S_WORD
-    # endianness: register=big, word=little
+
+  - platform: template
     id: sens_p01_259
     name: "Battery_Temperature"
     unit_of_measurement: "°C"
     accuracy_decimals: 1
-    filters:
-      - multiply: 0.1
     device_class: temperature
     state_class: measurement
-  - platform: modbus_controller
-    modbus_controller_id: srne_main
-    register_type: holding
-    skip_updates: ${p01_skip_updates}
-    address: 263
-    force_new_range: true
-    value_type: U_WORD
-    # endianness: register=big, word=little
+
+  - platform: template
     id: sens_p01_263
     name: "PV1_Voltage"
     unit_of_measurement: "V"
     accuracy_decimals: 1
-    filters:
-      - multiply: 0.1
     device_class: voltage
     state_class: measurement
-  - platform: modbus_controller
-    modbus_controller_id: srne_main
-    register_type: holding
-    skip_updates: ${p01_skip_updates}
-    address: 264
-    value_type: U_WORD
-    # endianness: register=big, word=little
+
+  - platform: template
     id: sens_p01_264
     name: "PV1_Current"
     unit_of_measurement: "A"
     accuracy_decimals: 1
-    filters:
-      - multiply: 0.1
     device_class: current
     state_class: measurement
-  - platform: modbus_controller
-    modbus_controller_id: srne_main
-    register_type: holding
-    skip_updates: ${p01_skip_updates}
-    address: 265
-    value_type: U_WORD
-    # endianness: register=big, word=little
+
+  - platform: template
     id: sens_p01_265
     name: "PV1_Power"
     unit_of_measurement: "W"
     accuracy_decimals: 0
     device_class: power
     state_class: measurement
-  - platform: modbus_controller
-    modbus_controller_id: srne_main
-    register_type: holding
-    skip_updates: ${p01_skip_updates}
-    address: 266
-    value_type: U_WORD
-    # endianness: register=big, word=little
+
+  - platform: template
     id: sens_p01_266
     name: "PV_Total_Power"
     unit_of_measurement: "W"
     accuracy_decimals: 0
     device_class: power
     state_class: measurement
-  - platform: modbus_controller
-    modbus_controller_id: srne_main
-    register_type: holding
-    skip_updates: ${p01_skip_updates}
-    address: 270
-    force_new_range: true
-    value_type: U_WORD
-    # endianness: register=big, word=little
+
+  - platform: template
     id: sens_p01_270
     name: "Battery_Charge_Power"
     unit_of_measurement: "W"
     accuracy_decimals: 0
     device_class: power
     state_class: measurement
-  - platform: modbus_controller
-    modbus_controller_id: srne_main
-    register_type: holding
-    skip_updates: ${p01_skip_updates}
-    address: 271
-    value_type: U_WORD
-    # endianness: register=big, word=little
+
+  - platform: template
     id: sens_p01_271
     name: "PV2_Voltage"
     unit_of_measurement: "V"
     accuracy_decimals: 1
-    filters:
-      - multiply: 0.1
     device_class: voltage
     state_class: measurement
-  - platform: modbus_controller
-    modbus_controller_id: srne_main
-    register_type: holding
-    skip_updates: ${p01_skip_updates}
-    address: 272
-    value_type: U_WORD
-    # endianness: register=big, word=little
+
+  - platform: template
     id: sens_p01_272
     name: "PV2_Current"
     unit_of_measurement: "A"
     accuracy_decimals: 1
-    filters:
-      - multiply: 0.1
     device_class: current
     state_class: measurement
-  - platform: modbus_controller
-    modbus_controller_id: srne_main
-    register_type: holding
-    skip_updates: ${p01_skip_updates}
-    address: 273
-    value_type: U_WORD
-    # endianness: register=big, word=little
+
+  - platform: template
     id: sens_p01_273
     name: "PV2_Power"
     unit_of_measurement: "W"
     accuracy_decimals: 0
     device_class: power
     state_class: measurement
-  - platform: modbus_controller
+
+  - platform: template
     id: sens_p01_267
-    modbus_controller_id: srne_main
-    register_type: holding
-    skip_updates: ${p01_skip_updates}
     internal: true
-    address: 267
-    value_type: U_WORD
   - platform: template
     id: battery_power
     name: "Battery_Power"

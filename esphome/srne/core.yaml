@@ -28,14 +28,16 @@ modbus_controller:
   - id: srne_main
     address: 1
     modbus_id: modbus1
-    command_throttle: 150ms
-    max_cmd_retries: 8
+    command_throttle: 100ms
+    max_cmd_retries: 3
+    offline_skip_updates: 10
     update_interval: ${main_update_interval_s}000ms
 
 # ネットワーク/管理設定（必要に応じて編集してください）
 wifi:
   ssid: !secret wifi_ssid
   password: !secret wifi_password
+  power_save_mode: NONE
   ap:
     ssid: 'srne-inverter-setup'
     password: !secret fallback_ap_password

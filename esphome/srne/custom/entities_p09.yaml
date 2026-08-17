@@ -1,679 +1,357 @@
 
 sensor:
-  - platform: modbus_controller
-    modbus_controller_id: srne_main
-    register_type: holding
-    skip_updates: ${p09_skip_updates}
-    address: 61440
-    force_new_range: true
-    value_type: U_WORD
-    # endianness: register=big, word=little
+  - platform: template
     id: sens_p09_61440
     name: "PV_Yield_1d"
     unit_of_measurement: "kWh"
     accuracy_decimals: 0
-    filters:
-      - multiply: 0.1
     device_class: energy
     state_class: total_increasing
-  - platform: modbus_controller
-    modbus_controller_id: srne_main
-    register_type: holding
-    skip_updates: ${p09_skip_updates}
-    address: 61441
-    value_type: U_WORD
-    # endianness: register=big, word=little
+
+  - platform: template
     id: sens_p09_61441
     name: "PV_Yield_2d"
     unit_of_measurement: "kWh"
     accuracy_decimals: 0
-    filters:
-      - multiply: 0.1
     device_class: energy
     state_class: total_increasing
-  - platform: modbus_controller
-    modbus_controller_id: srne_main
-    register_type: holding
-    skip_updates: ${p09_skip_updates}
-    address: 61442
-    value_type: U_WORD
-    # endianness: register=big, word=little
+
+  - platform: template
     id: sens_p09_61442
     name: "PV_Yield_3d"
     unit_of_measurement: "kWh"
     accuracy_decimals: 0
-    filters:
-      - multiply: 0.1
     device_class: energy
     state_class: total_increasing
-  - platform: modbus_controller
-    modbus_controller_id: srne_main
-    register_type: holding
-    skip_updates: ${p09_skip_updates}
-    address: 61443
-    value_type: U_WORD
-    # endianness: register=big, word=little
+
+  - platform: template
     id: sens_p09_61443
     name: "PV_Yield_4d"
     unit_of_measurement: "kWh"
     accuracy_decimals: 0
-    filters:
-      - multiply: 0.1
     device_class: energy
     state_class: total_increasing
-  - platform: modbus_controller
-    modbus_controller_id: srne_main
-    register_type: holding
-    skip_updates: ${p09_skip_updates}
-    address: 61444
-    value_type: U_WORD
-    # endianness: register=big, word=little
+
+  - platform: template
     id: sens_p09_61444
     name: "PV_Yield_5d"
     unit_of_measurement: "kWh"
     accuracy_decimals: 0
-    filters:
-      - multiply: 0.1
     device_class: energy
     state_class: total_increasing
-  - platform: modbus_controller
-    modbus_controller_id: srne_main
-    register_type: holding
-    skip_updates: ${p09_skip_updates}
-    address: 61445
-    value_type: U_WORD
-    # endianness: register=big, word=little
+
+  - platform: template
     id: sens_p09_61445
     name: "PV_Yield_6d"
     unit_of_measurement: "kWh"
     accuracy_decimals: 0
-    filters:
-      - multiply: 0.1
     device_class: energy
     state_class: total_increasing
-  - platform: modbus_controller
-    modbus_controller_id: srne_main
-    register_type: holding
-    skip_updates: ${p09_skip_updates}
-    address: 61446
-    value_type: U_WORD
-    # endianness: register=big, word=little
+
+  - platform: template
     id: sens_p09_61446
     name: "PV_Yield_7d"
     unit_of_measurement: "kWh"
     accuracy_decimals: 0
-    filters:
-      - multiply: 0.1
     device_class: energy
     state_class: total_increasing
-  - platform: modbus_controller
-    modbus_controller_id: srne_main
-    register_type: holding
-    skip_updates: ${p09_skip_updates}
-    address: 61447
-    value_type: U_WORD
-    # endianness: register=big, word=little
+
+  - platform: template
     id: sens_p09_61447
     name: "Battery_Charge_1d"
     unit_of_measurement: "Ah"
     accuracy_decimals: 0
-  - platform: modbus_controller
-    modbus_controller_id: srne_main
-    register_type: holding
-    skip_updates: ${p09_skip_updates}
-    address: 61448
-    value_type: U_WORD
-    # endianness: register=big, word=little
+
+  - platform: template
     id: sens_p09_61448
     name: "Battery_Charge_2d"
     unit_of_measurement: "Ah"
     accuracy_decimals: 0
-  - platform: modbus_controller
-    modbus_controller_id: srne_main
-    register_type: holding
-    skip_updates: ${p09_skip_updates}
-    address: 61449
-    value_type: U_WORD
-    # endianness: register=big, word=little
+
+  - platform: template
     id: sens_p09_61449
     name: "Battery_Charge_3d"
     unit_of_measurement: "Ah"
     accuracy_decimals: 0
-  - platform: modbus_controller
-    modbus_controller_id: srne_main
-    register_type: holding
-    skip_updates: ${p09_skip_updates}
-    address: 61450
-    value_type: U_WORD
-    # endianness: register=big, word=little
+
+  - platform: template
     id: sens_p09_61450
     name: "Battery_Charge_4d"
     unit_of_measurement: "Ah"
     accuracy_decimals: 0
-  - platform: modbus_controller
-    modbus_controller_id: srne_main
-    register_type: holding
-    skip_updates: ${p09_skip_updates}
-    address: 61451
-    value_type: U_WORD
-    # endianness: register=big, word=little
+
+  - platform: template
     id: sens_p09_61451
     name: "Battery_Charge_5d"
     unit_of_measurement: "Ah"
     accuracy_decimals: 0
-  - platform: modbus_controller
-    modbus_controller_id: srne_main
-    register_type: holding
-    skip_updates: ${p09_skip_updates}
-    address: 61452
-    value_type: U_WORD
-    # endianness: register=big, word=little
+
+  - platform: template
     id: sens_p09_61452
     name: "Battery_Charge_6d"
     unit_of_measurement: "Ah"
     accuracy_decimals: 0
-  - platform: modbus_controller
-    modbus_controller_id: srne_main
-    register_type: holding
-    skip_updates: ${p09_skip_updates}
-    address: 61453
-    value_type: U_WORD
-    # endianness: register=big, word=little
+
+  - platform: template
     id: sens_p09_61453
     name: "Battery_Charge_7d"
     unit_of_measurement: "Ah"
     accuracy_decimals: 0
-  - platform: modbus_controller
-    modbus_controller_id: srne_main
-    register_type: holding
-    skip_updates: ${p09_skip_updates}
-    address: 61454
-    value_type: U_WORD
-    # endianness: register=big, word=little
+
+  - platform: template
     id: sens_p09_61454
     name: "Battery_Discharge_1d"
     unit_of_measurement: "Ah"
     accuracy_decimals: 0
-  - platform: modbus_controller
-    modbus_controller_id: srne_main
-    register_type: holding
-    skip_updates: ${p09_skip_updates}
-    address: 61455
-    value_type: U_WORD
-    # endianness: register=big, word=little
+
+  - platform: template
     id: sens_p09_61455
     name: "Battery_Discharge_2d"
     unit_of_measurement: "Ah"
     accuracy_decimals: 0
-  - platform: modbus_controller
-    modbus_controller_id: srne_main
-    register_type: holding
-    skip_updates: ${p09_skip_updates}
-    address: 61456
-    value_type: U_WORD
-    # endianness: register=big, word=little
+
+  - platform: template
     id: sens_p09_61456
     name: "Battery_Discharge_3d"
     unit_of_measurement: "Ah"
     accuracy_decimals: 0
-  - platform: modbus_controller
-    modbus_controller_id: srne_main
-    register_type: holding
-    skip_updates: ${p09_skip_updates}
-    address: 61457
-    value_type: U_WORD
-    # endianness: register=big, word=little
+
+  - platform: template
     id: sens_p09_61457
     name: "Battery_Discharge_4d"
     unit_of_measurement: "Ah"
     accuracy_decimals: 0
-  - platform: modbus_controller
-    modbus_controller_id: srne_main
-    register_type: holding
-    skip_updates: ${p09_skip_updates}
-    address: 61458
-    value_type: U_WORD
-    # endianness: register=big, word=little
+
+  - platform: template
     id: sens_p09_61458
     name: "Battery_Discharge_5d"
     unit_of_measurement: "Ah"
     accuracy_decimals: 0
-  - platform: modbus_controller
-    modbus_controller_id: srne_main
-    register_type: holding
-    skip_updates: ${p09_skip_updates}
-    address: 61459
-    value_type: U_WORD
-    # endianness: register=big, word=little
+
+  - platform: template
     id: sens_p09_61459
     name: "Battery_Discharge_6d"
     unit_of_measurement: "Ah"
     accuracy_decimals: 0
-  - platform: modbus_controller
-    modbus_controller_id: srne_main
-    register_type: holding
-    skip_updates: ${p09_skip_updates}
-    address: 61460
-    value_type: U_WORD
-    # endianness: register=big, word=little
+
+  - platform: template
     id: sens_p09_61460
     name: "Battery_Discharge_7d"
     unit_of_measurement: "Ah"
     accuracy_decimals: 0
-  - platform: modbus_controller
-    modbus_controller_id: srne_main
-    register_type: holding
-    skip_updates: ${p09_skip_updates}
-    address: 61461
-    value_type: U_WORD
-    # endianness: register=big, word=little
+
+  - platform: template
     id: sens_p09_61461
     name: "Grid_Charge_1d"
     unit_of_measurement: "Ah"
     accuracy_decimals: 0
-  - platform: modbus_controller
-    modbus_controller_id: srne_main
-    register_type: holding
-    skip_updates: ${p09_skip_updates}
-    address: 61462
-    value_type: U_WORD
-    # endianness: register=big, word=little
+
+  - platform: template
     id: sens_p09_61462
     name: "Grid_Charge_2d"
     unit_of_measurement: "Ah"
     accuracy_decimals: 0
-  - platform: modbus_controller
-    modbus_controller_id: srne_main
-    register_type: holding
-    skip_updates: ${p09_skip_updates}
-    address: 61463
-    value_type: U_WORD
-    # endianness: register=big, word=little
+
+  - platform: template
     id: sens_p09_61463
     name: "Grid_Charge_3d"
     unit_of_measurement: "Ah"
     accuracy_decimals: 0
-  - platform: modbus_controller
-    modbus_controller_id: srne_main
-    register_type: holding
-    skip_updates: ${p09_skip_updates}
-    address: 61464
-    value_type: U_WORD
-    # endianness: register=big, word=little
+
+  - platform: template
     id: sens_p09_61464
     name: "Grid_Charge_4d"
     unit_of_measurement: "Ah"
     accuracy_decimals: 0
-  - platform: modbus_controller
-    modbus_controller_id: srne_main
-    register_type: holding
-    skip_updates: ${p09_skip_updates}
-    address: 61465
-    value_type: U_WORD
-    # endianness: register=big, word=little
+
+  - platform: template
     id: sens_p09_61465
     name: "Grid_Charge_5d"
     unit_of_measurement: "Ah"
     accuracy_decimals: 0
-  - platform: modbus_controller
-    modbus_controller_id: srne_main
-    register_type: holding
-    skip_updates: ${p09_skip_updates}
-    address: 61466
-    value_type: U_WORD
-    # endianness: register=big, word=little
+
+  - platform: template
     id: sens_p09_61466
     name: "Grid_Charge_6d"
     unit_of_measurement: "Ah"
     accuracy_decimals: 0
-  - platform: modbus_controller
-    modbus_controller_id: srne_main
-    register_type: holding
-    skip_updates: ${p09_skip_updates}
-    address: 61467
-    value_type: U_WORD
-    # endianness: register=big, word=little
+
+  - platform: template
     id: sens_p09_61467
     name: "Grid_Charge_7d"
     unit_of_measurement: "Ah"
     accuracy_decimals: 0
-  - platform: modbus_controller
-    modbus_controller_id: srne_main
-    register_type: holding
-    skip_updates: ${p09_skip_updates}
-    address: 61468
-    value_type: U_WORD
-    # endianness: register=big, word=little
+
+  - platform: template
     id: sens_p09_61468
     name: "Load_Consumption_1d"
     unit_of_measurement: "kWh"
     accuracy_decimals: 0
-    filters:
-      - multiply: 0.1
     device_class: energy
     state_class: total_increasing
-  - platform: modbus_controller
-    modbus_controller_id: srne_main
-    register_type: holding
-    skip_updates: ${p09_skip_updates}
-    address: 61469
-    value_type: U_WORD
-    # endianness: register=big, word=little
+
+  - platform: template
     id: sens_p09_61469
     name: "Load_Consumption_2d"
     unit_of_measurement: "kWh"
     accuracy_decimals: 0
-    filters:
-      - multiply: 0.1
     device_class: energy
     state_class: total_increasing
-  - platform: modbus_controller
-    modbus_controller_id: srne_main
-    register_type: holding
-    skip_updates: ${p09_skip_updates}
-    address: 61470
-    value_type: U_WORD
-    # endianness: register=big, word=little
+
+  - platform: template
     id: sens_p09_61470
     name: "Load_Consumption_3d"
     unit_of_measurement: "kWh"
     accuracy_decimals: 0
-    filters:
-      - multiply: 0.1
     device_class: energy
     state_class: total_increasing
-  - platform: modbus_controller
-    modbus_controller_id: srne_main
-    register_type: holding
-    skip_updates: ${p09_skip_updates}
-    address: 61471
-    value_type: U_WORD
-    # endianness: register=big, word=little
+
+  - platform: template
     id: sens_p09_61471
     name: "Load_Consumption_4d"
     unit_of_measurement: "kWh"
     accuracy_decimals: 0
-    filters:
-      - multiply: 0.1
     device_class: energy
     state_class: total_increasing
-  - platform: modbus_controller
-    modbus_controller_id: srne_main
-    register_type: holding
-    skip_updates: ${p09_skip_updates}
-    address: 61472
-    force_new_range: true
-    value_type: U_WORD
-    # endianness: register=big, word=little
+
+  - platform: template
     id: sens_p09_61472
     name: "Load_Consumption_5d"
     unit_of_measurement: "kWh"
     accuracy_decimals: 0
-    filters:
-      - multiply: 0.1
     device_class: energy
     state_class: total_increasing
-  - platform: modbus_controller
-    modbus_controller_id: srne_main
-    register_type: holding
-    skip_updates: ${p09_skip_updates}
-    address: 61473
-    value_type: U_WORD
-    # endianness: register=big, word=little
+
+  - platform: template
     id: sens_p09_61473
     name: "Load_Consumption_6d"
     unit_of_measurement: "kWh"
     accuracy_decimals: 0
-    filters:
-      - multiply: 0.1
     device_class: energy
     state_class: total_increasing
-  - platform: modbus_controller
-    modbus_controller_id: srne_main
-    register_type: holding
-    skip_updates: ${p09_skip_updates}
-    address: 61474
-    value_type: U_WORD
-    # endianness: register=big, word=little
+
+  - platform: template
     id: sens_p09_61474
     name: "Load_Consumption_7d"
     unit_of_measurement: "kWh"
     accuracy_decimals: 0
-    filters:
-      - multiply: 0.1
     device_class: energy
     state_class: total_increasing
-  - platform: modbus_controller
-    modbus_controller_id: srne_main
-    register_type: holding
-    skip_updates: ${p09_skip_updates}
-    address: 61475
-    value_type: U_WORD
-    # endianness: register=big, word=little
+
+  - platform: template
     id: sens_p09_61475
     name: "Grid_Import_1d"
     unit_of_measurement: "kWh"
     accuracy_decimals: 0
-    filters:
-      - multiply: 0.1
     device_class: energy
     state_class: total_increasing
-  - platform: modbus_controller
-    modbus_controller_id: srne_main
-    register_type: holding
-    skip_updates: ${p09_skip_updates}
-    address: 61476
-    value_type: U_WORD
-    # endianness: register=big, word=little
+
+  - platform: template
     id: sens_p09_61476
     name: "Grid_Import_2d"
     unit_of_measurement: "kWh"
     accuracy_decimals: 0
-    filters:
-      - multiply: 0.1
     device_class: energy
     state_class: total_increasing
-  - platform: modbus_controller
-    modbus_controller_id: srne_main
-    register_type: holding
-    skip_updates: ${p09_skip_updates}
-    address: 61477
-    value_type: U_WORD
-    # endianness: register=big, word=little
+
+  - platform: template
     id: sens_p09_61477
     name: "Grid_Import_3d"
     unit_of_measurement: "kWh"
     accuracy_decimals: 0
-    filters:
-      - multiply: 0.1
     device_class: energy
     state_class: total_increasing
-  - platform: modbus_controller
-    modbus_controller_id: srne_main
-    register_type: holding
-    skip_updates: ${p09_skip_updates}
-    address: 61478
-    value_type: U_WORD
-    # endianness: register=big, word=little
+
+  - platform: template
     id: sens_p09_61478
     name: "Grid_Import_4d"
     unit_of_measurement: "kWh"
     accuracy_decimals: 0
-    filters:
-      - multiply: 0.1
     device_class: energy
     state_class: total_increasing
-  - platform: modbus_controller
-    modbus_controller_id: srne_main
-    register_type: holding
-    skip_updates: ${p09_skip_updates}
-    address: 61479
-    value_type: U_WORD
-    # endianness: register=big, word=little
+
+  - platform: template
     id: sens_p09_61479
     name: "Grid_Import_5d"
     unit_of_measurement: "kWh"
     accuracy_decimals: 0
-    filters:
-      - multiply: 0.1
     device_class: energy
     state_class: total_increasing
-  - platform: modbus_controller
-    modbus_controller_id: srne_main
-    register_type: holding
-    skip_updates: ${p09_skip_updates}
-    address: 61480
-    value_type: U_WORD
-    # endianness: register=big, word=little
+
+  - platform: template
     id: sens_p09_61480
     name: "Grid_Import_6d"
     unit_of_measurement: "kWh"
     accuracy_decimals: 0
-    filters:
-      - multiply: 0.1
     device_class: energy
     state_class: total_increasing
-  - platform: modbus_controller
-    modbus_controller_id: srne_main
-    register_type: holding
-    skip_updates: ${p09_skip_updates}
-    address: 61481
-    value_type: U_WORD
-    # endianness: register=big, word=little
+
+  - platform: template
     id: sens_p09_61481
     name: "Grid_Import_7d"
     unit_of_measurement: "kWh"
     accuracy_decimals: 0
-    filters:
-      - multiply: 0.1
     device_class: energy
     state_class: total_increasing
-  - platform: modbus_controller
-    modbus_controller_id: srne_main
-    register_type: holding
-    skip_updates: ${p09_skip_updates}
-    address: 61482
-    value_type: U_WORD
-    # endianness: register=big, word=little
+
+  - platform: template
     id: sens_p09_61482
     name: "Daily_Energy_24h"
     unit_of_measurement: "kWh"
     accuracy_decimals: 0
-    filters:
-      - multiply: 0.1
     device_class: energy
     state_class: total_increasing
-  - platform: modbus_controller
-    modbus_controller_id: srne_main
-    register_type: holding
-    skip_updates: ${p09_skip_updates}
-    address: 61483
-    value_type: U_WORD
-    # endianness: register=big, word=little
+
+  - platform: template
     id: sens_p09_61483
     name: "Unknown_Energy_Statistic_(0xF02B)"
     unit_of_measurement: "kWh"
     accuracy_decimals: 0
-    filters:
-      - multiply: 0.1
     device_class: energy
     state_class: total_increasing
-  - platform: modbus_controller
-    modbus_controller_id: srne_main
-    register_type: holding
-    skip_updates: ${p09_skip_updates}
-    address: 61484
-    value_type: U_WORD
-    # endianness: register=big, word=little
+
+  - platform: template
     id: sens_p09_61484
     name: "Grid_Export_Today"
     unit_of_measurement: "kWh"
     accuracy_decimals: 0
-    filters:
-      - multiply: 0.1
     device_class: energy
     state_class: total_increasing
-  - platform: modbus_controller
-    modbus_controller_id: srne_main
-    register_type: holding
-    skip_updates: ${p09_skip_updates}
-    address: 61485
-    value_type: U_WORD
-    # endianness: register=big, word=little
+
+  - platform: template
     id: sens_p09_61485
     name: "Battery_Charge_0d"
     unit_of_measurement: "Ah"
     accuracy_decimals: 0
-  - platform: modbus_controller
-    modbus_controller_id: srne_main
-    register_type: holding
-    skip_updates: ${p09_skip_updates}
-    address: 61486
-    value_type: U_WORD
-    # endianness: register=big, word=little
+
+  - platform: template
     id: sens_p09_61486
     name: "Battery_Discharge_0d"
     unit_of_measurement: "Ah"
     accuracy_decimals: 0
-  - platform: modbus_controller
-    modbus_controller_id: srne_main
-    register_type: holding
-    skip_updates: ${p09_skip_updates}
-    address: 61487
-    value_type: U_WORD
-    # endianness: register=big, word=little
+
+  - platform: template
     id: sens_p09_61487
     name: "PV_Yield_0d"
     unit_of_measurement: "kWh"
     accuracy_decimals: 0
-    filters:
-      - multiply: 0.1
     device_class: energy
     state_class: total_increasing
-  - platform: modbus_controller
-    modbus_controller_id: srne_main
-    register_type: holding
-    skip_updates: ${p09_skip_updates}
-    address: 61488
-    value_type: U_WORD
-    # endianness: register=big, word=little
+
+  - platform: template
     id: sens_p09_61488
     name: "Load_Consumption_0d"
     unit_of_measurement: "kWh"
     accuracy_decimals: 0
-    filters:
-      - multiply: 0.1
     device_class: energy
     state_class: total_increasing
-  - platform: modbus_controller
-    modbus_controller_id: srne_main
-    register_type: holding
-    skip_updates: ${p09_skip_updates}
-    address: 61489
-    value_type: U_WORD
-    # endianness: register=big, word=little
+
+  - platform: template
     id: sens_p09_61489
     name: "Total_Operation_Days"
     unit_of_measurement: "day"
     accuracy_decimals: 0
-  - platform: modbus_controller
-    id: sens_p09_61490_lo
-    modbus_controller_id: srne_main
-    internal: true
-    register_type: holding
-    skip_updates: ${p09_skip_updates}
-    address: 61490
-    value_type: U_WORD
-    force_new_range: true
-  - platform: modbus_controller
-    id: sens_p09_61490_hi
-    modbus_controller_id: srne_main
-    internal: true
-    register_type: holding
-    skip_updates: ${p09_skip_updates}
-    address: 61491
-    value_type: U_WORD
-    force_new_range: true
+
   - platform: template
     id: sens_p09_61490
     name: "Total_Grid_Export"
@@ -681,124 +359,19 @@ sensor:
     accuracy_decimals: 0
     device_class: energy
     state_class: total_increasing
-    lambda: |-
-      uint32_t lo = (uint32_t) id(sens_p09_61490_lo).state;
-      uint32_t hi = (uint32_t) id(sens_p09_61490_hi).state;
-      uint32_t u32 = (hi << 16) | (lo & 0xFFFF);
-      // Guard against reboot-time spikes for long-term total counters.
-      static bool init_done = false;
-      static uint32_t last_u32 = 0;
-      if (millis() < 60000U) { return {}; }
-      if (!init_done) {
-        init_done = true;
-        last_u32 = u32;
-        return {};
-      }
-      if (u32 < last_u32) { return {}; }
-      uint32_t delta = u32 - last_u32;
-      if (delta > 50000U) { return {}; }
-      last_u32 = u32;
-      return (float)u32 * 0.1;
-  - platform: modbus_controller
-    id: sens_p09_61492_lo
-    modbus_controller_id: srne_main
-    internal: true
-    register_type: holding
-    skip_updates: ${p09_skip_updates}
-    address: 61492
-    value_type: U_WORD
-    force_new_range: true
-  - platform: modbus_controller
-    id: sens_p09_61492_hi
-    modbus_controller_id: srne_main
-    internal: true
-    register_type: holding
-    skip_updates: ${p09_skip_updates}
-    address: 61493
-    value_type: U_WORD
-    force_new_range: true
+
   - platform: template
     id: sens_p09_61492
     name: "Total_Battery_Charge"
     unit_of_measurement: "Ah"
     accuracy_decimals: 0
-    lambda: |-
-      uint32_t lo = (uint32_t) id(sens_p09_61492_lo).state;
-      uint32_t hi = (uint32_t) id(sens_p09_61492_hi).state;
-      uint32_t u32 = (hi << 16) | (lo & 0xFFFF);
-      // Guard against reboot-time spikes for long-term total counters.
-      static bool init_done = false;
-      static uint32_t last_u32 = 0;
-      if (millis() < 60000U) { return {}; }
-      if (!init_done) {
-        init_done = true;
-        last_u32 = u32;
-        return {};
-      }
-      if (u32 < last_u32) { return {}; }
-      uint32_t delta = u32 - last_u32;
-      if (delta > 50000U) { return {}; }
-      last_u32 = u32;
-      return (float)u32;
-  - platform: modbus_controller
-    id: sens_p09_61494_lo
-    modbus_controller_id: srne_main
-    internal: true
-    register_type: holding
-    skip_updates: ${p09_skip_updates}
-    address: 61494
-    value_type: U_WORD
-    force_new_range: true
-  - platform: modbus_controller
-    id: sens_p09_61494_hi
-    modbus_controller_id: srne_main
-    internal: true
-    register_type: holding
-    skip_updates: ${p09_skip_updates}
-    address: 61495
-    value_type: U_WORD
-    force_new_range: true
+
   - platform: template
     id: sens_p09_61494
     name: "Total_Battery_Discharge"
     unit_of_measurement: "Ah"
     accuracy_decimals: 0
-    lambda: |-
-      uint32_t lo = (uint32_t) id(sens_p09_61494_lo).state;
-      uint32_t hi = (uint32_t) id(sens_p09_61494_hi).state;
-      uint32_t u32 = (hi << 16) | (lo & 0xFFFF);
-      // Guard against reboot-time spikes for long-term total counters.
-      static bool init_done = false;
-      static uint32_t last_u32 = 0;
-      if (millis() < 60000U) { return {}; }
-      if (!init_done) {
-        init_done = true;
-        last_u32 = u32;
-        return {};
-      }
-      if (u32 < last_u32) { return {}; }
-      uint32_t delta = u32 - last_u32;
-      if (delta > 50000U) { return {}; }
-      last_u32 = u32;
-      return (float)u32;
-  - platform: modbus_controller
-    id: sens_p09_61496_lo
-    modbus_controller_id: srne_main
-    internal: true
-    register_type: holding
-    skip_updates: ${p09_skip_updates}
-    address: 61496
-    value_type: U_WORD
-    force_new_range: true
-  - platform: modbus_controller
-    id: sens_p09_61496_hi
-    modbus_controller_id: srne_main
-    internal: true
-    register_type: holding
-    skip_updates: ${p09_skip_updates}
-    address: 61497
-    value_type: U_WORD
-    force_new_range: true
+
   - platform: template
     id: sens_p09_61496
     name: "Total_PV_Yield"
@@ -806,42 +379,7 @@ sensor:
     accuracy_decimals: 0
     device_class: energy
     state_class: total_increasing
-    lambda: |-
-      uint32_t lo = (uint32_t) id(sens_p09_61496_lo).state;
-      uint32_t hi = (uint32_t) id(sens_p09_61496_hi).state;
-      uint32_t u32 = (hi << 16) | (lo & 0xFFFF);
-      // Guard against reboot-time spikes for long-term total counters.
-      static bool init_done = false;
-      static uint32_t last_u32 = 0;
-      if (millis() < 60000U) { return {}; }
-      if (!init_done) {
-        init_done = true;
-        last_u32 = u32;
-        return {};
-      }
-      if (u32 < last_u32) { return {}; }
-      uint32_t delta = u32 - last_u32;
-      if (delta > 50000U) { return {}; }
-      last_u32 = u32;
-      return (float)u32 * 0.1;
-  - platform: modbus_controller
-    id: sens_p09_61498_lo
-    modbus_controller_id: srne_main
-    internal: true
-    register_type: holding
-    skip_updates: ${p09_skip_updates}
-    address: 61498
-    value_type: U_WORD
-    force_new_range: true
-  - platform: modbus_controller
-    id: sens_p09_61498_hi
-    modbus_controller_id: srne_main
-    internal: true
-    register_type: holding
-    skip_updates: ${p09_skip_updates}
-    address: 61499
-    value_type: U_WORD
-    force_new_range: true
+
   - platform: template
     id: sens_p09_61498
     name: "Total_Load_Consumption"
@@ -849,132 +387,39 @@ sensor:
     accuracy_decimals: 0
     device_class: energy
     state_class: total_increasing
-    lambda: |-
-      uint32_t lo = (uint32_t) id(sens_p09_61498_lo).state;
-      uint32_t hi = (uint32_t) id(sens_p09_61498_hi).state;
-      uint32_t u32 = (hi << 16) | (lo & 0xFFFF);
-      // Guard against reboot-time spikes for long-term total counters.
-      static bool init_done = false;
-      static uint32_t last_u32 = 0;
-      if (millis() < 60000U) { return {}; }
-      if (!init_done) {
-        init_done = true;
-        last_u32 = u32;
-        return {};
-      }
-      if (u32 < last_u32) { return {}; }
-      uint32_t delta = u32 - last_u32;
-      if (delta > 50000U) { return {}; }
-      last_u32 = u32;
-      return (float)u32 * 0.1;
-  - platform: modbus_controller
-    modbus_controller_id: srne_main
-    register_type: holding
-    skip_updates: ${p09_skip_updates}
-    address: 61500
-    force_new_range: true
-    value_type: U_WORD
-    # endianness: register=big, word=little
+
+  - platform: template
     id: sens_p09_61500
     name: "Grid_Charge_0d"
     unit_of_measurement: "Ah"
     accuracy_decimals: 0
-  - platform: modbus_controller
-    modbus_controller_id: srne_main
-    register_type: holding
-    skip_updates: ${p09_skip_updates}
-    address: 61501
-    value_type: U_WORD
-    # endianness: register=big, word=little
+
+  - platform: template
     id: sens_p09_61501
     name: "Grid_Import_0d"
     unit_of_measurement: "kWh"
     accuracy_decimals: 0
-    filters:
-      - multiply: 0.1
     device_class: energy
     state_class: total_increasing
-  - platform: modbus_controller
-    modbus_controller_id: srne_main
-    register_type: holding
-    skip_updates: ${p09_skip_updates}
-    address: 61502
-    value_type: U_WORD
-    # endianness: register=big, word=little
+
+  - platform: template
     id: sens_p09_61502
     name: "Inverter_Runtime_Today"
     unit_of_measurement: "min"
     accuracy_decimals: 0
-  - platform: modbus_controller
-    modbus_controller_id: srne_main
-    register_type: holding
-    skip_updates: ${p09_skip_updates}
-    address: 61503
-    value_type: U_WORD
-    # endianness: register=big, word=little
+
+  - platform: template
     id: sens_p09_61503
     name: "Bypass_Runtime_Today"
     unit_of_measurement: "min"
     accuracy_decimals: 0
-  - platform: modbus_controller
-    id: sens_p09_61510_lo
-    modbus_controller_id: srne_main
-    internal: true
-    register_type: holding
-    skip_updates: ${p09_skip_updates}
-    address: 61510
-    value_type: U_WORD
-    force_new_range: true
-  - platform: modbus_controller
-    id: sens_p09_61510_hi
-    modbus_controller_id: srne_main
-    internal: true
-    register_type: holding
-    skip_updates: ${p09_skip_updates}
-    address: 61511
-    value_type: U_WORD
-    force_new_range: true
+
   - platform: template
     id: sens_p09_61510
     name: "Total_Grid_Charge"
     unit_of_measurement: "Ah"
     accuracy_decimals: 0
-    lambda: |-
-      uint32_t lo = (uint32_t) id(sens_p09_61510_lo).state;
-      uint32_t hi = (uint32_t) id(sens_p09_61510_hi).state;
-      uint32_t u32 = (hi << 16) | (lo & 0xFFFF);
-      // Guard against reboot-time spikes for long-term total counters.
-      static bool init_done = false;
-      static uint32_t last_u32 = 0;
-      if (millis() < 60000U) { return {}; }
-      if (!init_done) {
-        init_done = true;
-        last_u32 = u32;
-        return {};
-      }
-      if (u32 < last_u32) { return {}; }
-      uint32_t delta = u32 - last_u32;
-      if (delta > 50000U) { return {}; }
-      last_u32 = u32;
-      return (float)u32;
-  - platform: modbus_controller
-    id: sens_p09_61512_lo
-    modbus_controller_id: srne_main
-    internal: true
-    register_type: holding
-    skip_updates: ${p09_skip_updates}
-    address: 61512
-    value_type: U_WORD
-    force_new_range: true
-  - platform: modbus_controller
-    id: sens_p09_61512_hi
-    modbus_controller_id: srne_main
-    internal: true
-    register_type: holding
-    skip_updates: ${p09_skip_updates}
-    address: 61513
-    value_type: U_WORD
-    force_new_range: true
+
   - platform: template
     id: sens_p09_61512
     name: "Total_Grid_Import"
@@ -982,123 +427,60 @@ sensor:
     accuracy_decimals: 0
     device_class: energy
     state_class: total_increasing
-    lambda: |-
-      uint32_t lo = (uint32_t) id(sens_p09_61512_lo).state;
-      uint32_t hi = (uint32_t) id(sens_p09_61512_hi).state;
-      uint32_t u32 = (hi << 16) | (lo & 0xFFFF);
-      // Guard against reboot-time spikes for long-term total counters.
-      static bool init_done = false;
-      static uint32_t last_u32 = 0;
-      if (millis() < 60000U) { return {}; }
-      if (!init_done) {
-        init_done = true;
-        last_u32 = u32;
-        return {};
-      }
-      if (u32 < last_u32) { return {}; }
-      uint32_t delta = u32 - last_u32;
-      if (delta > 50000U) { return {}; }
-      last_u32 = u32;
-      return (float)u32 * 0.1;
-  - platform: modbus_controller
-    modbus_controller_id: srne_main
-    register_type: holding
-    skip_updates: ${p09_skip_updates}
-    address: 61514
-    force_new_range: true
-    value_type: U_WORD
-    # endianness: register=big, word=little
+
+  - platform: template
     id: sens_p09_61514
     name: "Total_Inverter_Runtime"
     unit_of_measurement: "h"
     accuracy_decimals: 0
-  - platform: modbus_controller
-    modbus_controller_id: srne_main
-    register_type: holding
-    skip_updates: ${p09_skip_updates}
-    address: 61515
-    value_type: U_WORD
-    # endianness: register=big, word=little
+
+  - platform: template
     id: sens_p09_61515
     name: "Total_Bypass_Runtime"
     unit_of_measurement: "h"
     accuracy_decimals: 0
-  - platform: modbus_controller
-    modbus_controller_id: srne_main
-    register_type: holding
-    skip_updates: ${p09_skip_updates}
-    address: 61516
-    value_type: U_WORD
-    # endianness: register=big, word=little
+
+  - platform: template
     id: sens_p09_61516
     name: "Grid_Charge_Today_kWh"
     unit_of_measurement: "kWh"
     accuracy_decimals: 0
     device_class: energy
     state_class: total_increasing
-  - platform: modbus_controller
+
+  - platform: template
     id: p09_eq_time_ym
-    modbus_controller_id: srne_main
-    register_type: holding
-    skip_updates: ${p09_skip_updates}
     internal: true
-    address: 61507
-    value_type: U_WORD
     on_value:
       then:
         - component.update: p09_equalization_time
-  - platform: modbus_controller
+  - platform: template
     id: p09_eq_time_dh
-    modbus_controller_id: srne_main
-    register_type: holding
-    skip_updates: ${p09_skip_updates}
     internal: true
-    address: 61508
-    value_type: U_WORD
     on_value:
       then:
         - component.update: p09_equalization_time
-  - platform: modbus_controller
+  - platform: template
     id: p09_eq_time_ms
-    modbus_controller_id: srne_main
-    register_type: holding
-    skip_updates: ${p09_skip_updates}
     internal: true
-    address: 61509
-    value_type: U_WORD
     on_value:
       then:
         - component.update: p09_equalization_time
-  - platform: modbus_controller
+  - platform: template
     id: p09_uptime_ym
-    modbus_controller_id: srne_main
-    register_type: holding
-    skip_updates: ${p09_skip_updates}
     internal: true
-    address: 61504
-    value_type: U_WORD
     on_value:
       then:
         - component.update: p09_uptime_text
-  - platform: modbus_controller
+  - platform: template
     id: p09_uptime_dh
-    modbus_controller_id: srne_main
-    register_type: holding
-    skip_updates: ${p09_skip_updates}
     internal: true
-    address: 61505
-    value_type: U_WORD
     on_value:
       then:
         - component.update: p09_uptime_text
-  - platform: modbus_controller
+  - platform: template
     id: p09_uptime_ms
-    modbus_controller_id: srne_main
-    register_type: holding
-    skip_updates: ${p09_skip_updates}
     internal: true
-    address: 61506
-    value_type: U_WORD
     on_value:
       then:
         - component.update: p09_uptime_text

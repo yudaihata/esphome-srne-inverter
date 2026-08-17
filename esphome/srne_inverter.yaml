@@ -4,11 +4,16 @@ substitutions:
 
 packages:
   core: !include srne/core.yaml
+  p00_anchors: !include srne/anchors/p00_anchors.yaml
   p00_entities: !include srne/custom/entities_p00.yaml
+  p01_anchors: !include srne/anchors/p01_anchors.yaml
   p01_entities: !include srne/custom/entities_p01.yaml
+  p02_anchors: !include srne/anchors/p02_anchors.yaml
   p02_entities: !include srne/custom/entities_p02.yaml
   p03_entities: !include srne/custom/entities_p03.yaml
   p05_entities: !include srne/custom/entities_p05.yaml
   p07_entities: !include srne/custom/entities_p07.yaml
+  p09_anchors: !include srne/anchors/p09_anchors.yaml
   p09_entities: !include srne/custom/entities_p09.yaml
+  p10_anchors: !include srne/anchors/p10_anchors.yaml
   p10_entities: !include srne/custom/entities_p10.yaml
