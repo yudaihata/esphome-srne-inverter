@@ -1,37 +1,47 @@
-# 機種互換性
+# Model Compatibility
 
-このプロジェクトは、機種名ではなく次の2段階で読み取り対象を決定します。
+This project determines readable registers in two stages rather than selecting a fixed register map from the product name:
 
-1. `docs/srne_hybrid_modbus_v1.96.json`を候補レジスタとして使用する。
-2. `wizard.py`の実機スキャンで応答を確認できたレジスタだけをYAMLへ生成する。
+1. `docs/srne_hybrid_modbus_v1.96.json` supplies candidate registers.
+2. `wizard.py` scans the connected inverter and generates YAML only for registers that respond.
 
-そのため、同じSRNE Modbusレジスタ体系を実装する機種へ展開できる構造ですが、カタログに項目があることだけでは実機互換性を保証しません。
+This design can support other models that implement the same SRNE Modbus register layout. A register appearing in the catalog does not, by itself, prove hardware compatibility.
 
-## 確認状況
+## Verified Hardware
 
-| 機種 | カタログ | 設定生成・ビルド | 読み取り実機検証 | 書き込み実機検証 |
+| Model | Catalog | Generation and build | Read-only runtime validation | Write validation |
 | --- | --- | --- | --- | --- |
-| ASF48100U200-H | v1.96 | 確認済み | P00/P01/P02/P05/P07/P09/P10 | 未確認。書き込み経路は生成・ビルド確認のみ |
+| ASF48100U200-H | v1.96 | Verified | P00/P01/P02/P05/P07/P09/P10 | Not verified; generation and build only |
 
-リポジトリに含まれる`esphome/`以下の生成済みYAMLは、ASF48100U200-Hのスキャン結果を基にした参照スナップショットです。
+The generated YAML under `esphome/` is a reference snapshot based on an ASF48100U200-H scan.
 
-## 他機種で使用する場合
+## Testing Another Model
 
-1. 既存の生成済みYAMLをそのまま書き込まず、対象機をUSB-RS485で接続して`python3 wizard.py`を実行します。
-2. `tools/build/implemented_addresses.json`に対象機のスキャン結果が保存されたことを確認します。このファイルは実機固有データのためGit管理外です。
-3. `ruff check .`、`pytest -q`、`esphome config esphome/srne_inverter.yaml`を実行します。
-4. 最初は読み取りだけで運用し、Modbus例外、タイムアウト、再接続、異常値がないことを確認します。
-5. 書き込み可能レジスタは、機種固有の範囲と意味を別途確認してから試験します。
+1. Do not install the committed generated YAML unchanged. Connect the target inverter through USB/RS485 and run `python3 wizard.py`.
+2. Confirm that the scan result was written to `tools/build/implemented_addresses.json`. This device-specific file is excluded from Git.
+3. Run `ruff check .`, `pytest -q`, and `esphome config esphome/srne_inverter.yaml`.
+4. Start with read-only operation. Check for Modbus exceptions, timeouts, repeated reconnects, and implausible values.
+5. Verify the meaning and valid range of every writable register for that model before performing a write test.
 
-## 対応実績を追加する条件
+## Adding a Verified Model
 
-機種を「確認済み」と記載するには、少なくとも以下を記録します。
+Record at least the following information before listing a model as verified:
 
-- 正確な機種名と、公開可能なファームウェア・プロトコル版
-- 使用したカタログ版とスキャン日時
-- 応答を確認したPグループ
-- ESPHome設定検証・ビルド結果
-- 読み取り運用時のModbus例外、切断、異常値の有無
-- 書き込みを試験した場合は、対象レジスタと試験範囲
+- Exact model name and publishable firmware or protocol versions
+- Catalog version and scan date
+- P-groups that responded successfully
+- ESPHome configuration and build results
+- Modbus exceptions, disconnects, or implausible values observed during read-only operation
+- Registers and value ranges used for any write validation
 
-シリアル番号、Wi-Fi認証情報、ESPHome APIキー、OTAパスワード、実機スキャンの生データはコミットしません。
+Do not commit serial numbers, Wi-Fi credentials, ESPHome API keys, OTA passwords, or raw device-specific scan output.
+
+## 日本語概要
+
+このプロジェクトは機種名で固定レジスタを選ぶのではなく、v1.96カタログの候補を実機スキャンし、応答したレジスタだけを生成します。
+
+- 現在の実機確認済み機種はASF48100U200-Hです。
+- `esphome/`以下の生成済みYAMLは、この機種のスキャン結果を基にした参照用です。
+- 他機種では必ず`python3 wizard.py`で再スキャンし、最初は読み取りだけで検証してください。
+- 書き込み可能レジスタは、対象機種で意味と許容範囲を確認してから試験してください。
+- 対応実績を追加する際も、認証情報、シリアル番号、実機固有の生スキャン結果はコミットしません。
