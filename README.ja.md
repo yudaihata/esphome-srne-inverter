@@ -109,3 +109,6 @@ GitHub Actionsでも同じ検証を実行します。
 - 機種互換性と検証手順: `docs/COMPATIBILITY.md`
 - プロトコルメモ: `docs/SRNE_Inverter_Modbus_Protocol_V1.96_Notes.md`
 - レジスタカタログ。参考情報であり実機動作を優先: `docs/srne_hybrid_modbus_v1.96.json`
+- 第三者の権利とプロトコル文書の取り扱い: `NOTICE.md`
+
+ベンダー提供のプロトコルPDFは、このリポジトリでは再配布しません。正規の経路から仕様書を入手し、すべてのレジスタ動作を接続した実機で確認してください。

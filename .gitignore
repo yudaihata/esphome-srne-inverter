@@ -27,3 +27,6 @@ backups/
 *.bak
 .letta/
 /名称未設定フォル*/
+
+# Vendor documentation is not redistributed by this project
+docs/*.pdf

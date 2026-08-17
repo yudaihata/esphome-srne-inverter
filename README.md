@@ -109,3 +109,6 @@ Generated entities are stored in `esphome/srne/custom/entities_<group>.yaml`. Th
 - Model compatibility and validation: `docs/COMPATIBILITY.md`
 - Protocol notes: `docs/SRNE_Inverter_Modbus_Protocol_V1.96_Notes.md`
 - Register catalog, advisory with device behavior taking precedence: `docs/srne_hybrid_modbus_v1.96.json`
+- Third-party rights and protocol-document policy: `NOTICE.md`
+
+The original vendor protocol PDF is intentionally not redistributed. Obtain vendor documentation through an authorized source and validate all register behavior against the connected device.
