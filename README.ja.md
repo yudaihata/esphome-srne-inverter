@@ -34,6 +34,16 @@ python3 -m pip install -r requirements.txt -r requirements-dev.txt
 3. `esphome/secrets.example.yaml`を基に`esphome/secrets.yaml`を作成します。実際のSecretsファイルはGit管理外です。
 4. `esphome run esphome/srne_inverter.yaml`で設定検証、ビルド、書き込みを行います。
 
+初回の対話実行では英語または日本語を選択します。OS言語が標準選択として表示され、選択結果は`tools/build/wizard_state.json`へ保存されます。言語の明示指定または再検出も可能です。
+
+```sh
+python3 wizard.py --lang en
+python3 wizard.py --lang ja
+python3 wizard.py --lang auto
+```
+
+英語を基準・フォールバック言語とします。ウィザードの文言は`locales/en.json`と`locales/ja.json`に保存し、キーと埋め込み変数の一致をテストで検証します。
+
 ## 生成ファイル
 
 - `esphome/srne_inverter.yaml`: ESPHomeのルート設定

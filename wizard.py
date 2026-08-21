@@ -1,25 +1,16 @@
 #!/usr/bin/env python3
-"""
-初心者向けステップバイステップ・ウィザード
-
-このスクリプトは以下を対話式に案内します:
-  1) 依存/環境チェック、シリアルポート選択 or ドライラン
-  2) フェーズ1: レジスタ探索 (implemented_registers.json)
-  3) フェーズ2: 範囲構築 (device_specific_ranges.json)
-  4) フェーズ3: YAML生成 (esphome/*)
-
-途中で明確な次のアクションとファイル出力パスを表示します。
-"""
+"""Interactive discovery and ESPHome configuration wizard."""
 from __future__ import annotations
 
+import argparse
 import base64
 import getpass
+import hashlib
+import json
+import re
 import secrets
 import sys
-import json
 from pathlib import Path
-import hashlib
-import re
 from typing import Any, Dict, List, Optional
 
 from tools.common import (
@@ -31,6 +22,12 @@ from tools.common import (
 )
 import tools.discovery as disc
 import tools.range_builder as rb
+from tools.i18n import (
+    SUPPORTED_LANGUAGES,
+    detect_system_language,
+    set_language,
+    tr,
+)
 
 # yaml_generator から内部関数を再利用
 import tools.yaml_generator as yg
@@ -48,12 +45,62 @@ def file_sha256(path: Path) -> str:
         return ""
 
 
-def load_wizard_state(path: Path = WIZ_STATE_PATH) -> Dict[str, Any]:
+def load_wizard_state(path: Path | None = None) -> Dict[str, Any]:
+    path = WIZ_STATE_PATH if path is None else path
     try:
         data = json.loads(path.read_text(encoding="utf-8"))
         return data if isinstance(data, dict) else {}
     except (OSError, json.JSONDecodeError):
         return {}
+
+
+def update_wizard_state(updates: Dict[str, Any], path: Path | None = None) -> None:
+    """Merge preferences and scan metadata without dropping unrelated state."""
+    path = WIZ_STATE_PATH if path is None else path
+    state = load_wizard_state(path)
+    state.update(updates)
+    try:
+        path.parent.mkdir(parents=True, exist_ok=True)
+        path.write_text(json.dumps(state, ensure_ascii=False, indent=2), encoding="utf-8")
+    except OSError:
+        pass
+
+
+def select_language(requested: str | None, interactive: bool = True) -> str:
+    """Resolve CLI, saved, and system language preferences in that order."""
+    state = load_wizard_state()
+    saved = state.get("language")
+    if requested in SUPPORTED_LANGUAGES:
+        return str(requested)
+    if requested != "auto" and saved in SUPPORTED_LANGUAGES:
+        return str(saved)
+
+    detected = detect_system_language()
+    if requested == "auto" or not interactive:
+        return detected
+
+    default_choice = "2" if detected == "ja" else "1"
+    while True:
+        choice = input(tr("language.prompt", default=default_choice)).strip()
+        if not choice:
+            choice = default_choice
+        if choice == "1":
+            return "en"
+        if choice == "2":
+            return "ja"
+        print(tr("language.retry"))
+
+
+def parse_args(argv: Optional[List[str]] = None) -> argparse.Namespace:
+    parser = argparse.ArgumentParser(
+        description="Discover SRNE inverter registers and generate ESPHome YAML."
+    )
+    parser.add_argument(
+        "--lang",
+        choices=("auto", *SUPPORTED_LANGUAGES),
+        help="wizard language: en, ja, or auto (saved preference when omitted)",
+    )
+    return parser.parse_args(argv)
 
 
 def scan_result_is_reusable(
@@ -117,15 +164,14 @@ def prompt(text: str, default: Optional[str] = None) -> str:
 
 
 def yes_no(text: str, default_yes: bool = True) -> bool:
-    # UI 統一: はい=Enter を基本に表示
     if default_yes:
-        prompt_str = f"{text} [Enter=はい / n=いいえ]: "
+        prompt_str = tr("common.yes_no_default_yes", text=text)
     else:
-        prompt_str = f"{text} [y=はい / Enter=いいえ]: "
+        prompt_str = tr("common.yes_no_default_no", text=text)
     s = input(prompt_str).strip().lower()
     if not s:
         return default_yes
-    return s in ("y", "yes")
+    return s in ("y", "yes", "はい")
 
 
 def try_list_serial_ports_all():
@@ -181,22 +227,34 @@ def check_pyserial() -> bool:
 
 
 def step_environment() -> Dict[str, Any]:
-    print_header("ステップ0: 環境チェック")
+    print_header(tr("environment.title"))
     print("Python:", sys.version.split(" ")[0])
     has_mm = check_minimalmodbus()
-    print("minimalmodbus:", "OK" if has_mm else "未インストール")
+    print("minimalmodbus:", "OK" if has_mm else tr("common.not_installed"))
     if not has_mm:
-        print("- 注意: 実機探索には minimalmodbus が必要です。")
-        print("  インストール: pip install minimalmodbus")
-        print("  インストール後に再実行してください。")
+        print(
+            tr(
+                "environment.missing_dependency",
+                package="minimalmodbus",
+                purpose=tr("environment.purpose_modbus"),
+            )
+        )
+        print(tr("environment.install", package="minimalmodbus"))
+        print(tr("environment.rerun"))
         sys.exit(1)
 
     has_pyserial = check_pyserial()
-    print("pyserial:", "OK" if has_pyserial else "未インストール")
+    print("pyserial:", "OK" if has_pyserial else tr("common.not_installed"))
     if not has_pyserial:
-        print("- 注意: USBシリアル自動検出には pyserial が必要です。")
-        print("  インストール: pip install pyserial")
-        print("  インストール後に再実行してください。")
+        print(
+            tr(
+                "environment.missing_dependency",
+                package="pyserial",
+                purpose=tr("environment.purpose_serial"),
+            )
+        )
+        print(tr("environment.install", package="pyserial"))
+        print(tr("environment.rerun"))
         sys.exit(1)
 
     # スキャン結果の再利用確認はステップ1で行う
@@ -204,16 +262,16 @@ def step_environment() -> Dict[str, Any]:
 
 
 def step_discovery(env: Dict[str, Any]) -> Path:
-    print_header("ステップ1: レジスタ探索 (discovery)")
+    print_header(tr("discovery.title"))
     # 既存スキャン結果があれば、最初に再利用可否を確認して即終了できるようにする
     implemented_default = BUILD_DIR / "implemented_registers.json"
     prev = load_wizard_state()
     if scan_result_is_reusable(implemented_default, prev):
-        print(f"既存のスキャン結果が見つかりました: {implemented_default}")
-        if yes_no("前回のスキャン結果を利用しますか?", True):
+        print(tr("discovery.previous_found", path=implemented_default))
+        if yes_no(tr("discovery.reuse_previous"), True):
             return implemented_default
     elif implemented_default.exists():
-        print("既存のスキャン結果は、現在のカタログと一致しないため再利用しません。")
+        print(tr("discovery.previous_mismatch"))
 
     # 以降は新規スキャンのためのポート選択
     # ポート選択（ここで実施）
@@ -226,42 +284,42 @@ def step_discovery(env: Dict[str, Any]) -> Path:
         devices = list_usb_serial_ports()
         # 前回ポートが生きていれば優先採用（確認のみ）
         if prev_port and any(d.get("device") == prev_port for d in devices):
-            sel = input(f"前回のポート {prev_port} を使用します。Enter=続行, n=選び直し, q=終了: ").strip().lower()
+            sel = input(tr("discovery.use_port", port=prev_port)).strip().lower()
             if sel in ("",):
                 port = prev_port
                 break
             if sel == "q":
-                print("終了しました。")
+                print(tr("common.finished"))
                 sys.exit(0)
             # 選び直し
             prev_port = ""
             continue
 
         if not devices:
-            sel = input("USB未検出。Enter=再スキャン, q=終了: ").strip().lower()
+            sel = input(tr("discovery.usb_not_found")).strip().lower()
             if sel == "q":
-                print("終了しました。")
+                print(tr("common.finished"))
                 sys.exit(0)
             # Enter またはその他で再スキャン
             continue
         if len(devices) == 1:
             dev = devices[0]
-            sel = input(f"検出: {dev.get('device','')}  Enter=続行, r=再スキャン, q=終了: ").strip().lower()
+            sel = input(tr("discovery.detected_port", port=dev.get("device", ""))).strip().lower()
             if sel in ("",):
                 port = dev.get("device", "")
                 break
             if sel == "q":
-                print("終了しました。")
+                print(tr("common.finished"))
                 sys.exit(0)
             # r などは再スキャン
             continue
         # 複数検出
-        print("現在接続されているUSBシリアル:")
+        print(tr("discovery.connected_ports"))
         for i, info in enumerate(devices, 1):
             print(f"  {i}) {info.get('device','')}  -  {info.get('description','')}")
-        sel = input(f"番号を選択 (1-{len(devices)}) / Enter=再スキャン / q=終了: ").strip().lower()
+        sel = input(tr("discovery.select_port", count=len(devices))).strip().lower()
         if sel == "q":
-            print("終了しました。")
+            print(tr("common.finished"))
             sys.exit(0)
         if sel == "":
             continue
@@ -271,9 +329,9 @@ def step_discovery(env: Dict[str, Any]) -> Path:
                 port = devices[idx - 1].get("device", "")
                 if port:
                     break
-        print("無効な選択です。")
+        print(tr("common.invalid_selection"))
 
-    print(f"使用ポート: {port}")
+    print(tr("discovery.using_port", port=port))
 
     catalog_hash = file_sha256(JSON_CATALOG_PATH)
 
@@ -281,7 +339,7 @@ def step_discovery(env: Dict[str, Any]) -> Path:
     ensure_dir(BUILD_DIR)
 
     # 標準設定で進めるかを先に確認（既定: はい）
-    if yes_no("標準設定で進めますか?", True):
+    if yes_no(tr("discovery.standard_settings"), True):
         # 既定値（安全側）を使用（前回値があれば再利用）
         slave = int(prev.get("slave_id", 1))
         baud = int(prev.get("baudrate", 9600))
@@ -289,17 +347,17 @@ def step_discovery(env: Dict[str, Any]) -> Path:
         delay_ms = int(prev.get("delay_ms", 50))
     else:
         # 詳細設定（必要なときだけ表示）
-        slave = int(prompt("スレーブID", str(prev.get("slave_id", 1))))
-        baud = int(prompt("ボーレート", str(prev.get("baudrate", 9600))))
-        timeout = float(prompt("タイムアウト秒", str(prev.get("timeout", 0.5))))
-        delay_ms = int(prompt("リクエスト間ウェイト(ms)", str(prev.get("delay_ms", 50))))
+        slave = int(prompt(tr("discovery.slave_id"), str(prev.get("slave_id", 1))))
+        baud = int(prompt(tr("discovery.baud_rate"), str(prev.get("baudrate", 9600))))
+        timeout = float(prompt(tr("discovery.timeout"), str(prev.get("timeout", 0.5))))
+        delay_ms = int(prompt(tr("discovery.request_delay"), str(prev.get("delay_ms", 50))))
 
     regs = load_register_defs(JSON_CATALOG_PATH)
-    print(f"探索対象レジスタ件数: {len(regs)} 件")
+    print(tr("discovery.register_count", count=len(regs)))
     # 詳細設定に分岐しない場面なので、否定は「いいえ」ではなくキャンセルの表現に統一
-    resp = input("スキャンを開始しますか? [Enter=はい / c=キャンセル]: ").strip().lower()
+    resp = input(tr("discovery.start")).strip().lower()
     if resp == "c":
-        print("キャンセルしました。")
+        print(tr("discovery.cancelled"))
         sys.exit(0)
 
     result = disc.discover(
@@ -314,7 +372,7 @@ def step_discovery(env: Dict[str, Any]) -> Path:
     )
     write_json(out_path, result)
     succ = sum(1 for r in result if r.get("success"))
-    print(f"探索完了: success={succ} / total={len(result)} → {out_path}")
+    print(tr("discovery.complete", success=succ, total=len(result), path=out_path))
 
     # 状態を保存（次回の再利用判定用）
     state = {
@@ -326,16 +384,12 @@ def step_discovery(env: Dict[str, Any]) -> Path:
         "json_catalog_sha256": catalog_hash,
         "implemented_path": str(out_path),
     }
-    try:
-        WIZ_STATE_PATH.parent.mkdir(parents=True, exist_ok=True)
-        WIZ_STATE_PATH.write_text(json.dumps(state, ensure_ascii=False, indent=2), encoding="utf-8")
-    except Exception:
-        pass
+    update_wizard_state(state)
     return out_path
 
 
 def step_ranges(implemented_path: Path) -> Path:
-    print_header("ステップ2: 範囲構築 (range_builder)")
+    print_header(tr("ranges.title"))
     with implemented_path.open("r", encoding="utf-8") as f:
         records = json.load(f)
     # 連続まとめ読みは 32 語以内に分割（機器上限に合わせた標準設定）
@@ -346,15 +400,22 @@ def step_ranges(implemented_path: Path) -> Path:
     # 簡易サマリ
     ranges = built.get("ranges", {})
     total_blocks = sum(len(v) for v in ranges.values())
-    print(f"連続区間の構築完了: グループ={len(ranges)} / ブロック={total_blocks} → {out_path}")
+    print(
+        tr(
+            "ranges.complete",
+            groups=len(ranges),
+            blocks=total_blocks,
+            path=out_path,
+        )
+    )
     for g in sorted(ranges.keys()):
         blks = ranges.get(g, [])
-        print(f"  {g}: {len(blks)} ブロック")
+        print(tr("ranges.block_summary", group=g, count=len(blks)))
     return out_path
 
 
 def step_yaml(implemented_path: Path, ranges_path: Path) -> None:
-    print_header("ステップ3: YAML生成 (yaml_generator)")
+    print_header(tr("yaml.title"))
     impl = yg.load_json(implemented_path)
     ranged = yg.load_json(ranges_path)
 
@@ -409,25 +470,25 @@ def step_yaml(implemented_path: Path, ranges_path: Path) -> None:
     custom_dir.mkdir(parents=True, exist_ok=True)
 
     # ターゲットボード と UART/GPIO, Wi‑Fi 設定（ESP32系のみ）
-    print("ターゲットボードを選択してください（番号を入力）")
+    print(tr("yaml.select_board"))
     presets = [
         {"label": "ESP32-S3 DevKitC-1", "board": "esp32-s3-devkitc-1"},
         {"label": "ESP32 DevKit", "board": "esp32dev"},
-        {"label": "スキップ（手動入力）", "board": None},
+        {"label": tr("yaml.board_manual"), "board": None},
     ]
     for i, p in enumerate(presets, 1):
         print(f"  {i}) {p['label']}")
     while True:
-        sel = input("番号: ").strip()
+        sel = input(f"{tr('yaml.board_number')}: ").strip()
         if sel.isdigit():
             sel_idx = int(sel)
             if 1 <= sel_idx <= len(presets):
                 break
-        print(f"無効な入力です。1〜{len(presets)} の番号を入力してください。")
+        print(tr("yaml.select_board_invalid", count=len(presets)))
     chosen = presets[sel_idx - 1]
     if chosen["board"] is None:
         # 手動入力
-        board_name = prompt("ESP32ボード名 (esp32: board)", "esp32dev")
+        board_name = prompt(tr("yaml.board_name"), "esp32dev")
     else:
         board_name = chosen["board"]
     # UART ピンは全員手動入力（Enterでボード既定値を採用）。
@@ -441,18 +502,18 @@ def step_yaml(implemented_path: Path, ranges_path: Path) -> None:
                 return su
             if s.isdigit():
                 return f"GPIO{s}"
-            print("無効な入力です。例: 8 または GPIO8 を入力してください。")
+            print(tr("yaml.gpio_invalid"))
 
     if board_name == "esp32-s3-devkitc-1":
         # シンプル構成の既定: TX=GPIO5, RX=GPIO7
-        uart_tx = _ask_gpio("UART TXピン", "GPIO5")
-        uart_rx = _ask_gpio("UART RXピン", "GPIO7")
+        uart_tx = _ask_gpio(tr("yaml.pin_tx"), "GPIO5")
+        uart_rx = _ask_gpio(tr("yaml.pin_rx"), "GPIO7")
     elif board_name == "esp32dev":
-        uart_tx = _ask_gpio("UART TXピン", "GPIO17")
-        uart_rx = _ask_gpio("UART RXピン", "GPIO16")
+        uart_tx = _ask_gpio(tr("yaml.pin_tx"), "GPIO17")
+        uart_rx = _ask_gpio(tr("yaml.pin_rx"), "GPIO16")
     else:
-        uart_tx = _ask_gpio("UART TXピン", "GPIO17")
-        uart_rx = _ask_gpio("UART RXピン", "GPIO16")
+        uart_tx = _ask_gpio(tr("yaml.pin_tx"), "GPIO17")
+        uart_rx = _ask_gpio(tr("yaml.pin_rx"), "GPIO16")
     # Modbus基本設定はプロンプトせず、前回値があれば再利用、なければ既定値を使用
     slave_addr_cfg = 1
     baud_cfg = 9600
@@ -467,8 +528,8 @@ def step_yaml(implemented_path: Path, ranges_path: Path) -> None:
     # RS485の方向制御ピン(flow_control_pin)の設定（任意）
     def _ask_gpio_optional(label: str, default_gpio: str = "") -> str:
         while True:
-            hint = f"（既定={default_gpio}）" if default_gpio else ""
-            s = input(f"{label} {hint} [未設定=Enter]: ").strip()
+            hint = tr("yaml.gpio_optional_hint", default=default_gpio) if default_gpio else ""
+            s = input(tr("yaml.gpio_optional", label=label, hint=hint)).strip()
             if not s:
                 return default_gpio
             if s.lower() in ("none", "null", "off", "-"):
@@ -478,38 +539,38 @@ def step_yaml(implemented_path: Path, ranges_path: Path) -> None:
                 return su
             if s.isdigit():
                 return f"GPIO{s}"
-            print("無効な入力です。例: 22 または GPIO22 を入力してください。")
+            print(tr("yaml.gpio_invalid"))
 
     # 直接入力方式: Enterなら未設定(None)として生成
-    flow_control_pin = _ask_gpio_optional("UART 方向制御ピン", "")
+    flow_control_pin = _ask_gpio_optional(tr("yaml.direction_pin"), "")
 
     # Wi‑Fiシークレットの登録（既存があれば再利用 or 直接上書きの二択に集約）
     secrets_path = ESPHOME_DIR / "secrets.yaml"
     if secrets_path.exists():
-        print(f"既存のWi‑Fi設定が見つかりました: {secrets_path}")
-        reuse = yes_no("既存のWi‑Fi設定を再利用しますか?", True)
+        print(tr("yaml.wifi_existing", path=secrets_path))
+        reuse = yes_no(tr("yaml.wifi_reuse"), True)
         if not reuse:
-            ssid = prompt("Wi‑Fi SSID")
-            pw = getpass.getpass("Wi‑Fi パスワード: ")
+            ssid = prompt(tr("yaml.wifi_ssid"))
+            pw = getpass.getpass(tr("yaml.wifi_password"))
             secrets_path.parent.mkdir(parents=True, exist_ok=True)
             secrets_content = f"wifi_ssid: {yaml_string(ssid)}\nwifi_password: {yaml_string(pw)}\n"
             secrets_path.write_text(secrets_content, encoding="utf-8")
-            print(f"Wi‑Fi設定を更新しました: {secrets_path}")
+            print(tr("yaml.wifi_updated", path=secrets_path))
     else:
-        if yes_no("Wi‑Fi設定（SSID/パスワード）を登録しますか?", True):
-            ssid = prompt("Wi‑Fi SSID")
-            pw = getpass.getpass("Wi‑Fi パスワード: ")
+        if yes_no(tr("yaml.wifi_register"), True):
+            ssid = prompt(tr("yaml.wifi_ssid"))
+            pw = getpass.getpass(tr("yaml.wifi_password"))
             secrets_path.parent.mkdir(parents=True, exist_ok=True)
             secrets_content = f"wifi_ssid: {yaml_string(ssid)}\nwifi_password: {yaml_string(pw)}\n"
             secrets_path.write_text(secrets_content, encoding="utf-8")
-            print(f"Wi‑Fi設定を書き込みました: {secrets_path}")
+            print(tr("yaml.wifi_written", path=secrets_path))
         else:
-            print("Wi‑Fi設定がないためYAMLを生成できません。")
+            print(tr("yaml.wifi_missing"))
             sys.exit(1)
 
     added_secrets = ensure_management_secrets(secrets_path)
     if added_secrets:
-        print("API暗号化・OTA・フォールバックAP用の認証情報を生成しました。")
+        print(tr("yaml.management_secrets_created"))
 
     # 単一controller構成（全グループ共通）
     controllers: List[Dict[str, Any]] = [{
@@ -619,7 +680,7 @@ def step_yaml(implemented_path: Path, ranges_path: Path) -> None:
         _recipes = {}
     user_lines = [
         "# User-editable intervals (seconds only)",
-        "# ここだけ編集してください。main更新秒と各グループのskip_updatesを指定します。",
+        "# Edit only this file: set the main interval and per-group skip_updates.",
         "main_update_interval_s: '5'",
     ]
     group_loads: Dict[str, int] = {}
@@ -663,7 +724,7 @@ def step_yaml(implemented_path: Path, ranges_path: Path) -> None:
     root_yaml = "\n".join(lines)
     (ESPHOME_DIR / "srne_inverter.yaml").write_text(root_yaml, encoding="utf-8")
 
-    print("生成完了。以下のファイルをESPHomeで利用できます:")
+    print(tr("yaml.files_ready"))
     print(f"- {ESPHOME_DIR / 'srne_inverter.yaml'}")
     print(f"- {srne_dir / 'core.yaml'}")
     for a in anchor_files.values():
@@ -671,24 +732,28 @@ def step_yaml(implemented_path: Path, ranges_path: Path) -> None:
     for g, e in files.items():
         print(f"- {e}")
 
-    print("\n次のステップ:")
-    print("- 任意: 不要なエンティティをコメントアウト (custom/entities_*.yaml)")
-    print("- ビルド/フラッシュ: ESPHomeで srne_inverter.yaml を実行")
+    print(f"\n{tr('yaml.next_steps')}")
+    print(tr("yaml.next_optional"))
+    print(tr("yaml.next_build"))
 
 
-def main() -> None:
-    print_header("SRNE Modbus 自動生成ウィザードへようこそ")
-    print("このウィザードは次の3段階を自動で案内します: \n"
-          "  1) 実装レジスタ探索 → 2) 連続区間構築 → 3) YAML生成")
+def main(argv: Optional[List[str]] = None) -> None:
+    args = parse_args(argv)
+    language = select_language(args.lang, interactive=sys.stdin.isatty())
+    set_language(language)
+    update_wizard_state({"language": language})
+
+    print_header(tr("main.title"))
+    print(tr("main.intro"))
 
     # ステップ0: 環境チェック
     env = step_environment()
     # スキャン実施フロー（ステップ1、ここで既存結果の再利用確認も実施）
-    print("既存の成果物がある場合でも、全て上書きして再生成します。")
+    print(tr("main.overwrite"))
     implemented_path = step_discovery(env)
     ranges_path = step_ranges(implemented_path)
     step_yaml(implemented_path, ranges_path)
-    print("\nすべて完了しました。良きSRNEライフを！")
+    print(f"\n{tr('main.complete')}")
 
 
 if __name__ == "__main__":

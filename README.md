@@ -34,6 +34,16 @@ python3 -m pip install -r requirements.txt -r requirements-dev.txt
 3. Create `esphome/secrets.yaml` from `esphome/secrets.example.yaml`. The real secrets file is excluded from Git.
 4. Run `esphome run esphome/srne_inverter.yaml` to validate, build, and install the firmware.
 
+On the first interactive run, the wizard asks for English or Japanese and uses the system locale as the default. The selection is saved in `tools/build/wizard_state.json`. Override or redetect it at any time:
+
+```sh
+python3 wizard.py --lang en
+python3 wizard.py --lang ja
+python3 wizard.py --lang auto
+```
+
+English is the source and fallback language. Wizard messages are stored in `locales/en.json` and `locales/ja.json`; tests enforce matching keys and format placeholders.
+
 ## Generated Files
 
 - `esphome/srne_inverter.yaml`: root ESPHome configuration
