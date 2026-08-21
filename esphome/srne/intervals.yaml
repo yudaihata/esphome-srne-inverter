@@ -1,5 +1,5 @@
 # User-editable intervals (seconds only)
-# ここだけ編集してください。main更新秒と各グループのskip_updatesを指定します。
+# Edit only this file: set the main interval and per-group skip_updates.
 main_update_interval_s: '5'
 p00_skip_updates: '113'
 p01_skip_updates: '0'
